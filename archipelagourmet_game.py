@@ -105,6 +105,7 @@ class ArchipelagourmetGame(Game):
 class ArchipelagourmetRecipes(OptionList):
     """
     Indicates which recipes the player could make.
+    The player is free to add or remove any options they like. Multiple appearances will function as weightings for the options provided.
     """
 
     display_name = "Archipelagourmet Recipes"
@@ -118,6 +119,7 @@ class ArchipelagourmetRecipes(OptionList):
 class ArchipelagourmetTakeawayOptions(OptionList):
     """
     Indicates which takeaway options the player could order.
+    The player is free to add or remove any options they like. Multiple appearances will function as weightings for the options provided.
     """
 
     display_name = "Archipelagourmet Takeaway Options"
@@ -131,6 +133,7 @@ class ArchipelagourmetTakeawayOptions(OptionList):
 class ArchipelagourmetRestaurantOptions(OptionList):
     """
     Indicates which restaurant options the player could order.
+    The player is free to add or remove any options they like. Multiple appearances will function as weightings for the options provided.
     """
 
     display_name = "Archipelagourmet Restaurant Options"
