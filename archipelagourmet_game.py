@@ -1418,32 +1418,32 @@ class ArchipelagourmetGame(Game):
         ingredients_to_exclude = self.ingredients_to_exclude
 
         for ingredient in self.ingredients_base:
-            if ingredient not in ingredients_to_exclude:
+            if ingredient.lower() not in ingredients_to_exclude.lower():
                 ingredients.append(ingredient)
 
         if self.include_red_meat_ingredients:
             for ingredient in self.ingredients_red_meat:
-                if ingredient not in ingredients_to_exclude:
+                if ingredient.lower() not in ingredients_to_exclude.lower():
                     ingredients.append(ingredient)
 
         if self.include_poultry_ingredients:
             for ingredient in self.ingredients_poultry:
-                if ingredient not in ingredients_to_exclude:
+                if ingredient.lower() not in ingredients_to_exclude.lower():
                     ingredients.append(ingredient)
 
         if self.include_seafood_ingredients:
             for ingredient in self.ingredients_seafood:
-                if ingredient not in ingredients_to_exclude:
+                if ingredient.lower() not in ingredients_to_exclude.lower():
                     ingredients.append(ingredient)
 
         if self.include_nonvegan_ingredients:
             for ingredient in self.ingredients_nonvegan:
-                if ingredient not in ingredients_to_exclude:
+                if ingredient.lower() not in ingredients_to_exclude.lower():
                     ingredients.append(ingredient)
 
         if self.custom_ingrdients_to_include:
             for ingredient in self.custom_ingrdients_to_include:
-                if ingredient not in ingredients_to_exclude:
+                if ingredient.lower() not in ingredients_to_exclude.lower():
                     ingredients.append(ingredient)
 
         return sorted(ingredients)
