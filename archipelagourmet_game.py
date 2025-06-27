@@ -1411,39 +1411,39 @@ class ArchipelagourmetGame(Game):
 
     @functools.cached_property
     def ingredients_to_exclude(self) -> Set[str]:
-        return set(self.archipelago_options.archipelagourmet_ingredients_to_exclude.value)
+        return {ingredient.lower() for ingredient in self.archipelago_options.archipelagourmet_ingredients_to_exclude.value}
 
     def ingredients(self) -> List[str]:
         ingredients: List[str] = list()
         ingredients_to_exclude = self.ingredients_to_exclude
 
         for ingredient in self.ingredients_base:
-            if ingredient.lower() not in ingredients_to_exclude.lower():
+            if ingredient.lower() not in ingredients_to_exclude:
                 ingredients.append(ingredient)
 
         if self.include_red_meat_ingredients:
             for ingredient in self.ingredients_red_meat:
-                if ingredient.lower() not in ingredients_to_exclude.lower():
+                if ingredient.lower() not in ingredients_to_exclude:
                     ingredients.append(ingredient)
 
         if self.include_poultry_ingredients:
             for ingredient in self.ingredients_poultry:
-                if ingredient.lower() not in ingredients_to_exclude.lower():
+                if ingredient.lower() not in ingredients_to_exclude:
                     ingredients.append(ingredient)
 
         if self.include_seafood_ingredients:
             for ingredient in self.ingredients_seafood:
-                if ingredient.lower() not in ingredients_to_exclude.lower():
+                if ingredient.lower() not in ingredients_to_exclude:
                     ingredients.append(ingredient)
 
         if self.include_nonvegan_ingredients:
             for ingredient in self.ingredients_nonvegan:
-                if ingredient.lower() not in ingredients_to_exclude.lower():
+                if ingredient.lower() not in ingredients_to_exclude:
                     ingredients.append(ingredient)
 
         if self.custom_ingrdients_to_include:
             for ingredient in self.custom_ingrdients_to_include:
-                if ingredient.lower() not in ingredients_to_exclude.lower():
+                if ingredient.lower() not in ingredients_to_exclude:
                     ingredients.append(ingredient)
 
         return sorted(ingredients)
