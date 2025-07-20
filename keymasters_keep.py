@@ -138,7 +138,7 @@ class KeymastersKeepGameSelection(OptionList):
         "Hyperspace Dogfights",
         "Identity V",
         "Jackbox Party Packs",
-        "Keymaster's Keep Challenges",
+        "Keymaster's Keep",
         "League of Legends",
         "Left 4 Dead 2",
         "Lethal Company",
