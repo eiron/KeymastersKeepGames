@@ -44,17 +44,25 @@ class ArchipelagourmetGame(Game):
 
     # Main Objectives
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
-        game_objective_templates: List[GameObjectiveTemplate] = [
-            GameObjectiveTemplate(
-                label="Prepare a meal using the following ingredients: INGREDIENTS",
-                data={
-                    "INGREDIENTS": (self.ingredients, self.number_of_ingredients),
-                },
-                is_time_consuming=False,
-                is_difficult=False,
-                weight=self.ingredients_weight,
-            ),
-        ]
+        game_objective_templates: List[GameObjectiveTemplate] = []
+        
+        min_ingredients = self.archipelago_options.archipelagourmet_minimum_ingredient_count.value
+        max_ingredients = self.archipelago_options.archipelagourmet_maximum_ingredient_count.value
+        ingredient_range_breadth = max_ingredients - min_ingredients + 1
+        
+        # Create an objective for each possible ingredient count
+        for ingredient_count in range(min_ingredients, max_ingredients + 1):
+            game_objective_templates.append(
+                GameObjectiveTemplate(
+                    label="Prepare a meal using the following ingredients: INGREDIENTS",
+                    data={
+                        "INGREDIENTS": (self.ingredients, ingredient_count),
+                    },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=self.ingredients_weight,
+                ),
+            )
 
         if self.recipes:
             game_objective_templates.append(
@@ -65,7 +73,7 @@ class ArchipelagourmetGame(Game):
                     },
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=self.recipes_weight,
+                    weight=self.recipes_weight * ingredient_range_breadth,
                 ),
             )
 
@@ -78,7 +86,7 @@ class ArchipelagourmetGame(Game):
                     },
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=self.takeaways_weight,
+                    weight=self.takeaways_weight * ingredient_range_breadth,
                 ),
             )
 
@@ -91,7 +99,7 @@ class ArchipelagourmetGame(Game):
                     },
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=self.restaurants_weight,
+                    weight=self.restaurants_weight * ingredient_range_breadth,
                 ),
             )
         
@@ -1479,13 +1487,6 @@ class ArchipelagourmetGame(Game):
                     ingredients.append(ingredient)
 
         return sorted(ingredients)
-    
-    @property
-    def number_of_ingredients(self) -> int:
-        return random.randint(
-            self.archipelago_options.archipelagourmet_minimum_ingredient_count.value,
-            self.archipelago_options.archipelagourmet_maximum_ingredient_count.value
-        )
 
 # Archipelago Options
 class ArchipelagourmetRecipes(OptionList):

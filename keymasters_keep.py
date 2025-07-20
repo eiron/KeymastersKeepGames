@@ -44,18 +44,23 @@ class KeymastersKeepGame(Game):
         game_objective_templates: List[GameObjectiveTemplate] = []
 
         if self.game_selection and self.challenge_types:
-            game_objective_templates.append(
-                GameObjectiveTemplate(
-                    label="Complete a CHALLENGE_TYPE including the games: GAMES",
-                    data={
-                        "CHALLENGE_TYPE": (self.challenge_types, 1),
-                        "GAMES": (self.game_selection, self.number_of_games),
-                    },
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=50,
-                ),
-            )
+            min_games = self.archipelago_options.keymasters_keep_minimum_game_count.value
+            max_games = self.archipelago_options.keymasters_keep_maximum_game_count.value
+            
+            # Create an objective for each possible game count
+            for game_count in range(min_games, max_games + 1):
+                game_objective_templates.append(
+                    GameObjectiveTemplate(
+                        label="Complete a CHALLENGE_TYPE including the games: GAMES",
+                        data={
+                            "CHALLENGE_TYPE": (self.challenge_types, 1),
+                            "GAMES": (self.game_selection, game_count),
+                        },
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=50,
+                    ),
+                )
         
         return game_objective_templates
 
@@ -75,13 +80,6 @@ class KeymastersKeepGame(Game):
         """Get the player's game selection."""
         games: List[str] = list(self.archipelago_options.keymasters_keep_game_selection.value)
         return sorted(games)
-    
-    @property
-    def number_of_games(self) -> int:
-        """Get a random number of games between min and max."""
-        min_games = self.archipelago_options.keymasters_keep_minimum_game_count.value
-        max_games = self.archipelago_options.keymasters_keep_maximum_game_count.value
-        return random.randint(min_games, max_games)
 
 
 # Archipelago Options
