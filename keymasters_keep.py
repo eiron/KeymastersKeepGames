@@ -73,7 +73,6 @@ class KeymastersKeepGame(Game):
             
         return challenge_types
 
-    @functools.cached_property
     def game_selection(self) -> List[str]:
         """Get the player's game selection."""
         games: List[str] = list(self.archipelago_options.keymasters_keep_game_selection.value)
