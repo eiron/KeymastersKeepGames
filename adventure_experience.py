@@ -89,22 +89,22 @@ class AdventureExperienceGame(Game):
     @property
     def has_local_exploration(self) -> bool:
         local_exploration = self.local_exploration()
-        return len(local_exploration) > 0 and not (len(local_exploration) == 1 and local_exploration[0] in ["...", "Local Place 1"])
+        return len(local_exploration) > 0
 
     @property
     def has_cultural_experiences(self) -> bool:
         cultural_experiences = self.cultural_experiences()
-        return len(cultural_experiences) > 0 and not (len(cultural_experiences) == 1 and cultural_experiences[0] in ["...", "Cultural Experience 1"])
+        return len(cultural_experiences) > 0
 
     @property
     def has_outdoor_activities(self) -> bool:
         outdoor_activities = self.outdoor_activities()
-        return len(outdoor_activities) > 0 and not (len(outdoor_activities) == 1 and outdoor_activities[0] in ["...", "Outdoor Activity 1"])
+        return len(outdoor_activities) > 0
 
     @property
     def has_culinary_adventures(self) -> bool:
         culinary_adventures = self.culinary_adventures()
-        return len(culinary_adventures) > 0 and not (len(culinary_adventures) == 1 and culinary_adventures[0] in ["...", "Culinary Adventure 1"])
+        return len(culinary_adventures) > 0
 
     def local_exploration_actions(self) -> List[str]:
         return sorted(self.archipelago_options.adventure_local_exploration_actions.value)

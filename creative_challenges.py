@@ -89,22 +89,22 @@ class CreativeChallengesGame(Game):
     @property
     def has_art_projects(self) -> bool:
         art_projects = self.art_projects()
-        return len(art_projects) > 0 and not (len(art_projects) == 1 and art_projects[0] in ["...", "Art Project 1"])
+        return len(art_projects) > 0
 
     @property
     def has_writing(self) -> bool:
         writing = self.writing()
-        return len(writing) > 0 and not (len(writing) == 1 and writing[0] in ["...", "Writing Project 1"])
+        return len(writing) > 0
 
     @property
     def has_photography(self) -> bool:
         photography = self.photography()
-        return len(photography) > 0 and not (len(photography) == 1 and photography[0] in ["...", "Photo Challenge 1"])
+        return len(photography) > 0
 
     @property
     def has_crafts(self) -> bool:
         crafts = self.crafts()
-        return len(crafts) > 0 and not (len(crafts) == 1 and crafts[0] in ["...", "Craft Project 1"])
+        return len(crafts) > 0
 
     def art_project_actions(self) -> List[str]:
         return sorted(self.archipelago_options.creative_art_project_actions.value)

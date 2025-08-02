@@ -102,3 +102,16 @@ This includes options for customizing the game selection pool, challenge types, 
 - **Set Game Count Range**: Configure minimum (1-10) and maximum (1-10) games per challenge (defaults to 2-6)
 
 This creates a truly recursive meta-gaming experience where Keymaster's Keep challenges you to play the very games that Keymaster's Keep was designed to manage! Just like with other modules, players can completely customize their experience by editing the game selection to match their preferences and library.
+
+## Social/Connections Challenges
+A meta-game in which the options generated will be friend meetups, family activities, community events, and networking opportunities from the player's social backlog, paired with appropriate social actions and customizable lists of people to interact with.
+Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
+
+This features separate objective templates for different types of social activities, with actions tailored to each category:
+
+Friend Meetups: ``"ARRANGE Coffee Meetup with Best Friend"`` or ``"CATCH UP WITH Game Night with College Friend"``
+Family Activities: ``"VISIT Family Dinner with Family Member"`` or ``"SPEND TIME WITH Holiday Visit with Family Member"``
+Community Events: ``"ATTEND Local Festival"`` or ``"VOLUNTEER FOR Community Meeting"``
+Networking: ``"NETWORK AT Professional Meetup"`` or ``"PARTICIPATE IN Industry Conference"``
+
+This includes options for customizing meetup types, family activities, community events, networking opportunities, and their respective action lists. Most importantly, it includes a **People Selection** option where you can list actual friends, family members, colleagues, and other people you want to connect with. The system will only generate objectives for social categories that have been configured, allowing for flexible use whether you focus on friend connections, family time, community involvement, professional networking, or all four!

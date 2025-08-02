@@ -89,22 +89,22 @@ class PhysicalHealthChallengesGame(Game):
     @property
     def has_exercises(self) -> bool:
         exercises = self.exercises()
-        return len(exercises) > 0 and not (len(exercises) == 1 and exercises[0] in ["...", "Exercise 1"])
+        return len(exercises) > 0
 
     @property
     def has_wellness(self) -> bool:
         wellness = self.wellness()
-        return len(wellness) > 0 and not (len(wellness) == 1 and wellness[0] in ["...", "Wellness 1"])
+        return len(wellness) > 0
 
     @property
     def has_nutrition(self) -> bool:
         nutrition = self.nutrition()
-        return len(nutrition) > 0 and not (len(nutrition) == 1 and nutrition[0] in ["...", "Nutrition 1"])
+        return len(nutrition) > 0
 
     @property
     def has_movement(self) -> bool:
         movement = self.movement()
-        return len(movement) > 0 and not (len(movement) == 1 and movement[0] in ["...", "Movement 1"])
+        return len(movement) > 0
 
     def exercise_actions(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_exercise_actions.value)

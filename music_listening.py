@@ -76,17 +76,17 @@ class MusicListeningGame(Game):
     @property
     def has_albums(self) -> bool:
         albums = self.albums()
-        return len(albums) > 0 and not (len(albums) == 1 and albums[0] in ["...", "Album 1"])
+        return len(albums) > 0
 
     @property
     def has_artists(self) -> bool:
         artists = self.artists()
-        return len(artists) > 0 and not (len(artists) == 1 and artists[0] in ["...", "Artist 1"])
+        return len(artists) > 0
 
     @property
     def has_playlists(self) -> bool:
         playlists = self.playlists()
-        return len(playlists) > 0 and not (len(playlists) == 1 and playlists[0] in ["...", "Playlist 1"])
+        return len(playlists) > 0
 
     def album_actions(self) -> List[str]:
         return sorted(self.archipelago_options.music_album_actions.value)

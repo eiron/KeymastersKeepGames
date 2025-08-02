@@ -89,22 +89,22 @@ class ChristmasHolidayChallengesGame(Game):
     @property
     def has_decorations(self) -> bool:
         decorations = self.decorations()
-        return len(decorations) > 0 and not (len(decorations) == 1 and decorations[0] in ["...", "Decoration 1"])
+        return len(decorations) > 0
 
     @property
     def has_gifts(self) -> bool:
         gifts = self.gifts()
-        return len(gifts) > 0 and not (len(gifts) == 1 and gifts[0] in ["...", "Gift 1"])
+        return len(gifts) > 0
 
     @property
     def has_baking(self) -> bool:
         baking = self.baking()
-        return len(baking) > 0 and not (len(baking) == 1 and baking[0] in ["...", "Recipe 1"])
+        return len(baking) > 0
 
     @property
     def has_traditions(self) -> bool:
         traditions = self.traditions()
-        return len(traditions) > 0 and not (len(traditions) == 1 and traditions[0] in ["...", "Tradition 1"])
+        return len(traditions) > 0
 
     def decoration_actions(self) -> List[str]:
         return sorted(self.archipelago_options.christmas_decoration_actions.value)

@@ -63,12 +63,12 @@ class WatchlistGame(Game):
     @property
     def has_films(self) -> bool:
         films = self.films()
-        return len(films) > 0 and not (len(films) == 1 and films[0] in ["...", "Film 1"])
+        return len(films) > 0
 
     @property
     def has_tv_shows(self) -> bool:
         tv_shows = self.tv_shows()
-        return len(tv_shows) > 0 and not (len(tv_shows) == 1 and tv_shows[0] in ["...", "TV Show 1"])
+        return len(tv_shows) > 0
 
     def film_actions(self) -> List[str]:
         return sorted(self.archipelago_options.watchlist_film_actions.value)
