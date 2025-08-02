@@ -115,3 +115,83 @@ Community Events: ``"ATTEND Local Festival"`` or ``"VOLUNTEER FOR Community Meet
 Networking: ``"NETWORK AT Professional Meetup"`` or ``"PARTICIPATE IN Industry Conference"``
 
 This includes options for customizing meetup types, family activities, community events, networking opportunities, and their respective action lists. Most importantly, it includes a **People Selection** option where you can list actual friends, family members, colleagues, and other people you want to connect with. The system will only generate objectives for social categories that have been configured, allowing for flexible use whether you focus on friend connections, family time, community involvement, professional networking, or all four!
+
+## Real-World Scavenger Hunt
+A comprehensive real-world exploration game that encourages getting outside, discovering your local area, and engaging with your community. This module turns your surroundings into a game world with objectives focused on photography, location discovery, object collection, social interaction, nature exploration, cultural experiences, seasonal activities, and community engagement.
+
+This features 8 major categories of real-world objectives:
+
+Photography Challenges: ``"Take a photo of A street musician"`` or ``"Photograph Lightning during a storm in natural lighting without flash"``
+Location Hunting: ``"Find and visit A hidden garden"`` or ``"Visit 3 different Local cafes establishments"``
+Object Collection: ``"Collect 10 different Interesting rocks items"`` or ``"Find 2 Vintage postcards at thrift stores or markets"``
+Interaction Challenges: ``"Engage in 3 conversations with Local shop owners"`` or ``"Learn 5 basic phrases in Spanish"``
+Nature Exploration: ``"Identify 10 different Birds species"`` or ``"Explore 3 different Walking trails trails"``
+Cultural Discovery: ``"Visit 2 Art museums or galleries"`` or ``"Try 3 different Local specialties dishes"``
+Seasonal Activities: ``"Participate in Leaf collection during Fall"`` or ``"Experience Rain puddle photography during specific weather"``
+Community Engagement: ``"Support 3 local Restaurants businesses"`` or ``"Help with Community garden maintenance"``
+
+This includes extensive customization options with hundreds of possible targets, activities, and constraints. Players can:
+- **Focus Areas**: Choose from 8 different activity categories
+- **Difficulty Levels**: Easy, hard, or all challenge types
+- **Travel Scope**: Local, regional, or unlimited exploration
+- **Constraints**: Transportation methods, time limits, weather conditions, companions
+
+The module contains over 500 different objectives across photography subjects, discoverable locations, collectible items, people to meet, activities to try, and seasonal experiences. It's designed to encourage exploration, community connection, and getting outside your normal routine!
+
+## Individual Game Modules
+
+### Stardew Valley
+A comprehensive farming simulation module covering all aspects of Pelican Town life, from crop management and animal care to community relationships and cave exploration.
+
+Core Categories: ``Farm Management``, ``Relationship Building``, ``Exploration & Combat``, ``Crafting & Collection``, ``Seasonal Activities``, ``Community Goals``, ``Achievement Hunting``
+
+Sample Objectives: ``"Earn 50000g through Crop sales"`` or ``"Reach 8 hearts relationship level with Abigail"`` or ``"Complete 15 different Community Center bundles"``
+
+### Animal Crossing: New Horizons
+An island life simulation module focusing on island development, social interaction, decoration, and seasonal activities across the charming world of Animal Crossing.
+
+Core Categories: ``Island Development``, ``Social Interaction``, ``Decoration & Design``, ``Collection & Catalog``, ``Seasonal Events``, ``Achievement Goals``
+
+Sample Objectives: ``"Develop 5 different Residential Areas areas"`` or ``"Achieve Best Friends relationship with 3 villagers"`` or ``"Collect 25 different Fish species"``
+
+### Hades
+A roguelike action module covering escape attempts, weapon mastery, relationship building with gods and underworld denizens, and the compelling narrative of Zagreus's journey.
+
+Core Categories: ``Escape Attempts``, ``Weapon Mastery``, ``Relationship Building``, ``Boon Collection``, ``House Upgrades``, ``Narrative Progress``, ``Challenge Runs``
+
+Sample Objectives: ``"Complete 5 successful escape attempts"`` or ``"Master the Stygian Blade weapon"`` or ``"Max out relationship with Megaera"``
+
+### Dead Cells
+A challenging metroidvania module focused on combat mastery, weapon experimentation, biome progression, and the brutal but rewarding world of the Prisoner's journey.
+
+Core Categories: ``Combat Mastery``, ``Weapon Experimentation``, ``Biome Progression``, ``Mutation Builds``, ``Speed Running``, ``Achievement Hunting``
+
+Sample Objectives: ``"Defeat 25 different Elite enemies"`` or ``"Complete a run using only Survival weapons"`` or ``"Reach 3BC difficulty level"``
+
+### Cult of the Lamb
+A unique cult management and action module covering cult building, follower management, combat crusades, and the dark humor of leading a woodland cult.
+
+Core Categories: ``Cult Management``, ``Combat & Crusades``, ``Follower Care``, ``Base Building``, ``Resource Collection``, ``Ritual Performance``, ``Story Progression``
+
+Sample Objectives: ``"Recruit 15 new cult followers"`` or ``"Defeat Leshy in combat"`` or ``"Perform 5 different Blessing rituals"``
+
+### Bloodstained: Ritual of the Night
+A comprehensive Metroidvania module covering shard collection, exploration, boss battles, alchemy, equipment mastery, and Miriam's quest for answers.
+
+Core Categories: ``Shard Collection``, ``Exploration``, ``Boss Challenges``, ``Alchemy & Crafting``, ``Equipment Mastery``, ``Completion Goals``, ``Speedrun Challenges``
+
+Sample Objectives: ``"Collect 20 Conjure shards"`` or ``"Reach 90% map completion"`` or ``"Defeat Bloodless without using healing items"``
+
+### Minecraft
+An expansive sandbox module covering building projects, exploration, resource gathering, redstone engineering, and the limitless creativity of the block world.
+
+Core Categories: ``Building Projects``, ``Exploration & Adventure``, ``Resource Gathering``, ``Redstone Engineering``, ``Farming & Automation``, ``Combat Challenges``, ``Creative Builds``
+
+Sample Objectives: ``"Build a 50x50 Castle structure"`` or ``"Explore 10 different Ocean Monuments"`` or ``"Create an automated Crop farm system"``
+
+### Baldur's Gate 3
+A deep RPG module covering character builds, story choices, companion relationships, tactical combat, exploration, and the rich narrative possibilities of Faerûn.
+
+Core Categories: ``Character Builds``, ``Story Progression``, ``Companion Quests``, ``Exploration``, ``Combat Challenges``, ``Social Encounters``, ``Collectibles``, ``Achievement Hunting``
+
+Sample Objectives: ``"Complete Act 1 with a Paladin/Warlock multiclass build"`` or ``"Achieve Romance relationship with Shadowheart"`` or ``"Successfully pass 20 Persuasion skill checks"``
