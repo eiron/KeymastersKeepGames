@@ -37,7 +37,8 @@ class StardewValleyGame(Game):
         KeymastersKeepGamePlatforms.SW,
         KeymastersKeepGamePlatforms.XONE,
         KeymastersKeepGamePlatforms.XSX,
-        KeymastersKeepGamePlatforms.MOBILE,
+        KeymastersKeepGamePlatforms.AND,
+        KeymastersKeepGamePlatforms.IOS,
     ]
 
     is_adult_only_or_unrated = False

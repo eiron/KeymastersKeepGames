@@ -33,8 +33,7 @@ class BaldursGate3Game(Game):
 
     platforms_other = [
         KeymastersKeepGamePlatforms.PS5,
-        KeymastersKeepGamePlatforms.XSXS,
-        KeymastersKeepGamePlatforms.MAC,
+        KeymastersKeepGamePlatforms.XSX,
     ]
 
     is_adult_only_or_unrated = False

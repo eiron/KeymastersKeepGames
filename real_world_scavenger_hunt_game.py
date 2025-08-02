@@ -30,7 +30,7 @@ class ScavengerHuntArchipelagoOptions:
 
 class ScavengerHuntGame(Game):
     name = "Real-World Scavenger Hunt"
-    platform = KeymastersKeepGamePlatforms.IRL
+    platform = KeymastersKeepGamePlatforms.META
 
     platforms_other = []
 

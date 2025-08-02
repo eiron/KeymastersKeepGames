@@ -37,7 +37,8 @@ class MinecraftGame(Game):
         KeymastersKeepGamePlatforms.SW,
         KeymastersKeepGamePlatforms.XONE,
         KeymastersKeepGamePlatforms.XSX,
-        KeymastersKeepGamePlatforms.Mobile,
+        KeymastersKeepGamePlatforms.AND,
+        KeymastersKeepGamePlatforms.IOS,
     ]
 
     is_adult_only_or_unrated = False
