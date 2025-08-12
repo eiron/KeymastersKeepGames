@@ -494,34 +494,42 @@ class HadesGame(Game):
 class HadesIncludeEscapeAttempts(Toggle):
     """Include escape attempt objectives (runs, bosses, heat)."""
     display_name = "Include Escape Attempts"
+    default = True
 
 class HadesIncludeWeaponMastery(Toggle):
     """Include weapon mastery objectives (aspects, upgrades, runs)."""
     display_name = "Include Weapon Mastery"
+    default = True
 
 class HadesIncludeRelationshipBuilding(Toggle):
     """Include relationship objectives (characters, gifts, keepsakes)."""
     display_name = "Include Relationship Building"
+    default = True
 
 class HadesIncludeStoryProgression(Toggle):
     """Include story progression objectives (storylines, codex, endings)."""
     display_name = "Include Story Progression"
+    default = True
 
 class HadesIncludeMirrorUpgrades(Toggle):
     """Include Mirror of Night upgrade objectives."""
     display_name = "Include Mirror Upgrades"
+    default = True
 
 class HadesIncludeProphecies(Toggle):
     """Include Fated List prophecy objectives."""
     display_name = "Include Prophecies"
+    default = True
 
 class HadesIncludeContractorUpgrades(Toggle):
     """Include House Contractor upgrade objectives."""
     display_name = "Include Contractor Upgrades"
+    default = True
 
 class HadesIncludeCollectionGoals(Toggle):
     """Include resource collection and merchant objectives."""
     display_name = "Include Collection Goals"
+    default = True
 
 class HadesDifficultyLevel(Choice):
     """Sets the difficulty level for objectives and constraints."""

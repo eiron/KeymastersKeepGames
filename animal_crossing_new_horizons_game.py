@@ -620,34 +620,42 @@ class AnimalCrossingNewHorizonsGame(Game):
 class ACNHIncludeDailyActivities(Toggle):
     """Include daily activity objectives (resource gathering, tasks)."""
     display_name = "Include Daily Activities"
+    default = True
 
 class ACNHIncludeCollections(Toggle):
     """Include collection objectives (museum donations, critterpedia)."""
     display_name = "Include Collection Activities"
+    default = True
 
 class ACNHIncludeIslandDevelopment(Toggle):
     """Include island development objectives (buildings, infrastructure, rating)."""
     display_name = "Include Island Development"
+    default = True
 
 class ACNHIncludeVillagerInteractions(Toggle):
     """Include villager interaction objectives (friendship, gifts, help)."""
     display_name = "Include Villager Interactions"
+    default = True
 
 class ACNHIncludeShopping(Toggle):
     """Include shopping objectives (purchases, collections, sets)."""
     display_name = "Include Shopping Activities"
+    default = True
 
 class ACNHIncludeCrafting(Toggle):
     """Include crafting objectives (DIY recipes, customization)."""
     display_name = "Include Crafting Activities"
+    default = True
 
 class ACNHIncludeSeasonalEvents(Toggle):
     """Include seasonal event objectives (limited-time activities)."""
     display_name = "Include Seasonal Events"
+    default = False  # Keep as False - seasonal events are more specialized/harder
 
 class ACNHIncludeDecorating(Toggle):
     """Include decorating objectives (room design, themes, HHA scoring)."""
     display_name = "Include Decorating Activities"
+    default = True
 
 class ACNHCollectionFocus(Choice):
     """Focus collection objectives on specific categories."""

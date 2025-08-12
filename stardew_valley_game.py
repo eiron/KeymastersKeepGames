@@ -525,38 +525,47 @@ class StardewValleyGame(Game):
 class StardewIncludeFarming(Toggle):
     """Include farming objectives (crops, animals, profit goals)."""
     display_name = "Include Farming Objectives"
+    default = True
 
 class StardewIncludeMining(Toggle):
     """Include mining objectives (floors, ores, monsters)."""
     display_name = "Include Mining Objectives"
+    default = True
 
 class StardewIncludeFishing(Toggle):
     """Include fishing objectives (fish catches, legendary fish, crab pots)."""
     display_name = "Include Fishing Objectives"
+    default = True
 
 class StardewIncludeForaging(Toggle):
     """Include foraging objectives (wild items, tree tapping)."""
     display_name = "Include Foraging Objectives"
+    default = True
 
 class StardewIncludeRelationships(Toggle):
     """Include relationship objectives (villager hearts, marriage, gifts)."""
     display_name = "Include Relationship Objectives"
+    default = True
 
 class StardewIncludeCommunityCenterBundles(Toggle):
     """Include Community Center bundle objectives."""
     display_name = "Include Community Center Bundles"
+    default = True
 
 class StardewIncludeCollections(Toggle):
     """Include collection objectives (museum, artifacts, minerals)."""
     display_name = "Include Collection Objectives"
+    default = True
 
 class StardewIncludeCooking(Toggle):
     """Include cooking objectives (recipes, dishes)."""
     display_name = "Include Cooking Objectives"
+    default = True
 
 class StardewIncludeSeasonalGoals(Toggle):
     """Include seasonal objectives (festivals, seasonal profits)."""
     display_name = "Include Seasonal Goals"
+    default = True
 
 class StardewDifficultyLevel(Choice):
     """Sets the difficulty level for objectives and constraints."""

@@ -620,34 +620,42 @@ class BloodstainedRitualOfTheNightGame(Game):
 class BloodstainedIncludeShardCollection(Toggle):
     """Include shard collection and upgrade objectives."""
     display_name = "Include Shard Collection"
+    default = True
 
 class BloodstainedIncludeExploration(Toggle):
     """Include map exploration and discovery objectives."""
     display_name = "Include Exploration"
+    default = True
 
 class BloodstainedIncludeBossChallenges(Toggle):
     """Include boss fight and combat challenge objectives."""
     display_name = "Include Boss Challenges"
+    default = True
 
 class BloodstainedIncludeAlchemyCrafting(Toggle):
     """Include alchemy, crafting, and synthesis objectives."""
     display_name = "Include Alchemy & Crafting"
+    default = True
 
 class BloodstainedIncludeEquipmentMastery(Toggle):
     """Include weapon mastery and equipment collection objectives."""
     display_name = "Include Equipment Mastery"
+    default = True
 
 class BloodstainedIncludeCompletionGoals(Toggle):
     """Include story completion and achievement objectives."""
     display_name = "Include Completion Goals"
+    default = True
 
 class BloodstainedIncludeSpeedrunChallenges(Toggle):
     """Include speedrun and time-based challenge objectives."""
     display_name = "Include Speedrun Challenges"
+    default = False  # Keep as False - speedrun challenges are specialized/harder
 
 class BloodstainedIncludeDifficultyChallenges(Toggle):
     """Include difficulty and restriction-based challenge objectives."""
     display_name = "Include Difficulty Challenges"
+    default = False  # Keep as False - difficulty challenges are specialized/harder
 
 class BloodstainedFocusStyle(Choice):
     """Focus objectives on specific gameplay styles."""

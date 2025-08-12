@@ -536,34 +536,42 @@ class DeadCellsGame(Game):
 class DeadCellsIncludeProgressionRuns(Toggle):
     """Include progression run objectives (completing runs, reaching biomes)."""
     display_name = "Include Progression Runs"
+    default = True
 
 class DeadCellsIncludeWeaponMastery(Toggle):
     """Include weapon mastery objectives (unlocks, upgrades, kills)."""
     display_name = "Include Weapon Mastery"
+    default = True
 
 class DeadCellsIncludeBossChallenges(Toggle):
     """Include boss challenge objectives (no damage, specific weapons)."""
     display_name = "Include Boss Challenges"
+    default = True
 
 class DeadCellsIncludeBiomeExploration(Toggle):
     """Include biome exploration objectives (secrets, challenge rooms)."""
     display_name = "Include Biome Exploration"
+    default = True
 
 class DeadCellsIncludeBlueprintCollection(Toggle):
     """Include blueprint collection objectives."""
     display_name = "Include Blueprint Collection"
+    default = True
 
 class DeadCellsIncludeMutationGoals(Toggle):
     """Include mutation and build objectives."""
     display_name = "Include Mutation Goals"
+    default = True
 
 class DeadCellsIncludeDifficultyScaling(Toggle):
     """Include Boss Cell difficulty progression."""
     display_name = "Include Difficulty Scaling"
+    default = False  # Keep as False - difficulty scaling is specialized/harder
 
 class DeadCellsIncludeSpeedChallenges(Toggle):
     """Include speedrun and time challenge objectives."""
     display_name = "Include Speed Challenges"
+    default = False  # Keep as False - speed challenges are specialized/harder
 
 class DeadCellsPlaystyleFocus(Choice):
     """Focus weapon objectives on specific stat builds."""

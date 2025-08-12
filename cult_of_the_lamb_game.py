@@ -637,34 +637,42 @@ class CultOfTheLambGame(Game):
 class COTLIncludeCultManagement(Toggle):
     """Include cult management objectives (followers, faith, sermons)."""
     display_name = "Include Cult Management"
+    default = True
 
 class COTLIncludeCrusadeObjectives(Toggle):
     """Include crusade objectives (combat, exploration, rescues)."""
     display_name = "Include Crusade Objectives"
+    default = True
 
 class COTLIncludeFollowerRelationships(Toggle):
     """Include follower relationship objectives (loyalty, marriage, quests)."""
     display_name = "Include Follower Relationships"
+    default = True
 
 class COTLIncludeBaseBuilding(Toggle):
     """Include base building objectives (construction, upgrades, decoration)."""
     display_name = "Include Base Building"
+    default = True
 
 class COTLIncludeBossProgression(Toggle):
     """Include boss and story progression objectives."""
     display_name = "Include Boss Progression"
+    default = True
 
 class COTLIncludeRitualCeremonies(Toggle):
     """Include ritual and ceremony objectives."""
     display_name = "Include Ritual Ceremonies"
+    default = True
 
 class COTLIncludeResourceCollection(Toggle):
     """Include resource collection and production objectives."""
     display_name = "Include Resource Collection"
+    default = True
 
 class COTLIncludeDoctrineDevelopment(Toggle):
     """Include doctrine and commandment objectives."""
     display_name = "Include Doctrine Development"
+    default = True
 
 class COTLManagementStyle(Choice):
     """Focus cult management on specific leadership styles."""

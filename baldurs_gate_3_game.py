@@ -926,34 +926,42 @@ class BaldursGate3Game(Game):
 class BG3IncludeCharacterBuilds(Toggle):
     """Include character build experimentation and multiclassing objectives."""
     display_name = "Include Character Builds"
+    default = True
 
 class BG3IncludeStoryProgression(Toggle):
     """Include main story and narrative choice objectives."""
     display_name = "Include Story Progression"
+    default = True
 
 class BG3IncludeCompanionQuests(Toggle):
     """Include companion relationship and personal quest objectives."""
     display_name = "Include Companion Quests"
+    default = True
 
 class BG3IncludeExploration(Toggle):
     """Include world exploration and discovery objectives."""
     display_name = "Include Exploration"
+    default = True
 
 class BG3IncludeCombatChallenges(Toggle):
     """Include tactical combat and boss fight objectives."""
     display_name = "Include Combat Challenges"
+    default = True
 
 class BG3IncludeSocialEncounters(Toggle):
     """Include dialogue, persuasion, and social interaction objectives."""
     display_name = "Include Social Encounters"
+    default = True
 
 class BG3IncludeCollectibles(Toggle):
     """Include item collection and treasure hunting objectives."""
     display_name = "Include Collectibles"
+    default = True
 
 class BG3IncludeAchievementHunting(Toggle):
     """Include achievement and completion challenge objectives."""
     display_name = "Include Achievement Hunting"
+    default = True
 
 class BG3DifficultyPreference(Choice):
     """Prefer certain difficulty levels for objectives."""

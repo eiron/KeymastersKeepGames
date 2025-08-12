@@ -1189,34 +1189,42 @@ class ScavengerHuntGame(Game):
 class ScavengerIncludePhotography(Toggle):
     """Include photography and visual documentation objectives."""
     display_name = "Include Photography"
+    default = True
 
 class ScavengerIncludeLocationHunting(Toggle):
     """Include location discovery and exploration objectives."""
     display_name = "Include Location Hunting"
+    default = True
 
 class ScavengerIncludeObjectCollection(Toggle):
     """Include item collection and specimen gathering objectives."""
     display_name = "Include Object Collection"
+    default = True
 
 class ScavengerIncludeInteractionChallenges(Toggle):
     """Include social interaction and communication objectives."""
     display_name = "Include Interaction Challenges"
+    default = True
 
 class ScavengerIncludeNatureExploration(Toggle):
     """Include wildlife observation and nature study objectives."""
     display_name = "Include Nature Exploration"
+    default = True
 
 class ScavengerIncludeCulturalDiscovery(Toggle):
     """Include cultural learning and artistic exploration objectives."""
     display_name = "Include Cultural Discovery"
+    default = True
 
 class ScavengerIncludeSeasonalActivities(Toggle):
     """Include weather and season-specific objectives."""
     display_name = "Include Seasonal Activities"
+    default = True
 
 class ScavengerIncludeCommunityEngagement(Toggle):
     """Include community participation and local support objectives."""
     display_name = "Include Community Engagement"
+    default = True
 
 class ScavengerDifficultyPreference(Choice):
     """Prefer certain difficulty levels for objectives."""

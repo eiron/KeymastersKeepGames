@@ -768,34 +768,42 @@ class MinecraftGame(Game):
 class MinecraftIncludeSurvivalBasics(Toggle):
     """Include basic survival objectives (tools, shelter, mining)."""
     display_name = "Include Survival Basics"
+    default = True
 
 class MinecraftIncludeBuildingProjects(Toggle):
     """Include building and construction objectives."""
     display_name = "Include Building Projects"
+    default = True
 
 class MinecraftIncludeExploration(Toggle):
     """Include exploration and discovery objectives."""
     display_name = "Include Exploration"
+    default = True
 
 class MinecraftIncludeRedstoneEngineering(Toggle):
     """Include redstone contraption and automation objectives."""
     display_name = "Include Redstone Engineering"
+    default = True
 
 class MinecraftIncludeFarmingAutomation(Toggle):
     """Include farming, breeding, and automation objectives."""
     display_name = "Include Farming & Automation"
+    default = True
 
 class MinecraftIncludeBossProgression(Toggle):
     """Include boss fights and major progression objectives."""
     display_name = "Include Boss Progression"
+    default = True
 
 class MinecraftIncludeCollectionGoals(Toggle):
     """Include item collection and museum objectives."""
     display_name = "Include Collection Goals"
+    default = True
 
 class MinecraftIncludeChallengeRuns(Toggle):
     """Include challenge runs and restriction objectives."""
     display_name = "Include Challenge Runs"
+    default = False  # Keep as False - challenge runs are specialized/harder
 
 class MinecraftGameModeFocus(Choice):
     """Focus objectives on specific game modes."""

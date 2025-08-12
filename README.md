@@ -1,6 +1,87 @@
 # KeymastersKeepGames
 Keymaster's Keep games maintained by eiron
 
+## Universal Game Tester 🔧
+
+The **Universal Game Tester** (`universal_game_tester.py`) is a comprehensive testing and analysis tool that works with **ANY** Keymaster's Keep game implementation. It automatically discovers, loads, and tests game modules regardless of their structure, option types, or complexity.
+
+### Key Features
+
+- **🔍 Automatic Discovery**: Scans directory for game implementation files using pattern recognition
+- **🎯 Universal Compatibility**: Works with any game module, including custom option types and complex data structures
+- **⚖️ Authentic Simulation**: Reproduces the Keep's weighted objective selection system for realistic testing
+- **📊 Comprehensive Analysis**: Provides detailed metrics on objectives, weights, features, and complexity
+- **🎮 Interactive Testing**: Menu-driven interface for testing individual games or running full test suites
+
+### Usage
+
+```bash
+# Test all discovered game implementations
+python universal_game_tester.py
+
+# Test a specific game implementation
+python universal_game_tester.py stardew_valley_game.py
+
+# Test with shortened filename
+python universal_game_tester.py hades
+```
+
+### What It Tests
+
+- **Dynamic Objective Generation**: Simulates the Keep's weighted selection process
+- **Option System Compatibility**: Validates all option types (Toggle, Choice, Range, OptionSet, custom types)
+- **Template Population**: Tests objective template data population with real values
+- **Constraint Systems**: Analyzes optional constraint templates
+- **Feature Detection**: Identifies relationship systems, difficulty scaling, and special features
+- **Import Resolution**: Handles relative imports and missing dependencies automatically
+
+### Sample Output
+
+```
+🎮 TESTING: Date Everything Game
+📊 IMPLEMENTATION ANALYSIS:
+   • Total Objectives: 29
+   • Complexity Score: 86
+   • Weight Distribution:
+     - Weight 10: 9 objectives █████████
+     - Weight 8: 2 objectives ██
+   • Features: Relationship System
+   • Categories: 10 options available
+
+🎯 DYNAMIC OBJECTIVE SELECTION:
+   1. 🔥 Achieve LOVE with Rebel (Rubber Duck)
+      └─ Weight: 10 | 😊 | ⏰ 📊x2 ⚖️10
+   2. ⭐ Get 5 structural elements to FRIENDS status
+      └─ Weight: 8 | 💪 | ⏰ 📊x2 ⚖️8
+```
+
+### Technical Details
+
+The tester handles:
+- **Custom Option Classes**: Automatically resolves string type annotations to actual classes
+- **Dynamic Mocking**: Creates universal mock environment for all possible imports
+- **Robust Error Handling**: Gracefully handles import failures, missing attributes, and malformed data
+- **Weight-Based Selection**: Implements the same probabilistic selection system used by the Keep
+- **Cross-Platform Compatibility**: Works on Windows, Mac, and Linux
+
+This tool is essential for validating that game implementations will work correctly within the Keymaster's Keep ecosystem before deployment.
+
+---
+
+## Include Option Standards
+
+All game implementations follow a standardized approach for include Toggle options:
+
+- **Basic Content**: All fundamental include options default to `True` for better objective generation
+- **Specialized/Harder Content**: Options for speedruns, difficulty challenges, or specialized content default to `False` 
+- **Cursed/Tedious Modules**: Games like "Cursed Red Dead Redemption 2" and "Really Boring Challenges" have all options default to `True`, as players are deliberately opting into that content type
+
+This ensures that casual players get comprehensive objective generation by default, while preserving the option to disable challenging or specialized content categories.
+
+---
+
+## Game Implementation Modules
+
 ## Archipelagourmet
 A meta-game in which the options generarated will be recipes, and/or takeaway and restaurant options provided by the player.
 Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
@@ -140,6 +221,13 @@ The module contains over 500 different objectives across photography subjects, d
 
 ## Individual Game Modules
 
+### Date Everything
+A whimsical dating simulation module where you romance household objects and abstract concepts in your own home. Features 100+ fully voice-acted characters from structural elements to existential dread, with branching relationships and transformation possibilities.
+
+Core Categories: ``Structural Objects``, ``Furniture & Decor``, ``Kitchen Appliances``, ``Bathroom Items``, ``Laundry Items``, ``Office & Bedroom``, ``Miscellaneous Items``, ``Special Concepts``, ``DLC Characters``
+
+Sample Objectives: ``"Achieve LOVE with Rebel (Rubber Duck)"`` or ``"Get 5 structural elements to FRIENDS status"`` or ``"Transform Teddy (Teddy Bear) into human form through deep connection"``
+
 ### Stardew Valley
 A comprehensive farming simulation module covering all aspects of Pelican Town life, from crop management and animal care to community relationships and cave exploration.
 
@@ -195,3 +283,31 @@ A deep RPG module covering character builds, story choices, companion relationsh
 Core Categories: ``Character Builds``, ``Story Progression``, ``Companion Quests``, ``Exploration``, ``Combat Challenges``, ``Social Encounters``, ``Collectibles``, ``Achievement Hunting``
 
 Sample Objectives: ``"Complete Act 1 with a Paladin/Warlock multiclass build"`` or ``"Achieve Romance relationship with Shadowheart"`` or ``"Successfully pass 20 Persuasion skill checks"``
+
+### Red Dead Redemption 2 (Cursed Edition)
+A deliberately chaotic and humorous take on the Wild West epic, featuring intentionally absurd objectives that subvert the serious tone of Arthur Morgan's story with ridiculous challenges.
+
+Core Categories: ``Absurd Combat``, ``Ridiculous Exploration``, ``Chaotic Social Interactions``, ``Silly Customization``, ``Nonsense Activities``, ``Bizarre Challenges``
+
+Sample Objectives: ``"Kill 50 enemies using only throwing knives while wearing a fancy hat"`` or ``"Ride your horse backwards for 10 minutes straight"`` or ``"Get a 1000 dollar bounty in Valentine by only antagonizing people"``
+
+### Really Boring Challenges
+A deliberately mundane module that transforms everyday, routine activities into gaming objectives, celebrating the art of finding engagement in the most ordinary tasks.
+
+Core Categories: ``Household Maintenance``, ``Personal Organization``, ``Digital Housekeeping``, ``Routine Optimization``, ``Administrative Tasks``, ``Basic Self-Care``
+
+Sample Objectives: ``"Organize 50 digital files"`` or ``"Clean one room thoroughly"`` or ``"Update 3 different passwords"``
+
+### Archipelago Multiworld Randomizer
+A meta-gaming module that creates objectives for participating in Archipelago multiworld randomizer sessions, covering the collaborative puzzle-solving experience of linked randomized games.
+
+Core Categories: ``Multiworld Participation``, ``Item Progression``, ``Helper Activities``, ``Community Engagement``, ``Technical Setup``, ``Game Coordination``
+
+Sample Objectives: ``"Complete your sphere 1 progression items"`` or ``"Send 10 useful items to other players"`` or ``"Help troubleshoot another player's connection issues"``
+
+### Board Game Collection
+A physical gaming module focused on exploring and mastering your board game collection, from quick card games to complex strategy epics, with emphasis on both solo and group play.
+
+Core Categories: ``Strategy Games``, ``Party Games``, ``Solo Gaming``, ``Learning New Games``, ``Game Night Hosting``, ``Collection Management``
+
+Sample Objectives: ``"Learn and play 3 new games from your collection"`` or ``"Host a game night with 4+ different games"`` or ``"Complete a solo campaign game"``
