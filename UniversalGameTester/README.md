@@ -10,43 +10,34 @@ A comprehensive testing framework for validating **any** Keymaster's Keep game i
 - **Comprehensive Analysis**: Provides detailed metrics on objectives, weights, and features
 - **Robust Error Handling**: Gracefully handles missing dependencies and import failures
 
-## Quick Start
+## Installation
 
-### Installation
-1. Extract the `UniversalGameTester` folder anywhere on your system (NOT in Archipelago's worlds directories)
-2. Ensure you have Python 3.7+ installed
-3. Open a command prompt in the UniversalGameTester folder
+This is a standard Archipelago world file (.apworld). To install:
 
-### Usage Options
+1. Copy `keymasters_keep_game_tester.apworld` to your Archipelago `custom_worlds` directory
+2. The Universal Game Tester will appear in your Archipelago launcher as a tool
+3. Launch it from the Archipelago launcher's Tools menu
 
-**Option 1: Interactive Menu (Recommended)**
-```bash
-python universal_game_tester.py
-```
+## Usage
 
-**Option 2: Direct Launcher**
-```bash
-python run_universal_game_tester.py
-```
+Once installed, you can access the Universal Game Tester through:
 
-**Option 3: Test Specific Games**
-```bash
-# Test a specific game file
-python universal_game_tester.py stardew_valley_game.py
+**From Archipelago Launcher:**
+- Open Archipelago Launcher
+- Go to the Tools menu
+- Select "Keymaster's Keep Game Tester"
 
-# Test with shortened filename
-python universal_game_tester.py hades
+**Features Available:**
+- Interactive GUI for testing game implementations
+- Automatic scanning and discovery of game files
+- Detailed analysis reports with metrics
+- Dynamic objective generation testing
 
-# Test multiple games
-python universal_game_tester.py date_everything stardew_valley hades
-```
+## System Requirements
 
-## Important Notes
-
-- **This is NOT an Archipelago world module** - it's a standalone testing tool
-- Don't place this in `worlds` or `custom_worlds` directories
-- Don't try to load it as a world in Archipelago
-- Extract to a separate folder like `C:\Tools\UniversalGameTester\`
+- Archipelago (latest version recommended)
+- Python 3.7+ (included with Archipelago)
+- Kivy (for GUI - automatically handled by Archipelago)
 
 ## What It Tests
 
@@ -108,17 +99,19 @@ DYNAMIC OBJECTIVE SELECTION:
 
 ### Common Issues
 
-**Error: "No module named 'worlds.C:\...'"**
-- This happens when the tool is placed in Archipelago's worlds directories
-- Solution: Move to a separate folder and run directly
+**Tool doesn't appear in Archipelago launcher**
+- Ensure the .apworld file is in the correct directory (`worlds` or `custom_worlds`)
+- Restart Archipelago launcher after adding the file
+- Check that the file isn't corrupted or blocked by antivirus
 
 **No games found during scanning**
 - The tool automatically scans for Keymaster's Keep games in your setup
 - Verify your game files are accessible and follow naming conventions
+- Ensure you have files available in your keymasters_keep folder
 
-**Import or dependency errors**
-- The tool has built-in error handling for missing dependencies
-- Most import issues are resolved automatically through the mock system
+**GUI display issues**
+- All Unicode characters have been replaced with ASCII equivalents for Kivy compatibility
+- If text appears garbled, ensure your system supports the character encoding
 
 ### Results Interpretation
 
