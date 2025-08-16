@@ -740,13 +740,23 @@ class JustDanceGame(Game):
             "Eiffel 65 - Blue (Da Ba Dee) (Hit The Electro Beat) [JD2018]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2018_exclusives(self) -> List[str]:
         """Ubisoft Connect exclusive and regional exclusive songs for Just Dance 2018"""
-        return [
-            "Sabrina Carpenter - Thumbs [JD2018 Ubisoft Connect]",
-            "The Just Dance Band - Sugar Dance [JD2018 Code Unlock]",
-            "Demo - Sun (Солнышко) [JD2018 Russia Exclusive]",
-        ]
+        exclusives = []
+        
+        if "JD2018 - Ubisoft Connect Unlockables" in self.exclusive_content:
+            exclusives.extend([
+                "Sabrina Carpenter - Thumbs [JD2018 Ubisoft Connect]",
+                "The Just Dance Band - Sugar Dance [JD2018 Code Unlock]",
+            ])
+            
+        if "JD2018 - Russia Exclusive" in self.exclusive_content:
+            exclusives.extend([
+                "Demo - Sun (Солнышко) [JD2018 Russia Exclusive]",
+            ])
+            
+        return exclusives
 
     @functools.cached_property
     def songs_just_dance_2018_platform_exclusives(self) -> List[str]:
@@ -830,24 +840,28 @@ class JustDanceGame(Game):
             "Janelle Monáe - Make Me Feel [JD2019]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2019_code_unlock(self) -> List[str]:
         """Code exclusive songs for Just Dance 2019"""
         return [
             "Michelle Delamor - Fire On The Dancefloor [JD2019 Code Unlock]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2019_middle_east_exclusive(self) -> List[str]:
         """Middle East exclusive songs for Just Dance 2019"""
         return [
             "Maan Barghouth - Hala Bel Khamis [JD2019 Middle East Exclusive]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2019_france_canada_exclusive(self) -> List[str]:
         """France/Canada exclusive songs for Just Dance 2019"""
         return [
             "McFly & Carlito - On Ne Porte Pas De Sous-Vêtements [JD2019 France/Canada Exclusive]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2019_russia_exclusive(self) -> List[str]:
         """Russia exclusive songs for Just Dance 2019"""
         return [
