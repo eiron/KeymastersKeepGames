@@ -311,3 +311,14 @@ A physical gaming module focused on exploring and mastering your board game coll
 Core Categories: ``Strategy Games``, ``Party Games``, ``Solo Gaming``, ``Learning New Games``, ``Game Night Hosting``, ``Collection Management``
 
 Sample Objectives: ``"Learn and play 3 new games from your collection"`` or ``"Host a game night with 4+ different games"`` or ``"Complete a solo campaign game"``
+
+### Just Dance
+A comprehensive rhythm gaming module covering the entire Just Dance franchise from 2014 through 2025, with support for base game tracks, regional exclusives, subscription content (Just Dance Unlimited), and premium content (Just Dance+).
+
+Game Coverage: ``Just Dance 2014-2025``, ``Just Dance Unlimited Subscription``, ``Just Dance+ Premium Content``, ``Regional Exclusives`` (China, France, Japan, Benelux, Germany, Italy, Southeast Asia, and more)
+
+Core Categories: ``Base Game Completion``, ``Subscription Service Mastery``, ``Regional Content Exploration``, ``Score Achievement``, ``Song Collection``, ``Dance Challenge Completion``
+
+Sample Objectives: ``"Perfect 25 songs from Just Dance 2023 base tracklist"`` or ``"Complete 15 dances from Just Dance Unlimited subscription"`` or ``"Master 5 songs from Just Dance+ premium content"`` or ``"Achieve 4+ stars on 20 regional exclusive tracks"``
+
+Features comprehensive song libraries with accurate track lists, regional exclusives, platform-specific content, and both subscription services. Supports granular customization of which games you own, which DLC/subscription content you have access to, and which regional exclusives are available in your region.
