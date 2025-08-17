@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import functools
 from typing import List
 
 from dataclasses import dataclass
@@ -41,8 +42,8 @@ class MusicListeningGame(Game):
         if self.has_albums:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION ALBUM",
-                    data={"ACTION": (self.album_actions, 1), "ALBUM": (self.albums, 1)},
+                    label="ACTION_VERB ALBUM_NAME",
+                    data={"ACTION_VERB": (self.album_actions, 1), "ALBUM_NAME": (self.albums, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -52,8 +53,8 @@ class MusicListeningGame(Game):
         if self.has_artists:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION ARTIST",
-                    data={"ACTION": (self.artist_actions, 1), "ARTIST": (self.artists, 1)},
+                    label="ACTION_VERB ARTIST_NAME",
+                    data={"ACTION_VERB": (self.artist_actions, 1), "ARTIST_NAME": (self.artists, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -63,8 +64,8 @@ class MusicListeningGame(Game):
         if self.has_playlists:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION PLAYLIST",
-                    data={"ACTION": (self.playlist_actions, 1), "PLAYLIST": (self.playlists, 1)},
+                    label="ACTION_VERB PLAYLIST_NAME",
+                    data={"ACTION_VERB": (self.playlist_actions, 1), "PLAYLIST_NAME": (self.playlists, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -88,21 +89,27 @@ class MusicListeningGame(Game):
         playlists = self.playlists()
         return len(playlists) > 0
 
+    @functools.cached_property
     def album_actions(self) -> List[str]:
         return sorted(self.archipelago_options.music_album_actions.value)
 
+    @functools.cached_property
     def artist_actions(self) -> List[str]:
         return sorted(self.archipelago_options.music_artist_actions.value)
 
+    @functools.cached_property
     def playlist_actions(self) -> List[str]:
         return sorted(self.archipelago_options.music_playlist_actions.value)
 
+    @functools.cached_property
     def albums(self) -> List[str]:
         return sorted(self.archipelago_options.music_album_selection.value)
 
+    @functools.cached_property
     def artists(self) -> List[str]:
         return sorted(self.archipelago_options.music_artist_selection.value)
 
+    @functools.cached_property
     def playlists(self) -> List[str]:
         return sorted(self.archipelago_options.music_playlist_selection.value)
 
@@ -193,3 +200,4 @@ class MusicPlaylistActions(OptionSet):
         "SHUFFLE THROUGH",
         "CURATE FROM",
     ]
+

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import functools
 from typing import List
 
 from dataclasses import dataclass
@@ -43,8 +44,8 @@ class CreativeChallengesGame(Game):
         if self.has_art_projects:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION ART",
-                    data={"ACTION": (self.art_project_actions, 1), "ART": (self.art_projects, 1)},
+                    label="ACTION_VERB ART_PROJECT",
+                    data={"ACTION_VERB": (self.art_project_actions, 1), "ART_PROJECT": (self.art_projects, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -54,8 +55,8 @@ class CreativeChallengesGame(Game):
         if self.has_writing:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION WRITING",
-                    data={"ACTION": (self.writing_actions, 1), "WRITING": (self.writing, 1)},
+                    label="ACTION_VERB WRITING_PROJECT",
+                    data={"ACTION_VERB": (self.writing_actions, 1), "WRITING_PROJECT": (self.writing, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -65,8 +66,8 @@ class CreativeChallengesGame(Game):
         if self.has_photography:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION PHOTOGRAPHY",
-                    data={"ACTION": (self.photography_actions, 1), "PHOTOGRAPHY": (self.photography, 1)},
+                    label="ACTION_VERB PHOTOGRAPHY_PROJECT",
+                    data={"ACTION_VERB": (self.photography_actions, 1), "PHOTOGRAPHY_PROJECT": (self.photography, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -76,8 +77,8 @@ class CreativeChallengesGame(Game):
         if self.has_crafts:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION CRAFT",
-                    data={"ACTION": (self.craft_actions, 1), "CRAFT": (self.crafts, 1)},
+                    label="ACTION_VERB CRAFT_PROJECT",
+                    data={"ACTION_VERB": (self.craft_actions, 1), "CRAFT_PROJECT": (self.crafts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -106,27 +107,35 @@ class CreativeChallengesGame(Game):
         crafts = self.crafts()
         return len(crafts) > 0
 
+    @functools.cached_property
     def art_project_actions(self) -> List[str]:
         return sorted(self.archipelago_options.creative_art_project_actions.value)
 
+    @functools.cached_property
     def writing_actions(self) -> List[str]:
         return sorted(self.archipelago_options.creative_writing_actions.value)
 
+    @functools.cached_property
     def photography_actions(self) -> List[str]:
         return sorted(self.archipelago_options.creative_photography_actions.value)
 
+    @functools.cached_property
     def craft_actions(self) -> List[str]:
         return sorted(self.archipelago_options.creative_craft_actions.value)
 
+    @functools.cached_property
     def art_projects(self) -> List[str]:
         return sorted(self.archipelago_options.creative_art_project_selection.value)
 
+    @functools.cached_property
     def writing(self) -> List[str]:
         return sorted(self.archipelago_options.creative_writing_selection.value)
 
+    @functools.cached_property
     def photography(self) -> List[str]:
         return sorted(self.archipelago_options.creative_photography_selection.value)
 
+    @functools.cached_property
     def crafts(self) -> List[str]:
         return sorted(self.archipelago_options.creative_craft_selection.value)
 
@@ -250,3 +259,4 @@ class CreativeCraftActions(OptionSet):
         "PRACTICE",
         "MASTER",
     ]
+

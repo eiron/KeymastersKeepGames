@@ -43,8 +43,8 @@ class ChristmasHolidayChallengesGame(Game):
         if self.has_decorations:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION DECORATION",
-                    data={"ACTION": (self.decoration_actions, 1), "DECORATION": (self.decorations, 1)},
+                    label="ACTION_VERB DECORATION_ITEM",
+                    data={"ACTION_VERB": (self.decoration_actions, 1), "DECORATION_ITEM": (self.decorations, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -54,8 +54,8 @@ class ChristmasHolidayChallengesGame(Game):
         if self.has_gifts:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION GIFT",
-                    data={"ACTION": (self.gift_actions, 1), "GIFT": (self.gifts, 1)},
+                    label="ACTION_VERB GIFT_ITEM",
+                    data={"ACTION_VERB": (self.gift_actions, 1), "GIFT_ITEM": (self.gifts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -65,8 +65,8 @@ class ChristmasHolidayChallengesGame(Game):
         if self.has_baking:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION BAKING",
-                    data={"ACTION": (self.baking_actions, 1), "BAKING": (self.baking, 1)},
+                    label="ACTION_VERB BAKING_ITEM",
+                    data={"ACTION_VERB": (self.baking_actions, 1), "BAKING_ITEM": (self.baking, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -76,8 +76,8 @@ class ChristmasHolidayChallengesGame(Game):
         if self.has_traditions:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION TRADITION",
-                    data={"ACTION": (self.tradition_actions, 1), "TRADITION": (self.traditions, 1)},
+                    label="ACTION_VERB TRADITION_ITEM",
+                    data={"ACTION_VERB": (self.tradition_actions, 1), "TRADITION_ITEM": (self.traditions, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,

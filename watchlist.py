@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import functools
 from typing import List
 
 from dataclasses import dataclass
@@ -39,8 +40,8 @@ class WatchlistGame(Game):
         if self.has_films:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION FILM",
-                    data={"ACTION": (self.film_actions, 1), "FILM": (self.films, 1)},
+                    label="ACTION_VERB FILM_NAME",
+                    data={"ACTION_VERB": (self.film_actions, 1), "FILM_NAME": (self.films, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -50,8 +51,8 @@ class WatchlistGame(Game):
         if self.has_tv_shows:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION TV",
-                    data={"ACTION": (self.tv_actions, 1), "TV": (self.tv_shows, 1)},
+                    label="ACTION_VERB TV_SERIES_NAME",
+                    data={"ACTION_VERB": (self.tv_actions, 1), "TV_SERIES_NAME": (self.tv_shows, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -70,15 +71,19 @@ class WatchlistGame(Game):
         tv_shows = self.tv_shows()
         return len(tv_shows) > 0
 
+    @functools.cached_property
     def film_actions(self) -> List[str]:
         return sorted(self.archipelago_options.watchlist_film_actions.value)
 
+    @functools.cached_property
     def tv_actions(self) -> List[str]:
         return sorted(self.archipelago_options.watchlist_tv_actions.value)
 
+    @functools.cached_property
     def films(self) -> List[str]:
         return sorted(self.archipelago_options.watchlist_film_selection.value)
 
+    @functools.cached_property
     def tv_shows(self) -> List[str]:
         return sorted(self.archipelago_options.watchlist_tv_selection.value)
 
@@ -139,3 +144,4 @@ class WatchlistTVActions(OptionSet):
         "CATCH UP",
         "WATCH SEASON",
     ]
+

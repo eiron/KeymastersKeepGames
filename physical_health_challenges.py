@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import functools
 from typing import List
 
 from dataclasses import dataclass
@@ -43,8 +44,8 @@ class PhysicalHealthChallengesGame(Game):
         if self.has_exercises:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION EXERCISE",
-                    data={"ACTION": (self.exercise_actions, 1), "EXERCISE": (self.exercises, 1)},
+                    label="ACTION_VERB_VERB EXERCISE_OBJECTIVE",
+                    data={"ACTION_VERB_VERB": (self.exercise_actions, 1), "EXERCISE_OBJECTIVE": (self.exercises, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -54,8 +55,8 @@ class PhysicalHealthChallengesGame(Game):
         if self.has_wellness:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION WELLNESS",
-                    data={"ACTION": (self.wellness_actions, 1), "WELLNESS": (self.wellness, 1)},
+                    label="ACTION_VERB_VERB WELLNESS_OBJECTIVE",
+                    data={"ACTION_VERB_VERB": (self.wellness_actions, 1), "WELLNESS_OBJECTIVE": (self.wellness, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -65,8 +66,8 @@ class PhysicalHealthChallengesGame(Game):
         if self.has_nutrition:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION NUTRITION",
-                    data={"ACTION": (self.nutrition_actions, 1), "NUTRITION": (self.nutrition, 1)},
+                    label="ACTION_VERB_VERB NUTRITION_OBJECTIVE",
+                    data={"ACTION_VERB_VERB": (self.nutrition_actions, 1), "NUTRITION_OBJECTIVE": (self.nutrition, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -76,8 +77,8 @@ class PhysicalHealthChallengesGame(Game):
         if self.has_movement:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION MOVEMENT",
-                    data={"ACTION": (self.movement_actions, 1), "MOVEMENT": (self.movement, 1)},
+                    label="ACTION_VERB_VERB MOVEMENT_OBJECTIVE",
+                    data={"ACTION_VERB_VERB": (self.movement_actions, 1), "MOVEMENT_OBJECTIVE": (self.movement, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -106,27 +107,35 @@ class PhysicalHealthChallengesGame(Game):
         movement = self.movement()
         return len(movement) > 0
 
+    @functools.cached_property
     def exercise_actions(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_exercise_actions.value)
 
+    @functools.cached_property
     def wellness_actions(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_wellness_actions.value)
 
+    @functools.cached_property
     def nutrition_actions(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_nutrition_actions.value)
 
+    @functools.cached_property
     def movement_actions(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_movement_actions.value)
 
+    @functools.cached_property
     def exercises(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_exercise_selection.value)
 
+    @functools.cached_property
     def wellness(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_wellness_selection.value)
 
+    @functools.cached_property
     def nutrition(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_nutrition_selection.value)
 
+    @functools.cached_property
     def movement(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_movement_selection.value)
 
@@ -250,3 +259,4 @@ class PhysicalHealthMovementActions(OptionSet):
         "REPEAT",
         "EXTEND",
     ]
+

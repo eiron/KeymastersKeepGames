@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import functools
 from typing import List
 
 from dataclasses import dataclass
@@ -44,8 +45,8 @@ class SocialConnectionsGame(Game):
         if self.has_meetups:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION MEETUP with PERSON",
-                    data={"ACTION": (self.meetup_actions, 1), "MEETUP": (self.meetups, 1), "PERSON": (self.people, 1)},
+                    label="ACTION_VERB MEETUP_TYPE with PERSON_NAME",
+                    data={"ACTION_VERB": (self.meetup_actions, 1), "MEETUP_TYPE": (self.meetups, 1), "PERSON_NAME": (self.people, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -55,8 +56,8 @@ class SocialConnectionsGame(Game):
         if self.has_family_activities:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION FAMILY_ACTIVITY with PERSON",
-                    data={"ACTION": (self.family_actions, 1), "FAMILY_ACTIVITY": (self.family_activities, 1), "PERSON": (self.people, 1)},
+                    label="ACTION_VERB FAMILY_ACTIVITY_TYPE with PERSON_NAME",
+                    data={"ACTION_VERB": (self.family_actions, 1), "FAMILY_ACTIVITY_TYPE": (self.family_activities, 1), "PERSON_NAME": (self.people, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -66,8 +67,8 @@ class SocialConnectionsGame(Game):
         if self.has_community_events:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION COMMUNITY_EVENT",
-                    data={"ACTION": (self.community_actions, 1), "COMMUNITY_EVENT": (self.community_events, 1)},
+                    label="ACTION_VERB COMMUNITY_EVENT",
+                    data={"ACTION_VERB": (self.community_actions, 1), "COMMUNITY_EVENT": (self.community_events, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -77,8 +78,8 @@ class SocialConnectionsGame(Game):
         if self.has_networking:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION NETWORKING_EVENT",
-                    data={"ACTION": (self.networking_actions, 1), "NETWORKING_EVENT": (self.networking_events, 1)},
+                    label="ACTION_VERB NETWORKING_EVENT",
+                    data={"ACTION_VERB": (self.networking_actions, 1), "NETWORKING_EVENT": (self.networking_events, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -107,30 +108,39 @@ class SocialConnectionsGame(Game):
         networking_events = self.networking_events()
         return len(networking_events) > 0
 
+    @functools.cached_property
     def meetup_actions(self) -> List[str]:
         return sorted(self.archipelago_options.social_meetup_actions.value)
 
+    @functools.cached_property
     def family_actions(self) -> List[str]:
         return sorted(self.archipelago_options.social_family_actions.value)
 
+    @functools.cached_property
     def community_actions(self) -> List[str]:
         return sorted(self.archipelago_options.social_community_actions.value)
 
+    @functools.cached_property
     def networking_actions(self) -> List[str]:
         return sorted(self.archipelago_options.social_networking_actions.value)
 
+    @functools.cached_property
     def meetups(self) -> List[str]:
         return sorted(self.archipelago_options.social_meetup_selection.value)
 
+    @functools.cached_property
     def family_activities(self) -> List[str]:
         return sorted(self.archipelago_options.social_family_selection.value)
 
+    @functools.cached_property
     def community_events(self) -> List[str]:
         return sorted(self.archipelago_options.social_community_selection.value)
 
+    @functools.cached_property
     def networking_events(self) -> List[str]:
         return sorted(self.archipelago_options.social_networking_selection.value)
 
+    @functools.cached_property
     def people(self) -> List[str]:
         return sorted(self.archipelago_options.social_people_selection.value)
 
@@ -266,3 +276,4 @@ class SocialNetworkingActions(OptionSet):
         "PARTICIPATE IN",
         "CONNECT AT",
     ]
+

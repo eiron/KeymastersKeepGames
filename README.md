@@ -322,3 +322,22 @@ Core Categories: ``Base Game Completion``, ``Subscription Service Mastery``, ``R
 Sample Objectives: ``"Perfect 25 songs from Just Dance 2023 base tracklist"`` or ``"Complete 15 dances from Just Dance Unlimited subscription"`` or ``"Master 5 songs from Just Dance+ premium content"`` or ``"Achieve 4+ stars on 20 regional exclusive tracks"``
 
 Features comprehensive song libraries with accurate track lists, regional exclusives, platform-specific content, and both subscription services. Supports granular customization of which games you own, which DLC/subscription content you have access to, and which regional exclusives are available in your region.
+
+
+### Harvestella
+A farming RPG module that brings the full breadth of Harvestella's systems to Keymaster's Keep. This implementation covers farming, exploration, combat, relationships, story progression, crafting, cooking, and seasonal events, with robust support for all major gameplay features and option types.
+
+Core Categories: ``Farming Objectives``, ``Exploration & Adventure``, ``Combat Challenges``, ``Relationship System``, ``Story Progression``, ``Crafting & Cooking``, ``Seasonal & Collection Goals``
+
+Sample Objectives: ``"Harvest 50 crops across all seasons"`` or ``"Defeat 10 unique monsters in Quietus dungeons"`` or ``"Reach max relationship with a main character"`` or ``"Complete Chapter 5 and restore all Seaslight crystals"``
+
+Features:
+- Dynamic crop selection, farming goals, and seasonal objectives
+- Exploration of locations, dungeons, and rare material collection
+- Combat with monsters, bosses, and job mastery
+- Relationship events and character-specific objectives
+- Story progression, chapter completion, and seasonal dungeon unlocks
+- Crafting, equipment upgrades, and recipe mastery
+- Collection goals for items, recipes, monsters, and more
+
+Harvestella brings all its farming, adventure, and relationship systems to Keymaster's Keep.

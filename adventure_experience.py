@@ -43,8 +43,8 @@ class AdventureExperienceGame(Game):
         if self.has_local_exploration:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION LOCAL",
-                    data={"ACTION": (self.local_exploration_actions, 1), "LOCAL": (self.local_exploration, 1)},
+                    label="ACTION_VERB LOCAL_ITEM",
+                    data={"ACTION_VERB": (self.local_exploration_actions, 1), "LOCAL_ITEM": (self.local_exploration, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -54,8 +54,8 @@ class AdventureExperienceGame(Game):
         if self.has_cultural_experiences:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION CULTURAL",
-                    data={"ACTION": (self.cultural_experience_actions, 1), "CULTURAL": (self.cultural_experiences, 1)},
+                    label="ACTION_VERB CULTURAL_ITEM",
+                    data={"ACTION_VERB": (self.cultural_experience_actions, 1), "CULTURAL_ITEM": (self.cultural_experiences, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -65,8 +65,8 @@ class AdventureExperienceGame(Game):
         if self.has_outdoor_activities:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION OUTDOOR",
-                    data={"ACTION": (self.outdoor_activity_actions, 1), "OUTDOOR": (self.outdoor_activities, 1)},
+                    label="ACTION_VERB OUTDOOR_ITEM",
+                    data={"ACTION_VERB": (self.outdoor_activity_actions, 1), "OUTDOOR_ITEM": (self.outdoor_activities, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -76,8 +76,8 @@ class AdventureExperienceGame(Game):
         if self.has_culinary_adventures:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION CULINARY",
-                    data={"ACTION": (self.culinary_adventure_actions, 1), "CULINARY": (self.culinary_adventures, 1)},
+                    label="ACTION_VERB CULINARY_ITEM",
+                    data={"ACTION_VERB": (self.culinary_adventure_actions, 1), "CULINARY_ITEM": (self.culinary_adventures, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,

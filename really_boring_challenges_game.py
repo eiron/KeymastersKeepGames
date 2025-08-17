@@ -52,8 +52,8 @@ class ReallyBoringChallengesGame(Game):
                 data={"ENVIRONMENT_TYPE": (self.boring_environments, 1)},
             ),
             GameObjectiveTemplate(
-                label="Complete this objective using only INTERACTION_METHOD",
-                data={"INTERACTION_METHOD": (self.tedious_methods, 1)},
+                label="Complete this objective using only INTERACTION_VERB_METHOD",
+                data={"INTERACTION_VERB_METHOD": (self.tedious_methods, 1)},
             ),
             GameObjectiveTemplate(
                 label="Complete this objective while documenting every DOCUMENTATION_INTERVAL",
@@ -91,10 +91,10 @@ class ReallyBoringChallengesGame(Game):
                     weight=3,
                 ),
                 GameObjectiveTemplate(
-                    label="Perform COUNT_REPETITIONS repetitions of BORING_ACTION",
+                    label="Perform COUNT_REPETITIONS repetitions of BORING_ACTION_VERB",
                     data={
                         "COUNT_REPETITIONS": (self.soul_crushing_repetitions, 1),
-                        "BORING_ACTION": (self.mind_numbing_actions, 1)
+                        "BORING_ACTION_VERB": (self.mind_numbing_actions, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=False,
@@ -258,9 +258,9 @@ class ReallyBoringChallengesGame(Game):
         if self.include_soul_crushing_grinds:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Perform GRIND_ACTION GRIND_COUNT times consecutively",
+                    label="Perform GRIND_ACTION_VERB GRIND_COUNT times consecutively",
                     data={
-                        "GRIND_ACTION": (self.soul_destroying_actions, 1),
+                        "GRIND_ACTION_VERB": (self.soul_destroying_actions, 1),
                         "GRIND_COUNT": (self.spirit_breaking_counts, 1)
                     },
                     is_time_consuming=True,

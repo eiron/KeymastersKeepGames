@@ -46,8 +46,8 @@ class BoardGameCollectionGame(Game):
         if self.has_collection_games:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION GAME",
-                    data={"ACTION": (self.collection_actions, 1), "GAME": (self.collection_games, 1)},
+                    label="ACTION_VERB GAME_NAME",
+                    data={"ACTION_VERB": (self.collection_actions, 1), "GAME_NAME": (self.collection_games, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=3,
@@ -58,8 +58,8 @@ class BoardGameCollectionGame(Game):
         if self.has_solo_games:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION SOLO_GAME",
-                    data={"ACTION": (self.solo_actions, 1), "SOLO_GAME": (self.solo_games, 1)},
+                    label="ACTION_VERB SOLO_GAME_NAME",
+                    data={"ACTION_VERB": (self.solo_actions, 1), "SOLO_GAME_NAME": (self.solo_games, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -70,8 +70,8 @@ class BoardGameCollectionGame(Game):
         if self.has_coop_games:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION COOP_GAME cooperatively",
-                    data={"ACTION": (self.coop_actions, 1), "COOP_GAME": (self.coop_games, 1)},
+                    label="ACTION_VERB COOP_GAME_NAME cooperatively",
+                    data={"ACTION_VERB": (self.coop_actions, 1), "COOP_GAME_NAME": (self.coop_games, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -82,8 +82,8 @@ class BoardGameCollectionGame(Game):
         if self.has_competitive_games:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION COMPETITIVE_GAME competitively",
-                    data={"ACTION": (self.competitive_actions, 1), "COMPETITIVE_GAME": (self.competitive_games, 1)},
+                    label="ACTION_VERB COMPETITIVE_GAME_NAME competitively",
+                    data={"ACTION_VERB": (self.competitive_actions, 1), "COMPETITIVE_GAME_NAME": (self.competitive_games, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -94,8 +94,8 @@ class BoardGameCollectionGame(Game):
         if self.has_party_games:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION PARTY_GAME with a group",
-                    data={"ACTION": (self.party_actions, 1), "PARTY_GAME": (self.party_games, 1)},
+                    label="ACTION_VERB PARTY_GAME_NAME with a group",
+                    data={"ACTION_VERB": (self.party_actions, 1), "PARTY_GAME_NAME": (self.party_games, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
