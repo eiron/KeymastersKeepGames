@@ -35,7 +35,7 @@ class DanganronpaArchipelagoOptions:
     danganronpa_include_bonus_presents: "DanganronpaIncludeBonusPresents"
     danganronpa_include_post_chapter_presents: "DanganronpaIncludePostChapterPresents"
     danganronpa_include_underwear_presents: "DanganronpaIncludeUnderwearPresents"
-
+    danganronpa_include_summer_camp: "DanganronpaIncludeSummerCamp"
 
 
 class DanganronpaGame(Game):
@@ -58,7 +58,7 @@ class DanganronpaGame(Game):
             constraints.extend([
                 GameObjectiveTemplate(
                     label="Complete this objective within DAYS in-game days",
-                    data={"DAYS": ([5, 10, 15, 20], 1)},
+                    data={"DAYS": (self.all_day_counts, 1)},
                 ),
                 GameObjectiveTemplate(
                     label="Complete this objective without any incorrect statements",
@@ -216,7 +216,7 @@ class DanganronpaGame(Game):
                     GameObjectiveTemplate(
                         label="Obtain PRESENT from the MonoMono machine",
                         data={"PRESENT": (self.all_presents, 1)},
-                        is_time_consuming=False,
+                        is_time_consuming=True,
                         is_difficult=False,
                         weight=1,
                     ),
@@ -307,14 +307,14 @@ class DanganronpaGame(Game):
                 ),
                 GameObjectiveTemplate(
                     label="Survive DISTANCE meters in Death Road of Despair",
-                    data={"DISTANCE": ([100, 300, 500, 800], 1)},
+                    data={"DISTANCE": (self.all_death_road_distances, 1)},
                     is_time_consuming=True,
                     is_difficult=True,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
                     label="Clear stage LEVEL in Magical Girl Monomi",
-                    data={"LEVEL": ([3, 5, 7, 10], 1)},
+                    data={"LEVEL": (self.all_monogirl_levels, 1)},
                     is_time_consuming=True,
                     is_difficult=True,
                     weight=2,
@@ -342,6 +342,78 @@ class DanganronpaGame(Game):
                     weight=3,
                 ),
             ])
+
+        # Summer Camp (Danganronpa S)
+            if "Danganronpa S: Ultimate Summer Camp" in self.games_owned and self.include_summer_camp:
+                templates.extend([
+                    GameObjectiveTemplate(
+                        label="Reach turn TURN in Development Mode as CHARACTER",
+                        data={
+                            "TURN": (self.all_turn_counts, 1),
+                            "CHARACTER": (self.all_summer_camp_characters, 1),
+                        },
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Clear floor FLOOR in Tower of Despair using CHARACTERS",
+                        data={
+                            "FLOOR": (self.all_floors, 1),
+                            "CHARACTERS": (self.all_summer_camp_characters, 4),
+                        },
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=4,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Clear floor FLOOR in Tower of Despair with a party than includes CHARACTER",
+                        data={
+                            "FLOOR": (self.all_floors, 1),
+                            "CHARACTER": (self.all_summer_camp_characters, 1),
+                        },
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=3,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Clear floor FLOOR in Tower of Despair with a party than includes CHARACTERS",
+                        data={
+                            "FLOOR": (self.all_floors, 1),
+                            "CHARACTERS": (self.all_summer_camp_characters, 2),
+                        },
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=3,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Unlock a swimsuit outfit for CHARACTER in Summer Camp mode",
+                        data={"CHARACTER": (self.all_swimsuit_students, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Collect QUANTITY Summer Camp presents",
+                        data={"QUANTITY": (self.all_present_quantities, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Defeat BOSS in Summer Camp mode",
+                        data={"BOSS": (self.all_summer_camp_bosses, 1)},
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=3,
+                    ),GameObjectiveTemplate(
+                        label="Acquire a rare card from the MonoMono Machine",
+                        data={},
+                        is_time_consuming=False,
+                        is_difficult=True,
+                        weight=2,
+                    ),
+                ])
 
         return templates
 
@@ -421,6 +493,38 @@ class DanganronpaGame(Game):
     @staticmethod
     def all_hidden_monokuma_counts() -> List[int]:
         return [5, 10, 20]
+    
+    @staticmethod
+    def all_summer_camp_floors() -> List[int]:
+        return [10, 30, 50, 100]
+
+    @staticmethod
+    def all_summer_camp_present_quantities() -> List[int]:
+        return [10, 20, 30, 50]
+
+    @staticmethod
+    def all_death_road_distances() -> List[int]:
+        return [100, 300, 500, 800]
+
+    @staticmethod
+    def all_monogirl_levels() -> List[int]:
+        return [3, 5, 7, 10]
+    
+    @staticmethod
+    def all_turn_counts() -> List[int]:
+        return [1, 3, 5, 10, 20]
+
+    @staticmethod
+    def all_floors() -> List[int]:
+        return [1, 5, 10, 30, 50, 100]
+
+    @staticmethod
+    def all_quantities() -> List[int]:
+        return [1, 5, 10, 20, 30, 50, 100]
+
+    @staticmethod
+    def all_day_counts() -> List[int]:
+        return [5, 10, 15, 20]
 
     def all_students(self) -> List[str]:
         students: List[str] = []
@@ -622,6 +726,58 @@ class DanganronpaGame(Game):
     @property
     def include_underwear_presents(self) -> bool:
         return getattr(self.archipelago_options, "danganronpa_include_underwear_presents", True)
+    
+    @property
+    def include_summer_camp(self) -> bool:
+        return getattr(self.archipelago_options, "danganronpa_include_summer_camp", True)
+
+    @staticmethod
+    def all_summer_camp_characters() -> List[str]:
+        return [
+            # DR1
+            "Makoto Naegi", "Kyoko Kirigiri", "Byakuya Togami", "Toko Fukawa", "Aoi Asahina",
+            "Yasuhiro Hagakure", "Kiyotaka Ishimaru", "Mondo Owada", "Chihiro Fujisaki",
+            "Leon Kuwata", "Sakura Ogami", "Hifumi Yamada", "Celestia Ludenberg",
+            "Sayaka Maizono", "Junko Enoshima", "Mukuro Ikusaba",
+            # DR2
+            "Hajime Hinata", "Nagito Komaeda", "Chiaki Nanami", "Sonia Nevermind",
+            "Gundham Tanaka", "Kazuichi Soda", "Fuyuhiko Kuzuryu", "Peko Pekoyama",
+            "Akane Owari", "Nekomaru Nidai", "Teruteru Hanamura", "Mahiru Koizumi",
+            "Hiyoko Saionji", "Ibuki Mioda", "Mikan Tsumiki", "Ultimate Imposter",
+            # V3
+            "Shuichi Saihara", "Kaede Akamatsu", "Kaito Momota", "Maki Harukawa",
+            "Rantaro Amami", "Ryoma Hoshi", "Kirumi Tojo", "Angie Yonaga",
+            "Tenko Chabashira", "Himiko Yumeno", "Korekiyo Shinguji", "Miu Iruma",
+            "Gonta Gokuhara", "Kokichi Oma", "K1-B0", "Tsumugi Shirogane",
+            # Mascots
+            "Monokuma", "Usami",
+        ]
+
+    @staticmethod
+    def all_swimsuit_students() -> List[str]:
+        return [
+            # DR1
+            "Makoto Naegi", "Kyoko Kirigiri", "Byakuya Togami", "Toko Fukawa",
+            "Aoi Asahina", "Sayaka Maizono", "Celestia Ludenberg", "Junko Enoshima", "Mukuro Ikusaba",
+            # DR2
+            "Hajime Hinata", "Nagito Komaeda", "Chiaki Nanami", "Sonia Nevermind",
+            "Ibuki Mioda", "Hiyoko Saionji", "Mahiru Koizumi", "Akane Owari",
+            "Mikan Tsumiki", "Peko Pekoyama",
+            # V3
+            "Kaede Akamatsu", "Shuichi Saihara", "Maki Harukawa", "Kaito Momota",
+            "Kokichi Oma", "Miu Iruma", "Angie Yonaga", "Tenko Chabashira",
+            "Himiko Yumeno", "Tsumugi Shirogane",
+        ]
+
+
+
+    @staticmethod
+    def all_summer_camp_bosses() -> List[str]:
+        return [
+        "Monobeast Alpha", "Monobeast Omega", "Usami Flower", "Ultimate Warrior Monokuma",
+        "Tower Guardian", "Despair Queen Junko", "Secret Boss ???"
+        ]
+
 
 
 # ===== Ownership =====
@@ -632,6 +788,7 @@ class DanganronpaOwnedGames(OptionSet):
         "Danganronpa: Trigger Happy Havoc",
         "Danganronpa 2: Goodbye Despair",
         "Danganronpa V3: Killing Harmony",
+        "Danganronpa S: Ultimate Summer Camp"
     }
 
 
@@ -691,11 +848,13 @@ class DanganronpaIncludeUTDP(Toggle):
     display_name = "Include UTDP Objectives"
     default = True
 
+class DanganronpaIncludeSummerCamp(Toggle):
+    display_name = "Include Summer Camp Objectives"
+    default = True
 
 class DanganronpaIncludeExtraMinigames(Toggle):
     display_name = "Include Extra Minigame Objectives"
     default = True
-
 
 class DanganronpaIncludeCollectibles(Toggle):
     display_name = "Include Collectibles Objectives"
