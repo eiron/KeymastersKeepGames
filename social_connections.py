@@ -56,8 +56,8 @@ class SocialConnectionsGame(Game):
         if self.has_family_activities:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION_VERB FAMILY_ACTIVITY_TYPE with PERSON_NAME",
-                    data={"ACTION_VERB": (self.family_actions, 1), "FAMILY_ACTIVITY_TYPE": (self.family_activities, 1), "PERSON_NAME": (self.people, 1)},
+                    label="ACTION_VERB FAMILY_ACTIVITY_TYPE",
+                    data={"ACTION_VERB": (self.family_actions, 1), "FAMILY_ACTIVITY_TYPE": (self.family_activities, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
