@@ -108,41 +108,41 @@ class SocialConnectionsGame(Game):
         networking_events = self.networking_events()
         return len(networking_events) > 0
 
-    @functools.cached_property
     def meetup_actions(self) -> List[str]:
-        return sorted(self.archipelago_options.social_meetup_actions.value)
+        meetup_actions: List[str] = list(self.archipelago_options.social_meetup_actions.value)
+        return sorted(meetup_actions)
 
-    @functools.cached_property
     def family_actions(self) -> List[str]:
-        return sorted(self.archipelago_options.social_family_actions.value)
+        family_actions: List[str] = list(self.archipelago_options.social_family_actions.value)
+        return sorted(family_actions)
 
-    @functools.cached_property
     def community_actions(self) -> List[str]:
-        return sorted(self.archipelago_options.social_community_actions.value)
+        community_actions: List[str] = list(self.archipelago_options.social_community_actions.value)
+        return sorted(community_actions)
 
-    @functools.cached_property
     def networking_actions(self) -> List[str]:
-        return sorted(self.archipelago_options.social_networking_actions.value)
+        networking_actions: List[str] = list(self.archipelago_options.social_networking_actions.value)
+        return sorted(networking_actions)
 
-    @functools.cached_property
     def meetups(self) -> List[str]:
-        return sorted(self.archipelago_options.social_meetup_selection.value)
+        meetups: List[str] = list(self.archipelago_options.social_meetup_selection.value)
+        return sorted(meetups)
 
-    @functools.cached_property
     def family_activities(self) -> List[str]:
-        return sorted(self.archipelago_options.social_family_selection.value)
+        family_activities: List[str] = list(self.archipelago_options.social_family_selection.value)
+        return sorted(family_activities)
 
-    @functools.cached_property
     def community_events(self) -> List[str]:
-        return sorted(self.archipelago_options.social_community_selection.value)
+        community_events: List[str] = list(self.archipelago_options.social_community_selection.value)
+        return sorted(community_events)
 
-    @functools.cached_property
     def networking_events(self) -> List[str]:
-        return sorted(self.archipelago_options.social_networking_selection.value)
+        networking_events: List[str] = list(self.archipelago_options.social_networking_selection.value)
+        return sorted(networking_events)
 
-    @functools.cached_property
     def people(self) -> List[str]:
-        return sorted(self.archipelago_options.social_people_selection.value)
+        people: List[str] = list(self.archipelago_options.social_people_selection.value)
+        return sorted(people)
 
 
 # Archipelago Options

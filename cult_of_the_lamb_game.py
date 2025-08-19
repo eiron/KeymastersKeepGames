@@ -104,7 +104,7 @@ class CultOfTheLambGame(Game):
                         weight=1,
                     ),
                     GameObjectiveTemplate(
-                        label="Use PUNISHMENT on PUNISHMENT_COUNT followers",
+                        label="Use PUNISHMENT_TYPE on PUNISHMENT_COUNT followers",
                         data={
                             "PUNISHMENT": (self.punishments, 1),
                             "PUNISHMENT_COUNT": (self.punishment_counts, 1)
@@ -209,10 +209,10 @@ class CultOfTheLambGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Have followers produce RESOURCE_COUNT RESOURCE through work",
+                    label="Have followers produce RESOURCE_COUNT RESOURCE_TYPE through work",
                     data={
                         "RESOURCE_COUNT": (self.production_counts, 1),
-                        "RESOURCE": (self.producible_resources, 1)
+                        "RESOURCE_TYPE": (self.producible_resources, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=False,

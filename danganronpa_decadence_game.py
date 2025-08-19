@@ -712,24 +712,25 @@ class DanganronpaGame(Game):
     # ===== Ownership helper =====
     @property
     def games_owned(self) -> List[str]:
-        return sorted(self.archipelago_options.danganronpa_owned_games.value)
+        games_owned: List[str] = list(self.archipelago_options.danganronpa_owned_games.value)
+        return sorted(games_owned)
 
     # Config toggles for present types
     @property
     def include_bonus_presents(self) -> bool:
-        return getattr(self.archipelago_options, "danganronpa_include_bonus_presents", True)
+        return self.archipelago_options.danganronpa_include_bonus_presents.value
 
     @property
     def include_post_chapter_presents(self) -> bool:
-        return getattr(self.archipelago_options, "danganronpa_include_post_chapter_presents", True)
+        return self.archipelago_options.danganronpa_include_post_chapter_presents.value
 
     @property
     def include_underwear_presents(self) -> bool:
-        return getattr(self.archipelago_options, "danganronpa_include_underwear_presents", True)
-    
+        return self.archipelago_options.danganronpa_include_underwear_presents.value
+
     @property
     def include_summer_camp(self) -> bool:
-        return getattr(self.archipelago_options, "danganronpa_include_summer_camp", True)
+        return self.archipelago_options.danganronpa_include_summer_camp.value
 
     @staticmethod
     def all_summer_camp_characters() -> List[str]:
@@ -784,12 +785,12 @@ class DanganronpaGame(Game):
 class DanganronpaOwnedGames(OptionSet):
     """Select which Danganronpa games you own"""
     display_name = "Owned Games"
-    default = {
+    default = [
         "Danganronpa: Trigger Happy Havoc",
         "Danganronpa 2: Goodbye Despair",
         "Danganronpa V3: Killing Harmony",
         "Danganronpa S: Ultimate Summer Camp"
-    }
+    ]
 
 
 # ===== Mode Filters =====

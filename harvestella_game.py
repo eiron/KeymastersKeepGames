@@ -114,6 +114,7 @@ class HarvestellaGame(Game):
     @staticmethod
     def all_inventory_categories() -> List[str]:
         return ["crop", "monster material", "gem", "artifact"]
+    
     name = "Harvestella"
     platform = KeymastersKeepGamePlatforms.PC
 
@@ -462,10 +463,6 @@ class HarvestellaGame(Game):
             "Nemean Tomato", "Morrocorn", "Lightalfa", "Colorful Carrot"
         ]
 
-    @functools.cached_property
-    def crops(self) -> List[str]:
-        return sorted(self.archipelago_options.harvestella_crop_selection.value)
-
     @staticmethod
     def all_jobs() -> List[str]:
         return [
@@ -473,10 +470,6 @@ class HarvestellaGame(Game):
             "Shadow Walker", "Woglinde", "Lunamancer", "Avenger", "Pilgrim",
             "Aristotle", "Samurai"
         ]
-
-    @functools.cached_property
-    def jobs(self) -> List[str]:
-        return sorted(self.archipelago_options.harvestella_job_selection.value)
 
     @staticmethod
     def all_locations() -> List[str]:
@@ -487,19 +480,11 @@ class HarvestellaGame(Game):
             "Floating Sanctum", "Avatar's Territory"
         ]
 
-    @functools.cached_property
-    def locations(self) -> List[str]:
-        return sorted(self.archipelago_options.harvestella_location_selection.value)
-
     @staticmethod
     def all_characters() -> List[str]:
         return [
             "Shrika", "Heine", "Asyl", "Aria", "Emo", "Istina", "Brakka", "Dianthus", "Cres", "Unicorn"
         ]
-
-    @functools.cached_property
-    def characters(self) -> List[str]:
-        return sorted(self.archipelago_options.harvestella_character_selection.value)
 
     @staticmethod
     def all_monsters() -> List[str]:
@@ -508,10 +493,6 @@ class HarvestellaGame(Game):
             "Slime", "Chloro Gel", "Cyano Gel", "Crawler", "Shadow Elemental", "Bone Dragon",
             "Ancient Golem", "Lorelei", "Malicid", "Mnemosyne", "Star Sleeper", "Venom Bouquet", "Writhing Kelpie"
         ]
-
-    @functools.cached_property
-    def monsters(self) -> List[str]:
-        return sorted(self.archipelago_options.harvestella_monster_selection.value)
 
     @staticmethod
     def all_recipes() -> List[str]:
@@ -522,10 +503,6 @@ class HarvestellaGame(Game):
             "Fruit Smoothie"
         ]
 
-    @functools.cached_property
-    def recipes(self) -> List[str]:
-        return sorted(self.archipelago_options.harvestella_recipe_selection.value)
-
     @staticmethod
     def all_craftable_items() -> List[str]:
         return [
@@ -534,10 +511,6 @@ class HarvestellaGame(Game):
             "Healing Potion", "Magic Potion", "Stamina Potion",
             "Iron Ingot", "Silver Ingot", "Gold Ingot", "Mythril Ingot"
         ]
-
-    @functools.cached_property
-    def craftable_items(self) -> List[str]:
-        return sorted(self.archipelago_options.harvestella_item_selection.value)
 
     @staticmethod
     def all_dungeons() -> List[str]:
@@ -550,10 +523,6 @@ class HarvestellaGame(Game):
             "Autumn Season Dungeon"
         ]
 
-    @functools.cached_property
-    def dungeons(self) -> List[str]:
-        return self.all_dungeons()
-
     @staticmethod
     def all_boss_monsters() -> List[str]:
         return [
@@ -565,10 +534,6 @@ class HarvestellaGame(Game):
             "Ancient Golem"
         ]
 
-    @functools.cached_property
-    def boss_monsters(self) -> List[str]:
-        return self.all_boss_monsters()
-
     @staticmethod
     def all_seasonal_dungeons() -> List[str]:
         return [
@@ -578,17 +543,9 @@ class HarvestellaGame(Game):
             "Wind Seaslight Dungeon"
         ]
 
-    @functools.cached_property
-    def seasonal_dungeons(self) -> List[str]:
-        return self.all_seasonal_dungeons()
-
     @staticmethod
     def all_seasons() -> List[str]:
         return ["Spring", "Summer", "Autumn", "Winter", "Quietus"]
-
-    @functools.cached_property
-    def seasons(self) -> List[str]:
-        return self.all_seasons()
 
     @staticmethod
     def all_seasonal_crops() -> List[str]:
@@ -598,10 +555,6 @@ class HarvestellaGame(Game):
             "Pumpkin", "Sweet Potato", "Carrot", # Autumn
             "Nemean Tomato", "Morrocorn"        # Special seasonal crops
         ]
-
-    @functools.cached_property
-    def seasonal_crops(self) -> List[str]:
-        return self.all_seasonal_crops()
 
     @staticmethod
     def all_equipment() -> List[str]:
@@ -616,10 +569,6 @@ class HarvestellaGame(Game):
             "Avenger Gauntlets",
             "Pilgrim Scepter"
         ]
-
-    @functools.cached_property
-    def equipment(self) -> List[str]:
-        return self.all_equipment()
 
 
 # Archipelago Options
