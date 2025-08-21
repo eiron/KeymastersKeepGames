@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, Choice, Range, OptionSet
+from Options import DefaultOnToggle, Choice, OptionSet
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -572,58 +571,49 @@ class HarvestellaGame(Game):
 
 
 # Archipelago Options
-class HarvestellaIncludeFarming(Toggle):
+class HarvestellaIncludeFarming(DefaultOnToggle):
     """Include farming-related objectives (growing crops, managing fields, etc.)"""
     display_name = "Include Farming Objectives"
-    default = True
 
 
-class HarvestellaIncludeExploration(Toggle):
+class HarvestellaIncludeExploration(DefaultOnToggle):
     """Include exploration objectives (discovering areas, collecting treasures, etc.)"""
     display_name = "Include Exploration Objectives"
-    default = True
 
 
-class HarvestellaIncludeCombat(Toggle):
+class HarvestellaIncludeCombat(DefaultOnToggle):
     """Include combat objectives (defeating monsters, mastering jobs, etc.)"""
     display_name = "Include Combat Objectives"
-    default = True
 
 
-class HarvestellaIncludeRelationships(Toggle):
+class HarvestellaIncludeRelationships(DefaultOnToggle):
     """Include relationship objectives (befriending characters, completing events, etc.)"""
     display_name = "Include Relationship Objectives"
-    default = True
 
 
-class HarvestellaIncludeStory(Toggle):
+class HarvestellaIncludeStory(DefaultOnToggle):
     """Include story progression objectives (completing chapters, restoring Seaslights, etc.)"""
     display_name = "Include Story Objectives"
-    default = True
 
 
-class HarvestellaIncludeCrafting(Toggle):
+class HarvestellaIncludeCrafting(DefaultOnToggle):
     """Include crafting objectives (creating items, upgrading equipment, etc.)"""
     display_name = "Include Crafting Objectives"
-    default = True
 
 
-class HarvestellaIncludeCooking(Toggle):
+class HarvestellaIncludeCooking(DefaultOnToggle):
     """Include cooking objectives (learning recipes, preparing meals, etc.)"""
     display_name = "Include Cooking Objectives"
-    default = True
 
 
-class HarvestellaIncludeSeasonalGoals(Toggle):
+class HarvestellaIncludeSeasonalGoals(DefaultOnToggle):
     """Include seasonal objectives (seasonal activities, Quietus events, etc.)"""
     display_name = "Include Seasonal Objectives"
-    default = True
 
 
-class HarvestellaIncludeCollection(Toggle):
+class HarvestellaIncludeCollection(DefaultOnToggle):
     """Include collection objectives (gathering items, completing sets, etc.)"""
     display_name = "Include Collection Objectives"
-    default = True
 
 
 class HarvestellaDifficultyLevel(Choice):

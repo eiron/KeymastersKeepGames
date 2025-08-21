@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, Choice
+from Options import DefaultOnToggle, Choice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -491,45 +490,37 @@ class HadesGame(Game):
 
 
 # Archipelago Options
-class HadesIncludeEscapeAttempts(Toggle):
+class HadesIncludeEscapeAttempts(DefaultOnToggle):
     """Include escape attempt objectives (runs, bosses, heat)."""
     display_name = "Include Escape Attempts"
-    default = True
 
-class HadesIncludeWeaponMastery(Toggle):
+class HadesIncludeWeaponMastery(DefaultOnToggle):
     """Include weapon mastery objectives (aspects, upgrades, runs)."""
     display_name = "Include Weapon Mastery"
-    default = True
 
-class HadesIncludeRelationshipBuilding(Toggle):
+class HadesIncludeRelationshipBuilding(DefaultOnToggle):
     """Include relationship objectives (characters, gifts, keepsakes)."""
     display_name = "Include Relationship Building"
-    default = True
 
-class HadesIncludeStoryProgression(Toggle):
+class HadesIncludeStoryProgression(DefaultOnToggle):
     """Include story progression objectives (storylines, codex, endings)."""
     display_name = "Include Story Progression"
-    default = True
 
-class HadesIncludeMirrorUpgrades(Toggle):
+class HadesIncludeMirrorUpgrades(DefaultOnToggle):
     """Include Mirror of Night upgrade objectives."""
     display_name = "Include Mirror Upgrades"
-    default = True
 
-class HadesIncludeProphecies(Toggle):
+class HadesIncludeProphecies(DefaultOnToggle):
     """Include Fated List prophecy objectives."""
     display_name = "Include Prophecies"
-    default = True
 
-class HadesIncludeContractorUpgrades(Toggle):
+class HadesIncludeContractorUpgrades(DefaultOnToggle):
     """Include House Contractor upgrade objectives."""
     display_name = "Include Contractor Upgrades"
-    default = True
 
-class HadesIncludeCollectionGoals(Toggle):
+class HadesIncludeCollectionGoals(DefaultOnToggle):
     """Include resource collection and merchant objectives."""
     display_name = "Include Collection Goals"
-    default = True
 
 class HadesDifficultyLevel(Choice):
     """Sets the difficulty level for objectives and constraints."""

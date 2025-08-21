@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, Choice
+from Options import DefaultOnToggle, Toggle, Choice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -533,45 +532,38 @@ class DeadCellsGame(Game):
 
 
 # Archipelago Options
-class DeadCellsIncludeProgressionRuns(Toggle):
+class DeadCellsIncludeProgressionRuns(DefaultOnToggle):
     """Include progression run objectives (completing runs, reaching biomes)."""
     display_name = "Include Progression Runs"
-    default = True
 
-class DeadCellsIncludeWeaponMastery(Toggle):
+class DeadCellsIncludeWeaponMastery(DefaultOnToggle):
     """Include weapon mastery objectives (unlocks, upgrades, kills)."""
     display_name = "Include Weapon Mastery"
-    default = True
 
-class DeadCellsIncludeBossChallenges(Toggle):
+class DeadCellsIncludeBossChallenges(DefaultOnToggle):
     """Include boss challenge objectives (no damage, specific weapons)."""
     display_name = "Include Boss Challenges"
-    default = True
 
-class DeadCellsIncludeBiomeExploration(Toggle):
+class DeadCellsIncludeBiomeExploration(DefaultOnToggle):
     """Include biome exploration objectives (secrets, challenge rooms)."""
     display_name = "Include Biome Exploration"
-    default = True
 
-class DeadCellsIncludeBlueprintCollection(Toggle):
+class DeadCellsIncludeBlueprintCollection(DefaultOnToggle):
     """Include blueprint collection objectives."""
     display_name = "Include Blueprint Collection"
-    default = True
 
 class DeadCellsIncludeMutationGoals(Toggle):
     """Include mutation and build objectives."""
     display_name = "Include Mutation Goals"
-    default = True
 
-class DeadCellsIncludeDifficultyScaling(Toggle):
+class DeadCellsIncludeDifficultyScaling(Toggle):  # Keep as False by default - difficulty scaling is specialized/harder
     """Include Boss Cell difficulty progression."""
     display_name = "Include Difficulty Scaling"
-    default = False  # Keep as False - difficulty scaling is specialized/harder
+    default = False
 
-class DeadCellsIncludeSpeedChallenges(Toggle):
+class DeadCellsIncludeSpeedChallenges(Toggle):  # Keep as False by default - speed challenges are specialized/harder
     """Include speedrun and time challenge objectives."""
     display_name = "Include Speed Challenges"
-    default = False  # Keep as False - speed challenges are specialized/harder
 
 class DeadCellsPlaystyleFocus(Choice):
     """Focus weapon objectives on specific stat builds."""

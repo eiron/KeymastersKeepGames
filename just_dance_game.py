@@ -5,7 +5,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, OptionSet
+from Options import DefaultOnToggle, OptionSet
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -2216,12 +2216,11 @@ class JustDanceGamesOwned(OptionSet):
     ]
 
 
-class JustDanceIncludeUnlimitedSongs(Toggle):
+class JustDanceIncludeUnlimitedSongs(DefaultOnToggle):
     """
     Include songs from Just Dance Unlimited subscription service.
     """
     display_name = "Include Just Dance Unlimited Songs"
-    default = True
 
 
 class JustDanceDLCContent(OptionSet):

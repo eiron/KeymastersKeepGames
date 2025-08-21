@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, Choice
+from Options import DefaultOnToggle, Toggle, Choice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -765,45 +764,37 @@ class MinecraftGame(Game):
 
 
 # Archipelago Options
-class MinecraftIncludeSurvivalBasics(Toggle):
+class MinecraftIncludeSurvivalBasics(DefaultOnToggle):
     """Include basic survival objectives (tools, shelter, mining)."""
     display_name = "Include Survival Basics"
-    default = True
 
-class MinecraftIncludeBuildingProjects(Toggle):
+class MinecraftIncludeBuildingProjects(DefaultOnToggle):
     """Include building and construction objectives."""
     display_name = "Include Building Projects"
-    default = True
 
-class MinecraftIncludeExploration(Toggle):
+class MinecraftIncludeExploration(DefaultOnToggle):
     """Include exploration and discovery objectives."""
     display_name = "Include Exploration"
-    default = True
 
-class MinecraftIncludeRedstoneEngineering(Toggle):
+class MinecraftIncludeRedstoneEngineering(DefaultOnToggle):
     """Include redstone contraption and automation objectives."""
     display_name = "Include Redstone Engineering"
-    default = True
 
-class MinecraftIncludeFarmingAutomation(Toggle):
+class MinecraftIncludeFarmingAutomation(DefaultOnToggle):
     """Include farming, breeding, and automation objectives."""
     display_name = "Include Farming & Automation"
-    default = True
 
-class MinecraftIncludeBossProgression(Toggle):
+class MinecraftIncludeBossProgression(DefaultOnToggle):
     """Include boss fights and major progression objectives."""
     display_name = "Include Boss Progression"
-    default = True
 
-class MinecraftIncludeCollectionGoals(Toggle):
+class MinecraftIncludeCollectionGoals(DefaultOnToggle):
     """Include item collection and museum objectives."""
     display_name = "Include Collection Goals"
-    default = True
 
-class MinecraftIncludeChallengeRuns(Toggle):
+class MinecraftIncludeChallengeRuns(Toggle): # Keep as False - challenge runs are specialized/harder
     """Include challenge runs and restriction objectives."""
     display_name = "Include Challenge Runs"
-    default = False  # Keep as False - challenge runs are specialized/harder
 
 class MinecraftGameModeFocus(Choice):
     """Focus objectives on specific game modes."""

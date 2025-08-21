@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, Choice
+from Options import DefaultOnToggle, Choice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -634,45 +633,37 @@ class CultOfTheLambGame(Game):
 
 
 # Archipelago Options
-class COTLIncludeCultManagement(Toggle):
+class COTLIncludeCultManagement(DefaultOnToggle):
     """Include cult management objectives (followers, faith, sermons)."""
     display_name = "Include Cult Management"
-    default = True
 
-class COTLIncludeCrusadeObjectives(Toggle):
+class COTLIncludeCrusadeObjectives(DefaultOnToggle):
     """Include crusade objectives (combat, exploration, rescues)."""
     display_name = "Include Crusade Objectives"
-    default = True
 
-class COTLIncludeFollowerRelationships(Toggle):
+class COTLIncludeFollowerRelationships(DefaultOnToggle):
     """Include follower relationship objectives (loyalty, marriage, quests)."""
     display_name = "Include Follower Relationships"
-    default = True
 
-class COTLIncludeBaseBuilding(Toggle):
+class COTLIncludeBaseBuilding(DefaultOnToggle):
     """Include base building objectives (construction, upgrades, decoration)."""
     display_name = "Include Base Building"
-    default = True
 
-class COTLIncludeBossProgression(Toggle):
+class COTLIncludeBossProgression(DefaultOnToggle):
     """Include boss and story progression objectives."""
     display_name = "Include Boss Progression"
-    default = True
 
-class COTLIncludeRitualCeremonies(Toggle):
+class COTLIncludeRitualCeremonies(DefaultOnToggle):
     """Include ritual and ceremony objectives."""
     display_name = "Include Ritual Ceremonies"
-    default = True
 
-class COTLIncludeResourceCollection(Toggle):
+class COTLIncludeResourceCollection(DefaultOnToggle):
     """Include resource collection and production objectives."""
     display_name = "Include Resource Collection"
-    default = True
 
-class COTLIncludeDoctrineDevelopment(Toggle):
+class COTLIncludeDoctrineDevelopment(DefaultOnToggle):
     """Include doctrine and commandment objectives."""
     display_name = "Include Doctrine Development"
-    default = True
 
 class COTLManagementStyle(Choice):
     """Focus cult management on specific leadership styles."""

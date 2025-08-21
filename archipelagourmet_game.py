@@ -6,7 +6,7 @@ from typing import List, Dict, Set
 
 from dataclasses import dataclass
 
-from Options import Range, OptionList, Toggle
+from Options import Range, OptionList, DefaultOnToggle
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -1608,33 +1608,29 @@ class ArchipelagourmetIngredientsOptionsWeight(Range):
     range_start = 0
     range_end = 100
 
-class ArchipelagourmetIngredientsIncludeRedMeatOptions(Toggle):
+class ArchipelagourmetIngredientsIncludeRedMeatOptions(DefaultOnToggle):
     """
     Indicates whether to include red meat options in the game.
     """
     display_name = "Include Red Meat Options"
-    default = True
 
-class ArchipelagourmetIngredientsIncludePoultryOptions(Toggle):
+class ArchipelagourmetIngredientsIncludePoultryOptions(DefaultOnToggle):
     """
     Indicates whether to include poultry options in the game.
     """
     display_name = "Include Poultry Options"
-    default = True
 
-class ArchipelagourmetIngredientsIncludeSeafoodOptions(Toggle):
+class ArchipelagourmetIngredientsIncludeSeafoodOptions(DefaultOnToggle):
     """
     Indicates whether to include seafood options in the game.
     """
     display_name = "Include Seafood Options"
-    default = True
 
-class ArchipelagourmetIngredientsIncludeNonVeganOptions(Toggle):
+class ArchipelagourmetIngredientsIncludeNonVeganOptions(DefaultOnToggle):
     """
     Indicates whether to include non-vegan (non-meat) options in the game.
     """
     display_name = "Include Non-Vegan (Non-Meat) Options"
-    default = True
 
 class ArchipelagourmetCustomIngredientsToInclude(OptionList):
     """

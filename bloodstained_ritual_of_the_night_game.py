@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, Choice
+from Options import DefaultOnToggle, Toggle, Choice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -617,45 +616,37 @@ class BloodstainedRitualOfTheNightGame(Game):
 
 
 # Archipelago Options
-class BloodstainedIncludeShardCollection(Toggle):
+class BloodstainedIncludeShardCollection(DefaultOnToggle):
     """Include shard collection and upgrade objectives."""
     display_name = "Include Shard Collection"
-    default = True
 
-class BloodstainedIncludeExploration(Toggle):
+class BloodstainedIncludeExploration(DefaultOnToggle):
     """Include map exploration and discovery objectives."""
     display_name = "Include Exploration"
-    default = True
 
-class BloodstainedIncludeBossChallenges(Toggle):
+class BloodstainedIncludeBossChallenges(DefaultOnToggle):
     """Include boss fight and combat challenge objectives."""
     display_name = "Include Boss Challenges"
-    default = True
 
-class BloodstainedIncludeAlchemyCrafting(Toggle):
+class BloodstainedIncludeAlchemyCrafting(DefaultOnToggle):
     """Include alchemy, crafting, and synthesis objectives."""
     display_name = "Include Alchemy & Crafting"
-    default = True
 
-class BloodstainedIncludeEquipmentMastery(Toggle):
+class BloodstainedIncludeEquipmentMastery(DefaultOnToggle):
     """Include weapon mastery and equipment collection objectives."""
     display_name = "Include Equipment Mastery"
-    default = True
 
-class BloodstainedIncludeCompletionGoals(Toggle):
+class BloodstainedIncludeCompletionGoals(DefaultOnToggle):
     """Include story completion and achievement objectives."""
     display_name = "Include Completion Goals"
-    default = True
 
 class BloodstainedIncludeSpeedrunChallenges(Toggle):
     """Include speedrun and time-based challenge objectives."""
     display_name = "Include Speedrun Challenges"
-    default = False  # Keep as False - speedrun challenges are specialized/harder
 
 class BloodstainedIncludeDifficultyChallenges(Toggle):
     """Include difficulty and restriction-based challenge objectives."""
     display_name = "Include Difficulty Challenges"
-    default = False  # Keep as False - difficulty challenges are specialized/harder
 
 class BloodstainedFocusStyle(Choice):
     """Focus objectives on specific gameplay styles."""

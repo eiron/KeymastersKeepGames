@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import functools
-from typing import ClassVar, Set, List
+from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, Choice, OptionSet
+from Options import DefaultOnToggle, Choice, OptionSet
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -648,7 +647,7 @@ class DanganronpaGame(Game):
             "Monokuma's Test",
         ]
 
-    # ===== Toggle accessors =====
+    # ===== DefaultOnToggle accessors =====
     @property
     def enable_story_mode(self) -> bool:
         return self.archipelago_options.danganronpa_enable_story_mode.value
@@ -715,7 +714,7 @@ class DanganronpaGame(Game):
         games_owned: List[str] = list(self.archipelago_options.danganronpa_owned_games.value)
         return sorted(games_owned)
 
-    # Config toggles for present types
+    # Config defaultontoggles for present types
     @property
     def include_bonus_presents(self) -> bool:
         return self.archipelago_options.danganronpa_include_bonus_presents.value
@@ -794,85 +793,57 @@ class DanganronpaOwnedGames(OptionSet):
 
 
 # ===== Mode Filters =====
-class DanganronpaEnableStoryMode(Toggle):
+class DanganronpaEnableStoryMode(DefaultOnToggle):
     display_name = "Enable Story Mode Objectives"
-    default = True
 
-
-class DanganronpaEnableBonusModes(Toggle):
+class DanganronpaEnableBonusModes(DefaultOnToggle):
     display_name = "Enable Bonus Mode Objectives"
-    default = True
 
-
-# ===== Category Toggles =====
-class DanganronpaIncludeInvestigation(Toggle):
+# ===== Category DefaultOnToggles =====
+class DanganronpaIncludeInvestigation(DefaultOnToggle):
     display_name = "Include Investigation Objectives"
-    default = True
 
-
-class DanganronpaIncludeClassTrial(Toggle):
+class DanganronpaIncludeClassTrial(DefaultOnToggle):
     display_name = "Include Class Trial Objectives"
-    default = True
 
-
-class DanganronpaIncludeFreeTime(Toggle):
+class DanganronpaIncludeFreeTime(DefaultOnToggle):
     display_name = "Include Free Time Objectives"
-    default = True
 
-
-class DanganronpaIncludeReportCard(Toggle):
+class DanganronpaIncludeReportCard(DefaultOnToggle):
     display_name = "Include Report Card Objectives"
-    default = True
 
-
-class DanganronpaIncludeSkills(Toggle):
+class DanganronpaIncludeSkills(DefaultOnToggle):
     display_name = "Include Skill Objectives"
-    default = True
 
-
-class DanganronpaIncludePresents(Toggle):
+class DanganronpaIncludePresents(DefaultOnToggle):
     display_name = "Include Present Objectives"
-    default = True
 
-
-class DanganronpaIncludeSchoolMode(Toggle):
+class DanganronpaIncludeSchoolMode(DefaultOnToggle):
     display_name = "Include School Mode Objectives"
-    default = True
 
-
-class DanganronpaIncludeIslandMode(Toggle):
+class DanganronpaIncludeIslandMode(DefaultOnToggle):
     display_name = "Include Island Mode Objectives"
-    default = True
 
-
-class DanganronpaIncludeUTDP(Toggle):
+class DanganronpaIncludeUTDP(DefaultOnToggle):
     display_name = "Include UTDP Objectives"
-    default = True
 
-class DanganronpaIncludeSummerCamp(Toggle):
+class DanganronpaIncludeSummerCamp(DefaultOnToggle):
     display_name = "Include Summer Camp Objectives"
-    default = True
 
-class DanganronpaIncludeExtraMinigames(Toggle):
+class DanganronpaIncludeExtraMinigames(DefaultOnToggle):
     display_name = "Include Extra Minigame Objectives"
-    default = True
 
-class DanganronpaIncludeCollectibles(Toggle):
+class DanganronpaIncludeCollectibles(DefaultOnToggle):
     display_name = "Include Collectibles Objectives"
-    default = True
 
-class DanganronpaIncludeBonusPresents(Toggle):
+class DanganronpaIncludeBonusPresents(DefaultOnToggle):
     display_name = "Include Bonus Presents"
-    default = True
 
-class DanganronpaIncludePostChapterPresents(Toggle):
+class DanganronpaIncludePostChapterPresents(DefaultOnToggle):
     display_name = "Include Post-Chapter Presents"
-    default = True
 
-class DanganronpaIncludeUnderwearPresents(Toggle):
+class DanganronpaIncludeUnderwearPresents(DefaultOnToggle):
     display_name = "Include Underwear Presents"
-    default = True
-
 
 # ===== Difficulty =====
 class DanganronpaLogicDifficulty(Choice):

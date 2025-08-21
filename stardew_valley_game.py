@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, Choice, Range
+from Options import DefaultOnToggle, Choice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -522,50 +521,41 @@ class StardewValleyGame(Game):
 
 
 # Archipelago Options
-class StardewIncludeFarming(Toggle):
+class StardewIncludeFarming(DefaultOnToggle):
     """Include farming objectives (crops, animals, profit goals)."""
     display_name = "Include Farming Objectives"
-    default = True
 
-class StardewIncludeMining(Toggle):
+class StardewIncludeMining(DefaultOnToggle):
     """Include mining objectives (floors, ores, monsters)."""
     display_name = "Include Mining Objectives"
-    default = True
 
-class StardewIncludeFishing(Toggle):
+class StardewIncludeFishing(DefaultOnToggle):
     """Include fishing objectives (fish catches, legendary fish, crab pots)."""
     display_name = "Include Fishing Objectives"
-    default = True
 
-class StardewIncludeForaging(Toggle):
+class StardewIncludeForaging(DefaultOnToggle):
     """Include foraging objectives (wild items, tree tapping)."""
     display_name = "Include Foraging Objectives"
-    default = True
 
-class StardewIncludeRelationships(Toggle):
+class StardewIncludeRelationships(DefaultOnToggle):
     """Include relationship objectives (villager hearts, marriage, gifts)."""
     display_name = "Include Relationship Objectives"
-    default = True
 
-class StardewIncludeCommunityCenterBundles(Toggle):
+class StardewIncludeCommunityCenterBundles(DefaultOnToggle):
     """Include Community Center bundle objectives."""
     display_name = "Include Community Center Bundles"
-    default = True
 
-class StardewIncludeCollections(Toggle):
+class StardewIncludeCollections(DefaultOnToggle):
     """Include collection objectives (museum, artifacts, minerals)."""
     display_name = "Include Collection Objectives"
-    default = True
 
-class StardewIncludeCooking(Toggle):
+class StardewIncludeCooking(DefaultOnToggle):
     """Include cooking objectives (recipes, dishes)."""
     display_name = "Include Cooking Objectives"
-    default = True
 
-class StardewIncludeSeasonalGoals(Toggle):
+class StardewIncludeSeasonalGoals(DefaultOnToggle):
     """Include seasonal objectives (festivals, seasonal profits)."""
     display_name = "Include Seasonal Goals"
-    default = True
 
 class StardewDifficultyLevel(Choice):
     """Sets the difficulty level for objectives and constraints."""

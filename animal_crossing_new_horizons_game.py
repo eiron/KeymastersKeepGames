@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, Choice
+from Options import Toggle, DefaultOnToggle, Choice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -616,45 +616,38 @@ class AnimalCrossingNewHorizonsGame(Game):
 
 
 # Archipelago Options
-class ACNHIncludeDailyActivities(Toggle):
+class ACNHIncludeDailyActivities(DefaultOnToggle):
     """Include daily activity objectives (resource gathering, tasks)."""
     display_name = "Include Daily Activities"
-    default = True
 
-class ACNHIncludeCollections(Toggle):
+class ACNHIncludeCollections(DefaultOnToggle):
     """Include collection objectives (museum donations, critterpedia)."""
     display_name = "Include Collection Activities"
-    default = True
 
-class ACNHIncludeIslandDevelopment(Toggle):
+class ACNHIncludeIslandDevelopment(DefaultOnToggle):
     """Include island development objectives (buildings, infrastructure, rating)."""
     display_name = "Include Island Development"
-    default = True
 
-class ACNHIncludeVillagerInteractions(Toggle):
+class ACNHIncludeVillagerInteractions(DefaultOnToggle):
     """Include villager interaction objectives (friendship, gifts, help)."""
     display_name = "Include Villager Interactions"
-    default = True
 
-class ACNHIncludeShopping(Toggle):
+class ACNHIncludeShopping(DefaultOnToggle):
     """Include shopping objectives (purchases, collections, sets)."""
     display_name = "Include Shopping Activities"
-    default = True
 
-class ACNHIncludeCrafting(Toggle):
+class ACNHIncludeCrafting(DefaultOnToggle):
     """Include crafting objectives (DIY recipes, customization)."""
     display_name = "Include Crafting Activities"
-    default = True
 
 class ACNHIncludeSeasonalEvents(Toggle):
     """Include seasonal event objectives (limited-time activities)."""
     display_name = "Include Seasonal Events"
     default = False  # Keep as False - seasonal events are more specialized/harder
 
-class ACNHIncludeDecorating(Toggle):
+class ACNHIncludeDecorating(DefaultOnToggle):
     """Include decorating objectives (room design, themes, HHA scoring)."""
     display_name = "Include Decorating Activities"
-    default = True
 
 class ACNHCollectionFocus(Choice):
     """Focus collection objectives on specific categories."""

@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
@@ -698,42 +697,34 @@ class CursedRedDeadRedemption2Game(Game):
 class CURSEDRDR2IncludeAnimalCruelty(Toggle):
     """Include absolutely cursed animal-related objectives."""
     display_name = "Include Animal Cruelty"
-    default = True
 
 class CURSEDRDR2IncludeSocialDisasters(Toggle):
     """Include socially destructive and chaotic objectives."""
     display_name = "Include Social Disasters"
-    default = True
 
 class CURSEDRDR2IncludeTransportationChaos(Toggle):
     """Include vehicle and transportation mayhem objectives."""
     display_name = "Include Transportation Chaos"
-    default = True
 
 class CURSEDRDR2IncludeFashionCrimes(Toggle):
     """Include terrible outfit and appearance objectives."""
     display_name = "Include Fashion Crimes"
-    default = True
 
 class CURSEDRDR2IncludeRoleplayNightmares(Toggle):
     """Include painful roleplay restriction objectives."""
     display_name = "Include Roleplay Nightmares"
-    default = True
 
 class CURSEDRDR2IncludeTediousCollections(Toggle):
     """Include mind-numbingly boring collection objectives."""
     display_name = "Include Tedious Collections"
-    default = True
 
 class CURSEDRDR2IncludeCombatAbsurdities(Toggle):
     """Include ridiculous and impractical combat objectives."""
     display_name = "Include Combat Absurdities"
-    default = True
 
 class CURSEDRDR2IncludeEconomyDestruction(Toggle):
     """Include money-wasting and economy-breaking objectives."""
     display_name = "Include Economy Destruction"
-    default = True
 
 class CURSEDRDR2CursedDifficulty(Choice):
     """How cursed should the objectives be?"""

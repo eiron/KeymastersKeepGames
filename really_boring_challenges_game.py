@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, Choice
+from Options import DefaultOnToggle, Choice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -680,45 +679,37 @@ class ReallyBoringChallengesGame(Game):
 
 
 # Archipelago Options
-class RBCIncludeRepetitiveCounting(Toggle):
+class RBCIncludeRepetitiveCounting(DefaultOnToggle):
     """Include repetitive counting objectives that test patience."""
     display_name = "Include Repetitive Counting"
-    default = True
 
-class RBCIncludeMindlessClicking(Toggle):
+class RBCIncludeMindlessClicking(DefaultOnToggle):
     """Include mindless clicking and button pressing objectives."""
     display_name = "Include Mindless Clicking"
-    default = True
 
-class RBCIncludeTediousWaiting(Toggle):
+class RBCIncludeTediousWaiting(DefaultOnToggle):
     """Include waiting and observation objectives."""
     display_name = "Include Tedious Waiting"
-    default = True
 
-class RBCIncludePointlessOrganizing(Toggle):
+class RBCIncludePointlessOrganizing(DefaultOnToggle):
     """Include organizing and sorting objectives."""
     display_name = "Include Pointless Organizing"
-    default = True
 
-class RBCIncludeEndlessWalking(Toggle):
+class RBCIncludeEndlessWalking(DefaultOnToggle):
     """Include walking and movement pattern objectives."""
     display_name = "Include Endless Walking"
-    default = True
 
-class RBCIncludeMonotonousCollection(Toggle):
+class RBCIncludeMonotonousCollection(DefaultOnToggle):
     """Include collection and gathering objectives."""
     display_name = "Include Monotonous Collection"
-    default = True
 
-class RBCIncludeSoulCrushingGrinds(Toggle):
+class RBCIncludeSoulCrushingGrinds(DefaultOnToggle):
     """Include repetitive grinding and achievement objectives."""
     display_name = "Include Soul Crushing Grinds"
-    default = True
 
-class RBCIncludeMindNumbingTasks(Toggle):
+class RBCIncludeMindNumbingTasks(DefaultOnToggle):
     """Include precision and meditation objectives."""
     display_name = "Include Mind Numbing Tasks"
-    default = True
 
 class RBCBoredomIntensity(Choice):
     """How boring should the challenges be?"""

@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, Choice
+from Options import DefaultOnToggle, Choice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -1186,45 +1185,37 @@ class ScavengerHuntGame(Game):
 
 
 # Archipelago Options
-class ScavengerIncludePhotography(Toggle):
+class ScavengerIncludePhotography(DefaultOnToggle):
     """Include photography and visual documentation objectives."""
     display_name = "Include Photography"
-    default = True
 
-class ScavengerIncludeLocationHunting(Toggle):
+class ScavengerIncludeLocationHunting(DefaultOnToggle):
     """Include location discovery and exploration objectives."""
     display_name = "Include Location Hunting"
-    default = True
 
-class ScavengerIncludeObjectCollection(Toggle):
+class ScavengerIncludeObjectCollection(DefaultOnToggle):
     """Include item collection and specimen gathering objectives."""
     display_name = "Include Object Collection"
-    default = True
 
-class ScavengerIncludeInteractionChallenges(Toggle):
+class ScavengerIncludeInteractionChallenges(DefaultOnToggle):
     """Include social interaction and communication objectives."""
     display_name = "Include Interaction Challenges"
-    default = True
 
-class ScavengerIncludeNatureExploration(Toggle):
+class ScavengerIncludeNatureExploration(DefaultOnToggle):
     """Include wildlife observation and nature study objectives."""
     display_name = "Include Nature Exploration"
-    default = True
 
-class ScavengerIncludeCulturalDiscovery(Toggle):
+class ScavengerIncludeCulturalDiscovery(DefaultOnToggle):
     """Include cultural learning and artistic exploration objectives."""
     display_name = "Include Cultural Discovery"
-    default = True
 
-class ScavengerIncludeSeasonalActivities(Toggle):
+class ScavengerIncludeSeasonalActivities(DefaultOnToggle):
     """Include weather and season-specific objectives."""
     display_name = "Include Seasonal Activities"
-    default = True
 
-class ScavengerIncludeCommunityEngagement(Toggle):
+class ScavengerIncludeCommunityEngagement(DefaultOnToggle):
     """Include community participation and local support objectives."""
     display_name = "Include Community Engagement"
-    default = True
 
 class ScavengerDifficultyPreference(Choice):
     """Prefer certain difficulty levels for objectives."""

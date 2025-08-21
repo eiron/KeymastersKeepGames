@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, Choice
+from Options import DefaultOnToggle, Choice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -923,45 +922,37 @@ class BaldursGate3Game(Game):
 
 
 # Archipelago Options
-class BG3IncludeCharacterBuilds(Toggle):
+class BG3IncludeCharacterBuilds(DefaultOnToggle):
     """Include character build experimentation and multiclassing objectives."""
     display_name = "Include Character Builds"
-    default = True
 
-class BG3IncludeStoryProgression(Toggle):
+class BG3IncludeStoryProgression(DefaultOnToggle):
     """Include main story and narrative choice objectives."""
     display_name = "Include Story Progression"
-    default = True
 
-class BG3IncludeCompanionQuests(Toggle):
+class BG3IncludeCompanionQuests(DefaultOnToggle):
     """Include companion relationship and personal quest objectives."""
     display_name = "Include Companion Quests"
-    default = True
 
-class BG3IncludeExploration(Toggle):
+class BG3IncludeExploration(DefaultOnToggle):
     """Include world exploration and discovery objectives."""
     display_name = "Include Exploration"
-    default = True
 
-class BG3IncludeCombatChallenges(Toggle):
+class BG3IncludeCombatChallenges(DefaultOnToggle):
     """Include tactical combat and boss fight objectives."""
     display_name = "Include Combat Challenges"
-    default = True
 
-class BG3IncludeSocialEncounters(Toggle):
+class BG3IncludeSocialEncounters(DefaultOnToggle):
     """Include dialogue, persuasion, and social interaction objectives."""
     display_name = "Include Social Encounters"
-    default = True
 
-class BG3IncludeCollectibles(Toggle):
+class BG3IncludeCollectibles(DefaultOnToggle):
     """Include item collection and treasure hunting objectives."""
     display_name = "Include Collectibles"
-    default = True
 
-class BG3IncludeAchievementHunting(Toggle):
+class BG3IncludeAchievementHunting(DefaultOnToggle):
     """Include achievement and completion challenge objectives."""
     display_name = "Include Achievement Hunting"
-    default = True
 
 class BG3DifficultyPreference(Choice):
     """Prefer certain difficulty levels for objectives."""

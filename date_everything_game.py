@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, Choice
+from Options import DefaultOnToggle, Choice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -568,50 +567,41 @@ class DateEverythingGame(Game):
 
 
 # Archipelago Options
-class DEIncludeStructuralObjects(Toggle):
+class DEIncludeStructuralObjects(DefaultOnToggle):
     """Include dating structural elements like walls, floors, and doors (Characters 1-10)."""
     display_name = "Include Structural Objects"
-    default = True
 
-class DEIncludeFurnitureDecor(Toggle):
+class DEIncludeFurnitureDecor(DefaultOnToggle):
     """Include dating furniture and decorative items (Characters 11-30)."""
     display_name = "Include Furniture & Decor"
-    default = True
 
-class DEIncludeKitchenAppliances(Toggle):
+class DEIncludeKitchenAppliances(DefaultOnToggle):
     """Include dating kitchen appliances and food-related items (Characters 31-42)."""
     display_name = "Include Kitchen Appliances"
-    default = True
 
-class DEIncludeBathroomItems(Toggle):
+class DEIncludeBathroomItems(DefaultOnToggle):
     """Include dating bathroom fixtures and personal care items (Characters 43-52)."""
     display_name = "Include Bathroom Items"
-    default = True
 
-class DEIncludeLaundryItems(Toggle):
+class DEIncludeLaundryItems(DefaultOnToggle):
     """Include dating laundry room items and cleaning supplies (Characters 71-80)."""
     display_name = "Include Laundry Items"
-    default = True
 
-class DEIncludeOfficeBedroom(Toggle):
+class DEIncludeOfficeBedroom(DefaultOnToggle):
     """Include dating office supplies, bedroom items, and personal belongings (Characters 53-70)."""
     display_name = "Include Office & Bedroom Items"
-    default = True
 
-class DEIncludeMiscItems(Toggle):
+class DEIncludeMiscItems(DefaultOnToggle):
     """Include dating miscellaneous items like tools, keys, and storage (Characters 81-90)."""
     display_name = "Include Miscellaneous Items"
-    default = True
 
-class DEIncludeSpecialConcepts(Toggle):
+class DEIncludeSpecialConcepts(DefaultOnToggle):
     """Include dating abstract concepts and special characters (Characters 91-100)."""
     display_name = "Include Special Concepts"
-    default = True
 
-class DEIncludeDLCCharacters(Toggle):
+class DEIncludeDLCCharacters(DefaultOnToggle):
     """Include dating DLC characters from the Lavish Edition (Characters 101-102)."""
     display_name = "Include DLC Characters"
-    default = True
 
 class DERelationshipGoals(Choice):
     """What kind of relationship outcomes should you focus on?"""
