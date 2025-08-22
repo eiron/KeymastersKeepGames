@@ -124,7 +124,7 @@ class DanganronpaGame(Game):
             if self.include_class_trial:
                 templates.extend([
                     GameObjectiveTemplate(
-                        label="Achieve RANK rank in the CHAPTER class trial",
+                        label="Achieve RANK rank in the chapter CHAPTER class trial",
                         data={
                             "RANK": (self.all_trial_ranks, 1),
                             "CHAPTER": (self.all_chapters, 1),
