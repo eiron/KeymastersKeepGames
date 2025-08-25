@@ -537,9 +537,8 @@ class BaldursGate3Game(Game):
     @staticmethod
     def subclass_types() -> List[str]:
         return [
-            "Barbarian subclasses", "Bard subclasses", "Cleric subclasses", "Druid subclasses",
-            "Fighter subclasses", "Monk subclasses", "Paladin subclasses", "Ranger subclasses",
-            "Rogue subclasses", "Sorcerer subclasses", "Warlock subclasses", "Wizard subclasses"
+            "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk",
+            "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"
         ]
 
     @staticmethod
@@ -554,8 +553,8 @@ class BaldursGate3Game(Game):
     @staticmethod
     def feat_types() -> List[str]:
         return [
-            "Combat feats", "Spellcasting feats", "Social feats", "Utility feats",
-            "Racial feats", "Movement feats", "Defensive feats", "Offensive feats"
+            "Combat", "Spellcasting", "Social", "Utility",
+            "Racial", "Movement", "Defensive", "Offensive"
         ]
 
     @staticmethod
