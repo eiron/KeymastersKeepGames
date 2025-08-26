@@ -366,7 +366,7 @@ class DanganronpaGame(Game):
                         weight=4,
                     ),
                     GameObjectiveTemplate(
-                        label="Clear floor FLOOR in Tower of Despair with a party than includes CHARACTER",
+                        label="Clear floor FLOOR in Tower of Despair with a party that includes CHARACTER",
                         data={
                             "FLOOR": (self.all_floors, 1),
                             "CHARACTER": (self.all_summer_camp_characters, 1),
@@ -376,7 +376,7 @@ class DanganronpaGame(Game):
                         weight=3,
                     ),
                     GameObjectiveTemplate(
-                        label="Clear floor FLOOR in Tower of Despair with a party than includes CHARACTERS",
+                        label="Clear floor FLOOR in Tower of Despair with a party that includes CHARACTERS",
                         data={
                             "FLOOR": (self.all_floors, 1),
                             "CHARACTERS": (self.all_summer_camp_characters, 2),
