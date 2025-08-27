@@ -293,10 +293,9 @@ class AnimalCrossingNewHorizonsGame(Game):
         if self.include_seasonal_events:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Participate in EVENT and collect EVENT_ITEM",
+                    label="Participate in EVENT and collect at least one event-specific item",
                     data={
-                        "EVENT": (self.seasonal_events, 1),
-                        "EVENT_ITEM": (self.event_items, 1)
+                        "EVENT": (self.seasonal_events, 1)
                     },
                     is_time_consuming=False,
                     is_difficult=False,

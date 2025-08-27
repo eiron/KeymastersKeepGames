@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
@@ -107,35 +106,27 @@ class PhysicalHealthChallengesGame(Game):
         movement = self.movement()
         return len(movement) > 0
 
-    @functools.cached_property
     def exercise_actions(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_exercise_actions.value)
 
-    @functools.cached_property
     def wellness_actions(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_wellness_actions.value)
 
-    @functools.cached_property
     def nutrition_actions(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_nutrition_actions.value)
 
-    @functools.cached_property
     def movement_actions(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_movement_actions.value)
 
-    @functools.cached_property
     def exercises(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_exercise_selection.value)
 
-    @functools.cached_property
     def wellness(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_wellness_selection.value)
 
-    @functools.cached_property
     def nutrition(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_nutrition_selection.value)
 
-    @functools.cached_property
     def movement(self) -> List[str]:
         return sorted(self.archipelago_options.physical_health_movement_selection.value)
 

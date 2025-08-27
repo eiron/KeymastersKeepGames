@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
@@ -216,7 +215,6 @@ class JustDanceGame(Game):
         ])
 
     # Base game song collections
-    @functools.cached_property
     def songs_just_dance_1(self) -> List[str]:
         return [
             "Cyndi Lauper - Girls Just Want to Have Fun [JD1]",
@@ -253,7 +251,6 @@ class JustDanceGame(Game):
             "MC Hammer - U Can't Touch This [JD1]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2(self) -> List[str]:
         return [
             "The Weather Girls - It's Raining Men [JD2]",
@@ -302,7 +299,6 @@ class JustDanceGame(Game):
             "Fatboy Slim - Rockafeller Skank [JD2]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_3(self) -> List[str]:
         return [
             "Katy Perry featuring Snoop Dogg - California Gurls [JD3]",
@@ -354,7 +350,6 @@ class JustDanceGame(Game):
             "Groove Century - Soul Searchin' [JD3]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_4(self) -> List[str]:
         return [
             "Carly Rae Jepsen - Call Me Maybe [JD4]",
@@ -399,7 +394,6 @@ class JustDanceGame(Game):
             "Halloween Thrills - Time Warp (The Rocky Horror Picture Show Cast) [JD4]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2014(self) -> List[str]:
         return [
             "One Direction - Kiss You [JD2014]",
@@ -448,7 +442,6 @@ class JustDanceGame(Game):
             "Sentai Express - Nitro Bot [JD2014]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2015(self) -> List[str]:
         return [
             "Ariana Grande feat. Iggy Azalea & Big Sean - Problem [JD2015]",
@@ -496,7 +489,6 @@ class JustDanceGame(Game):
             "Sentai Express - Nitro Bot [JD2015]",  # Ubisoft Connect unlock
         ]
 
-    @functools.cached_property
     def songs_just_dance_2016(self) -> List[str]:
         """Base track list for Just Dance 2016 (44 songs)."""
         return [
@@ -545,7 +537,6 @@ class JustDanceGame(Game):
             "Imposs - Stadium Flow [JD2016]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2016_exclusives(self) -> List[str]:
         """Just Dance 2016 exclusive content."""
         exclusives = []
@@ -568,7 +559,6 @@ class JustDanceGame(Game):
         
         return exclusives
 
-    @functools.cached_property
     def songs_just_dance_2016_just_dance_unlimited(self) -> List[str]:
         """Just Dance 2016 DLC content (Just Dance Unlimited)."""
         dlc_songs = []
@@ -590,7 +580,6 @@ class JustDanceGame(Game):
         
         return dlc_songs
 
-    @functools.cached_property
     def songs_just_dance_2017(self) -> List[str]:
         return [
             "DNCE - Cake By The Ocean [JD2017]",
@@ -636,7 +625,6 @@ class JustDanceGame(Game):
             "Rossini - William Tell Overture [JD2017]",  # Switch exclusive
         ]
 
-    @functools.cached_property
     def songs_just_dance_2017_exclusives(self) -> List[str]:
         exclusive_songs = []
         
@@ -657,7 +645,6 @@ class JustDanceGame(Game):
         
         return exclusive_songs
 
-    @functools.cached_property
     def songs_just_dance_2017_platform_exclusives(self) -> List[str]:
         """Platform exclusive content for Just Dance 2017 (Nintendo Switch exclusives)"""
         return [
@@ -665,7 +652,6 @@ class JustDanceGame(Game):
             "Rossini - William Tell Overture [JD2017 Switch Exclusive]",
         ]
 
-    @functools.cached_property  
     def songs_just_dance_2017_just_dance_unlimited(self) -> List[str]:
         if "JD2017 - Just Dance Unlimited" in self.dlc_content:
             return [
@@ -694,7 +680,6 @@ class JustDanceGame(Game):
             ]
         return []
 
-    @functools.cached_property
     def songs_just_dance_2018(self) -> List[str]:
         """Base disc songs for Just Dance 2018"""
         return [
@@ -740,7 +725,6 @@ class JustDanceGame(Game):
             "Eiffel 65 - Blue (Da Ba Dee) (Hit The Electro Beat) [JD2018]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2018_exclusives(self) -> List[str]:
         """Ubisoft Connect exclusive and regional exclusive songs for Just Dance 2018"""
         exclusives = []
@@ -758,7 +742,6 @@ class JustDanceGame(Game):
             
         return exclusives
 
-    @functools.cached_property
     def songs_just_dance_2018_platform_exclusives(self) -> List[str]:
         """Platform exclusive content for Just Dance 2018 (Nintendo Switch Double Rumble)"""
         return [
@@ -769,7 +752,6 @@ class JustDanceGame(Game):
             "Artistas Varios - Tales Of The Cauldron [JD2018 Switch Double Rumble]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2018_just_dance_unlimited(self) -> List[str]:
         """Just Dance Unlimited tracks available for Just Dance 2018"""
         return [
@@ -786,7 +768,6 @@ class JustDanceGame(Game):
             "Sean Paul ft. Dua Lipa - No Lie [JD2018 DLC]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2019(self) -> List[str]:
         """Base disc songs for Just Dance 2019"""
         return [
@@ -840,35 +821,30 @@ class JustDanceGame(Game):
             "Janelle Monáe - Make Me Feel [JD2019]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2019_code_unlock(self) -> List[str]:
         """Code exclusive songs for Just Dance 2019"""
         return [
             "Michelle Delamor - Fire On The Dancefloor [JD2019 Code Unlock]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2019_middle_east_exclusive(self) -> List[str]:
         """Middle East exclusive songs for Just Dance 2019"""
         return [
             "Maan Barghouth - Hala Bel Khamis [JD2019 Middle East Exclusive]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2019_france_canada_exclusive(self) -> List[str]:
         """France/Canada exclusive songs for Just Dance 2019"""
         return [
             "McFly & Carlito - On Ne Porte Pas De Sous-Vêtements [JD2019 France/Canada Exclusive]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2019_russia_exclusive(self) -> List[str]:
         """Russia exclusive songs for Just Dance 2019"""
         return [
             "Bremenskiye Muzykanty - There Is Nothing Better In The World (Ничего на свете лучше нету) [JD2019 Russia Exclusive]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2019_just_dance_unlimited(self) -> List[str]:
         """Just Dance Unlimited tracks available for Just Dance 2019"""
         return [
@@ -889,7 +865,6 @@ class JustDanceGame(Game):
             "Becky G ft. Bad Bunny - Mayores [JD2019 DLC]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2020(self) -> List[str]:
         """Base disc tracks for Just Dance 2020"""
         return [
@@ -935,7 +910,6 @@ class JustDanceGame(Game):
             "Ed Sheeran & Justin Bieber - I Don't Care [JD2020]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2020_japan_exclusive(self) -> List[str]:
         return [
             "NiziU - Make you happy [JD2020 Japan Exclusive]",
@@ -950,25 +924,21 @@ class JustDanceGame(Game):
             "TRF - EZ DO DANCE [JD2020 Japan Exclusive]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2020_france_exclusive(self) -> List[str]:
         return [
             "Tal - Le sens de la vie [JD2020 France Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2020_benelux_exclusive(self) -> List[str]:
         return [
             "K3 - Roller Disco [JD2020 Benelux Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2020_russia_exclusive(self) -> List[str]:
         return [
             "LOBODA - SuperStar [JD2020 Russia Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2020_just_dance_unlimited(self) -> List[str]:
         """Just Dance Unlimited tracks available for Just Dance 2020"""
         return [
@@ -989,7 +959,6 @@ class JustDanceGame(Game):
             "Disclosure ft. AlunaGeorge - White Noise [JD2020 DLC]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2021(self) -> List[str]:
         """Base disc tracks for Just Dance 2021"""
         return [
@@ -1036,7 +1005,6 @@ class JustDanceGame(Game):
             "ONUKA - Zenit [JD2021]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2021_just_dance_unlimited(self) -> List[str]:
         """Just Dance Unlimited tracks available for Just Dance 2021"""
         return [
@@ -1058,25 +1026,21 @@ class JustDanceGame(Game):
             "Yi Yan/Zhao Fang Jing/Suika Kune/Feizaojun - Rainbow Beats [JD2021 DLC]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2021_japan_exclusive(self) -> List[str]:
         return [
             "Da Pump - U.S.A. [JD2021 Japan Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2021_france_exclusive(self) -> List[str]:
         return [
             "Bilal Hassani ft. Sundy Jules, Paola Locatelli & Sulivan Gwed - Flash (Just Dance Version) [JD2021 France Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2021_benelux_exclusive(self) -> List[str]:
         return [
             "K3 - Dans van de Farao [JD2021 Benelux Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2022(self) -> List[str]:
         return [
             "Bakermat - Baianá [JD2022]",
@@ -1121,7 +1085,6 @@ class JustDanceGame(Game):
             "Sylvester - You Make Me Feel (Mighty Real) [JD2022]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2022_china_exclusive(self) -> List[str]:
         return [
             "阿里郎 - 作为你的兄弟 (As Your Brother) [JD2022 China Exclusive]",
@@ -1131,43 +1094,36 @@ class JustDanceGame(Game):
             "胡维纳 - 冰雪奇缘 (Let It Go Chinese Ver.) [JD2022 China Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2022_france_exclusive(self) -> List[str]:
         return [
             "Julien Granel & Lena Situations - À la Folie [JD2022 France Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2022_france_canada_exclusive(self) -> List[str]:
         return [
             "Julien Granel & Lena Situations - À la Folie [JD2022 France/Canada Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2022_japan_exclusive(self) -> List[str]:
         return [
             "Gen Hoshino - Koi [JD2022 Japan Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2022_benelux_exclusive(self) -> List[str]:
         return [
             "K3 - Waterval [JD2022 Benelux Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2022_germany_exclusive(self) -> List[str]:
         return [
             "Lisa Pac - Shoutout [JD2022 Germany Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2022_southeast_asia_exclusive(self) -> List[str]:
         return [
             "Jam Hsiao - Princess (王妃) [JD2022 Southeast Asia Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2022_just_dance_unlimited(self) -> List[str]:
         return [
             "Gen Hoshino - Koi [JD2022 JDU]",
@@ -1186,7 +1142,6 @@ class JustDanceGame(Game):
             "Dua Lipa - Break My Heart [JD2022 JDU]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2022_just_dance_plus(self) -> List[str]:
         return [
             "Stromae - L'enfer [JD2022 JD+]",
@@ -1195,7 +1150,6 @@ class JustDanceGame(Game):
             "Daddy Yankee - X Última Vez [JD2022 JD+]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2023(self) -> List[str]:
         return [
             "CLiQ feat. Ms Banks and Alika - Anything I Do [JD2023]",
@@ -1241,31 +1195,26 @@ class JustDanceGame(Game):
             "Tigermonkey - Zooby Doo [JD2023]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2023_france_exclusive(self) -> List[str]:
         return [
             "Michou - Jamais Lâcher [JD2023 France Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2023_italy_exclusive(self) -> List[str]:
         return [
             "Sangiovanni - Farfalle [JD2023 Italy Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2023_japan_exclusive(self) -> List[str]:
         return [
             "Naniwa Danshi - Ubu Love [JD2023 Japan Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2023_benelux_exclusive(self) -> List[str]:
         return [
             "K3 - Vleugels [JD2023 Benelux Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2023_just_dance_unlimited(self) -> List[str]:
         return [
             "Purple Disco Machine & Sophie and the Giants - In The Dark [JD2023 JDU]",
@@ -1280,7 +1229,6 @@ class JustDanceGame(Game):
             "Billie Eilish - bad guy [JD2023 JDU]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2023_just_dance_plus(self) -> List[str]:
         return [
             "Stray Kids - CIRCUS [JD2023 JD+]",
@@ -1289,7 +1237,6 @@ class JustDanceGame(Game):
             "Camila Cabello - Bam Bam [JD2023 JD+]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2024(self) -> List[str]:
         """Just Dance 2024 Edition songs."""
         return [
@@ -1337,14 +1284,12 @@ class JustDanceGame(Game):
             "Billie Eilish - you should see me in a crown [JD2024]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2024_japan_exclusive(self) -> List[str]:
         """Just Dance 2024 Edition Japan exclusive songs."""
         return [
             "Atarashii Gakko! - OTONABLUE [Japan Exclusive]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2024_just_dance_unlimited(self) -> List[str]:
         return [
             "Miley Cyrus - Flowers [JD2024 JDU]",
@@ -1359,7 +1304,6 @@ class JustDanceGame(Game):
             "Beyoncé - Crazy in Love [JD2024 JDU]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2024_just_dance_plus(self) -> List[str]:
         return [
             "NewJeans - Get Up [JD2024 JD+]",
@@ -1368,7 +1312,6 @@ class JustDanceGame(Game):
             "David Guetta & Bebe Rexha - I'm Good (Blue) [JD2024 JD+]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2025(self) -> List[str]:
         """Base tracklist for Just Dance 2025 Edition."""
         return [
@@ -1415,7 +1358,6 @@ class JustDanceGame(Game):
             "Zara Larsson - You Love Who You Love [JD2025]"
         ]
 
-    @functools.cached_property
     def songs_just_dance_2025_just_dance_unlimited(self) -> List[str]:
         return [
             "Olivia Rodrigo - bad idea right? [JD2025 JDU]",
@@ -1430,7 +1372,6 @@ class JustDanceGame(Game):
             "Teddy Swims - Lose Control [JD2025 JDU]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2025_just_dance_plus(self) -> List[str]:
         return [
             "ITZY - CAKE [JD2025 JD+]",
@@ -1439,7 +1380,6 @@ class JustDanceGame(Game):
             "Anitta - Funk Rave [JD2025 JD+]",
         ]
 
-    @functools.cached_property
     def songs_just_dance_2026(self) -> List[str]:
         return [
             # Note: Only partial track list available as of August 2025 - game releases October 2025
@@ -1694,7 +1634,6 @@ class JustDanceGame(Game):
         return sorted(list(set(songs)))  # Remove duplicates and sort
 
     # Unlimited songs (available via subscription)
-    @functools.cached_property
     def songs_unlimited(self) -> List[str]:
         return [
             "Cheap Thrills - Sia [JD Unlimited]",
@@ -1748,7 +1687,6 @@ class JustDanceGame(Game):
         ]
 
     # DLC song collections
-    @functools.cached_property
     def songs_jd2_dlc_pack_1_launch(self) -> List[str]:
         return [
             "Katy Perry - Firework [JD2 DLC - Pack 1]",
@@ -1757,7 +1695,6 @@ class JustDanceGame(Game):
             "M/A/R/R/S - Pump Up the Volume [JD2 DLC - Pack 1]",
         ]
 
-    @functools.cached_property
     def songs_jd2_dlc_pack_2_october_2010(self) -> List[str]:
         return [
             "Studio Allstars - Maniac (Michael Sembello) [JD2 DLC - Pack 2]",
@@ -1766,14 +1703,12 @@ class JustDanceGame(Game):
             "V V Brown - Crying Blood [JD2 DLC - Pack 2]",
         ]
 
-    @functools.cached_property
     def songs_jd2_dlc_pack_3_november_2010(self) -> List[str]:
         return [
             "The Reverend Horatio Duncan and Amos Sweets - Down By The Riverside",
             "The World Cup Girls - Futebol Crazy (Paul J. Borg)",
         ]
 
-    @functools.cached_property
     def songs_jd2_dlc_pack_4_december_2010(self) -> List[str]:
         return [
             "Carl Douglas - Kung Fu Fighting (Dave Ruffy/Mark Wallis Remix)",
@@ -1784,13 +1719,11 @@ class JustDanceGame(Game):
             "Santa Clones - Crazy Christmas",
         ]
 
-    @functools.cached_property
     def songs_jd2_dlc_pack_5_january_2011(self) -> List[str]:
         return [
             "Sweat Invaders - Skin-To-Skin",
         ]
 
-    @functools.cached_property
     def songs_jd2_dlc_pack_6_february_2011(self) -> List[str]:
         return [
             "The Supremes - You Can't Hurry Love",
@@ -1798,7 +1731,6 @@ class JustDanceGame(Game):
             "Estelle feat. Kanye West - American Boy",
         ]
 
-    @functools.cached_property
     def songs_jd2_dlc_pack_7_march_2011(self) -> List[str]:
         return [
             "Dexy's Midnight Runners - Come On Eileen",
@@ -1807,13 +1739,11 @@ class JustDanceGame(Game):
             "The Hit Crew - Here Comes the Hotstepper (Ini Kamoze)",
         ]
 
-    @functools.cached_property
     def songs_jd2_dlc_pack_8_april_june_2011(self) -> List[str]:
         return [
             "M People - Moving on Up",
         ]
 
-    @functools.cached_property
     def songs_jd3_sweat_pack_1(self) -> List[str]:
         return [
             "Alan Hawkshaw and Andrew Kingslow - Beat Match Until I'm Blue (Sweat Invaders) [JD3 DLC - Sweat Pack #1]",
@@ -1821,7 +1751,6 @@ class JustDanceGame(Game):
             "Sweat Invaders - Touch Me Want Me [JD3 DLC - Sweat Pack #1]",
         ]
 
-    @functools.cached_property
     def songs_jd3_sweat_pack_2(self) -> List[str]:
         return [
             "Sweat Invaders - Cardiac Caress",
@@ -1829,7 +1758,6 @@ class JustDanceGame(Game):
             "Sweat Invaders - Merengue",
         ]
 
-    @functools.cached_property
     def songs_jd3_valentine_pack(self) -> List[str]:
         return [
             "Bollywood - Katti Kalandal",
@@ -1837,7 +1765,6 @@ class JustDanceGame(Game):
             "Love Letter - Why Oh Why",
         ]
 
-    @functools.cached_property
     def songs_jd3_christmas_pack(self) -> List[str]:
         return [
             "The Bangles - Walk Like an Egyptian",
@@ -1846,7 +1773,6 @@ class JustDanceGame(Game):
             "Dee Dee Sharp - Mashed Potato Time",
         ]
 
-    @functools.cached_property
     def songs_jd3_spring_break_pack_1(self) -> List[str]:
         return [
             "Kim Wilde - Kids in America",
@@ -1855,7 +1781,6 @@ class JustDanceGame(Game):
             "Gorillaz - Dare",
         ]
 
-    @functools.cached_property
     def songs_jd3_spring_break_pack_2(self) -> List[str]:
         return [
             "The World Cup Girls - Futebol Crazy (Paul J. Borg)",
@@ -1863,7 +1788,6 @@ class JustDanceGame(Game):
             "Sorcerer - Dagomba",
         ]
 
-    @functools.cached_property
     def songs_jd3_individual_dlc(self) -> List[str]:
         return [
             "In the Style of Irene Cara - Fame (Irene Cara)",
@@ -1895,14 +1819,12 @@ class JustDanceGame(Game):
             "The Weather Girls - It's Raining Men",
         ]
 
-    @functools.cached_property
     def songs_jd4_dlc_pack_1_october_2012(self) -> List[str]:
         return [
             "Katy Perry - Part Of Me [JD4 DLC - Pack 1]",
             "Cobra Starship ft. Sabi - You Make Me Feel... [JD4 DLC - Pack 1]",
         ]
 
-    @functools.cached_property
     def songs_jd4_dlc_pack_2_november_2012(self) -> List[str]:
         return [
             "PSY - Gangnam Style",
@@ -1911,7 +1833,6 @@ class JustDanceGame(Game):
             "Sorcerer - Dagomba",
         ]
 
-    @functools.cached_property
     def songs_jd4_dlc_pack_3_december_2012(self) -> List[str]:
         return [
             "One Direction - One Thing",
@@ -1922,7 +1843,6 @@ class JustDanceGame(Game):
             "Cher Lloyd ft. Astro - Want U Back",
         ]
 
-    @functools.cached_property
     def songs_jd4_dlc_pack_4_january_2013(self) -> List[str]:
         return [
             "Cher Lloyd ft. Becky G - Oath",
@@ -1930,7 +1850,6 @@ class JustDanceGame(Game):
             "Reggaeton Storm - Boom",
         ]
 
-    @functools.cached_property
     def songs_jd4_dlc_pack_5_march_2013(self) -> List[str]:
         return [
             "Nick Phoenix and Thomas J. Bergersen - Professor Pumplestickle",
@@ -1938,7 +1857,6 @@ class JustDanceGame(Game):
             "DJ Fresh - Gold Dust",
         ]
 
-    @functools.cached_property
     def songs_jd4_dlc_pack_6_april_2013(self) -> List[str]:
         return [
             "Ke$ha - Die Young",
@@ -1947,7 +1865,6 @@ class JustDanceGame(Game):
         ]
 
     # Just Dance 2014 DLC Collections
-    @functools.cached_property
     def songs_jd2014_dlc_launch(self) -> List[str]:
         return [
             "Katy Perry - Roar [JD2014 DLC - Launch]",
@@ -1955,7 +1872,6 @@ class JustDanceGame(Game):
             "Avicii feat. Aloe Blacc - Wake Me Up [JD2014 DLC - Launch]",
         ]
 
-    @functools.cached_property
     def songs_jd2014_dlc_november_2013(self) -> List[str]:
         return [
             "Miley Cyrus - We Can't Stop [JD2014 DLC - November 2013]",
@@ -1965,7 +1881,6 @@ class JustDanceGame(Game):
             "Bonnie McKee - American Girl [JD2014 DLC - November 2013]",
         ]
 
-    @functools.cached_property
     def songs_jd2014_dlc_december_2013(self) -> List[str]:
         return [
             "Mainstreet - My Main Girl [JD2014 DLC - December 2013]",
@@ -1975,21 +1890,18 @@ class JustDanceGame(Game):
             "PSY - Gangnam Style [JD2014 DLC - December 2013]",
         ]
 
-    @functools.cached_property
     def songs_jd2014_dlc_february_2014(self) -> List[str]:
         return [
             "Pitbull feat. Ke$ha - Timber [JD2014 DLC - February 2014]",
             "Avril Lavigne - Rock n Roll [JD2014 DLC - February 2014]",
         ]
 
-    @functools.cached_property
     def songs_jd2014_dlc_march_2014(self) -> List[str]:
         return [
             "P!nk - Funhouse [JD2014 DLC - March 2014]",
             "Katy Perry - Part of Me [JD2014 DLC - March 2014]",
         ]
 
-    @functools.cached_property
     def songs_jd2014_dlc_april_2014(self) -> List[str]:
         return [
             "Justin Bieber feat. Nicki Minaj - Beauty And A Beat [JD2014 DLC - April 2014]",
@@ -1998,14 +1910,12 @@ class JustDanceGame(Game):
             "Ke$ha - We R Who We R [JD2014 DLC - April 2014]",
         ]
 
-    @functools.cached_property
     def songs_jd2014_dlc_may_2014(self) -> List[str]:
         return [
             "David Correy feat. Monobloco - The World is Ours [JD2014 DLC - May 2014]",
         ]
 
     # Just Dance 2015 DLC Collections
-    @functools.cached_property
     def songs_jd2015_dlc_day_one(self) -> List[str]:
         return [
             "Ariana Grande feat. Zedd - Break Free [JD2015 DLC - Day One]",  # Free
@@ -2024,7 +1934,6 @@ class JustDanceGame(Game):
             "Justin Bieber feat. Nicki Minaj - Beauty And A Beat [JD2015 DLC - Day One]",
         ]
 
-    @functools.cached_property
     def songs_jd2015_dlc_november_2014(self) -> List[str]:
         return [
             "Miley Cyrus - We Can't Stop [JD2015 DLC - November 2014]",
@@ -2034,7 +1943,6 @@ class JustDanceGame(Game):
             "P!nk - Funhouse [JD2015 DLC - November 2014]",
         ]
 
-    @functools.cached_property
     def songs_jd2015_dlc_january_2015(self) -> List[str]:
         return [
             "Charli XCX - Boom Clap [JD2015 DLC - January 2015]",
@@ -2045,14 +1953,12 @@ class JustDanceGame(Game):
         ]
 
     # Exclusive content collections
-    @functools.cached_property
     def songs_jd1_pal_exclusive(self) -> List[str]:
         return [
             # PAL region had some different songs, but JD1 was fairly consistent
             # Most exclusives were in later games
         ]
 
-    @functools.cached_property
     def songs_jd2_best_buy_walmart_exclusive(self) -> List[str]:
         return [
             "The Clash - Should I Stay or Should I Go [JD2 - Best Buy/Walmart Exclusive]",
@@ -2060,28 +1966,24 @@ class JustDanceGame(Game):
             "A. R. Rahman and The Pussycat Dolls ft. Nicole Scherzinger - Jai Ho! (You Are My Destiny) [JD2 - Best Buy/Walmart Exclusive]",
         ]
 
-    @functools.cached_property
     def songs_jd3_target_zellers_exclusive(self) -> List[str]:
         return [
             "Rihanna - Only Girl (In The World) [JD3 - Target/Zellers Exclusive]",
             "B.o.B. ft. Hayley Williams of Paramore - Airplanes [JD3 - Target/Zellers Exclusive]",
         ]
 
-    @functools.cached_property
     def songs_jd3_best_buy_exclusive(self) -> List[str]:
         return [
             "Katy Perry - Teenage Dream [JD3 - Best Buy Exclusive]",
             "Katy Perry - E.T. [JD3 - Best Buy Exclusive]",
         ]
 
-    @functools.cached_property
     def songs_jd3_pal_exclusive(self) -> List[str]:
         return [
             "Les Rita Mitsouko - Marcia Baila [JD3 - PAL Exclusive]",
             "Lena Meyer-Landrut - Satellite [JD3 - PAL Exclusive]",
         ]
 
-    @functools.cached_property
     def songs_jd3_ps3_exclusive(self) -> List[str]:
         return [
             "Ole Orquesta - Jambo Mambo [JD3 - PS3 Exclusive]",
@@ -2090,20 +1992,17 @@ class JustDanceGame(Game):
             "Groove Century - Soul Searchin' [JD3 - PS3 Exclusive]",
         ]
 
-    @functools.cached_property
     def songs_jd4_target_exclusive(self) -> List[str]:
         return [
             "Cobra Starship ft. Sabi - You Make Me Feel...",
         ]
 
-    @functools.cached_property
     def songs_jd4_best_buy_exclusive(self) -> List[str]:
         return [
             "Anja - Brand New Start",
             "Carrie Underwood - Good Girl",
         ]
 
-    @functools.cached_property
     def songs_jd4_pal_exclusive(self) -> List[str]:
         return [
             "Cercavo Amore - Emma",
@@ -2111,7 +2010,6 @@ class JustDanceGame(Game):
             "Rihanna ft. Jay-Z - Umbrella",  # PAL Special Edition only
         ]
 
-    @functools.cached_property
     def songs_jd4_wii_u_exclusive(self) -> List[str]:
         return [
             "The Girly Team - Ain't No Other Man (Christina Aguilera)",
@@ -2119,31 +2017,26 @@ class JustDanceGame(Game):
             "Cher Lloyd ft. Astro - Want U Back",
         ]
 
-    @functools.cached_property
     def songs_jd4_ntsc_exclusive(self) -> List[str]:
         return [
             "Carrie Underwood - Good Girl",
         ]
 
-    @functools.cached_property
     def songs_jd4_excluded_from_ntsc_wii(self) -> List[str]:
         return [
             "Bunny Beatz ft. Liquid - Make The Party (Don't Stop)",  # Available on other platforms but not NTSC Wii
         ]
 
-    @functools.cached_property
     def songs_jd4_cheetos_promo(self) -> List[str]:
         return [
             "Anja - Brand New Start [JD4 - Cheetos Promo]",
         ]
 
-    @functools.cached_property
     def songs_jd2014_ntsc_exclusive(self) -> List[str]:
         return [
             "Jason Derulo - The Other Side [JD2014 - NTSC Exclusive]",
         ]
 
-    @functools.cached_property
     def songs_jd2014_pal_exclusive(self) -> List[str]:
         return [
             "Ivete Sangalo - Dançando [JD2014 - PAL Exclusive]",
@@ -2151,20 +2044,17 @@ class JustDanceGame(Game):
             "Fedez - Alfonso Signorini (Eroe Nazionale) [JD2014 - PAL Exclusive]",
         ]
 
-    @functools.cached_property
     def songs_jd2014_popchips_promo(self) -> List[str]:
         return [
             "Capital Cities - Safe And Sound [JD2014 - Popchips Promo]",
             "Katy Perry - Waking Up in Vegas [JD2014 - Popchips Promo]",
         ]
 
-    @functools.cached_property
     def songs_jd2015_ntsc_exclusive(self) -> List[str]:
         return [
             "Austin Mahone - Till I Find You [JD2015 - NTSC Exclusive]",
         ]
 
-    @functools.cached_property
     def songs_jd2015_pal_exclusive(self) -> List[str]:
         return [
             "Stromae - Papaoutai [JD2015 - PAL Exclusive]",

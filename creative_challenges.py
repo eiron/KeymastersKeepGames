@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
@@ -107,35 +106,27 @@ class CreativeChallengesGame(Game):
         crafts = self.crafts()
         return len(crafts) > 0
 
-    @functools.cached_property
     def art_project_actions(self) -> List[str]:
         return sorted(self.archipelago_options.creative_art_project_actions.value)
 
-    @functools.cached_property
     def writing_actions(self) -> List[str]:
         return sorted(self.archipelago_options.creative_writing_actions.value)
 
-    @functools.cached_property
     def photography_actions(self) -> List[str]:
         return sorted(self.archipelago_options.creative_photography_actions.value)
 
-    @functools.cached_property
     def craft_actions(self) -> List[str]:
         return sorted(self.archipelago_options.creative_craft_actions.value)
 
-    @functools.cached_property
     def art_projects(self) -> List[str]:
         return sorted(self.archipelago_options.creative_art_project_selection.value)
 
-    @functools.cached_property
     def writing(self) -> List[str]:
         return sorted(self.archipelago_options.creative_writing_selection.value)
 
-    @functools.cached_property
     def photography(self) -> List[str]:
         return sorted(self.archipelago_options.creative_photography_selection.value)
 
-    @functools.cached_property
     def crafts(self) -> List[str]:
         return sorted(self.archipelago_options.creative_craft_selection.value)
 

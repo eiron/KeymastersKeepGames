@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import functools
 import random
 from typing import List, Dict, Set
 
@@ -149,7 +148,6 @@ class ArchipelagourmetGame(Game):
     def include_nonvegan_ingredients(self) -> bool:
         return bool(self.archipelago_options.archipelagourmet_include_nonvegan_options.value)
 
-    @functools.cached_property
     def ingredients_base(self) -> List[str]:
         return [
             "00 flour",
@@ -1021,7 +1019,6 @@ class ArchipelagourmetGame(Game):
             "zest",
         ]
 
-    @functools.cached_property
     def ingredients_red_meat(self) -> List[str]:
         return [
             "bacon",
@@ -1146,7 +1143,6 @@ class ArchipelagourmetGame(Game):
             "wild boar",
         ]
 
-    @functools.cached_property
     def ingredients_poultry(self) -> List[str]:
         return [
             "Barbary duck",
@@ -1191,7 +1187,6 @@ class ArchipelagourmetGame(Game):
             "woodcock",
         ]
 
-    @functools.cached_property
     def ingredients_seafood(self) -> List[str]:
         return [
             "anchovies",
@@ -1296,7 +1291,6 @@ class ArchipelagourmetGame(Game):
             "zander",
         ]
 
-    @functools.cached_property
     def ingredients_nonvegan(self) -> List[str]:
         return [
             "advocaat",
@@ -1449,7 +1443,6 @@ class ArchipelagourmetGame(Game):
     def custom_ingrdients_to_include(self) -> List[str]:
         return sorted(self.archipelago_options.archipelagourmet_custom_ingredients_to_include.value)
 
-    @functools.cached_property
     def ingredients_to_exclude(self) -> Set[str]:
         return {ingredient.lower() for ingredient in self.archipelago_options.archipelagourmet_ingredients_to_exclude.value}
 

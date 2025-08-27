@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
@@ -89,27 +88,21 @@ class MusicListeningGame(Game):
         playlists = self.playlists()
         return len(playlists) > 0
 
-    @functools.cached_property
     def album_actions(self) -> List[str]:
         return sorted(self.archipelago_options.music_album_actions.value)
 
-    @functools.cached_property
     def artist_actions(self) -> List[str]:
         return sorted(self.archipelago_options.music_artist_actions.value)
 
-    @functools.cached_property
     def playlist_actions(self) -> List[str]:
         return sorted(self.archipelago_options.music_playlist_actions.value)
 
-    @functools.cached_property
     def albums(self) -> List[str]:
         return sorted(self.archipelago_options.music_album_selection.value)
 
-    @functools.cached_property
     def artists(self) -> List[str]:
         return sorted(self.archipelago_options.music_artist_selection.value)
 
-    @functools.cached_property
     def playlists(self) -> List[str]:
         return sorted(self.archipelago_options.music_playlist_selection.value)
 

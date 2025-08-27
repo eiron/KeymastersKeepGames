@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import functools
 from typing import List
 
 from dataclasses import dataclass
@@ -71,19 +70,15 @@ class WatchlistGame(Game):
         tv_shows = self.tv_shows()
         return len(tv_shows) > 0
 
-    @functools.cached_property
     def film_actions(self) -> List[str]:
         return sorted(self.archipelago_options.watchlist_film_actions.value)
 
-    @functools.cached_property
     def tv_actions(self) -> List[str]:
         return sorted(self.archipelago_options.watchlist_tv_actions.value)
 
-    @functools.cached_property
     def films(self) -> List[str]:
         return sorted(self.archipelago_options.watchlist_film_selection.value)
 
-    @functools.cached_property
     def tv_shows(self) -> List[str]:
         return sorted(self.archipelago_options.watchlist_tv_selection.value)
 
