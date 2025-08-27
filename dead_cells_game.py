@@ -326,7 +326,7 @@ class DeadCellsGame(Game):
                     weight=1,
                 ),
                 GameObjectiveTemplate(
-                    label="Complete BIOME in under BIOME_TIME minutes",
+                    label="Complete BIOME_TYPE in under BIOME_TIME minutes",
                     data={
                         "BIOME_TYPE": (self.biomes, 1),
                         "BIOME_TIME": (self.biome_time_goals, 1)
