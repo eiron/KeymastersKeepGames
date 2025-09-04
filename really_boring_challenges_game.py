@@ -719,7 +719,7 @@ class RBCBoredomIntensity(Choice):
     option_extremely_dull = "Extremely Dull"
     option_soul_crushing = "Soul Crushing"
     option_mind_numbing = "Mind Numbing"
-    default = option_quite_boring
+    default = "quite_boring"
 
 class RBCTaskCount(Choice):
     """How many boring challenges should be included?"""
@@ -730,7 +730,7 @@ class RBCTaskCount(Choice):
     option_fifteen = "Fifteen"
     option_ten = "Ten"
     option_five = "Five"
-    default = option_twenty_five
+    default = "twenty_five"
 
 class RBCCompletionGoal(Choice):
     """What percentage of tasks should you aim to complete?"""
@@ -740,4 +740,4 @@ class RBCCompletionGoal(Choice):
     option_half_tasks = "Half Tasks"
     option_minimal_engagement = "Minimal Engagement"
     option_survival_mode = "Survival Mode"
-    default = option_half_tasks
+    default = "half_tasks"

@@ -22,7 +22,6 @@ class CursedRedDeadRedemption2ArchipelagoOptions:
     cursedrdr2_include_tedious_collections: CURSEDRDR2IncludeTediousCollections
     cursedrdr2_include_combat_absurdities: CURSEDRDR2IncludeCombatAbsurdities
     cursedrdr2_include_economy_destruction: CURSEDRDR2IncludeEconomyDestruction
-    cursedrdr2_cursed_difficulty: CURSEDRDR2CursedDifficulty
 
 
 class CursedRedDeadRedemption2Game(Game):
@@ -404,10 +403,6 @@ class CursedRedDeadRedemption2Game(Game):
     def include_economy_destruction(self) -> bool:
         return self.archipelago_options.cursedrdr2_include_economy_destruction.value
 
-    @property
-    def cursed_difficulty(self) -> str:
-        return self.archipelago_options.cursedrdr2_cursed_difficulty.value
-
     # Cursed Data Lists
     @staticmethod
     def draggable_animals() -> List[str]:
@@ -725,12 +720,3 @@ class CURSEDRDR2IncludeCombatAbsurdities(Toggle):
 class CURSEDRDR2IncludeEconomyDestruction(Toggle):
     """Include money-wasting and economy-breaking objectives."""
     display_name = "Include Economy Destruction"
-
-class CURSEDRDR2CursedDifficulty(Choice):
-    """How cursed should the objectives be?"""
-    display_name = "Cursed Difficulty"
-    option_mildly_cursed = "Mildly Cursed"
-    option_quite_cursed = "Quite Cursed"
-    option_extremely_cursed = "Extremely Cursed"
-    option_absolutely_diabolical = "Absolutely Diabolical"
-    default = option_quite_cursed
