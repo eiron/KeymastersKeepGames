@@ -345,7 +345,7 @@ class BloodstainedRitualOfTheNightGame(Game):
                     weight=1,
                 ),
                 GameObjectiveTemplate(
-                    label="Reach AREA in under AREA_TIME",
+                    label="Reach AREA_NAME in under AREA_TIME",
                     data={
                         "AREA": (self.speedrun_areas, 1),
                         "AREA_TIME": (self.area_times, 1)
@@ -369,13 +369,6 @@ class BloodstainedRitualOfTheNightGame(Game):
                 GameObjectiveTemplate(
                     label="Complete the game on DIFFICULTY difficulty",
                     data={"DIFFICULTY": (self.difficulty_modes, 1)},
-                    is_time_consuming=True,
-                    is_difficult=True,
-                    weight=1,
-                ),
-                GameObjectiveTemplate(
-                    label="Complete a no-shard run",
-                    data={},
                     is_time_consuming=True,
                     is_difficult=True,
                     weight=1,
@@ -620,7 +613,7 @@ class BloodstainedRitualOfTheNightGame(Game):
     @staticmethod
     def challenge_types() -> List[str]:
         return [
-            "No Shard Run", "Speedrun", "Low% Run", "Weapon Master Run",
+            "Speedrun", "Low% Run", "Weapon Master Run",
             "No Healing Items", "Boss Rush Only"
         ]
 
