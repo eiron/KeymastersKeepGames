@@ -23,6 +23,8 @@ class AnimalCrossingNewHorizonsArchipelagoOptions:
     acnh_include_seasonal_events: ACNHIncludeSeasonalEvents
     acnh_include_decorating: ACNHIncludeDecorating
     acnh_collection_focus: ACNHCollectionFocus
+    acnh_island_type: ACNHIslandType
+    acnh_include_happy_home_paradise: ACNHIncludeHappyHomeParadise
 
 
 class AnimalCrossingNewHorizonsGame(Game):
@@ -97,37 +99,103 @@ class AnimalCrossingNewHorizonsGame(Game):
             collection_templates = []
             
             if self.collection_focus in ["All", "Bugs"]:
-                collection_templates.append(
-                    GameObjectiveTemplate(
-                        label="Catch BUG and donate it to the museum",
-                        data={"BUG": (self.bugs, 1)},
-                        is_time_consuming=True,
-                        is_difficult=False,
-                        weight=2,
+                if self.island_type == "new_island":
+                    collection_templates.append(
+                        GameObjectiveTemplate(
+                            label="Catch BUG and donate it to the museum",
+                            data={"BUG": (self.bugs, 1)},
+                            is_time_consuming=True,
+                            is_difficult=False,
+                            weight=2,
+                        )
                     )
-                )
+                else:  # established_island
+                    collection_templates.extend([
+                        GameObjectiveTemplate(
+                            label="Catch BUG and sell it",
+                            data={"BUG": (self.bugs, 1)},
+                            is_time_consuming=True,
+                            is_difficult=False,
+                            weight=2,
+                        ),
+                        GameObjectiveTemplate(
+                            label="Catch one of the following bugs: BUG_OPTION_1, BUG_OPTION_2, or BUG_OPTION_3",
+                            data={
+                                "BUG_OPTION_1": (self.seasonal_bugs, 1),
+                                "BUG_OPTION_2": (self.seasonal_bugs, 1),
+                                "BUG_OPTION_3": (self.seasonal_bugs, 1)
+                            },
+                            is_time_consuming=True,
+                            is_difficult=False,
+                            weight=2,
+                        )
+                    ])
             
             if self.collection_focus in ["All", "Fish"]:
-                collection_templates.append(
-                    GameObjectiveTemplate(
-                        label="Catch FISH and donate it to the museum",
-                        data={"FISH": (self.fish, 1)},
-                        is_time_consuming=True,
-                        is_difficult=False,
-                        weight=2,
+                if self.island_type == "new_island":
+                    collection_templates.append(
+                        GameObjectiveTemplate(
+                            label="Catch FISH and donate it to the museum",
+                            data={"FISH": (self.fish, 1)},
+                            is_time_consuming=True,
+                            is_difficult=False,
+                            weight=2,
+                        )
                     )
-                )
+                else:  # established_island
+                    collection_templates.extend([
+                        GameObjectiveTemplate(
+                            label="Catch FISH and sell it",
+                            data={"FISH": (self.fish, 1)},
+                            is_time_consuming=True,
+                            is_difficult=False,
+                            weight=2,
+                        ),
+                        GameObjectiveTemplate(
+                            label="Catch one of the following fish: FISH_OPTION_1, FISH_OPTION_2, or FISH_OPTION_3",
+                            data={
+                                "FISH_OPTION_1": (self.seasonal_fish, 1),
+                                "FISH_OPTION_2": (self.seasonal_fish, 1),
+                                "FISH_OPTION_3": (self.seasonal_fish, 1)
+                            },
+                            is_time_consuming=True,
+                            is_difficult=False,
+                            weight=2,
+                        )
+                    ])
             
             if self.collection_focus in ["All", "Sea Creatures"]:
-                collection_templates.append(
-                    GameObjectiveTemplate(
-                        label="Dive for SEA_CREATURE and donate it to the museum",
-                        data={"SEA_CREATURE": (self.sea_creatures, 1)},
-                        is_time_consuming=True,
-                        is_difficult=False,
-                        weight=2,
+                if self.island_type == "new_island":
+                    collection_templates.append(
+                        GameObjectiveTemplate(
+                            label="Dive for SEA_CREATURE and donate it to the museum",
+                            data={"SEA_CREATURE": (self.sea_creatures, 1)},
+                            is_time_consuming=True,
+                            is_difficult=False,
+                            weight=2,
+                        )
                     )
-                )
+                else:  # established_island
+                    collection_templates.extend([
+                        GameObjectiveTemplate(
+                            label="Dive for SEA_CREATURE and sell it",
+                            data={"SEA_CREATURE": (self.sea_creatures, 1)},
+                            is_time_consuming=True,
+                            is_difficult=False,
+                            weight=2,
+                        ),
+                        GameObjectiveTemplate(
+                            label="Dive for one of the following sea creatures: SEA_OPTION_1, SEA_OPTION_2, or SEA_OPTION_3",
+                            data={
+                                "SEA_OPTION_1": (self.seasonal_sea_creatures, 1),
+                                "SEA_OPTION_2": (self.seasonal_sea_creatures, 1),
+                                "SEA_OPTION_3": (self.seasonal_sea_creatures, 1)
+                            },
+                            is_time_consuming=True,
+                            is_difficult=False,
+                            weight=2,
+                        )
+                    ])
             
             if self.collection_focus in ["All", "Fossils"]:
                 collection_templates.append(
@@ -161,14 +229,66 @@ class AnimalCrossingNewHorizonsGame(Game):
 
         # Island Development
         if self.include_island_development:
-            game_objective_templates.extend([
-                GameObjectiveTemplate(
-                    label="Build and place BUILDING on your island",
-                    data={"BUILDING": (self.buildings, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=2,
-                ),
+            development_templates = []
+            
+            if self.island_type == "new_island":
+                development_templates.extend([
+                    GameObjectiveTemplate(
+                        label="Build and place BUILDING on your island",
+                        data={"BUILDING": (self.new_island_buildings, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Unlock SHOP for the first time",
+                        data={"SHOP": (self.unlockable_shops, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Invite your first VILLAGER_COUNT villagers to your island",
+                        data={"VILLAGER_COUNT": (self.initial_villager_counts, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Plant your first TREE_COUNT fruit trees",
+                        data={"TREE_COUNT": (self.initial_tree_counts, 1)},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                ])
+            else:  # established_island
+                development_templates.extend([
+                    GameObjectiveTemplate(
+                        label="Redesign and relocate BUILDING_COUNT buildings",
+                        data={"BUILDING_COUNT": (self.relocation_counts, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Create a themed area: THEMED_AREA",
+                        data={"THEMED_AREA": (self.themed_areas, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Demolish and rebuild INFRASTRUCTURE_COUNT pieces of infrastructure",
+                        data={"INFRASTRUCTURE_COUNT": (self.rebuild_counts, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                ])
+            
+            # Common challenges for both island types
+            development_templates.extend([
                 GameObjectiveTemplate(
                     label="Create INFRASTRUCTURE_COUNT pieces of infrastructure",
                     data={"INFRASTRUCTURE_COUNT": (self.infrastructure_counts, 1)},
@@ -194,13 +314,15 @@ class AnimalCrossingNewHorizonsGame(Game):
                     weight=1,
                 ),
             ])
+            
+            game_objective_templates.extend(development_templates)
 
         # Villager Interactions
         if self.include_villager_interactions:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Reach best friend status with VILLAGER",
-                    data={"VILLAGER": (self.villager_personalities, 1)},
+                    label="Reach best friend status with a PERSONALITY_TYPE villager",
+                    data={"PERSONALITY_TYPE": (self.villager_personalities, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -220,7 +342,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Invite PERSONALITY_TYPE villager to your island",
+                    label="Invite a PERSONALITY_TYPE villager to your island",
                     data={"PERSONALITY_TYPE": (self.villager_personalities, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
@@ -342,6 +464,286 @@ class AnimalCrossingNewHorizonsGame(Game):
                 ),
             ])
 
+        # Sea Creature Diving
+        if self.collection_focus in ["All", "Sea Creatures"]:
+            sea_creature_templates = []
+            
+            # Common sea creature challenges
+            sea_creature_templates.extend([
+                GameObjectiveTemplate(
+                    label="Donate a sea creature to the museum",
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Catch COUNT different sea creatures in one day",
+                    data={"COUNT": (self.daily_creature_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Catch one of the following sea creatures: SEA_OPTION_1, SEA_OPTION_2, or SEA_OPTION_3",
+                    data={
+                        "SEA_OPTION_1": (self.seasonal_sea_creatures(), 1),
+                        "SEA_OPTION_2": (self.seasonal_sea_creatures(), 1),
+                        "SEA_OPTION_3": (self.seasonal_sea_creatures(), 1)
+                    },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Catch a scallop and give it to Pascal",
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+            ])
+
+            if self.island_type == "new_island":
+                sea_creature_templates.extend([
+                    GameObjectiveTemplate(
+                        label="Dive for sea creatures for the first time",
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Donate your first sea creature to Blathers",
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                ])
+            else:  # established_island
+                sea_creature_templates.extend([
+                    GameObjectiveTemplate(
+                        label="Complete the sea creature section of the museum",
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Catch COUNT different sea creatures and sell them",
+                        data={"COUNT": (self.collection_counts, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Give Pascal COUNT scallops over time",
+                        data={"COUNT": (self.daily_creature_counts, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                ])
+            
+            game_objective_templates.extend(sea_creature_templates)
+
+        # Miscellaneous Activities
+        misc_templates = []
+        
+        if self.island_type == "new_island":
+            misc_templates.extend([
+                GameObjectiveTemplate(
+                    label="Take your first photo using the camera app",
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Write your first letter to a villager",
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Visit a friend's island for the first time",
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Unlock and use your first custom design slot",
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+            ])
+        else:  # established_island
+            misc_templates.extend([
+                GameObjectiveTemplate(
+                    label="Create and share a custom design on the portal",
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Host a visitor and give them a tour of your island",
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Take COUNT photos showcasing different areas of your island",
+                    data={"COUNT": (self.daily_creature_counts(), 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Write and send COUNT letters to villagers with gifts attached",
+                    data={"COUNT": (self.daily_creature_counts(), 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
+            ])
+        
+        # Common miscellaneous activities for both island types
+        misc_templates.extend([
+            GameObjectiveTemplate(
+                label="Use the Nook Stop terminal to redeem Nook Miles for COUNT items",
+                data={"COUNT": (self.daily_creature_counts(), 1)},
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Complete COUNT Nook Miles achievements",
+                data={"COUNT": (self.daily_creature_counts(), 1)},
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Change your outfit and hairstyle at least COUNT times",
+                data={"COUNT": (self.daily_creature_counts(), 1)},
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=1,
+            ),
+        ])
+        
+        game_objective_templates.extend(misc_templates)
+
+        # Happy Home Paradise DLC
+        if self.include_happy_home_paradise:
+            hhp_templates = []
+            
+            # Basic vacation home challenges
+            hhp_templates.extend([
+                GameObjectiveTemplate(
+                    label="Design a vacation home with THEME theme",
+                    data={"THEME": (self.vacation_home_themes(), 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete COUNT vacation home designs",
+                    data={"COUNT": (self.vacation_home_counts(), 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Build and design a FACILITY_TYPE facility",
+                    data={"FACILITY_TYPE": (self.facility_types(), 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Unlock and use COUNT new furniture items from HHP",
+                    data={"COUNT": (self.vacation_home_counts(), 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+            ])
+            
+            if self.island_type == "new_island":
+                hhp_templates.extend([
+                    GameObjectiveTemplate(
+                        label="Complete your first vacation home design",
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Learn how to use the room sketch feature",
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Use partition walls for the first time",
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                ])
+            else:  # established_island
+                hhp_templates.extend([
+                    GameObjectiveTemplate(
+                        label="Remodel COUNT existing vacation homes with new themes",
+                        data={"COUNT": (self.daily_creature_counts(), 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Design vacation homes for COUNT different personality types",
+                        data={"COUNT": ([4, 6, 8], 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Complete all facility types on the archipelago",
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Take COUNT photos of your vacation home designs",
+                        data={"COUNT": (self.vacation_home_counts(), 1)},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                ])
+            
+            # Advanced HHP features
+            hhp_templates.extend([
+                GameObjectiveTemplate(
+                    label="Use the soundscape feature in COUNT vacation homes",
+                    data={"COUNT": (self.daily_creature_counts(), 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Create outdoor areas for COUNT vacation homes",
+                    data={"COUNT": (self.daily_creature_counts(), 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Use the ceiling decoration feature in a vacation home",
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+            ])
+            
+            game_objective_templates.extend(hhp_templates)
+
         return game_objective_templates
 
     # Property checks
@@ -381,6 +783,14 @@ class AnimalCrossingNewHorizonsGame(Game):
     def collection_focus(self) -> str:
         return self.archipelago_options.acnh_collection_focus.value
 
+    @property
+    def island_type(self) -> str:
+        return self.archipelago_options.acnh_island_type.value
+
+    @property
+    def include_happy_home_paradise(self) -> bool:
+        return self.archipelago_options.acnh_include_happy_home_paradise.value
+
     # Data lists
     @staticmethod
     def daily_items() -> List[str]:
@@ -414,6 +824,16 @@ class AnimalCrossingNewHorizonsGame(Game):
         ]
 
     @staticmethod
+    def seasonal_bugs() -> List[str]:
+        """Bugs that are more seasonal/time-specific, good for choice-based objectives"""
+        return [
+            "Monarch Butterfly", "Emperor Butterfly", "Agrias Butterfly", "Queen Alexandra's Birdwing",
+            "Atlas Moth", "Madagascan Sunset Moth", "Orchid Mantis", "Brown Cicada", "Robust Cicada",
+            "Giant Cicada", "Walker Cicada", "Evening Cicada", "Firefly", "Rainbow Stag", "Cyclommatus Stag",
+            "Golden Stag", "Giraffe Stag", "Horned Hercules", "Tarantula", "Scorpion"
+        ]
+
+    @staticmethod
     def fish() -> List[str]:
         return [
             "Bitterling", "Pale Chub", "Crucian Carp", "Dace", "Carp", "Koi", "Goldfish", "Pop-eyed Goldfish",
@@ -431,6 +851,16 @@ class AnimalCrossingNewHorizonsGame(Game):
         ]
 
     @staticmethod
+    def seasonal_fish() -> List[str]:
+        """Fish that are more seasonal/time-specific, good for choice-based objectives"""
+        return [
+            "Cherry Salmon", "Char", "Golden Trout", "Stringfish", "Salmon", "King Salmon",
+            "Sturgeon", "Napoleonfish", "Tuna", "Blue Marlin", "Giant Trevally", "Mahi-mahi",
+            "Ocean Sunfish", "Saw Shark", "Hammerhead Shark", "Great White Shark", "Whale Shark",
+            "Football Fish", "Oarfish", "Barreleye", "Coelacanth"
+        ]
+
+    @staticmethod
     def sea_creatures() -> List[str]:
         return [
             "Seaweed", "Sea Grapes", "Sea Cucumber", "Sea Pig", "Sea Star", "Sea Urchin",
@@ -442,6 +872,49 @@ class AnimalCrossingNewHorizonsGame(Game):
             "Lobster", "Giant Isopod", "Horseshoe Crab", "Sea Pineapple", "Spotted Garden Eel",
             "Flatworm"
         ]
+
+    @staticmethod
+    def seasonal_sea_creatures() -> List[str]:
+        """Sea creatures that are more seasonal/time-specific, good for choice-based objectives"""
+        return [
+            "Sea Pig", "Pearl Oyster", "Abalone", "Gigas Giant Clam", "Chambered Nautilus",
+            "Umbrella Octopus", "Vampire Squid", "Firefly Squid", "Snow Crab", "Red King Crab",
+            "Spider Crab", "Mantis Shrimp", "Spiny Lobster", "Giant Isopod", "Horseshoe Crab",
+            "Sea Pineapple", "Spotted Garden Eel"
+        ]
+
+    @staticmethod
+    def daily_creature_counts() -> List[int]:
+        """Reasonable daily counts for catching creatures"""
+        return [3, 5, 7, 10]
+
+    @staticmethod
+    def collection_counts() -> List[int]:
+        """Counts for collection-based challenges"""
+        return [5, 10, 15, 20]
+
+    @staticmethod
+    def vacation_home_themes() -> List[str]:
+        """Themes for vacation home design challenges"""
+        return [
+            "Beachside Cafe", "Cozy Library", "Artist's Studio", "Zen Garden", "Music Studio",
+            "Chef's Kitchen", "Spa Retreat", "Game Room", "Flower Shop", "Bookstore",
+            "Observatory", "Workshop", "Dance Studio", "Tea House", "Gallery",
+            "Outdoor Cinema", "Camping Site", "Greenhouse", "Bakery", "Pet Paradise"
+        ]
+
+    @staticmethod
+    def facility_types() -> List[str]:
+        """Types of facilities that can be built on the archipelago"""
+        return [
+            "Restaurant", "Cafe", "School", "Hospital", "Shop", "Clothing Store",
+            "Apparel Shop", "Office"
+        ]
+
+    @staticmethod
+    def vacation_home_counts() -> List[int]:
+        """Reasonable counts for vacation home design challenges"""
+        return [3, 5, 7, 10, 15, 20]
 
     @staticmethod
     def villager_personalities() -> List[str]:
@@ -657,3 +1130,15 @@ class ACNHCollectionFocus(Choice):
     option_sea_creatures = "Sea Creatures"
     option_fossils = "Fossils"
     default = option_all
+
+class ACNHIslandType(Choice):
+    """Choose between challenges for new or established islands."""
+    display_name = "Island Type"
+    option_new = "new"
+    option_established = "established"
+    default = option_new
+
+class ACNHIncludeHappyHomeParadise(Toggle):
+    """Include Happy Home Paradise DLC objectives (vacation home design, facilities)."""
+    display_name = "Include Happy Home Paradise DLC"
+    default = False  # Keep as False since this requires DLC ownership
