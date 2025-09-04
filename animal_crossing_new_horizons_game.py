@@ -917,6 +917,52 @@ class AnimalCrossingNewHorizonsGame(Game):
         return [3, 5, 7, 10, 15, 20]
 
     @staticmethod
+    def new_island_buildings() -> List[str]:
+        """Buildings that new island players can build for the first time"""
+        return [
+            "Nook's Cranny", "Able Sisters", "Museum", "Campsite", "Bridge", "Incline",
+            "Villager House"
+        ]
+
+    @staticmethod
+    def unlockable_shops() -> List[str]:
+        """Shops that can be unlocked for the first time"""
+        return [
+            "Nook's Cranny", "Able Sisters", "Kicks", "Redd's Co-op", "Cyrus & Reese's Shop", 
+            "Sahara's Shop", "Katrina's Shop", "Tortimer's Shop", "Leif's Shop"
+        ]
+
+    @staticmethod
+    def initial_villager_counts() -> List[int]:
+        """Number of first villagers to invite"""
+        return [3, 5, 7, 10]
+
+    @staticmethod
+    def initial_tree_counts() -> List[int]:
+        """Number of first fruit trees to plant"""
+        return [5, 10, 15, 20]
+
+    @staticmethod
+    def relocation_counts() -> List[int]:
+        """Number of buildings to relocate"""
+        return [1, 2, 3, 4]
+
+    @staticmethod
+    def themed_areas() -> List[str]:
+        """Themed areas for established islands"""
+        return [
+            "Japanese Garden", "Outdoor Library", "Beachside Cafe", "Flower Market",
+            "Playground Area", "Music Festival Ground", "Art Gallery", "Stargazing Observatory",
+            "Farming Area", "Picnic Grove", "Sports Complex", "Winter Wonderland",
+            "Fairy Tale Garden", "Industrial District", "Tropical Resort"
+        ]
+
+    @staticmethod
+    def rebuild_counts() -> List[int]:
+        """Number of infrastructure pieces to rebuild"""
+        return [1, 2, 3, 4, 5]
+
+    @staticmethod
     def villager_personalities() -> List[str]:
         return ["Lazy", "Jock", "Cranky", "Smug", "Normal", "Peppy", "Snooty", "Uchi"]
 
