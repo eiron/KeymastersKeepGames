@@ -22,6 +22,7 @@ class BloodstainedArchipelagoOptions:
     bloodstained_include_completion_goals: BloodstainedIncludeCompletionGoals
     bloodstained_include_speedrun_challenges: BloodstainedIncludeSpeedrunChallenges
     bloodstained_include_difficulty_challenges: BloodstainedIncludeDifficultyChallenges
+    bloodstained_include_game_modes: BloodstainedIncludeGameModes
     bloodstained_focus_style: BloodstainedFocusStyle
 
 
@@ -311,7 +312,7 @@ class BloodstainedRitualOfTheNightGame(Game):
                     weight=1,
                 ),
                 GameObjectiveTemplate(
-                    label="Complete all QUEST_TYPE quests",
+                    label="Complete all QUEST_TYPE",
                     data={"QUEST_TYPE": (self.quest_types, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
@@ -388,6 +389,92 @@ class BloodstainedRitualOfTheNightGame(Game):
                 ),
             ])
 
+        # Game Modes
+        if self.include_game_modes:
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="Complete Randomizer mode with RANDOMIZER_SETTING enabled",
+                    data={"RANDOMIZER_SETTING": (self.randomizer_settings, 1)},
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete Randomizer mode with RANDOMIZER_GOAL objective",
+                    data={"RANDOMIZER_GOAL": (self.randomizer_goals, 1)},
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete Full Chaos Randomizer with KEY_ITEM_SETTING, ITEMS_SETTING, ENEMY_DROP_SETTING, SAVE_WARP_SETTING, CRAFTING_SETTING, SHOP_SETTING, and QUEST_SETTING all enabled",
+                    data={
+                        "KEY_ITEM_SETTING": (self.key_item_settings, 1),
+                        "ITEMS_SETTING": (self.items_settings, 1),
+                        "ENEMY_DROP_SETTING": (self.enemy_drop_settings, 1),
+                        "SAVE_WARP_SETTING": (self.save_warp_settings, 1),
+                        "CRAFTING_SETTING": (self.crafting_settings, 1),
+                        "SHOP_SETTING": (self.shop_settings, 1),
+                        "QUEST_SETTING": (self.quest_settings, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete Classic Mode on CLASSIC_DIFFICULTY difficulty",
+                    data={"CLASSIC_DIFFICULTY": (self.classic_difficulties, 1)},
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete Boss Rush Mode Course COURSE_NUMBER on BOSS_RUSH_DIFFICULTY",
+                    data={
+                        "COURSE_NUMBER": (self.boss_rush_courses, 1),
+                        "BOSS_RUSH_DIFFICULTY": (self.boss_rush_difficulties, 1)
+                    },
+                    is_time_consuming=False,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete Boss Revenge mode and defeat REVENGE_BOSS",
+                    data={"REVENGE_BOSS": (self.revenge_bosses, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Survive CHAOS_ROOM_COUNT rooms in Chaos Mode",
+                    data={"CHAOS_ROOM_COUNT": (self.chaos_room_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete Chaos Mode with CHAOS_CHALLENGE challenge",
+                    data={"CHAOS_CHALLENGE": (self.chaos_challenges, 1)},
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete Speed Run Mode under SPEEDRUN_TIME",
+                    data={"SPEEDRUN_TIME": (self.speedrun_times, 1)},
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Unlock and complete 1986 Mode",
+                    data={},
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=1,
+                ),
+            ])
+
         return game_objective_templates
 
     # Property checks
@@ -422,6 +509,10 @@ class BloodstainedRitualOfTheNightGame(Game):
     @property
     def include_difficulty_challenges(self) -> bool:
         return self.archipelago_options.bloodstained_include_difficulty_challenges.value
+
+    @property
+    def include_game_modes(self) -> bool:
+        return self.archipelago_options.bloodstained_include_game_modes.value
 
     @property
     def focus_style(self) -> str:
@@ -516,7 +607,7 @@ class BloodstainedRitualOfTheNightGame(Game):
 
     @staticmethod
     def quest_types() -> List[str]:
-        return ["Johannes Quests", "Dominique Quests", "Miriam Quests", "Side Quests"]
+        return ["Johannes' Quests", "Dominique's Quests", "Miriam's Quests", "Side Quests"]
 
     @staticmethod
     def difficulty_modes() -> List[str]:
@@ -614,6 +705,78 @@ class BloodstainedRitualOfTheNightGame(Game):
     def low_percentages() -> range:
         return range(20, 50, 10)
 
+    @staticmethod
+    def randomizer_settings() -> List[str]:
+        return [
+            "Key Items: Shuffled", "Key Items: Anywhere", "Save/Warp Rooms: Unchanged", "Save/Warp Rooms: Mixed",
+            "Items: Retain Type", "Items: Retain Method", "Items: Total Random", 
+            "Enemy Drops: Unchanged", "Enemy Drops: Mixed Shards", "Enemy Drops: Mixed Items", "Enemy Drops: Chaos",
+            "Crafting: Unchanged", "Crafting: Shuffled", "Shop: Unchanged", "Shop: Shuffled", 
+            "Quests: Unchanged", "Quests: Shuffled"
+        ]
+
+    @staticmethod
+    def classic_difficulties() -> List[str]:
+        return ["Easy", "Normal", "Hard"]
+
+    @staticmethod
+    def boss_rush_courses() -> List[str]:
+        return ["Course 1", "Course 2"]
+
+    @staticmethod
+    def boss_rush_difficulties() -> List[str]:
+        return ["Normal", "Hard", "Nightmare"]
+
+    @staticmethod
+    def chaos_challenges() -> List[str]:
+        return [
+            "Defeat All Enemies", "Don't Use Any Special Ability", "Don't Attack Any Enemy",
+            "Reach Exit In Time", "Complete Without Taking Damage"
+        ]
+
+    @staticmethod
+    def chaos_room_counts() -> range:
+        return range(5, 25, 5)
+
+    @staticmethod
+    def revenge_bosses() -> List[str]:
+        return [
+            "All Boss Revenge Enemies", "Revenge Vepar", "Revenge Zangetsu", 
+            "Revenge Bloodless", "Revenge Bathin", "Revenge Gebel"
+        ]
+
+    @staticmethod
+    def randomizer_goals() -> List[str]:
+        return ["Defeat Gebel", "Defeat True Evil", "Defeat All Evil"]
+
+    @staticmethod
+    def key_item_settings() -> List[str]:
+        return ["Key Items: Shuffled", "Key Items: Anywhere"]
+
+    @staticmethod
+    def items_settings() -> List[str]:
+        return ["Items: Retain Type", "Items: Retain Method", "Items: Total Random"]
+
+    @staticmethod
+    def enemy_drop_settings() -> List[str]:
+        return ["Enemy Drops: Unchanged", "Enemy Drops: Mixed Shards", "Enemy Drops: Mixed Items", "Enemy Drops: Chaos"]
+
+    @staticmethod
+    def save_warp_settings() -> List[str]:
+        return ["Save/Warp Rooms: Unchanged", "Save/Warp Rooms: Mixed"]
+
+    @staticmethod
+    def crafting_settings() -> List[str]:
+        return ["Crafting: Unchanged", "Crafting: Shuffled"]
+
+    @staticmethod
+    def shop_settings() -> List[str]:
+        return ["Shop: Unchanged", "Shop: Shuffled"]
+
+    @staticmethod
+    def quest_settings() -> List[str]:
+        return ["Quests: Unchanged", "Quests: Shuffled"]
+
 
 # Archipelago Options
 class BloodstainedIncludeShardCollection(DefaultOnToggle):
@@ -647,6 +810,10 @@ class BloodstainedIncludeSpeedrunChallenges(Toggle):
 class BloodstainedIncludeDifficultyChallenges(Toggle):
     """Include difficulty and restriction-based challenge objectives."""
     display_name = "Include Difficulty Challenges"
+
+class BloodstainedIncludeGameModes(Toggle):
+    """Include objectives for special game modes like Randomizer, Classic, Bloodless, etc."""
+    display_name = "Include Game Mode Challenges"
 
 class BloodstainedFocusStyle(Choice):
     """Focus objectives on specific gameplay styles."""
