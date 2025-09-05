@@ -99,7 +99,7 @@ class AnimalCrossingNewHorizonsGame(Game):
             collection_templates = []
             
             if self.collection_focus in ["All", "Bugs"]:
-                if self.island_type == "new_island":
+                if self.island_type == "New":
                     collection_templates.append(
                         GameObjectiveTemplate(
                             label="Catch BUG and donate it to the museum",
@@ -132,7 +132,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                     ])
             
             if self.collection_focus in ["All", "Fish"]:
-                if self.island_type == "new_island":
+                if self.island_type == "New":
                     collection_templates.append(
                         GameObjectiveTemplate(
                             label="Catch FISH and donate it to the museum",
@@ -165,7 +165,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                     ])
             
             if self.collection_focus in ["All", "Sea Creatures"]:
-                if self.island_type == "new_island":
+                if self.island_type == "New":
                     collection_templates.append(
                         GameObjectiveTemplate(
                             label="Dive for SEA_CREATURE and donate it to the museum",
@@ -208,6 +208,90 @@ class AnimalCrossingNewHorizonsGame(Game):
                     )
                 )
             
+            # Sea Creature Diving (moved inside Collections section)
+            if self.collection_focus in ["All", "Sea Creatures"]:
+                sea_creature_templates = []
+                
+                # Common sea creature challenges
+                sea_creature_templates.extend([
+                    GameObjectiveTemplate(
+                        label="Donate a sea creature to the museum",
+                        data={},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Catch COUNT different sea creatures in one day",
+                        data={"COUNT": (self.daily_creature_counts, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Catch one of the following sea creatures: SEA_OPTION_1, SEA_OPTION_2, or SEA_OPTION_3",
+                        data={
+                            "SEA_OPTION_1": (self.seasonal_sea_creatures, 1),
+                            "SEA_OPTION_2": (self.seasonal_sea_creatures, 1),
+                            "SEA_OPTION_3": (self.seasonal_sea_creatures, 1)
+                        },
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Catch a scallop and give it to Pascal",
+                        data={},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                ])
+
+                if self.island_type == "New":
+                    sea_creature_templates.extend([
+                        GameObjectiveTemplate(
+                            label="Dive for sea creatures for the first time",
+                            data={},
+                            is_time_consuming=False,
+                            is_difficult=False,
+                            weight=1,
+                        ),
+                        GameObjectiveTemplate(
+                            label="Donate your first sea creature to Blathers",
+                            data={},
+                            is_time_consuming=False,
+                            is_difficult=False,
+                            weight=1,
+                        ),
+                    ])
+                else:  # established_island
+                    sea_creature_templates.extend([
+                        GameObjectiveTemplate(
+                            label="Complete the sea creature section of the museum",
+                            data={},
+                            is_time_consuming=True,
+                            is_difficult=True,
+                            weight=1,
+                        ),
+                        GameObjectiveTemplate(
+                            label="Catch COUNT different sea creatures and sell them",
+                            data={"COUNT": (self.collection_counts, 1)},
+                            is_time_consuming=True,
+                            is_difficult=False,
+                            weight=2,
+                        ),
+                        GameObjectiveTemplate(
+                            label="Give Pascal COUNT scallops over time",
+                            data={"COUNT": (self.daily_creature_counts, 1)},
+                            is_time_consuming=True,
+                            is_difficult=False,
+                            weight=1,
+                        ),
+                    ])
+                
+                collection_templates.extend(sea_creature_templates)
+            
             collection_templates.extend([
                 GameObjectiveTemplate(
                     label="Complete the COLLECTION_TYPE section of the museum",
@@ -231,7 +315,7 @@ class AnimalCrossingNewHorizonsGame(Game):
         if self.include_island_development:
             development_templates = []
             
-            if self.island_type == "new_island":
+            if self.island_type == "New":
                 development_templates.extend([
                     GameObjectiveTemplate(
                         label="Build and place BUILDING on your island",
@@ -464,110 +548,35 @@ class AnimalCrossingNewHorizonsGame(Game):
                 ),
             ])
 
-        # Sea Creature Diving
-        if self.collection_focus in ["All", "Sea Creatures"]:
-            sea_creature_templates = []
-            
-            # Common sea creature challenges
-            sea_creature_templates.extend([
-                GameObjectiveTemplate(
-                    label="Donate a sea creature to the museum",
-                    is_time_consuming=False,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Catch COUNT different sea creatures in one day",
-                    data={"COUNT": (self.daily_creature_counts, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Catch one of the following sea creatures: SEA_OPTION_1, SEA_OPTION_2, or SEA_OPTION_3",
-                    data={
-                        "SEA_OPTION_1": (self.seasonal_sea_creatures, 1),
-                        "SEA_OPTION_2": (self.seasonal_sea_creatures, 1),
-                        "SEA_OPTION_3": (self.seasonal_sea_creatures, 1)
-                    },
-                    is_time_consuming=False,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Catch a scallop and give it to Pascal",
-                    is_time_consuming=False,
-                    is_difficult=False,
-                    weight=1,
-                ),
-            ])
-
-            if self.island_type == "new_island":
-                sea_creature_templates.extend([
-                    GameObjectiveTemplate(
-                        label="Dive for sea creatures for the first time",
-                        is_time_consuming=False,
-                        is_difficult=False,
-                        weight=1,
-                    ),
-                    GameObjectiveTemplate(
-                        label="Donate your first sea creature to Blathers",
-                        is_time_consuming=False,
-                        is_difficult=False,
-                        weight=1,
-                    ),
-                ])
-            else:  # established_island
-                sea_creature_templates.extend([
-                    GameObjectiveTemplate(
-                        label="Complete the sea creature section of the museum",
-                        is_time_consuming=True,
-                        is_difficult=True,
-                        weight=1,
-                    ),
-                    GameObjectiveTemplate(
-                        label="Catch COUNT different sea creatures and sell them",
-                        data={"COUNT": (self.collection_counts, 1)},
-                        is_time_consuming=True,
-                        is_difficult=False,
-                        weight=2,
-                    ),
-                    GameObjectiveTemplate(
-                        label="Give Pascal COUNT scallops over time",
-                        data={"COUNT": (self.daily_creature_counts, 1)},
-                        is_time_consuming=True,
-                        is_difficult=False,
-                        weight=1,
-                    ),
-                ])
-            
-            game_objective_templates.extend(sea_creature_templates)
-
         # Miscellaneous Activities
         misc_templates = []
         
-        if self.island_type == "new_island":
+        if self.island_type == "New":
             misc_templates.extend([
                 GameObjectiveTemplate(
                     label="Take your first photo using the camera app",
+                    data={},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Write your first letter to a villager",
+                    data={},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Visit a friend's island for the first time",
+                    data={},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Unlock and use your first custom design slot",
+                    data={},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
@@ -577,12 +586,14 @@ class AnimalCrossingNewHorizonsGame(Game):
             misc_templates.extend([
                 GameObjectiveTemplate(
                     label="Create and share a custom design on the portal",
+                    data={},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
                     label="Host a visitor and give them a tour of your island",
+                    data={},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
@@ -666,22 +677,25 @@ class AnimalCrossingNewHorizonsGame(Game):
                 ),
             ])
             
-            if self.island_type == "new_island":
+            if self.island_type == "New":
                 hhp_templates.extend([
                     GameObjectiveTemplate(
                         label="Complete your first vacation home design",
+                        data={},
                         is_time_consuming=True,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
                         label="Learn how to use the room sketch feature",
+                        data={},
                         is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
                         label="Use partition walls for the first time",
+                        data={},
                         is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
@@ -698,13 +712,14 @@ class AnimalCrossingNewHorizonsGame(Game):
                     ),
                     GameObjectiveTemplate(
                         label="Design vacation homes for COUNT different personality types",
-                        data={"COUNT": ([4, 6, 8], 1)},
+                        data={"COUNT": (self.personality_type_counts, 1)},
                         is_time_consuming=True,
                         is_difficult=False,
                         weight=2,
                     ),
                     GameObjectiveTemplate(
                         label="Complete all facility types on the archipelago",
+                        data={},
                         is_time_consuming=True,
                         is_difficult=True,
                         weight=1,
@@ -736,6 +751,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                 ),
                 GameObjectiveTemplate(
                     label="Use the ceiling decoration feature in a vacation home",
+                    data={},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
@@ -892,6 +908,10 @@ class AnimalCrossingNewHorizonsGame(Game):
     def collection_counts() -> List[int]:
         """Counts for collection-based challenges"""
         return [5, 10, 15, 20]
+    
+    @staticmethod
+    def personality_type_counts() -> List[int]:
+        return [4, 6, 8]
 
     @staticmethod
     def vacation_home_themes() -> List[str]:
@@ -918,7 +938,7 @@ class AnimalCrossingNewHorizonsGame(Game):
 
     @staticmethod
     def new_island_buildings() -> List[str]:
-        """Buildings that new island players can build for the first time"""
+        """Buildings that New players can build for the first time"""
         return [
             "Nook's Cranny", "Able Sisters", "Museum", "Campsite", "Bridge", "Incline",
             "Villager House"
@@ -949,7 +969,7 @@ class AnimalCrossingNewHorizonsGame(Game):
 
     @staticmethod
     def themed_areas() -> List[str]:
-        """Themed areas for established islands"""
+        """Themed areas for Establisheds"""
         return [
             "Japanese Garden", "Outdoor Library", "Beachside Cafe", "Flower Market",
             "Playground Area", "Music Festival Ground", "Art Gallery", "Stargazing Observatory",
@@ -1180,9 +1200,8 @@ class ACNHCollectionFocus(Choice):
 class ACNHIslandType(Choice):
     """Choose between challenges for new or established islands."""
     display_name = "Island Type"
-    option_new = "new"
-    option_established = "established"
-    default = option_new
+    default = option_new = "New"
+    option_established = "Established"
 
 class ACNHIncludeHappyHomeParadise(Toggle):
     """Include Happy Home Paradise DLC objectives (vacation home design, facilities)."""
