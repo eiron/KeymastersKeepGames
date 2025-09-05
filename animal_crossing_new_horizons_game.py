@@ -969,7 +969,7 @@ class AnimalCrossingNewHorizonsGame(Game):
 
     @staticmethod
     def themed_areas() -> List[str]:
-        """Themed areas for Establisheds"""
+        """Themed areas for established islands"""
         return [
             "Japanese Garden", "Outdoor Library", "Beachside Cafe", "Flower Market",
             "Playground Area", "Music Festival Ground", "Art Gallery", "Stargazing Observatory",
