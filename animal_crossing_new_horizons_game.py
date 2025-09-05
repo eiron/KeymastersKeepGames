@@ -486,9 +486,9 @@ class AnimalCrossingNewHorizonsGame(Game):
                 GameObjectiveTemplate(
                     label="Catch one of the following sea creatures: SEA_OPTION_1, SEA_OPTION_2, or SEA_OPTION_3",
                     data={
-                        "SEA_OPTION_1": (self.seasonal_sea_creatures(), 1),
-                        "SEA_OPTION_2": (self.seasonal_sea_creatures(), 1),
-                        "SEA_OPTION_3": (self.seasonal_sea_creatures(), 1)
+                        "SEA_OPTION_1": (self.seasonal_sea_creatures, 1),
+                        "SEA_OPTION_2": (self.seasonal_sea_creatures, 1),
+                        "SEA_OPTION_3": (self.seasonal_sea_creatures, 1)
                     },
                     is_time_consuming=False,
                     is_difficult=False,
@@ -589,14 +589,14 @@ class AnimalCrossingNewHorizonsGame(Game):
                 ),
                 GameObjectiveTemplate(
                     label="Take COUNT photos showcasing different areas of your island",
-                    data={"COUNT": (self.daily_creature_counts(), 1)},
+                    data={"COUNT": (self.daily_creature_counts, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
                     label="Write and send COUNT letters to villagers with gifts attached",
-                    data={"COUNT": (self.daily_creature_counts(), 1)},
+                    data={"COUNT": (self.daily_creature_counts, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
@@ -607,21 +607,21 @@ class AnimalCrossingNewHorizonsGame(Game):
         misc_templates.extend([
             GameObjectiveTemplate(
                 label="Use the Nook Stop terminal to redeem Nook Miles for COUNT items",
-                data={"COUNT": (self.daily_creature_counts(), 1)},
+                data={"COUNT": (self.daily_creature_counts, 1)},
                 is_time_consuming=False,
                 is_difficult=False,
                 weight=2,
             ),
             GameObjectiveTemplate(
                 label="Complete COUNT Nook Miles achievements",
-                data={"COUNT": (self.daily_creature_counts(), 1)},
+                data={"COUNT": (self.daily_creature_counts, 1)},
                 is_time_consuming=True,
                 is_difficult=False,
                 weight=2,
             ),
             GameObjectiveTemplate(
                 label="Change your outfit and hairstyle at least COUNT times",
-                data={"COUNT": (self.daily_creature_counts(), 1)},
+                data={"COUNT": (self.daily_creature_counts, 1)},
                 is_time_consuming=False,
                 is_difficult=False,
                 weight=1,
@@ -638,28 +638,28 @@ class AnimalCrossingNewHorizonsGame(Game):
             hhp_templates.extend([
                 GameObjectiveTemplate(
                     label="Design a vacation home with THEME theme",
-                    data={"THEME": (self.vacation_home_themes(), 1)},
+                    data={"THEME": (self.vacation_home_themes, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
                     label="Complete COUNT vacation home designs",
-                    data={"COUNT": (self.vacation_home_counts(), 1)},
+                    data={"COUNT": (self.vacation_home_counts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
                     label="Build and design a FACILITY_TYPE facility",
-                    data={"FACILITY_TYPE": (self.facility_types(), 1)},
+                    data={"FACILITY_TYPE": (self.facility_types, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Unlock and use COUNT new furniture items from HHP",
-                    data={"COUNT": (self.vacation_home_counts(), 1)},
+                    data={"COUNT": (self.vacation_home_counts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -691,7 +691,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                 hhp_templates.extend([
                     GameObjectiveTemplate(
                         label="Remodel COUNT existing vacation homes with new themes",
-                        data={"COUNT": (self.daily_creature_counts(), 1)},
+                        data={"COUNT": (self.daily_creature_counts, 1)},
                         is_time_consuming=True,
                         is_difficult=False,
                         weight=2,
@@ -711,7 +711,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                     ),
                     GameObjectiveTemplate(
                         label="Take COUNT photos of your vacation home designs",
-                        data={"COUNT": (self.vacation_home_counts(), 1)},
+                        data={"COUNT": (self.vacation_home_counts, 1)},
                         is_time_consuming=False,
                         is_difficult=False,
                         weight=2,
@@ -722,14 +722,14 @@ class AnimalCrossingNewHorizonsGame(Game):
             hhp_templates.extend([
                 GameObjectiveTemplate(
                     label="Use the soundscape feature in COUNT vacation homes",
-                    data={"COUNT": (self.daily_creature_counts(), 1)},
+                    data={"COUNT": (self.daily_creature_counts, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Create outdoor areas for COUNT vacation homes",
-                    data={"COUNT": (self.daily_creature_counts(), 1)},
+                    data={"COUNT": (self.daily_creature_counts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
