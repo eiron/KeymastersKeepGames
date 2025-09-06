@@ -493,8 +493,18 @@ class JustDanceGame(Game):
             "Avicii - Addicted To You [JD2015]",
             # Special unlockable content
             "Avishay Goren & Yossi Cohen - Movement is Happiness (Find Your Thing) [JD2015]",  # 60min unlock
-            "Sentai Express - Nitro Bot [JD2015]",  # Ubisoft Connect unlock
         ]
+
+    def songs_just_dance_2015_exclusives(self) -> List[str]:
+        """Just Dance 2015 exclusive content."""
+        exclusives = []
+        
+        if "JD2015 - Ubisoft Connect Unlockables" in self.exclusive_content:
+            exclusives.extend([
+                "Sentai Express - Nitro Bot [JD2015 Ubisoft Connect]",
+            ])
+        
+        return exclusives
 
     @functools.cached_property
     def songs_just_dance_2016(self) -> List[str]:
@@ -1590,6 +1600,8 @@ class JustDanceGame(Game):
                 song_collection.extend(self.songs_jd2015_ntsc_exclusive)
             elif exclusive == "JD2015 - PAL Exclusive":
                 song_collection.extend(self.songs_jd2015_pal_exclusive)
+            elif exclusive == "JD2015 - Ubisoft Connect Unlockables":
+                song_collection.extend(self.songs_just_dance_2015_exclusives())
             elif exclusive == "JD2016 - Ubisoft Connect Unlockables":
                 song_collection.extend(self.songs_just_dance_2016_exclusives)
             elif exclusive == "JD2016 - Russia Exclusive":
@@ -2302,6 +2314,7 @@ class JustDanceExclusiveContent(OptionSet):
         "JD2014 - Popchips Promo",
         "JD2015 - NTSC Exclusive",
         "JD2015 - PAL Exclusive",
+        "JD2015 - Ubisoft Connect Unlockables",
         "JD2016 - Ubisoft Connect Unlockables",
         "JD2016 - Russia Exclusive",
         "JD2017 - Ubisoft Connect Unlockables",
@@ -2353,6 +2366,7 @@ class JustDanceExclusiveContent(OptionSet):
         "JD2014 - Popchips Promo",
         "JD2015 - NTSC Exclusive",
         "JD2015 - PAL Exclusive",
+        "JD2015 - Ubisoft Connect Unlockables",
         "JD2016 - Ubisoft Connect Unlockables",
         "JD2016 - Russia Exclusive",
         "JD2017 - Ubisoft Connect Unlockables",
