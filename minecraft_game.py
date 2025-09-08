@@ -629,8 +629,8 @@ class MinecraftGame(Game):
     @staticmethod
     def collection_categories() -> List[str]:
         return [
-            "All Ores", "All Woods", "All Flowers", "All Foods", "All Potions",
-            "All Enchantments", "All Banners", "All Dyes", "All Blocks"
+            "Ores", "Woods", "Flowers", "Foods", "Potions",
+            "Enchantments", "Banners", "Dyes", "Blocks"
         ]
 
     @staticmethod

@@ -3,7 +3,7 @@ Keymaster's Keep games maintained by eiron
 
 ## Universal Game Tester 🔧
 
-The **Universal Game Tester** (`universal_game_tester.py`) is a comprehensive testing and analysis tool that works with **ANY** Keymaster's Keep game implementation. It automatically discovers, loads, and tests game modules regardless of their structure, option types, or complexity.
+The **Universal Game Tester** (located in `UniversalGameTester/`) is a comprehensive testing and analysis tool that works with **ANY** Keymaster's Keep game implementation. It automatically discovers, loads, and tests game modules regardless of their structure, option types, or complexity.
 
 ### Key Features
 
@@ -17,6 +17,7 @@ The **Universal Game Tester** (`universal_game_tester.py`) is a comprehensive te
 
 ```bash
 # Test all discovered game implementations
+cd UniversalGameTester
 python universal_game_tester.py
 
 # Test a specific game implementation
@@ -341,3 +342,38 @@ Features:
 - Collection goals for items, recipes, monsters, and more
 
 Harvestella brings all its farming, adventure, and relationship systems to Keymaster's Keep.
+
+### Danganronpa Decadence
+A collection of visual novel murder mystery games featuring students trapped in deadly games. This module supports objectives across all four included games in the Decadence collection.
+
+**Supported Games:**
+- Danganronpa: Trigger Happy Havoc (with School Mode)
+- Danganronpa 2: Goodbye Despair (with Island Mode)  
+- Danganronpa V3: Killing Harmony (with UTDP mode)
+- Danganronpa S: Ultimate Summer Camp
+
+**Core Categories:**
+- Story mode objectives: investigations, class trials, free time activities, report cards, skills, and presents
+- Bonus mode objectives: School Mode, Island Mode, UTDP, and Summer Camp challenges
+- Extra minigames: Death Road of Despair, Magical Girl Monomi, and challenge modes
+- Collectibles: Hidden Monokuma hunting and location-based collection goals
+
+Sample Objectives: ``"Achieve S rank in the chapter 3 class trial"`` or ``"Max out friendship with Kyoko Kirigiri"`` or ``"Clear 5 segments of Nonstop Debate without mistakes"`` or ``"Reach turn 50 in Development Mode as Makoto Naegi"`` or ``"Clear floor 30 in Tower of Despair with a party that includes Hajime Hinata"``
+
+The module provides comprehensive coverage of all gameplay modes and mechanics across the entire Danganronpa collection.
+
+### Real-World Scavenger Hunt
+A meta-game that generates real-world exploration and discovery objectives for getting out and experiencing your local area.
+
+**Core Categories:**
+- Photography challenges: capturing specific subjects, lighting conditions, and artistic shots
+- Location hunting: discovering landmarks, neighborhoods, and hidden venues
+- Object collection: finding specific items, natural specimens, and cultural artifacts
+- Interaction challenges: social activities, community engagement, and public participation
+- Nature exploration: outdoor activities, wildlife observation, and environmental discovery
+- Cultural discovery: museums, historical sites, and local culture exploration
+- Seasonal activities: weather-dependent and time-sensitive objectives
+
+Sample Objectives: ``"Take a photo of a street musician performing"`` or ``"Visit 3 historical landmarks"`` or ``"Find and visit a hidden garden or courtyard"`` or ``"Attend a local community event"`` or ``"Collect 5 different types of leaves"`` or ``"Visit a museum during their special exhibition"``
+
+The module adapts difficulty and scope based on your travel preferences and seasonal availability.
