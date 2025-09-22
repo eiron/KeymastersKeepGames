@@ -759,7 +759,7 @@ class TheSims4Game(Game):
                     label="Improve your neighborhood's eco footprint to Green",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=False,
+                    is_difficult=True,
                     weight=1,
                 ),
             ])
