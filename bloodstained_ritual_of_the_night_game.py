@@ -347,7 +347,7 @@ class BloodstainedRitualOfTheNightGame(Game):
                 GameObjectiveTemplate(
                     label="Reach AREA_NAME in under AREA_TIME",
                     data={
-                        "AREA": (self.speedrun_areas, 1),
+                        "AREA_NAME": (self.speedrun_areas, 1),
                         "AREA_TIME": (self.area_times, 1)
                     },
                     is_time_consuming=False,
