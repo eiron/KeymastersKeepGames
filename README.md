@@ -83,6 +83,19 @@ This ensures that casual players get comprehensive objective generation by defau
 
 ## Game Implementation Modules
 
+## Adventure/Experience Challenges
+A meta-game in which the options generated will be local exploration, cultural experiences, outdoor activities, and culinary adventures from the player's adventure backlog, paired with appropriate actions.
+Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
+
+This features separate objective templates for different types of adventure activities, with actions tailored to each category:
+
+Local Exploration: ``"VISIT Downtown District"`` or ``"PHOTOGRAPH Historic Neighborhood"``
+Cultural Experiences: ``"ATTEND Live Theater Show"`` or ``"PARTICIPATE IN Cultural Workshop"``
+Outdoor Activities: ``"ATTEMPT Rock Climbing"`` or ``"CONQUER Hiking Trail"``
+Culinary Adventures: ``"TRY International Restaurant"`` or ``"SAMPLE Wine Tasting"``
+
+This includes options for customizing local exploration targets, cultural experiences, outdoor activities, culinary adventures, and their respective action lists. The system will only generate objectives for adventure categories that have been configured, allowing for flexible use whether you prefer local discovery, cultural immersion, outdoor challenges, food exploration, or all four!
+
 ## Archipelagourmet
 A meta-game in which the options generarated will be recipes, and/or takeaway and restaurant options provided by the player.
 Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
@@ -93,18 +106,46 @@ This also features a submodule that include challenges of the type:
 This includes options for filtering by dietary requirements, as well as blocking unwanted ingredients and adding custom ingredients.
 You can also set the range for the number of random ingredients from 1 through 10, though there is a chance too high a number will cause the challenge to be unreadable in the client!
 
-
-## Watchlist
-A meta-game in which the options generated will be films and TV shows from the player's watchlist, paired with appropriate viewing actions.
+## Christmas/Holiday Challenges
+A meta-game in which the options generated will be holiday decorations, gift preparations, baking projects, and festive traditions from the player's Christmas and holiday backlog, paired with appropriate seasonal actions.
 Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
 
-This features separate objective templates for films and television content, with actions tailored to each medium:
+This features separate objective templates for different types of holiday activities, with actions tailored to each category:
 
-Films: ``"WATCH Film Title"`` or ``"FINISH Documentary Title"``
-TV Shows: ``"BINGE TV Series Title"`` or ``"CATCH UP Miniseries Title"``
+Decorations: ``"SET UP Christmas Tree"`` or ``"ARRANGE Mantel Decorations"``
+Gifts: ``"MAKE Handmade Gift"`` or ``"WRAP Secret Santa Gift"``
+Baking: ``"MAKE Christmas Cookies"`` or ``"CREATE Gingerbread House"``
+Traditions: ``"ENJOY Christmas Movie Marathon"`` or ``"ATTEND Christmas Market Visit"``
 
-This includes options for customizing film selections, TV show selections, and their respective action lists. The system will only generate objectives for media types that have been configured, allowing for flexible use whether you prefer films, television, or both!
+This includes options for customizing decoration plans, gift preparations, baking projects, holiday traditions, and their respective action lists. The system will only generate objectives for holiday categories that have been configured, allowing for flexible use whether you focus on decorating, gift-giving, holiday baking, festive traditions, or all four!
 
+## Creative Challenges
+A meta-game in which the options generated will be art projects, writing endeavors, photography challenges, and craft projects from the player's creative backlog, paired with appropriate actions.
+Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
+
+This features separate objective templates for different types of creative activities, with actions tailored to each medium:
+
+Art Projects: ``"CREATE Watercolor Painting"`` or ``"REFINE Mixed Media Piece"``
+Writing: ``"WRITE Short Story"`` or ``"REVISE Poetry Collection"``
+Photography: ``"CAPTURE Portrait Session"`` or ``"MASTER Macro Challenge"``
+Crafts: ``"MAKE Knitting Project"`` or ``"ATTEMPT Woodworking"``
+
+This includes options for customizing art project selections, writing goals, photography challenges, craft projects, and their respective action lists. The system will only generate objectives for creative categories that have been configured, allowing for flexible use whether you focus on visual arts, writing, photography, crafting, or all four!
+
+## Keymaster's Keep
+The ultimate meta module for generating challenges to play Keymaster's Keep itself! This module creates objectives for playing Keymaster's Keep in its two game modes: Keymaster's Challenge and Magic Key Heist, using the comprehensive game selection pool from the actual Keymaster's Keep configuration.
+
+This features objective templates that mirror the two main game modes, with games selected from the real Keymaster's Keep pool:
+
+Keymaster's Challenge: ``"Complete a Keymaster's Challenge including the games: Celeste, Hollow Knight, and Slay the Spire"``
+Magic Key Heist: ``"Complete a Magic Key Heist including the games: Balatro and Enter the Gungeon"``
+
+This includes options for customizing the game selection pool, challenge types, and game count ranges. Players can:
+- **Edit Game Selection**: Add, remove, or weight games in the selection pool (defaults to the 120+ games currently available)
+- **Choose Challenge Types**: Select which game modes to include (Keymaster's Challenge, Magic Key Heist, or both)
+- **Set Game Count Range**: Configure minimum (1-10) and maximum (1-10) games per challenge (defaults to 2-6)
+
+This creates a truly recursive meta-gaming experience where Keymaster's Keep challenges you to play the very games that Keymaster's Keep was designed to manage! Just like with other modules, players can completely customize their experience by editing the game selection to match their preferences and library.
 
 ## Music Listening
 A meta-game in which the options generated will be albums, artists, and playlists from the player's music listening backlog, paired with appropriate listening actions.
@@ -131,72 +172,12 @@ Movement: ``"COMPLETE 10,000 Steps"`` or ``"PRACTICE Morning Stretch"``
 
 This includes options for customizing exercise selections, wellness activities, nutrition goals, movement challenges, and their respective action lists. The system will only generate objectives for health categories that have been configured, allowing for flexible use whether you focus on structured exercise, general wellness, nutrition tracking, daily movement, or all four!
 
-## Adventure/Experience Challenges
-A meta-game in which the options generated will be local exploration, cultural experiences, outdoor activities, and culinary adventures from the player's adventure backlog, paired with appropriate actions.
-Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
+## Really Boring Challenges
+A deliberately mundane module that transforms everyday, routine activities into gaming objectives, celebrating the art of finding engagement in the most ordinary tasks.
 
-This features separate objective templates for different types of adventure activities, with actions tailored to each category:
+Core Categories: ``Household Maintenance``, ``Personal Organization``, ``Digital Housekeeping``, ``Routine Optimization``, ``Administrative Tasks``, ``Basic Self-Care``
 
-Local Exploration: ``"VISIT Downtown District"`` or ``"PHOTOGRAPH Historic Neighborhood"``
-Cultural Experiences: ``"ATTEND Live Theater Show"`` or ``"PARTICIPATE IN Cultural Workshop"``
-Outdoor Activities: ``"ATTEMPT Rock Climbing"`` or ``"CONQUER Hiking Trail"``
-Culinary Adventures: ``"TRY International Restaurant"`` or ``"SAMPLE Wine Tasting"``
-
-This includes options for customizing local exploration targets, cultural experiences, outdoor activities, culinary adventures, and their respective action lists. The system will only generate objectives for adventure categories that have been configured, allowing for flexible use whether you prefer local discovery, cultural immersion, outdoor challenges, food exploration, or all four!
-
-## Creative Challenges
-A meta-game in which the options generated will be art projects, writing endeavors, photography challenges, and craft projects from the player's creative backlog, paired with appropriate actions.
-Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
-
-This features separate objective templates for different types of creative activities, with actions tailored to each medium:
-
-Art Projects: ``"CREATE Watercolor Painting"`` or ``"REFINE Mixed Media Piece"``
-Writing: ``"WRITE Short Story"`` or ``"REVISE Poetry Collection"``
-Photography: ``"CAPTURE Portrait Session"`` or ``"MASTER Macro Challenge"``
-Crafts: ``"MAKE Knitting Project"`` or ``"ATTEMPT Woodworking"``
-
-This includes options for customizing art project selections, writing goals, photography challenges, craft projects, and their respective action lists. The system will only generate objectives for creative categories that have been configured, allowing for flexible use whether you focus on visual arts, writing, photography, crafting, or all four!
-
-## Christmas/Holiday Challenges
-A meta-game in which the options generated will be holiday decorations, gift preparations, baking projects, and festive traditions from the player's Christmas and holiday backlog, paired with appropriate seasonal actions.
-Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
-
-This features separate objective templates for different types of holiday activities, with actions tailored to each category:
-
-Decorations: ``"SET UP Christmas Tree"`` or ``"ARRANGE Mantel Decorations"``
-Gifts: ``"MAKE Handmade Gift"`` or ``"WRAP Secret Santa Gift"``
-Baking: ``"MAKE Christmas Cookies"`` or ``"CREATE Gingerbread House"``
-Traditions: ``"ENJOY Christmas Movie Marathon"`` or ``"ATTEND Christmas Market Visit"``
-
-This includes options for customizing decoration plans, gift preparations, baking projects, holiday traditions, and their respective action lists. The system will only generate objectives for holiday categories that have been configured, allowing for flexible use whether you focus on decorating, gift-giving, holiday baking, festive traditions, or all four!
-
-## Keymaster's Keep
-The ultimate meta module for generating challenges to play Keymaster's Keep itself! This module creates objectives for playing Keymaster's Keep in its two game modes: Keymaster's Challenge and Magic Key Heist, using the comprehensive game selection pool from the actual Keymaster's Keep configuration.
-
-This features objective templates that mirror the two main game modes, with games selected from the real Keymaster's Keep pool:
-
-Keymaster's Challenge: ``"Complete a Keymaster's Challenge including the games: Celeste, Hollow Knight, and Slay the Spire"``
-Magic Key Heist: ``"Complete a Magic Key Heist including the games: Balatro and Enter the Gungeon"``
-
-This includes options for customizing the game selection pool, challenge types, and game count ranges. Players can:
-- **Edit Game Selection**: Add, remove, or weight games in the selection pool (defaults to the 120+ games currently available)
-- **Choose Challenge Types**: Select which game modes to include (Keymaster's Challenge, Magic Key Heist, or both)
-- **Set Game Count Range**: Configure minimum (1-10) and maximum (1-10) games per challenge (defaults to 2-6)
-
-This creates a truly recursive meta-gaming experience where Keymaster's Keep challenges you to play the very games that Keymaster's Keep was designed to manage! Just like with other modules, players can completely customize their experience by editing the game selection to match their preferences and library.
-
-## Social/Connections Challenges
-A meta-game in which the options generated will be friend meetups, family activities, community events, and networking opportunities from the player's social backlog, paired with appropriate social actions and customizable lists of people to interact with.
-Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
-
-This features separate objective templates for different types of social activities, with actions tailored to each category:
-
-Friend Meetups: ``"ARRANGE Coffee Meetup with Best Friend"`` or ``"CATCH UP WITH Game Night with College Friend"``
-Family Activities: ``"VISIT Family Dinner with Family Member"`` or ``"SPEND TIME WITH Holiday Visit with Family Member"``
-Community Events: ``"ATTEND Local Festival"`` or ``"VOLUNTEER FOR Community Meeting"``
-Networking: ``"NETWORK AT Professional Meetup"`` or ``"PARTICIPATE IN Industry Conference"``
-
-This includes options for customizing meetup types, family activities, community events, networking opportunities, and their respective action lists. Most importantly, it includes a **People Selection** option where you can list actual friends, family members, colleagues, and other people you want to connect with. The system will only generate objectives for social categories that have been configured, allowing for flexible use whether you focus on friend connections, family time, community involvement, professional networking, or all four!
+Sample Objectives: ``"Organize 50 digital files"`` or ``"Clean one room thoroughly"`` or ``"Update 3 different passwords"``
 
 ## Real-World Scavenger Hunt
 A comprehensive real-world exploration game that encourages getting outside, discovering your local area, and engaging with your community. This module turns your surroundings into a game world with objectives focused on photography, location discovery, object collection, social interaction, nature exploration, cultural experiences, seasonal activities, and community engagement.
@@ -219,6 +200,30 @@ This includes extensive customization options with hundreds of possible targets,
 - **Constraints**: Transportation methods, time limits, weather conditions, companions
 
 The module contains over 500 different objectives across photography subjects, discoverable locations, collectible items, people to meet, activities to try, and seasonal experiences. It's designed to encourage exploration, community connection, and getting outside your normal routine!
+
+## Social/Connections Challenges
+A meta-game in which the options generated will be friend meetups, family activities, community events, and networking opportunities from the player's social backlog, paired with appropriate social actions and customizable lists of people to interact with.
+Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
+
+This features separate objective templates for different types of social activities, with actions tailored to each category:
+
+Friend Meetups: ``"ARRANGE Coffee Meetup with Best Friend"`` or ``"CATCH UP WITH Game Night with College Friend"``
+Family Activities: ``"VISIT Family Dinner with Family Member"`` or ``"SPEND TIME WITH Holiday Visit with Family Member"``
+Community Events: ``"ATTEND Local Festival"`` or ``"VOLUNTEER FOR Community Meeting"``
+Networking: ``"NETWORK AT Professional Meetup"`` or ``"PARTICIPATE IN Industry Conference"``
+
+This includes options for customizing meetup types, family activities, community events, networking opportunities, and their respective action lists. Most importantly, it includes a **People Selection** option where you can list actual friends, family members, colleagues, and other people you want to connect with. The system will only generate objectives for social categories that have been configured, allowing for flexible use whether you focus on friend connections, family time, community involvement, professional networking, or all four!
+
+## Watchlist
+A meta-game in which the options generated will be films and TV shows from the player's watchlist, paired with appropriate viewing actions.
+Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
+
+This features separate objective templates for films and television content, with actions tailored to each medium:
+
+Films: ``"WATCH Film Title"`` or ``"FINISH Documentary Title"``
+TV Shows: ``"BINGE TV Series Title"`` or ``"CATCH UP Miniseries Title"``
+
+This includes options for customizing film selections, TV show selections, and their respective action lists. The system will only generate objectives for media types that have been configured, allowing for flexible use whether you prefer films, television, or both!
 
 ## Individual Game Modules
 
@@ -340,29 +345,6 @@ Core Categories: ``Building Projects``, ``Exploration & Adventure``, ``Resource 
 
 Sample Objectives: ``"Build a 50x50 Castle structure"`` or ``"Explore 10 different Ocean Monuments"`` or ``"Create an automated Crop farm system"``
 
-### Real-World Scavenger Hunt
-A meta-game that generates real-world exploration and discovery objectives for getting out and experiencing your local area.
-
-**Core Categories:**
-- Photography challenges: capturing specific subjects, lighting conditions, and artistic shots
-- Location hunting: discovering landmarks, neighborhoods, and hidden venues
-- Object collection: finding specific items, natural specimens, and cultural artifacts
-- Interaction challenges: social activities, community engagement, and public participation
-- Nature exploration: outdoor activities, wildlife observation, and environmental discovery
-- Cultural discovery: museums, historical sites, and local culture exploration
-- Seasonal activities: weather-dependent and time-sensitive objectives
-
-Sample Objectives: ``"Take a photo of a street musician performing"`` or ``"Visit 3 historical landmarks"`` or ``"Find and visit a hidden garden or courtyard"`` or ``"Attend a local community event"`` or ``"Collect 5 different types of leaves"`` or ``"Visit a museum during their special exhibition"``
-
-The module adapts difficulty and scope based on your travel preferences and seasonal availability.
-
-### Really Boring Challenges
-A deliberately mundane module that transforms everyday, routine activities into gaming objectives, celebrating the art of finding engagement in the most ordinary tasks.
-
-Core Categories: ``Household Maintenance``, ``Personal Organization``, ``Digital Housekeeping``, ``Routine Optimization``, ``Administrative Tasks``, ``Basic Self-Care``
-
-Sample Objectives: ``"Organize 50 digital files"`` or ``"Clean one room thoroughly"`` or ``"Update 3 different passwords"``
-
 ### Red Dead Redemption 2 (Cursed Edition)
 A deliberately chaotic and humorous take on the Wild West epic, featuring intentionally absurd objectives that subvert the serious tone of Arthur Morgan's story with ridiculous challenges.
 
@@ -378,10 +360,10 @@ Core Categories: ``Farm Management``, ``Relationship Building``, ``Exploration &
 Sample Objectives: ``"Earn 50000g through Crop sales"`` or ``"Reach 8 hearts relationship level with Abigail"`` or ``"Complete 15 different Community Center bundles"``
 
 ### The Sims 4
-A comprehensive life simulation module covering all aspects of Sim life in the base game, from skill development and career progression to relationships, emotions, and creative building challenges.
+A comprehensive life simulation module covering all aspects of Sim life across the base game and expansion packs, from skill development and career progression to relationships, emotions, and creative building challenges.
 
-Core Categories: ``Skill Mastery``, ``Career Progression``, ``Relationship Building``, ``Aspiration Completion``, ``Creative Building``, ``Emotional Challenges``, ``Collection Goals``, ``Life Events``
+Core Categories: ``Skill Mastery``, ``Career Progression``, ``Relationship Building``, ``Aspiration Completion``, ``Creative Building``, ``Emotional Challenges``, ``Collection Goals``, ``Life Events``, ``Expansion Content``
 
 Sample Objectives: ``"Master the Painting skill to level 10"`` or ``"Reach the top of the Writer career branch"`` or ``"Build a SOULMATE relationship with another Sim"`` or ``"Complete the Renaissance Sim aspiration"`` or ``"Build a 50,000 simoleon house with a CONFIDENT emotion focus"`` or ``"Experience the MORTIFIED emotion"`` or ``"Collect 15 different Space Rocks"``
 
-Features comprehensive objectives covering all base game skills (15 skills including Fitness, Cooking, Programming), careers (10 careers with branching paths), aspirations (12 base game aspirations across 4 categories), collections (fossils, space rocks, elements, crystals), emotions (15 different emotional states), and creative building challenges with various themes and constraints. All objectives are designed to be achievable with the base game content only.
+Features comprehensive objectives covering skills, careers, aspirations, collections, emotions, and creative building challenges from both base game and expansion pack content. Includes expanded career paths, additional skills, new aspirations, and exclusive collections from DLC packs. The module automatically adapts objectives based on available content, ensuring players can engage with their full Sims 4 library.
