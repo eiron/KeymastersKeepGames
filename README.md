@@ -222,82 +222,12 @@ The module contains over 500 different objectives across photography subjects, d
 
 ## Individual Game Modules
 
-### Date Everything
-A whimsical dating simulation module where you romance household objects and abstract concepts in your own home. Features 100+ fully voice-acted characters from structural elements to existential dread, with branching relationships and transformation possibilities.
-
-Core Categories: ``Structural Objects``, ``Furniture & Decor``, ``Kitchen Appliances``, ``Bathroom Items``, ``Laundry Items``, ``Office & Bedroom``, ``Miscellaneous Items``, ``Special Concepts``, ``DLC Characters``
-
-Sample Objectives: ``"Achieve LOVE with Rebel (Rubber Duck)"`` or ``"Get 5 structural elements to FRIENDS status"`` or ``"Transform Teddy (Teddy Bear) into human form through deep connection"``
-
-### Stardew Valley
-A comprehensive farming simulation module covering all aspects of Pelican Town life, from crop management and animal care to community relationships and cave exploration.
-
-Core Categories: ``Farm Management``, ``Relationship Building``, ``Exploration & Combat``, ``Crafting & Collection``, ``Seasonal Activities``, ``Community Goals``, ``Achievement Hunting``
-
-Sample Objectives: ``"Earn 50000g through Crop sales"`` or ``"Reach 8 hearts relationship level with Abigail"`` or ``"Complete 15 different Community Center bundles"``
-
 ### Animal Crossing: New Horizons
 An island life simulation module focusing on island development, social interaction, decoration, and seasonal activities across the charming world of Animal Crossing.
 
 Core Categories: ``Island Development``, ``Social Interaction``, ``Decoration & Design``, ``Collection & Catalog``, ``Seasonal Events``, ``Achievement Goals``
 
 Sample Objectives: ``"Develop 5 different Residential Areas areas"`` or ``"Achieve Best Friends relationship with 3 villagers"`` or ``"Collect 25 different Fish species"``
-
-### Hades
-A roguelike action module covering escape attempts, weapon mastery, relationship building with gods and underworld denizens, and the compelling narrative of Zagreus's journey.
-
-Core Categories: ``Escape Attempts``, ``Weapon Mastery``, ``Relationship Building``, ``Boon Collection``, ``House Upgrades``, ``Narrative Progress``, ``Challenge Runs``
-
-Sample Objectives: ``"Complete 5 successful escape attempts"`` or ``"Master the Stygian Blade weapon"`` or ``"Max out relationship with Megaera"``
-
-### Dead Cells
-A challenging metroidvania module focused on combat mastery, weapon experimentation, biome progression, and the brutal but rewarding world of the Prisoner's journey.
-
-Core Categories: ``Combat Mastery``, ``Weapon Experimentation``, ``Biome Progression``, ``Mutation Builds``, ``Speed Running``, ``Achievement Hunting``
-
-Sample Objectives: ``"Defeat 25 different Elite enemies"`` or ``"Complete a run using only Survival weapons"`` or ``"Reach 3BC difficulty level"``
-
-### Cult of the Lamb
-A unique cult management and action module covering cult building, follower management, combat crusades, and the dark humor of leading a woodland cult.
-
-Core Categories: ``Cult Management``, ``Combat & Crusades``, ``Follower Care``, ``Base Building``, ``Resource Collection``, ``Ritual Performance``, ``Story Progression``
-
-Sample Objectives: ``"Recruit 15 new cult followers"`` or ``"Defeat Leshy in combat"`` or ``"Perform 5 different Blessing rituals"``
-
-### Bloodstained: Ritual of the Night
-A comprehensive Metroidvania module covering shard collection, exploration, boss battles, alchemy, equipment mastery, and Miriam's quest for answers.
-
-Core Categories: ``Shard Collection``, ``Exploration``, ``Boss Challenges``, ``Alchemy & Crafting``, ``Equipment Mastery``, ``Completion Goals``, ``Speedrun Challenges``
-
-Sample Objectives: ``"Collect 20 Conjure shards"`` or ``"Reach 90% map completion"`` or ``"Defeat Bloodless without using healing items"``
-
-### Minecraft
-An expansive sandbox module covering building projects, exploration, resource gathering, redstone engineering, and the limitless creativity of the block world.
-
-Core Categories: ``Building Projects``, ``Exploration & Adventure``, ``Resource Gathering``, ``Redstone Engineering``, ``Farming & Automation``, ``Combat Challenges``, ``Creative Builds``
-
-Sample Objectives: ``"Build a 50x50 Castle structure"`` or ``"Explore 10 different Ocean Monuments"`` or ``"Create an automated Crop farm system"``
-
-### Baldur's Gate 3
-A deep RPG module covering character builds, story choices, companion relationships, tactical combat, exploration, and the rich narrative possibilities of Faerûn.
-
-Core Categories: ``Character Builds``, ``Story Progression``, ``Companion Quests``, ``Exploration``, ``Combat Challenges``, ``Social Encounters``, ``Collectibles``, ``Achievement Hunting``
-
-Sample Objectives: ``"Complete Act 1 with a Paladin/Warlock multiclass build"`` or ``"Achieve Romance relationship with Shadowheart"`` or ``"Successfully pass 20 Persuasion skill checks"``
-
-### Red Dead Redemption 2 (Cursed Edition)
-A deliberately chaotic and humorous take on the Wild West epic, featuring intentionally absurd objectives that subvert the serious tone of Arthur Morgan's story with ridiculous challenges.
-
-Core Categories: ``Absurd Combat``, ``Ridiculous Exploration``, ``Chaotic Social Interactions``, ``Silly Customization``, ``Nonsense Activities``, ``Bizarre Challenges``
-
-Sample Objectives: ``"Kill 50 enemies using only throwing knives while wearing a fancy hat"`` or ``"Ride your horse backwards for 10 minutes straight"`` or ``"Get a 1000 dollar bounty in Valentine by only antagonizing people"``
-
-### Really Boring Challenges
-A deliberately mundane module that transforms everyday, routine activities into gaming objectives, celebrating the art of finding engagement in the most ordinary tasks.
-
-Core Categories: ``Household Maintenance``, ``Personal Organization``, ``Digital Housekeeping``, ``Routine Optimization``, ``Administrative Tasks``, ``Basic Self-Care``
-
-Sample Objectives: ``"Organize 50 digital files"`` or ``"Clean one room thoroughly"`` or ``"Update 3 different passwords"``
 
 ### Archipelago Multiworld Randomizer
 A meta-gaming module that creates objectives for participating in Archipelago multiworld randomizer sessions, covering the collaborative puzzle-solving experience of linked randomized games.
@@ -306,6 +236,20 @@ Core Categories: ``Multiworld Participation``, ``Item Progression``, ``Helper Ac
 
 Sample Objectives: ``"Complete your sphere 1 progression items"`` or ``"Send 10 useful items to other players"`` or ``"Help troubleshoot another player's connection issues"``
 
+### Baldur's Gate 3
+A deep RPG module covering character builds, story choices, companion relationships, tactical combat, exploration, and the rich narrative possibilities of Faerûn.
+
+Core Categories: ``Character Builds``, ``Story Progression``, ``Companion Quests``, ``Exploration``, ``Combat Challenges``, ``Social Encounters``, ``Collectibles``, ``Achievement Hunting``
+
+Sample Objectives: ``"Complete Act 1 with a Paladin/Warlock multiclass build"`` or ``"Achieve Romance relationship with Shadowheart"`` or ``"Successfully pass 20 Persuasion skill checks"``
+
+### Bloodstained: Ritual of the Night
+A comprehensive Metroidvania module covering shard collection, exploration, boss battles, alchemy, equipment mastery, and Miriam's quest for answers.
+
+Core Categories: ``Shard Collection``, ``Exploration``, ``Boss Challenges``, ``Alchemy & Crafting``, ``Equipment Mastery``, ``Completion Goals``, ``Speedrun Challenges``
+
+Sample Objectives: ``"Collect 20 Conjure shards"`` or ``"Reach 90% map completion"`` or ``"Defeat Bloodless without using healing items"``
+
 ### Board Game Collection
 A physical gaming module focused on exploring and mastering your board game collection, from quick card games to complex strategy epics, with emphasis on both solo and group play.
 
@@ -313,35 +257,12 @@ Core Categories: ``Strategy Games``, ``Party Games``, ``Solo Gaming``, ``Learnin
 
 Sample Objectives: ``"Learn and play 3 new games from your collection"`` or ``"Host a game night with 4+ different games"`` or ``"Complete a solo campaign game"``
 
-### Just Dance
-A comprehensive rhythm gaming module covering the entire Just Dance franchise from 2014 through 2025, with support for base game tracks, regional exclusives, subscription content (Just Dance Unlimited), and premium content (Just Dance+).
+### Cult of the Lamb
+A unique cult management and action module covering cult building, follower management, combat crusades, and the dark humor of leading a woodland cult.
 
-Game Coverage: ``Just Dance 2014-2025``, ``Just Dance Unlimited Subscription``, ``Just Dance+ Premium Content``, ``Regional Exclusives`` (China, France, Japan, Benelux, Germany, Italy, Southeast Asia, and more)
+Core Categories: ``Cult Management``, ``Combat & Crusades``, ``Follower Care``, ``Base Building``, ``Resource Collection``, ``Ritual Performance``, ``Story Progression``
 
-Core Categories: ``Base Game Completion``, ``Subscription Service Mastery``, ``Regional Content Exploration``, ``Score Achievement``, ``Song Collection``, ``Dance Challenge Completion``
-
-Sample Objectives: ``"Perfect 25 songs from Just Dance 2023 base tracklist"`` or ``"Complete 15 dances from Just Dance Unlimited subscription"`` or ``"Master 5 songs from Just Dance+ premium content"`` or ``"Achieve 4+ stars on 20 regional exclusive tracks"``
-
-Features comprehensive song libraries with accurate track lists, regional exclusives, platform-specific content, and both subscription services. Supports granular customization of which games you own, which DLC/subscription content you have access to, and which regional exclusives are available in your region.
-
-
-### Harvestella
-A farming RPG module that brings the full breadth of Harvestella's systems to Keymaster's Keep. This implementation covers farming, exploration, combat, relationships, story progression, crafting, cooking, and seasonal events, with robust support for all major gameplay features and option types.
-
-Core Categories: ``Farming Objectives``, ``Exploration & Adventure``, ``Combat Challenges``, ``Relationship System``, ``Story Progression``, ``Crafting & Cooking``, ``Seasonal & Collection Goals``
-
-Sample Objectives: ``"Harvest 50 crops across all seasons"`` or ``"Defeat 10 unique monsters in Quietus dungeons"`` or ``"Reach max relationship with a main character"`` or ``"Complete Chapter 5 and restore all Seaslight crystals"``
-
-Features:
-- Dynamic crop selection, farming goals, and seasonal objectives
-- Exploration of locations, dungeons, and rare material collection
-- Combat with monsters, bosses, and job mastery
-- Relationship events and character-specific objectives
-- Story progression, chapter completion, and seasonal dungeon unlocks
-- Crafting, equipment upgrades, and recipe mastery
-- Collection goals for items, recipes, monsters, and more
-
-Harvestella brings all its farming, adventure, and relationship systems to Keymaster's Keep.
+Sample Objectives: ``"Recruit 15 new cult followers"`` or ``"Defeat Leshy in combat"`` or ``"Perform 5 different Blessing rituals"``
 
 ### Danganronpa Decadence
 A collection of visual novel murder mystery games featuring students trapped in deadly games. This module supports objectives across all four included games in the Decadence collection.
@@ -362,6 +283,63 @@ Sample Objectives: ``"Achieve S rank in the chapter 3 class trial"`` or ``"Max o
 
 The module provides comprehensive coverage of all gameplay modes and mechanics across the entire Danganronpa collection.
 
+### Date Everything
+A whimsical dating simulation module where you romance household objects and abstract concepts in your own home. Features 100+ fully voice-acted characters from structural elements to existential dread, with branching relationships and transformation possibilities.
+
+Core Categories: ``Structural Objects``, ``Furniture & Decor``, ``Kitchen Appliances``, ``Bathroom Items``, ``Laundry Items``, ``Office & Bedroom``, ``Miscellaneous Items``, ``Special Concepts``, ``DLC Characters``
+
+Sample Objectives: ``"Achieve LOVE with Rebel (Rubber Duck)"`` or ``"Get 5 structural elements to FRIENDS status"`` or ``"Transform Teddy (Teddy Bear) into human form through deep connection"``
+
+### Dead Cells
+A challenging metroidvania module focused on combat mastery, weapon experimentation, biome progression, and the brutal but rewarding world of the Prisoner's journey.
+
+Core Categories: ``Combat Mastery``, ``Weapon Experimentation``, ``Biome Progression``, ``Mutation Builds``, ``Speed Running``, ``Achievement Hunting``
+
+Sample Objectives: ``"Defeat 25 different Elite enemies"`` or ``"Complete a run using only Survival weapons"`` or ``"Reach 3BC difficulty level"``
+
+### Hades
+A roguelike action module covering escape attempts, weapon mastery, relationship building with gods and underworld denizens, and the compelling narrative of Zagreus's journey.
+
+Core Categories: ``Escape Attempts``, ``Weapon Mastery``, ``Relationship Building``, ``Boon Collection``, ``House Upgrades``, ``Narrative Progress``, ``Challenge Runs``
+
+Sample Objectives: ``"Complete 5 successful escape attempts"`` or ``"Master the Stygian Blade weapon"`` or ``"Max out relationship with Megaera"``
+
+### Harvestella
+A farming RPG module that brings the full breadth of Harvestella's systems to Keymaster's Keep. This implementation covers farming, exploration, combat, relationships, story progression, crafting, cooking, and seasonal events, with robust support for all major gameplay features and option types.
+
+Core Categories: ``Farming Objectives``, ``Exploration & Adventure``, ``Combat Challenges``, ``Relationship System``, ``Story Progression``, ``Crafting & Cooking``, ``Seasonal & Collection Goals``
+
+Sample Objectives: ``"Harvest 50 crops across all seasons"`` or ``"Defeat 10 unique monsters in Quietus dungeons"`` or ``"Reach max relationship with a main character"`` or ``"Complete Chapter 5 and restore all Seaslight crystals"``
+
+Features:
+- Dynamic crop selection, farming goals, and seasonal objectives
+- Exploration of locations, dungeons, and rare material collection
+- Combat with monsters, bosses, and job mastery
+- Relationship events and character-specific objectives
+- Story progression, chapter completion, and seasonal dungeon unlocks
+- Crafting, equipment upgrades, and recipe mastery
+- Collection goals for items, recipes, monsters, and more
+
+Harvestella brings all its farming, adventure, and relationship systems to Keymaster's Keep.
+
+### Just Dance
+A comprehensive rhythm gaming module covering the entire Just Dance franchise from 2014 through 2025, with support for base game tracks, regional exclusives, subscription content (Just Dance Unlimited), and premium content (Just Dance+).
+
+Game Coverage: ``Just Dance 2014-2025``, ``Just Dance Unlimited Subscription``, ``Just Dance+ Premium Content``, ``Regional Exclusives`` (China, France, Japan, Benelux, Germany, Italy, Southeast Asia, and more)
+
+Core Categories: ``Base Game Completion``, ``Subscription Service Mastery``, ``Regional Content Exploration``, ``Score Achievement``, ``Song Collection``, ``Dance Challenge Completion``
+
+Sample Objectives: ``"Perfect 25 songs from Just Dance 2023 base tracklist"`` or ``"Complete 15 dances from Just Dance Unlimited subscription"`` or ``"Master 5 songs from Just Dance+ premium content"`` or ``"Achieve 4+ stars on 20 regional exclusive tracks"``
+
+Features comprehensive song libraries with accurate track lists, regional exclusives, platform-specific content, and both subscription services. Supports granular customization of which games you own, which DLC/subscription content you have access to, and which regional exclusives are available in your region.
+
+### Minecraft
+An expansive sandbox module covering building projects, exploration, resource gathering, redstone engineering, and the limitless creativity of the block world.
+
+Core Categories: ``Building Projects``, ``Exploration & Adventure``, ``Resource Gathering``, ``Redstone Engineering``, ``Farming & Automation``, ``Combat Challenges``, ``Creative Builds``
+
+Sample Objectives: ``"Build a 50x50 Castle structure"`` or ``"Explore 10 different Ocean Monuments"`` or ``"Create an automated Crop farm system"``
+
 ### Real-World Scavenger Hunt
 A meta-game that generates real-world exploration and discovery objectives for getting out and experiencing your local area.
 
@@ -377,3 +355,33 @@ A meta-game that generates real-world exploration and discovery objectives for g
 Sample Objectives: ``"Take a photo of a street musician performing"`` or ``"Visit 3 historical landmarks"`` or ``"Find and visit a hidden garden or courtyard"`` or ``"Attend a local community event"`` or ``"Collect 5 different types of leaves"`` or ``"Visit a museum during their special exhibition"``
 
 The module adapts difficulty and scope based on your travel preferences and seasonal availability.
+
+### Really Boring Challenges
+A deliberately mundane module that transforms everyday, routine activities into gaming objectives, celebrating the art of finding engagement in the most ordinary tasks.
+
+Core Categories: ``Household Maintenance``, ``Personal Organization``, ``Digital Housekeeping``, ``Routine Optimization``, ``Administrative Tasks``, ``Basic Self-Care``
+
+Sample Objectives: ``"Organize 50 digital files"`` or ``"Clean one room thoroughly"`` or ``"Update 3 different passwords"``
+
+### Red Dead Redemption 2 (Cursed Edition)
+A deliberately chaotic and humorous take on the Wild West epic, featuring intentionally absurd objectives that subvert the serious tone of Arthur Morgan's story with ridiculous challenges.
+
+Core Categories: ``Absurd Combat``, ``Ridiculous Exploration``, ``Chaotic Social Interactions``, ``Silly Customization``, ``Nonsense Activities``, ``Bizarre Challenges``
+
+Sample Objectives: ``"Kill 50 enemies using only throwing knives while wearing a fancy hat"`` or ``"Ride your horse backwards for 10 minutes straight"`` or ``"Get a 1000 dollar bounty in Valentine by only antagonizing people"``
+
+### Stardew Valley
+A comprehensive farming simulation module covering all aspects of Pelican Town life, from crop management and animal care to community relationships and cave exploration.
+
+Core Categories: ``Farm Management``, ``Relationship Building``, ``Exploration & Combat``, ``Crafting & Collection``, ``Seasonal Activities``, ``Community Goals``, ``Achievement Hunting``
+
+Sample Objectives: ``"Earn 50000g through Crop sales"`` or ``"Reach 8 hearts relationship level with Abigail"`` or ``"Complete 15 different Community Center bundles"``
+
+### The Sims 4
+A comprehensive life simulation module covering all aspects of Sim life in the base game, from skill development and career progression to relationships, emotions, and creative building challenges.
+
+Core Categories: ``Skill Mastery``, ``Career Progression``, ``Relationship Building``, ``Aspiration Completion``, ``Creative Building``, ``Emotional Challenges``, ``Collection Goals``, ``Life Events``
+
+Sample Objectives: ``"Master the Painting skill to level 10"`` or ``"Reach the top of the Writer career branch"`` or ``"Build a SOULMATE relationship with another Sim"`` or ``"Complete the Renaissance Sim aspiration"`` or ``"Build a 50,000 simoleon house with a CONFIDENT emotion focus"`` or ``"Experience the MORTIFIED emotion"`` or ``"Collect 15 different Space Rocks"``
+
+Features comprehensive objectives covering all base game skills (15 skills including Fitness, Cooking, Programming), careers (10 careers with branching paths), aspirations (12 base game aspirations across 4 categories), collections (fossils, space rocks, elements, crystals), emotions (15 different emotional states), and creative building challenges with various themes and constraints. All objectives are designed to be achievable with the base game content only.
