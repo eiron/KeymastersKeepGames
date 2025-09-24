@@ -15,6 +15,7 @@ The Chapter Quest game allows you to:
 
 - `"[Fantasy Fiction] The Hobbit by J.R.R. Tolkien -> Read chapter 7"`
 - `"[Science Fiction] Dune by Frank Herbert -> Read chapter 23"`
+- `"[Fantasy Fiction] The Hobbit by J.R.R. Tolkien -> Read 2 chapters from this book"`
 - `"[Classic Literature] The Great Gatsby by F. Scott Fitzgerald -> Complete the entire book"`
 - `"Genre Challenge: Read 2 chapters from a Science Fiction book"`
 - `"Author Challenge: Read 1 chapter from a book by J.R.R. Tolkien"`
@@ -31,8 +32,10 @@ Chapter Quest:
       author: "Author Name"   # Optional
       genre: "Fiction"        # Optional
       difficulty: "normal"    # Optional: "normal" or "difficult"
-  chapter_quest_include_genre_challenges: true   # Optional
-  chapter_quest_include_author_challenges: true  # Optional
+  chapter_quest_include_specific_chapters: true    # Optional (default: enabled)
+  chapter_quest_include_bulk_chapters: true        # Optional (default: enabled)
+  chapter_quest_include_genre_challenges: true     # Optional (default: enabled)
+  chapter_quest_include_author_challenges: true    # Optional (default: enabled)
 ```
 
 ### Required Fields
@@ -45,8 +48,10 @@ Chapter Quest:
 - **difficulty**: "normal" (default) or "difficult"
 
 ### Optional Settings
-- **chapter_quest_include_genre_challenges**: Enable genre-based meta-challenges (default: true)
-- **chapter_quest_include_author_challenges**: Enable author-based meta-challenges (default: true)
+- **chapter_quest_include_specific_chapters**: Enable specific chapter objectives like "Read chapter 5" (default: enabled)
+- **chapter_quest_include_bulk_chapters**: Enable bulk chapter objectives like "Read 3 chapters from Book Title" (default: enabled)
+- **chapter_quest_include_genre_challenges**: Enable genre-based meta-challenges (default: enabled)
+- **chapter_quest_include_author_challenges**: Enable author-based meta-challenges (default: enabled)
 
 ## Features
 
@@ -72,11 +77,19 @@ Chapter Quest:
 
 ## Objective Types
 
-### Chapter Reading (Primary)
+### Specific Chapter Reading (Primary)
 - Format: `"[Genre] Book Title by Author -> Read chapter [X]"`
 - Weight: 10
+- Controlled by: `chapter_quest_include_specific_chapters`
 - Generated for every book (up to 10 chapters per book)
 - Individual chapters are not time-consuming
+
+### Bulk Chapter Reading
+- Format: `"[Genre] Book Title by Author -> Read [X] chapters from this book"`
+- Weight: 8
+- Controlled by: `chapter_quest_include_bulk_chapters`
+- Favors lower chapter counts (1-3 chapters most common)
+- Provides flexible reading goals
 
 ### Book Completion (Secondary)  
 - Format: `"[Genre] Book Title by Author -> Complete the entire book"`
@@ -87,14 +100,14 @@ Chapter Quest:
 ### Genre Challenges (Meta-objectives)
 - Format: `"Genre Challenge: Read [X] chapters from [Y] [Genre] book(s)"`
 - Weight: 10-20
-- Requires `chapter_quest_include_genre_challenges: true`
+- Controlled by: `chapter_quest_include_genre_challenges`
 - Single book: 1-3 chapters specified
 - Multiple books: Random count up to available books
 
 ### Author Challenges (Meta-objectives)
 - Format: `"Author Challenge: Read [X] chapters from [Y] book(s) by [Author]"`
 - Weight: 10-20
-- Requires `chapter_quest_include_author_challenges: true`
+- Controlled by: `chapter_quest_include_author_challenges`
 - Single book: 1-3 chapters specified
 - Multiple books: Random count up to available books
 

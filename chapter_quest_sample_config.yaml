@@ -112,6 +112,8 @@ Chapter Quest:
     genre: "Self-Help"
     difficulty: "normal"
 
-  # Optional: Control meta-challenge generation
-  chapter_quest_include_genre_challenges: true   # Enable genre-based challenges
-  chapter_quest_include_author_challenges: true  # Enable author-based challenges
+  # Optional: Control objective generation (all default to enabled)
+  chapter_quest_include_specific_chapters: true    # Enable specific chapter objectives
+  chapter_quest_include_bulk_chapters: true        # Enable bulk chapter objectives  
+  chapter_quest_include_genre_challenges: true     # Enable genre-based challenges
+  chapter_quest_include_author_challenges: true    # Enable author-based challenges

@@ -9,13 +9,15 @@ from ..game_objective_template import GameObjectiveTemplate
 
 from ..enums import KeymastersKeepGamePlatforms
 
-from Options import OptionList, Toggle
+from Options import OptionList, DefaultOnToggle
 from schema import And, Schema, Optional
 
 
 @dataclass
 class ChapterQuestOptions:
     chapter_quest_book_collection: BookCollection
+    chapter_quest_include_specific_chapters: ChapterQuestIncludeSpecificChapters
+    chapter_quest_include_bulk_chapters: ChapterQuestIncludeBulkChapters
     chapter_quest_include_genre_challenges: ChapterQuestIncludeGenreChallenges
     chapter_quest_include_author_challenges: ChapterQuestIncludeAuthorChallenges
 
@@ -90,20 +92,40 @@ class ChapterQuestGame(Game):
         for current_book in self.book_collection.keys():
             book_info = self.book_collection[current_book]
             
-            # Generate multiple chapter objectives per book (up to 10 random chapters)
-            num_chapters_for_book = min(10, book_info["chapters"])
-            # random.sample() will return all chapters if num_chapters_for_book equals total chapters
-            selected_chapters = self.random.sample(range(1, book_info["chapters"] + 1), num_chapters_for_book)
-            
-            for chapter in selected_chapters:
-                chapter_objective = GameObjectiveTemplate(
-                    label=f"[{book_info['genre']}] {current_book} by {book_info['author']} -> Read chapter {chapter}",
+            # Generate specific chapter objectives (if enabled)
+            if self.archipelago_options.chapter_quest_include_specific_chapters:
+                # Generate multiple chapter objectives per book (up to 10 random chapters)
+                num_chapters_for_book = min(10, book_info["chapters"])
+                # random.sample() will return all chapters if num_chapters_for_book equals total chapters
+                selected_chapters = self.random.sample(range(1, book_info["chapters"] + 1), num_chapters_for_book)
+                
+                for chapter in selected_chapters:
+                    chapter_objective = GameObjectiveTemplate(
+                        label=f"[{book_info['genre']}] {current_book} by {book_info['author']} -> Read chapter {chapter}",
+                        data={},
+                        is_difficult=(book_info["difficulty"] == "difficult"),
+                        is_time_consuming=False,  # Reading a single chapter is not time-consuming
+                        weight=10
+                    )
+                    objectives.append(chapter_objective)
+
+            # Generate bulk chapter objectives (if enabled)
+            if self.archipelago_options.chapter_quest_include_bulk_chapters:
+                # Generate "Read X chapters from Y book" objectives that favor lower numbers
+                max_bulk_chapters = min(book_info["chapters"], 10)  # Cap at 10 chapters max
+                # Use weighted random to favor lower numbers (1-3 are more likely than 7-10)
+                weights = [max_bulk_chapters - i for i in range(max_bulk_chapters)]  # Higher weight for lower numbers
+                num_bulk_chapters = self.random.choices(range(1, max_bulk_chapters + 1), weights=weights)[0]
+                
+                chapter_text = "chapter" if num_bulk_chapters == 1 else "chapters"
+                bulk_objective = GameObjectiveTemplate(
+                    label=f"[{book_info['genre']}] {current_book} by {book_info['author']} -> Read {num_bulk_chapters} {chapter_text}",
                     data={},
                     is_difficult=(book_info["difficulty"] == "difficult"),
-                    is_time_consuming=False,  # Reading a single chapter is not time-consuming
-                    weight=10
+                    is_time_consuming=(num_bulk_chapters > 3),  # More than 3 chapters is time-consuming
+                    weight=8  # Slightly lower weight than specific chapters
                 )
-                objectives.append(chapter_objective)
+                objectives.append(bulk_objective)
 
             # Add completion objective (completing entire book IS time-consuming)
             completion_objective = GameObjectiveTemplate(
@@ -236,17 +258,29 @@ class BookCollection(OptionList):
     ])
 
 
-class ChapterQuestIncludeGenreChallenges(Toggle):
+class ChapterQuestIncludeGenreChallenges(DefaultOnToggle):
     """
     Whether to include genre-based challenges like 'Read chapters from X Science Fiction books'
     """
     display_name = "Include Genre Challenges"
-    default = True
 
 
-class ChapterQuestIncludeAuthorChallenges(Toggle):
+class ChapterQuestIncludeAuthorChallenges(DefaultOnToggle):
     """
     Whether to include author-based challenges like 'Read chapters from X books by Jane Austen'
     """
     display_name = "Include Author Challenges"
-    default = True
+
+
+class ChapterQuestIncludeSpecificChapters(DefaultOnToggle):
+    """
+    Whether to include specific chapter objectives like 'Read chapter 5'
+    """
+    display_name = "Include Specific Chapter Objectives"
+
+
+class ChapterQuestIncludeBulkChapters(DefaultOnToggle):
+    """
+    Whether to include bulk chapter objectives like 'Read 3 chapters from Book Title'
+    """
+    display_name = "Include Bulk Chapter Objectives"
