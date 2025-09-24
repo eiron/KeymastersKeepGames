@@ -123,7 +123,7 @@ class ChapterQuestGame(Game):
                     data={},
                     is_difficult=(book_info["difficulty"] == "difficult"),
                     is_time_consuming=(num_bulk_chapters > 3),  # More than 3 chapters is time-consuming
-                    weight=8  # Slightly lower weight than specific chapters
+                    weight=16
                 )
                 objectives.append(bulk_objective)
 
@@ -133,7 +133,7 @@ class ChapterQuestGame(Game):
                 data={},
                 is_difficult=(book_info["difficulty"] == "difficult"),
                 is_time_consuming=True,  # Completing an entire book is time-consuming
-                weight=4  # Lower weight so it's less likely to be selected
+                weight=5  # Lower weight so it's less likely to be selected
             )
             objectives.append(completion_objective)
 
@@ -157,7 +157,7 @@ class ChapterQuestGame(Game):
                             label=f"Genre Challenge: Read {num_chapters} {chapter_text} from a {genre} book",
                             data={},
                             is_difficult=False,
-                            is_time_consuming=True,  # Reading from books is time-consuming
+                            is_time_consuming=False,  # Reading one chapter is not time-consuming
                             weight=20
                         )
                     else:
@@ -190,7 +190,7 @@ class ChapterQuestGame(Game):
                             label=f"Author Challenge: Read {num_chapters} {chapter_text} from a book by {author}",
                             data={},
                             is_difficult=False,
-                            is_time_consuming=True,  # Reading from books is time-consuming
+                            is_time_consuming=False,  # Reading one chapter is not time-consuming
                             weight=20
                         )
                     else:
