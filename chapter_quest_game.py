@@ -119,14 +119,13 @@ class ChapterQuestGame(Game):
         if self.archipelago_options.chapter_quest_include_genre_challenges:
             for genre in self.genres:
                 genre_books = [book for book, info in self.book_collection.items() if info["genre"] == genre]
-                if len(genre_books) >= 1:  # Accept genre challenges even with just one book
-                    # Maximum number should be the count of books in the collection for that genre
-                    max_books = len(genre_books)
-                    # For single book, use 1; for multiple books, pick a random number up to max_books
-                    if max_books == 1:
-                        num_books = 1
-                    else:
-                        num_books = self.random.randint(1, max_books)
+                # Maximum number should be the count of books in the collection for that genre
+                max_books = len(genre_books)
+                # For single book, use 1; for multiple books, pick a random number up to max_books
+                if max_books == 1:
+                    num_books = 1
+                else:
+                    num_books = self.random.randint(1, max_books)
                     
                     if num_books == 1:
                         # For single book challenges, specify a random number of chapters (1-3)
@@ -153,14 +152,13 @@ class ChapterQuestGame(Game):
         if self.archipelago_options.chapter_quest_include_author_challenges:
             for author in self.authors:
                 author_books = [book for book, info in self.book_collection.items() if info["author"] == author]
-                if len(author_books) >= 1:  # Accept author challenges even with just one book
-                    # Maximum number should be the count of books in the collection for that author
-                    max_books = len(author_books)
-                    # For single book, use 1; for multiple books, pick a random number up to max_books
-                    if max_books == 1:
-                        num_books = 1
-                    else:
-                        num_books = self.random.randint(1, max_books)
+                # Maximum number should be the count of books in the collection for that author
+                max_books = len(author_books)
+                # For single book, use 1; for multiple books, pick a random number up to max_books
+                if max_books == 1:
+                    num_books = 1
+                else:
+                    num_books = self.random.randint(1, max_books)
                     
                     if num_books == 1:
                         # For single book challenges, specify a random number of chapters (1-3)
