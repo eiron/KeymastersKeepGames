@@ -106,6 +106,24 @@ This also features a submodule that include challenges of the type:
 This includes options for filtering by dietary requirements, as well as blocking unwanted ingredients and adding custom ingredients.
 You can also set the range for the number of random ingredients from 1 through 10, though there is a chance too high a number will cause the challenge to be unreadable in the client!
 
+## Chapter Quest
+A meta-game that transforms your personal reading list into gaming objectives, creating targeted reading challenges based on your book collection with chapter-specific goals and meta-challenges.
+
+This features comprehensive objective templates for different types of reading goals:
+
+Individual Chapters: ``"[Fantasy Fiction] The Hobbit by J.R.R. Tolkien -> Read chapter 7"`` or ``"[Science Fiction] Dune by Frank Herbert -> Read chapter 23"``
+Book Completion: ``"[Classic Literature] The Great Gatsby by F. Scott Fitzgerald -> Complete the entire book"``
+Genre Challenges: ``"Genre Challenge: Read 2 chapters from a Science Fiction book"`` or ``"Genre Challenge: Read 1 chapter from Fantasy Fiction book"``
+Author Challenges: ``"Author Challenge: Read 3 chapters from different books by J.R.R. Tolkien"`` or ``"Author Challenge: Read 1 chapter from book by Jane Austen"``
+
+This includes extensive customization options for book collections, meta-challenges, and difficulty scaling:
+- **Book Collection**: Configure title, chapter count, author, genre, and difficulty for each book
+- **Meta-Challenges**: Optional genre-based and author-based challenges that scale dynamically based on your collection
+- **Difficulty System**: Mark challenging books as "difficult" to integrate with Keymaster's Keep difficulty filtering
+- **Smart Generation**: Up to 10 chapters per book, with single-chapter objectives marked as non-time-consuming and full book completion as time-consuming
+
+The system generates individual chapter reading goals, book completion objectives, and intelligent meta-challenges that encourage exploring different genres and authors in your collection. Perfect for readers who want to gamify their reading goals and discover variety in their personal libraries!
+
 ## Christmas/Holiday Challenges
 A meta-game in which the options generated will be holiday decorations, gift preparations, baking projects, and festive traditions from the player's Christmas and holiday backlog, paired with appropriate seasonal actions.
 Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
