@@ -105,7 +105,7 @@ class ChapterQuestGame(Game):
                         data={},
                         is_difficult=(book_info["difficulty"] == "difficult"),
                         is_time_consuming=False,  # Reading a single chapter is not time-consuming
-                        weight=5
+                        weight=2
                     )
                     objectives.append(chapter_objective)
 
@@ -123,7 +123,7 @@ class ChapterQuestGame(Game):
                     data={},
                     is_difficult=(book_info["difficulty"] == "difficult"),
                     is_time_consuming=(num_bulk_chapters > 3),  # More than 3 chapters is time-consuming
-                    weight=30
+                    weight=20
                 )
                 objectives.append(bulk_objective)
 
@@ -142,7 +142,7 @@ class ChapterQuestGame(Game):
             for genre in self.genres:
                 genre_books = [book for book, info in self.book_collection.items() if info["genre"] == genre]
                 # Maximum number should be the count of books in the collection for that genre
-                max_books = len(genre_books)
+                max_books = min(3, len(genre_books)) # Cap at 3 books max to avoid overly long challenges
                 # For single book, use 1; for multiple books, pick a random number up to max_books
                 if max_books == 1:
                     num_books = 1
@@ -158,7 +158,7 @@ class ChapterQuestGame(Game):
                             data={},
                             is_difficult=False,
                             is_time_consuming=False,  # Reading one chapter is not time-consuming
-                            weight=40
+                            weight=60
                         )
                     else:
                         genre_objective = GameObjectiveTemplate(
@@ -166,7 +166,7 @@ class ChapterQuestGame(Game):
                             data={},
                             is_difficult=False,
                             is_time_consuming=True,  # Reading from multiple books is time-consuming
-                            weight=25
+                            weight=40
                         )
                     objectives.append(genre_objective)
 
@@ -175,7 +175,7 @@ class ChapterQuestGame(Game):
             for author in self.authors:
                 author_books = [book for book, info in self.book_collection.items() if info["author"] == author]
                 # Maximum number should be the count of books in the collection for that author
-                max_books = len(author_books)
+                max_books = min(3,len(author_books)) # Cap at 3 books max to avoid overly long challenges
                 # For single book, use 1; for multiple books, pick a random number up to max_books
                 if max_books == 1:
                     num_books = 1
