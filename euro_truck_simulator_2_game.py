@@ -66,6 +66,10 @@ class EuroTruckSimulator2Game(Game):
                 label="Complete this objective taking economical routes (avoid toll roads)",
                 data={},
             ),
+            GameObjectiveTemplate(
+                label="Cross national borders unnecessarily during this objective",
+                data={},
+            ),
         ])
         
         return constraints
@@ -93,9 +97,9 @@ class EuroTruckSimulator2Game(Game):
         if self.include_country_exploration:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Complete deliveries to COUNT different cities in COUNTRY",
+                    label="Complete deliveries to CITY_COUNT different cities in COUNTRY",
                     data={
-                        "COUNT": (self.city_counts, 1),
+                        "CITY_COUNT": (self.city_counts, 1),
                         "COUNTRY": (self.countries, 1)
                     },
                     is_time_consuming=True,
@@ -191,6 +195,13 @@ class EuroTruckSimulator2Game(Game):
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Drive KM kilometers across European roads",
+                    data={"KM": (self.milestone_km, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=5,
                 ),
             ])
 
@@ -435,8 +446,9 @@ class EuroTruckSimulator2Game(Game):
         return [15, 20, 25]
 
     @staticmethod
-    def long_distance_km() -> List[int]:
-        return [1400, 1800, 2200, 2500]
+    def milestone_km() -> List[str]:
+        """Milestone distances in km - weighted for progressive objectives"""
+        return ["5,000", "5,000", "5,000", "10,000", "10,000", "20,000"]
 
 
 # Option classes would typically be defined elsewhere, but including stubs for completeness

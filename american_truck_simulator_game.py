@@ -74,6 +74,10 @@ class AmericanTruckSimulatorGame(Game):
                 label="Complete this objective with perfect parking scores only",
                 data={},
             ),
+            GameObjectiveTemplate(
+                label="Cross state lines unnecessarily during this objective",
+                data={},
+            ),
         ])
         
         return constraints
@@ -84,7 +88,7 @@ class AmericanTruckSimulatorGame(Game):
         if self.include_interstate_delivery:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Transport CARGO across state lines from ORIGIN to DESTINATION",
+                    label="Transport CARGO from ORIGIN to DESTINATION",
                     data={
                         "CARGO": (self.cargo_types, 1),
                         "ORIGIN": (self.cities, 1),
@@ -463,7 +467,7 @@ class AmericanTruckSimulatorGame(Game):
 
     @staticmethod
     def milestone_miles() -> List[str]:
-        return ["500,000", "1,000,000", "2,000,000"]
+        return ["3,000", "3,000", "3,000", "6,000", "6,000", "12,000"]
 
     @staticmethod
     def long_haul_miles() -> List[int]:
