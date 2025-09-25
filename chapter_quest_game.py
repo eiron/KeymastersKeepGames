@@ -105,7 +105,7 @@ class ChapterQuestGame(Game):
                         data={},
                         is_difficult=(book_info["difficulty"] == "difficult"),
                         is_time_consuming=False,  # Reading a single chapter is not time-consuming
-                        weight=10
+                        weight=5
                     )
                     objectives.append(chapter_objective)
 
@@ -123,7 +123,7 @@ class ChapterQuestGame(Game):
                     data={},
                     is_difficult=(book_info["difficulty"] == "difficult"),
                     is_time_consuming=(num_bulk_chapters > 3),  # More than 3 chapters is time-consuming
-                    weight=20
+                    weight=30
                 )
                 objectives.append(bulk_objective)
 
@@ -133,7 +133,7 @@ class ChapterQuestGame(Game):
                 data={},
                 is_difficult=(book_info["difficulty"] == "difficult"),
                 is_time_consuming=True,  # Completing an entire book is time-consuming
-                weight=5  # Lower weight so it's less likely to be selected
+                weight=5
             )
             objectives.append(completion_objective)
 
@@ -158,7 +158,7 @@ class ChapterQuestGame(Game):
                             data={},
                             is_difficult=False,
                             is_time_consuming=False,  # Reading one chapter is not time-consuming
-                            weight=40
+                            weight=25
                         )
                     else:
                         genre_objective = GameObjectiveTemplate(
@@ -166,7 +166,7 @@ class ChapterQuestGame(Game):
                             data={},
                             is_difficult=False,
                             is_time_consuming=True,  # Reading from multiple books is time-consuming
-                            weight=30
+                            weight=15
                         )
                     objectives.append(genre_objective)
 
@@ -191,7 +191,7 @@ class ChapterQuestGame(Game):
                             data={},
                             is_difficult=False,
                             is_time_consuming=False,  # Reading one chapter is not time-consuming
-                            weight=40
+                            weight=25
                         )
                     else:
                         author_objective = GameObjectiveTemplate(
@@ -199,7 +199,7 @@ class ChapterQuestGame(Game):
                             data={},
                             is_difficult=False,
                             is_time_consuming=True,  # Reading from multiple books is time-consuming
-                            weight=30
+                            weight=15
                         )
                     objectives.append(author_objective)
 
