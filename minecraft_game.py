@@ -409,7 +409,7 @@ class MinecraftGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Collect all MUSIC_DISC_COUNT music discs",
+                    label="Collect MUSIC_DISC_COUNT different music discs",
                     data={"MUSIC_DISC_COUNT": (self.music_disc_counts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
@@ -744,7 +744,7 @@ class MinecraftGame(Game):
 
     @staticmethod
     def music_disc_counts() -> range:
-        return range(10, 13)
+        return range(5, 13)
 
     @staticmethod
     def superflat_survival_days() -> range:
