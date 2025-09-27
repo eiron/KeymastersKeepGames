@@ -17,7 +17,7 @@ class ReallyBoringChallengesArchipelagoOptions:
     really_boring_challenges_include_repetitive_counting: RBCIncludeRepetitiveCounting
     really_boring_challenges_include_mindless_clicking: RBCIncludeMindlessClicking
     really_boring_challenges_include_patience_tests: RBCIncludeTediousWaiting
-    really_boring_challenges_include_tedious_sorting: RBCIncludePointlessOrganizing
+    really_boring_challenges_include_tedious_sorting: RBCIncludePointlessOrganising
     really_boring_challenges_include_mind_numbing_memorization: RBCIncludeMindNumbingTasks
     really_boring_challenges_include_soul_crushing_repetition: RBCIncludeSoulCrushingGrinds
     really_boring_challenges_task_count: RBCTaskCount
@@ -80,10 +80,19 @@ class ReallyBoringChallengesGame(Game):
                     weight=3,
                 ),
                 GameObjectiveTemplate(
-                    label="Count every COUNTABLE_THING in COUNTING_LOCATION",
+                    label="Count every PERSONAL_COUNTABLE",
                     data={
-                        "COUNTABLE_THING": (self.boring_countables, 1),
-                        "COUNTING_LOCATION": (self.vast_areas, 1)
+                        "PERSONAL_COUNTABLE": (self.personal_countables, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=3,
+                ),
+                GameObjectiveTemplate(
+                    label="Count every PUBLIC_COUNTABLE in PUBLIC_LOCATION",
+                    data={
+                        "PUBLIC_COUNTABLE": (self.public_countables, 1),
+                        "PUBLIC_LOCATION": (self.public_areas, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=False,
@@ -142,13 +151,13 @@ class ReallyBoringChallengesGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Click at exactly CLICK_INTERVAL second intervals for DURATION minutes",
+                    label="Click at approximately CLICK_INTERVAL second intervals for DURATION minutes",
                     data={
                         "CLICK_INTERVAL": (self.precise_intervals, 1),
                         "DURATION": (self.endless_durations, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -168,14 +177,14 @@ class ReallyBoringChallengesGame(Game):
         if self.include_tedious_waiting:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Wait exactly WAIT_DURATION without doing anything else",
+                    label="Wait exactly WAIT_DURATION minutes without doing anything else",
                     data={"WAIT_DURATION": (self.excruciating_wait_times, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
-                    label="Watch WATCHING_TARGET for OBSERVATION_DURATION without looking away",
+                    label="Watch WATCHING_TARGET for OBSERVATION_DURATION minutes with minimal distractions",
                     data={
                         "WATCHING_TARGET": (self.boring_watch_targets, 1),
                         "OBSERVATION_DURATION": (self.mind_melting_durations, 1)
@@ -185,21 +194,24 @@ class ReallyBoringChallengesGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Sit completely still for STILLNESS_DURATION",
+                    label="Sit as still as possible for STILLNESS_DURATION minutes (minimal movement only)",
                     data={"STILLNESS_DURATION": (self.torture_durations, 1)},
                     is_time_consuming=True,
                     is_difficult=True,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Wait for RANDOM_EVENT to occur naturally (no interference)",
-                    data={"RANDOM_EVENT": (self.rare_random_events, 1)},
+                    label="Wait up to WAIT_DURATION minutes for RANDOM_EVENT to occur (give up after time limit)",
+                    data={
+                        "WAIT_DURATION": (self.excruciating_wait_times, 1),
+                        "RANDOM_EVENT": (self.rare_random_events, 1)
+                    },
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
-                    label="Stare at STARING_TARGET for STARE_DURATION without blinking excessively",
+                    label="Stare at STARING_TARGET for STARE_DURATION minutes while minimising blinking",
                     data={
                         "STARING_TARGET": (self.staring_targets, 1),
                         "STARE_DURATION": (self.eye_strain_durations, 1)
@@ -210,15 +222,15 @@ class ReallyBoringChallengesGame(Game):
                 ),
             ])
 
-        # Pointless Organizing
+        # Pointless Organising
         if self.include_pointless_organizing:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Organize ITEM_COUNT ITEMS by ORGANIZATION_CRITERIA",
+                    label="Organise ITEM_COUNT ITEMS by ORGANISATION_CRITERIA",
                     data={
                         "ITEM_COUNT": (self.overwhelming_item_counts, 1),
                         "ITEMS": (self.mundane_items, 1),
-                        "ORGANIZATION_CRITERIA": (self.absurd_criteria, 1)
+                        "ORGANISATION_CRITERIA": (self.absurd_criteria, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=False,
@@ -235,9 +247,9 @@ class ReallyBoringChallengesGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Categorize CATEGORIZATION_COUNT items into CATEGORY_COUNT categories",
+                    label="Categorise CATEGORISATION_COUNT items into CATEGORY_COUNT categories",
                     data={
-                        "CATEGORIZATION_COUNT": (self.massive_categorization_counts, 1),
+                        "CATEGORISATION_COUNT": (self.massive_categorization_counts, 1),
                         "CATEGORY_COUNT": (self.category_counts, 1)
                     },
                     is_time_consuming=True,
@@ -267,7 +279,7 @@ class ReallyBoringChallengesGame(Game):
                     weight=3,
                 ),
                 GameObjectiveTemplate(
-                    label="Complete GRIND_TASK for GRIND_DURATION without breaks",
+                    label="Complete GRIND_TASK for GRIND_DURATION minutes without breaks",
                     data={
                         "GRIND_TASK": (self.monotonous_tasks, 1),
                         "GRIND_DURATION": (self.soul_crushing_durations, 1)
@@ -306,7 +318,7 @@ class ReallyBoringChallengesGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Perform MEDITATION_TASK for MEDITATION_DURATION",
+                    label="Perform MEDITATION_TASK for MEDITATION_DURATION minutes",
                     data={
                         "MEDITATION_TASK": (self.boring_meditation_tasks, 1),
                         "MEDITATION_DURATION": (self.meditation_durations, 1)
@@ -346,18 +358,31 @@ class ReallyBoringChallengesGame(Game):
 
     # Data lists for maximum boredom
     @staticmethod
-    def boring_countables() -> List[str]:
+    def personal_countables() -> List[str]:
         return [
-            "grains of sand", "blades of grass", "ceiling tiles", "floor tiles", "bricks",
-            "leaves on trees", "stars in the sky", "clouds", "raindrops", "dust particles",
-            "pixels on screen", "words in books", "letters in sentences", "cracks in walls"
+            "books on bookshelf", "items in fridge", "clothes in wardrobe", "CDs in collection", 
+            "spoons in drawer", "plates in cupboard", "bottles in recycling bin", "cans in pantry",
+            "toys in toybox", "tools in toolbox", "jewellery in box", "makeup items in bag",
+            "spices in rack", "shampoos in bathroom cabinet", "magazines on coffee table",
+            "photos in album", "coins in piggy bank", "keys on hook", "plants in garden",
+            "cups in mug tree", "cables behind TV", "remotes on table", "pillows on sofa",
+            "books on shelf", "pens in drawer", "shoes in wardrobe", "towels in bathroom",
+            "dishes in cupboard", "glasses in cabinet", "pots in kitchen", "pans in cupboard"
         ]
 
     @staticmethod
-    def vast_areas() -> List[str]:
+    def public_countables() -> List[str]:
         return [
-            "entire city", "large park", "shopping mall", "university campus", "airport",
-            "convention center", "forest", "beach", "mountain range", "desert"
+            "doors", "windows", "chairs", "lights", "bins", "signs", "steps", "walls", "people"
+        ]
+
+    @staticmethod
+    def public_areas() -> List[str]:
+        return [
+            "local park", "car park section", "supermarket aisle", "classroom", "office cubicle",
+            "community centre", "library section", "shopping centre", "train station", "bus stop area",
+            "museum hall", "art gallery", "sports stadium", "concert hall", "theatre foyer",
+            "hospital waiting room", "bank queue", "post office", "town hall", "swimming pool"
         ]
 
     @staticmethod
@@ -412,13 +437,13 @@ class ReallyBoringChallengesGame(Game):
     def mundane_items() -> List[str]:
         return [
             "paperclips", "rubber bands", "pens", "pencils", "staples", "coins", "buttons",
-            "screws", "nails", "paper clips", "thumbtacks", "erasers", "marbles"
+            "screws", "nails", "paper clips", "drawing pins", "erasers", "marbles"
         ]
 
     @staticmethod
     def absurd_criteria() -> List[str]:
         return [
-            "color intensity", "weight estimation", "alphabetical order", "size perception",
+            "colour intensity", "weight estimation", "alphabetical order", "size perception",
             "age guessing", "material type", "origin country", "purchase date", "usage frequency"
         ]
 
@@ -433,7 +458,7 @@ class ReallyBoringChallengesGame(Game):
     def complex_patterns() -> List[str]:
         return [
             "perfect spiral", "rainbow gradient", "size progression", "geometric shape",
-            "mandala pattern", "symmetrical design", "color wheel", "mathematical sequence"
+            "mandala pattern", "symmetrical design", "colour wheel", "mathematical sequence"
         ]
 
     @staticmethod
@@ -488,7 +513,7 @@ class ReallyBoringChallengesGame(Game):
     @staticmethod
     def tedious_sorting_methods() -> List[str]:
         return [
-            "alphabetical order", "chronological order", "size order", "color gradient",
+            "alphabetical order", "chronological order", "size order", "colour gradient",
             "frequency of use", "personal preference", "random assignment", "category type"
         ]
 
@@ -502,7 +527,7 @@ class ReallyBoringChallengesGame(Game):
     @staticmethod
     def monotonous_tasks() -> List[str]:
         return [
-            "data entry", "copy-pasting", "file organizing", "email sorting", "list making",
+            "data entry", "copy-pasting", "file organising", "email sorting", "list making",
             "inventory checking", "repetitive calculations", "format adjusting"
         ]
 
@@ -524,7 +549,7 @@ class ReallyBoringChallengesGame(Game):
     def mind_numbing_phrases() -> List[str]:
         return [
             "the quick brown fox", "hello world", "this is boring", "counting numbers",
-            "alphabet recitation", "color names", "day of week", "month names"
+            "alphabet recitation", "colour names", "day of week", "month names"
         ]
 
     @staticmethod
@@ -691,9 +716,9 @@ class RBCIncludeTediousWaiting(DefaultOnToggle):
     """Include waiting and observation objectives."""
     display_name = "Include Tedious Waiting"
 
-class RBCIncludePointlessOrganizing(DefaultOnToggle):
-    """Include organizing and sorting objectives."""
-    display_name = "Include Pointless Organizing"
+class RBCIncludePointlessOrganising(DefaultOnToggle):
+    """Include organising and sorting objectives."""
+    display_name = "Include Pointless Organising"
 
 class RBCIncludeEndlessWalking(DefaultOnToggle):
     """Include walking and movement pattern objectives."""
