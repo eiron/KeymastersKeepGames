@@ -18,7 +18,10 @@ class SocialConnectionsArchipelagoOptions:
     social_family_selection: SocialFamilySelection
     social_community_selection: SocialCommunitySelection
     social_networking_selection: SocialNetworkingSelection
-    social_people_selection: SocialPeopleSelection
+    social_meetup_people: SocialMeetupPeople
+    social_family_people: SocialFamilyPeople
+    social_community_people: SocialCommunityPeople
+    social_networking_people: SocialNetworkingPeople
     social_meetup_actions: SocialMeetupActions
     social_family_actions: SocialFamilyActions
     social_community_actions: SocialCommunityActions
@@ -45,7 +48,7 @@ class SocialConnectionsGame(Game):
             game_objective_templates.append(
                 GameObjectiveTemplate(
                     label="ACTION_VERB MEETUP_TYPE with PERSON_NAME",
-                    data={"ACTION_VERB": (self.meetup_actions, 1), "MEETUP_TYPE": (self.meetups, 1), "PERSON_NAME": (self.people, 1)},
+                    data={"ACTION_VERB": (self.meetup_actions, 1), "MEETUP_TYPE": (self.meetups, 1), "PERSON_NAME": (self.meetup_people, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -55,8 +58,8 @@ class SocialConnectionsGame(Game):
         if self.has_family_activities:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION_VERB FAMILY_ACTIVITY_TYPE",
-                    data={"ACTION_VERB": (self.family_actions, 1), "FAMILY_ACTIVITY_TYPE": (self.family_activities, 1)},
+                    label="ACTION_VERB FAMILY_ACTIVITY_TYPE with PERSON_NAME",
+                    data={"ACTION_VERB": (self.family_actions, 1), "FAMILY_ACTIVITY_TYPE": (self.family_activities, 1), "PERSON_NAME": (self.family_people, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -66,8 +69,8 @@ class SocialConnectionsGame(Game):
         if self.has_community_events:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION_VERB COMMUNITY_EVENT",
-                    data={"ACTION_VERB": (self.community_actions, 1), "COMMUNITY_EVENT": (self.community_events, 1)},
+                    label="ACTION_VERB COMMUNITY_EVENT with PERSON_NAME",
+                    data={"ACTION_VERB": (self.community_actions, 1), "COMMUNITY_EVENT": (self.community_events, 1), "PERSON_NAME": (self.community_people, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -77,8 +80,8 @@ class SocialConnectionsGame(Game):
         if self.has_networking:
             game_objective_templates.append(
                 GameObjectiveTemplate(
-                    label="ACTION_VERB NETWORKING_EVENT",
-                    data={"ACTION_VERB": (self.networking_actions, 1), "NETWORKING_EVENT": (self.networking_events, 1)},
+                    label="ACTION_VERB NETWORKING_EVENT with PERSON_NAME",
+                    data={"ACTION_VERB": (self.networking_actions, 1), "NETWORKING_EVENT": (self.networking_events, 1), "PERSON_NAME": (self.networking_people, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
@@ -90,22 +93,26 @@ class SocialConnectionsGame(Game):
     @property
     def has_meetups(self) -> bool:
         meetups = self.meetups()
-        return len(meetups) > 0
+        meetup_people = self.meetup_people()
+        return len(meetups) > 0 and len(meetup_people) > 0
 
     @property
     def has_family_activities(self) -> bool:
         family_activities = self.family_activities()
-        return len(family_activities) > 0
+        family_people = self.family_people()
+        return len(family_activities) > 0 and len(family_people) > 0
 
     @property
     def has_community_events(self) -> bool:
         community_events = self.community_events()
-        return len(community_events) > 0
+        community_people = self.community_people()
+        return len(community_events) > 0 and len(community_people) > 0
 
     @property
     def has_networking(self) -> bool:
         networking_events = self.networking_events()
-        return len(networking_events) > 0
+        networking_people = self.networking_people()
+        return len(networking_events) > 0 and len(networking_people) > 0
 
     def meetup_actions(self) -> List[str]:
         meetup_actions: List[str] = list(self.archipelago_options.social_meetup_actions.value)
@@ -139,9 +146,21 @@ class SocialConnectionsGame(Game):
         networking_events: List[str] = list(self.archipelago_options.social_networking_selection.value)
         return sorted(networking_events)
 
-    def people(self) -> List[str]:
-        people: List[str] = list(self.archipelago_options.social_people_selection.value)
-        return sorted(people)
+    def meetup_people(self) -> List[str]:
+        meetup_people: List[str] = list(self.archipelago_options.social_meetup_people.value)
+        return sorted(meetup_people)
+
+    def family_people(self) -> List[str]:
+        family_people: List[str] = list(self.archipelago_options.social_family_people.value)
+        return sorted(family_people)
+
+    def community_people(self) -> List[str]:
+        community_people: List[str] = list(self.archipelago_options.social_community_people.value)
+        return sorted(community_people)
+
+    def networking_people(self) -> List[str]:
+        networking_people: List[str] = list(self.archipelago_options.social_networking_people.value)
+        return sorted(networking_people)
 
 
 # Archipelago Options
@@ -193,16 +212,52 @@ class SocialNetworkingSelection(OptionSet):
     default = ["Professional Meetup", "Industry Conference", "Alumni Event", "Business Lunch", "Workshop", "..."]
 
 
-class SocialPeopleSelection(OptionSet):
+class SocialMeetupPeople(OptionSet):
     """
-    Defines the list of people (friends, family, colleagues, etc.) that you might interact with during social activities.
+    Defines the list of people you might interact with during friend meetups and social gatherings.
 
     Replace the placeholders with actual names or relationship descriptions of your choosing.
     """
 
-    display_name = "Social People Selection"
+    display_name = "Social Meetup People"
 
-    default = ["Best Friend", "College Friend", "Work Colleague", "Family Member", "Neighbour", "Old Friend", "..."]
+    default = ["Close Friend", "College Buddy", "Online Friend", "Old Friend", "New Acquaintance", "Fellow Hobbyist", "Gaming Friend", "Book Club Member", "Friend of a Friend", "..."]
+
+
+class SocialFamilyPeople(OptionSet):
+    """
+    Defines the list of family members you might interact with during family activities.
+
+    Replace the placeholders with actual names or relationship descriptions of your choosing.
+    """
+
+    display_name = "Social Family People"
+
+    default = ["Sister", "Brother", "Mom", "Dad", "Cousin", "Aunt/Uncle", "Grandparent", "Family Member", "..."]
+
+
+class SocialCommunityPeople(OptionSet):
+    """
+    Defines the list of people you might interact with during community events and local activities.
+
+    Replace the placeholders with actual names or relationship descriptions of your choosing.
+    """
+
+    display_name = "Social Community People"
+
+    default = ["Neighbor", "Community Member", "Local Contact", "Volunteer Coordinator", "Fellow Participant", "Local Organizer", "..."]
+
+
+class SocialNetworkingPeople(OptionSet):
+    """
+    Defines the list of people you might interact with during networking events and professional gatherings.
+
+    Replace the placeholders with actual names or relationship descriptions of your choosing.
+    """
+
+    display_name = "Social Networking People"
+
+    default = ["Work Colleague", "Former Coworker", "Industry Contact", "Professional Mentor", "Study Partner", "Business Contact", "..."]
 
 
 class SocialMeetupActions(OptionSet):
