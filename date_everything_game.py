@@ -134,6 +134,27 @@ class DateEverythingGame(Game):
                     is_difficult=False,
                     weight=6,
                 ),
+                GameObjectiveTemplate(
+                    label="Share a quick greeting with QUICK_CHARACTER",
+                    data={"QUICK_CHARACTER": (self.all_characters, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=8,
+                ),
+                GameObjectiveTemplate(
+                    label="Give a simple compliment to EASY_CHARACTER",
+                    data={"EASY_CHARACTER": (self.all_characters, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=8,
+                ),
+                GameObjectiveTemplate(
+                    label="Ask BASIC_CHARACTER about their day",
+                    data={"BASIC_CHARACTER": (self.all_characters, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=6,
+                ),
             ])
 
         # Kitchen Appliances (31-42)
@@ -163,6 +184,13 @@ class DateEverythingGame(Game):
                     is_difficult=True,
                     weight=2,
                 ),
+                GameObjectiveTemplate(
+                    label="Offer a friendly wave to KITCHEN_GREETING_CHARACTER",
+                    data={"KITCHEN_GREETING_CHARACTER": (self.kitchen_characters, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=4,
+                ),
             ])
 
         # Bathroom Items (43-52)
@@ -184,6 +212,13 @@ class DateEverythingGame(Game):
                     is_time_consuming=False,
                     is_difficult=True,
                     weight=3,
+                ),
+                GameObjectiveTemplate(
+                    label="Smile at BATHROOM_CHARACTER in passing",
+                    data={"BATHROOM_CHARACTER": (self.bathroom_characters, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=4,
                 ),
                 GameObjectiveTemplate(
                     label="Get BATHROOM_COUNT bathroom items to RELATIONSHIP_OUTCOME status",
@@ -252,6 +287,13 @@ class DateEverythingGame(Game):
                     is_time_consuming=False,
                     is_difficult=True,
                     weight=6,
+                ),
+                GameObjectiveTemplate(
+                    label="Give a thumbs up to OFFICE_CHARACTER",
+                    data={"OFFICE_CHARACTER": (self.office_bedroom_characters, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=4,
                 ),
             ])
 
@@ -474,6 +516,21 @@ class DateEverythingGame(Game):
         return [
             "Lucinda Lavish (Deluxe Edition)", "Michael Transaction (Microtransactions)"
         ]
+
+    @staticmethod
+    def all_characters() -> List[str]:
+        # Combine all character lists for quick/easy objectives
+        all_chars = []
+        all_chars.extend(DateEverythingGame.structural_characters())
+        all_chars.extend(DateEverythingGame.furniture_characters())
+        all_chars.extend(DateEverythingGame.kitchen_characters())
+        all_chars.extend(DateEverythingGame.bathroom_characters())
+        all_chars.extend(DateEverythingGame.office_bedroom_characters())
+        all_chars.extend(DateEverythingGame.laundry_characters())
+        all_chars.extend(DateEverythingGame.misc_characters())
+        all_chars.extend(DateEverythingGame.concept_characters())
+        all_chars.extend(DateEverythingGame.dlc_characters())
+        return all_chars
 
     @staticmethod
     def relationship_outcomes() -> List[str]:
