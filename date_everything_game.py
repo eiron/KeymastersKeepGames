@@ -282,7 +282,7 @@ class DateEverythingGame(Game):
                     weight=4,
                 ),
                 GameObjectiveTemplate(
-                    label="Read Diana's (Diary) secrets and maintain trust to achieve RELATIONSHIP_OUTCOME",
+                    label="Read Diana's (Diary) secrets to achieve RELATIONSHIP_OUTCOME",
                     data={"RELATIONSHIP_OUTCOME": (self.preferred_relationship_outcomes, 1)},
                     is_time_consuming=False,
                     is_difficult=True,

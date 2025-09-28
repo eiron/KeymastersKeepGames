@@ -593,7 +593,7 @@ class BloodstainedRitualOfTheNightGame(Game):
                     weight=1,
                 ),
                 GameObjectiveTemplate(
-                    label="Help CROP_TYPE with Harry's farming quests",
+                    label="Grow CROP_TYPE with Harry",
                     data={"CROP_TYPE": (self.crop_types, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
