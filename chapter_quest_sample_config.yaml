@@ -5,109 +5,126 @@ Chapter Quest:
   chapter_quest_book_collection:
   # Definition of book collection. Format is as follows:
   # - title: "Book Title"
-  #   chapters: 25
+  #   starting_chapter: 1 (*optional, defaults to 1)
+  #   total_chapters: 25
   #   author: "Author Name" (*optional)
   #   genre: "Fiction" (*optional)
   #   difficulty: "normal" (*optional, can be "normal" or "difficult")
 
   # Fiction books
   - title: "The Lord of the Rings: The Fellowship of the Ring"
-    chapters: 22
+    starting_chapter: 1
+    total_chapters: 22
     author: "J.R.R. Tolkien"
     genre: "Fantasy Fiction"
     difficulty: "normal"
   
   - title: "Dune"
-    chapters: 47
+    starting_chapter: 5
+    total_chapters: 47
     author: "Frank Herbert"
     genre: "Science Fiction"
     difficulty: "difficult"
   
   - title: "The Hobbit"
-    chapters: 19
+    starting_chapter: 1
+    total_chapters: 19
     author: "J.R.R. Tolkien"
     genre: "Fantasy Fiction"
     difficulty: "normal"
   
   - title: "1984"
-    chapters: 24
+    starting_chapter: 1
+    total_chapters: 24
     author: "George Orwell"
     genre: "Dystopian Fiction"
     difficulty: "normal"
   
   - title: "Pride and Prejudice"
-    chapters: 61
+    starting_chapter: 10
+    total_chapters: 61
     author: "Jane Austen"
     genre: "Romance"
     difficulty: "normal"
   
   # Non-fiction books
   - title: "Sapiens: A Brief History of Humankind"
-    chapters: 20
+    starting_chapter: 1
+    total_chapters: 20
     author: "Yuval Noah Harari"
     genre: "History"
     difficulty: "normal"
   
   - title: "The Art of War"
-    chapters: 13
+    starting_chapter: 1
+    total_chapters: 13
     author: "Sun Tzu"
     genre: "Philosophy"
     difficulty: "normal"
   
   - title: "A Brief History of Time"
-    chapters: 11
+    starting_chapter: 1
+    total_chapters: 11
     author: "Stephen Hawking"
     genre: "Science"
     difficulty: "difficult"
   
   # Contemporary fiction
   - title: "The Midnight Library"
-    chapters: 15
+    starting_chapter: 1
+    total_chapters: 15
     author: "Matt Haig"
     genre: "Contemporary Fiction"
     difficulty: "normal"
   
   - title: "Where the Crawdads Sing"
-    chapters: 53
+    starting_chapter: 1
+    total_chapters: 53
     author: "Delia Owens"
     genre: "Mystery"
     difficulty: "normal"
   
   # Classics
   - title: "To Kill a Mockingbird"
-    chapters: 31
+    starting_chapter: 1
+    total_chapters: 31
     author: "Harper Lee"
     genre: "Classic Literature"
     difficulty: "normal"
   
   - title: "The Great Gatsby"
-    chapters: 9
+    starting_chapter: 1
+    total_chapters: 9
     author: "F. Scott Fitzgerald"
     genre: "Classic Literature"
     difficulty: "normal"
   
   # Biography/Memoir
   - title: "Becoming"
-    chapters: 24
+    starting_chapter: 1
+    total_chapters: 24
     author: "Michelle Obama"
     genre: "Memoir"
     difficulty: "normal"
   
   - title: "Steve Jobs"
-    chapters: 42
+    starting_chapter: 3
+    total_chapters: 42
     author: "Walter Isaacson"
     genre: "Biography"
     difficulty: "normal"
   
   # Self-help/Business
   - title: "Atomic Habits"
-    chapters: 20
+    starting_chapter: 1
+    total_chapters: 20
     author: "James Clear"
     genre: "Self-Help"
     difficulty: "normal"
   
   - title: "The 7 Habits of Highly Effective People"
-    chapters: 15
+    starting_chapter: 1
+    total_chapters: 15
     author: "Stephen R. Covey"
     genre: "Self-Help"
     difficulty: "normal"

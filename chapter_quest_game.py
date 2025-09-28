@@ -53,16 +53,20 @@ class ChapterQuestGame(Game):
                 for book in self.archipelago_options.chapter_quest_book_collection:
                     if isinstance(book, dict):
                         title = book["title"]
-                        chapter_count = book["chapters"]
+                        chapter_count = book["total_chapters"]
                         genre = book.get("genre", "General")
                         author = book.get("author", "Unknown Author")
                         difficulty = book.get("difficulty", "normal")
+                        starting_chapter = book.get("starting_chapter", 1)
+                        if starting_chapter > chapter_count:
+                            raise ValueError(f"starting_chapter ({starting_chapter}) cannot be greater than total chapters ({chapter_count}) for book '{title}'")
                         
                         self.book_collection[title] = {
-                            "chapters": chapter_count,
+                            "total_chapters": chapter_count,
                             "genre": genre,
                             "author": author,
                             "difficulty": difficulty,
+                            "starting_chapter": starting_chapter,
                         }
                         
                         # Collect unique genres and authors
@@ -95,9 +99,9 @@ class ChapterQuestGame(Game):
             # Generate specific chapter objectives (if enabled)
             if self.archipelago_options.chapter_quest_include_specific_chapters:
                 # Generate multiple chapter objectives per book (up to 10 random chapters)
-                num_chapters_for_book = min(10, book_info["chapters"])
-                # random.sample() will return all chapters if num_chapters_for_book equals total chapters
-                selected_chapters = self.random.sample(range(1, book_info["chapters"] + 1), num_chapters_for_book)
+                num_chapters_for_book = min(10, book_info["total_chapters"] - book_info["starting_chapter"] + 1)
+                # random.sample() will return all available chapters if num_chapters_for_book equals total available chapters
+                selected_chapters = self.random.sample(range(book_info["starting_chapter"], book_info["total_chapters"] + 1), num_chapters_for_book)
                 
                 for chapter in selected_chapters:
                     chapter_objective = GameObjectiveTemplate(
@@ -111,8 +115,10 @@ class ChapterQuestGame(Game):
 
             # Generate bulk chapter objectives (if enabled)
             if self.archipelago_options.chapter_quest_include_bulk_chapters:
+                # Calculate remaining chapters after starting_chapter
+                remaining_chapters = book_info["total_chapters"] - book_info["starting_chapter"] + 1
                 # Generate "Read X chapters from Y book" objectives that favor lower numbers
-                max_bulk_chapters = min(book_info["chapters"], 10)  # Cap at 10 chapters max
+                max_bulk_chapters = min(remaining_chapters, 10)  # Cap at 10 chapters max
                 # Use weighted random to favor lower numbers (1-3 are more likely than 7-10)
                 weights = [max_bulk_chapters - i for i in range(max_bulk_chapters)]  # Higher weight for lower numbers
                 num_bulk_chapters = self.random.choices(range(1, max_bulk_chapters + 1), weights=weights)[0]
@@ -210,7 +216,8 @@ class BookCollection(OptionList):
     """
     Definition of book collection. Format is as follows:
     - title: "Book Title"
-      chapters: 25
+      starting_chapter: 1 (*optional, defaults to 1)
+      total_chapters: 25
       author: "Author Name" (*optional)
       genre: "Fiction" (*optional)
       difficulty: "normal" (*optional, can be "normal" or "difficult")
@@ -220,28 +227,32 @@ class BookCollection(OptionList):
     default = [
         {
             "title": "1984",
-            "chapters": 24,
+            "starting_chapter": 5,
+            "total_chapters": 24,
             "author": "George Orwell",
             "genre": "Dystopian Fiction",
             "difficulty": "normal"
         },
         {
             "title": "Pride and Prejudice",
-            "chapters": 61,
+            "starting_chapter": 10,
+            "total_chapters": 61,
             "author": "Jane Austen",
             "genre": "Classic Romance",
             "difficulty": "normal"
         },
         {
             "title": "Ulysses",
-            "chapters": 18,
+            "starting_chapter": 3,
+            "total_chapters": 18,
             "author": "James Joyce",
             "genre": "Modernist Literature",
             "difficulty": "difficult"
         },
         {
             "title": "Atomic Habits",
-            "chapters": 20,
+            "starting_chapter": 5,
+            "total_chapters": 20,
             "author": "James Clear",
             "genre": "Self-Help",
             "difficulty": "normal"
@@ -250,7 +261,8 @@ class BookCollection(OptionList):
     schema = Schema([
         {
             "title": And(str, len),
-            "chapters": And(int, lambda x: x > 0),
+            Optional("starting_chapter"): And(int, lambda x: x > 0),
+            "total_chapters": And(int, lambda x: x > 0),
             Optional("author"): And(str, len),
             Optional("genre"): And(str, len),
             Optional("difficulty"): And(str, lambda x: x in ["normal", "difficult"]),
