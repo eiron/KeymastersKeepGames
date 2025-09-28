@@ -105,7 +105,7 @@ class CultOfTheLambGame(Game):
                     GameObjectiveTemplate(
                         label="Use PUNISHMENT_TYPE on PUNISHMENT_COUNT followers",
                         data={
-                            "PUNISHMENT": (self.punishments, 1),
+                            "PUNISHMENT_TYPE": (self.punishments, 1),
                             "PUNISHMENT_COUNT": (self.punishment_counts, 1)
                         },
                         is_time_consuming=False,
