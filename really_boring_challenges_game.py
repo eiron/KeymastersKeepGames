@@ -744,7 +744,6 @@ class RBCBoredomIntensity(Choice):
     option_extremely_dull = "Extremely Dull"
     option_soul_crushing = "Soul Crushing"
     option_mind_numbing = "Mind Numbing"
-
     default = "quite_boring"
 
 class RBCTaskCount(Choice):
@@ -756,7 +755,6 @@ class RBCTaskCount(Choice):
     option_fifteen = "Fifteen"
     option_ten = "Ten"
     option_five = "Five"
-
     default = "twenty_five"
 
 class RBCCompletionGoal(Choice):
@@ -767,5 +765,4 @@ class RBCCompletionGoal(Choice):
     option_half_tasks = "Half Tasks"
     option_minimal_engagement = "Minimal Engagement"
     option_survival_mode = "Survival Mode"
-
     default = "half_tasks"

@@ -1223,7 +1223,7 @@ class ScavengerDifficultyPreference(Choice):
     option_all = "All"
     option_easy = "Easy"
     option_hard = "Hard"
-    default = option_all
+    default = "all"
 
 class ScavengerTravelScope(Choice):
     """Set the geographical scope for objectives."""
@@ -1231,7 +1231,7 @@ class ScavengerTravelScope(Choice):
     option_all = "All"
     option_local = "Local"
     option_regional = "Regional"
-    default = option_all
+    default = "all"
 
 class ScavengerSeasonPreference(Choice):
     """Focus seasonal activities on a specific season."""
@@ -1241,4 +1241,4 @@ class ScavengerSeasonPreference(Choice):
     option_summer = "Summer"
     option_fall = "Fall"
     option_winter = "Winter"
-    default = option_all
+    default = "all"

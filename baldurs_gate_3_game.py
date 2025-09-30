@@ -959,7 +959,7 @@ class BG3DifficultyPreference(Choice):
     option_all = "All"
     option_easy = "Easy"
     option_hard = "Hard"
-    default = option_all
+    default = "all"
 
 class BG3PlaystyleFocus(Choice):
     """Focus objectives on specific playstyles."""
@@ -968,4 +968,4 @@ class BG3PlaystyleFocus(Choice):
     option_combat = "Combat"
     option_story = "Story"
     option_exploration = "Exploration"
-    default = option_all
+    default = "all"

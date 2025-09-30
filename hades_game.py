@@ -528,4 +528,4 @@ class HadesDifficultyLevel(Choice):
     option_normal = "Normal"
     option_hard = "Hard"
     option_extreme = "Extreme"
-    default = option_normal
+    default = "normal"

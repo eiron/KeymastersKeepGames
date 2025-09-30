@@ -1181,7 +1181,6 @@ class ACNHIncludeCrafting(DefaultOnToggle):
 class ACNHIncludeSeasonalEvents(Toggle):
     """Include seasonal event objectives (limited-time activities)."""
     display_name = "Include Seasonal Events"
-    default = False  # Keep as False - seasonal events are more specialized/harder
 
 class ACNHIncludeDecorating(DefaultOnToggle):
     """Include decorating objectives (room design, themes, HHA scoring)."""
@@ -1195,15 +1194,15 @@ class ACNHCollectionFocus(Choice):
     option_fish = "Fish"
     option_sea_creatures = "Sea Creatures"
     option_fossils = "Fossils"
-    default = option_all
+    default = "all"
 
 class ACNHIslandType(Choice):
     """Choose between challenges for new or established islands."""
     display_name = "Island Type"
-    default = option_new = "New"
+    option_new = "New"
     option_established = "Established"
+    default = "new"
 
 class ACNHIncludeHappyHomeParadise(Toggle):
     """Include Happy Home Paradise DLC objectives (vacation home design, facilities)."""
     display_name = "Include Happy Home Paradise DLC"
-    default = False  # Keep as False since this requires DLC ownership

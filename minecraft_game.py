@@ -802,7 +802,7 @@ class MinecraftGameModeFocus(Choice):
     option_all = "All"
     option_survival = "Survival"
     option_creative = "Creative"
-    default = option_all
+    default = "all"
 
 class MinecraftDifficultyPreference(Choice):
     """Prefer certain difficulty levels for objectives."""
@@ -810,4 +810,4 @@ class MinecraftDifficultyPreference(Choice):
     option_all = "All"
     option_easy = "Easy"
     option_hard = "Hard"
-    default = option_all
+    default = "all"

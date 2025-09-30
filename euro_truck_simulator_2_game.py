@@ -486,4 +486,4 @@ class ETS2DifficultyLevel(Choice):
     option_easy = "Easy"
     option_medium = "Medium"
     option_hard = "Hard"
-    default = option_medium
+    default = "medium"

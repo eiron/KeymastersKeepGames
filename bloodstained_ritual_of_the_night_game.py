@@ -1348,4 +1348,4 @@ class BloodstainedFocusStyle(Choice):
     option_all = "All"
     option_exploration = "Exploration"
     option_combat = "Combat"
-    default = option_all
+    default = "all"

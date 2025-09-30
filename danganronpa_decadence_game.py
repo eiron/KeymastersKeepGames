@@ -1011,7 +1011,6 @@ class DanganronpaLogicDifficulty(Choice):
     option_kind = "Kind"
     option_mean = "Mean"
     option_cruel = "Cruel"
-
     default = "kind"
 
 class DanganronpaActionDifficulty(Choice):
@@ -1021,5 +1020,4 @@ class DanganronpaActionDifficulty(Choice):
     option_kind = "Kind"
     option_mean = "Mean"
     option_cruel = "Cruel"
-
     default = "kind"

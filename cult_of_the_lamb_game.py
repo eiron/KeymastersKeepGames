@@ -671,4 +671,4 @@ class COTLManagementStyle(Choice):
     option_all = "All"
     option_benevolent = "Benevolent"
     option_ruthless = "Ruthless"
-    default = option_all
+    default = "all"

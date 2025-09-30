@@ -564,4 +564,4 @@ class StardewDifficultyLevel(Choice):
     option_normal = "Normal"  
     option_hard = "Hard"
     option_expert = "Expert"
-    default = option_normal
+    default = "normal"

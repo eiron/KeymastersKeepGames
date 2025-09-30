@@ -668,5 +668,4 @@ class DERelationshipGoals(Choice):
     option_hate_focused = "Hate Focused"
     option_balanced_relationships = "Balanced Relationships"
     option_chaos_romance = "Chaos Romance"
-
     default = "balanced_relationships"

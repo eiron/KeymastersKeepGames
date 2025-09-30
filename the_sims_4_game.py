@@ -2412,7 +2412,7 @@ class Sims4DifficultyLevel(Choice):
     option_normal = "Normal"
     option_hard = "Hard"
     option_expert = "Expert"
-    default = option_normal
+    default = "normal"
 
 class Sims4FocusStyle(Choice):
     """Focus objectives on specific gameplay styles."""
@@ -2421,136 +2421,111 @@ class Sims4FocusStyle(Choice):
     option_creative = "Creative"
     option_social = "Social"
     option_achievement = "Achievement"
-    default = option_all
+    default = "all"
 
 
 # DLC Options - Expansion Packs
 class Sims4IncludeGetToWork(Toggle):
     """Include Get to Work content: active careers (Doctor, Detective, Scientist), aliens, retail ownership."""
     display_name = "Include Get to Work"
-    default = False
 
 class Sims4IncludeGetTogether(Toggle):
     """Include Get Together content: clubs, Windenburg, DJ skill."""
     display_name = "Include Get Together"
-    default = False
 
 class Sims4IncludeCityLiving(Toggle):
     """Include City Living content: apartments, San Myshuno, festivals, careers."""
     display_name = "Include City Living"
-    default = False
 
 class Sims4IncludeCatsAndDogs(Toggle):
     """Include Cats & Dogs content: pets, veterinarian career, Brindleton Bay."""
     display_name = "Include Cats & Dogs"
-    default = False
 
 class Sims4IncludeSeasons(Toggle):
     """Include Seasons content: weather, holidays, gardening career."""
     display_name = "Include Seasons"
-    default = False
 
 class Sims4IncludeGetFamous(Toggle):
     """Include Get Famous content: acting career, fame system, Del Sol Valley."""
     display_name = "Include Get Famous"
-    default = False
 
 class Sims4IncludeIslandLiving(Toggle):
     """Include Island Living content: mermaids, conservationist career, Sulani."""
     display_name = "Include Island Living"
-    default = False
 
 class Sims4IncludeDiscoverUniversity(Toggle):
     """Include Discover University content: university, degrees, organizations."""
     display_name = "Include Discover University"
-    default = False
 
 class Sims4IncludeEcoLifestyle(Toggle):
     """Include Eco Lifestyle content: civil designer career, eco footprint, Evergreen Harbor."""
     display_name = "Include Eco Lifestyle"
-    default = False
 
 class Sims4IncludeSnowyEscape(Toggle):
     """Include Snowy Escape content: skiing, hot springs, lifestyles, Mt. Komorebi."""
     display_name = "Include Snowy Escape"
-    default = False
 
 class Sims4IncludeCottageLiving(Toggle):
     """Include Cottage Living content: farming, animals, Henford-on-Bagley."""
     display_name = "Include Cottage Living"
-    default = False
 
 class Sims4IncludeHighSchoolYears(Toggle):
     """Include High School Years content: teen gameplay, prom, graduation."""
     display_name = "Include High School Years"
-    default = False
 
 class Sims4IncludeGrowingTogether(Toggle):
     """Include Growing Together content: family dynamics, milestones, San Sequoia."""
     display_name = "Include Growing Together"
-    default = False
 
 class Sims4IncludeHorseRanch(Toggle):
     """Include Horse Ranch content: horses, nectar making, Chestnut Ridge."""
     display_name = "Include Horse Ranch"
-    default = False
 
 class Sims4IncludeForRent(Toggle):
     """Include For Rent content: property rental, Tomarang."""
     display_name = "Include For Rent"
-    default = False
 
 class Sims4IncludeLovestruck(Toggle):
     """Include Lovestruck content: romantic relationships, Ciudad Enamorada."""
     display_name = "Include Lovestruck"
-    default = False
 
 
 # DLC Options - Game Packs
 class Sims4IncludeVampires(Toggle):
     """Include Vampires content: vampire gameplay, Forgotten Hollow."""
     display_name = "Include Vampires"
-    default = False
 
 class Sims4IncludeParenthood(Toggle):
     """Include Parenthood content: parenting skill, character values."""
     display_name = "Include Parenthood"
-    default = False
 
 class Sims4IncludeJungleAdventure(Toggle):
     """Include Jungle Adventure content: archaeology, Selvadorada."""
     display_name = "Include Jungle Adventure"
-    default = False
 
 class Sims4IncludeStrangerVille(Toggle):
     """Include StrangerVille content: mystery solving, military career."""
     display_name = "Include StrangerVille"
-    default = False
 
 class Sims4IncludeRealmOfMagic(Toggle):
     """Include Realm of Magic content: spellcasters, Glimmerbrook."""
     display_name = "Include Realm of Magic"
-    default = False
 
 class Sims4IncludeStarWars(Toggle):
     """Include Star Wars content: Batuu, lightsabers, Force powers."""
     display_name = "Include Star Wars: Journey to Batuu"
-    default = False
 
 class Sims4IncludeDreamHomeDecorator(Toggle):
     """Include Dream Home Decorator content: interior decorator career."""
     display_name = "Include Dream Home Decorator"
-    default = False
 
 class Sims4IncludeMyWeddingStories(Toggle):
     """Include My Wedding Stories content: wedding events, Tartosa."""
     display_name = "Include My Wedding Stories"
-    default = False
 
 class Sims4IncludeWerewolves(Toggle):
     """Include Werewolves content: werewolf gameplay, Moonwood Mill."""
     display_name = "Include Werewolves"
-    default = False
 
 # Additional Base Game Categories
 class Sims4IncludeSocialExperiments(DefaultOnToggle):
@@ -2580,4 +2555,3 @@ class Sims4IncludeRoutineBreaking(DefaultOnToggle):
 class Sims4IncludeRandomEvents(Toggle):
     """Include disaster management, chaos survival, and random event challenges."""
     display_name = "Include Random Events"
-    default = False

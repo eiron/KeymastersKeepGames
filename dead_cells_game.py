@@ -572,4 +572,4 @@ class DeadCellsPlaystyleFocus(Choice):
     option_brutality = "Brutality"
     option_tactics = "Tactics"
     option_survival = "Survival"
-    default = option_all
+    default = "all"
