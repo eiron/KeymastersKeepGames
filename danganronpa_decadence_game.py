@@ -84,7 +84,7 @@ class DanganronpaGame(Game):
             ])
 
         return constraints
-    
+
     # ===== Objective templates =====
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
         templates: List[GameObjectiveTemplate] = []
@@ -650,7 +650,7 @@ class DanganronpaGame(Game):
     @staticmethod
     def all_hidden_monokuma_counts() -> List[int]:
         return [5, 10, 20]
-    
+
     @staticmethod
     def all_summer_camp_floors() -> List[int]:
         return [10, 30, 50, 100]
@@ -666,7 +666,7 @@ class DanganronpaGame(Game):
     @staticmethod
     def all_monogirl_levels() -> List[int]:
         return [3, 5, 7, 10]
-    
+
     @staticmethod
     def all_turn_counts() -> List[int]:
         return [1, 3, 5, 10, 20]
@@ -1010,7 +1010,8 @@ class DanganronpaLogicDifficulty(Choice):
     option_kind = "Kind"
     option_mean = "Mean"
     option_cruel = "Cruel"
-    default = option_kind
+
+    default = "kind"
 
 
 class DanganronpaActionDifficulty(Choice):
@@ -1019,4 +1020,5 @@ class DanganronpaActionDifficulty(Choice):
     option_kind = "Kind"
     option_mean = "Mean"
     option_cruel = "Cruel"
-    default = option_kind
+
+    default = "kind"

@@ -44,7 +44,7 @@ class DateEverythingGame(Game):
 
     def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
         constraints = []
-        
+
         constraints.extend([
             GameObjectiveTemplate(
                 label="Complete this objective while exploring only HOUSE_AREA",
@@ -69,7 +69,7 @@ class DateEverythingGame(Game):
                 },
             ),
         ])
-        
+
         return constraints
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
@@ -445,7 +445,7 @@ class DateEverythingGame(Game):
     @staticmethod
     def structural_characters() -> List[str]:
         return [
-            "Wallace (Wall)", "Florence (Floor)", "Celia (Ceiling)", "Stella (Staircase)", 
+            "Wallace (Wall)", "Florence (Floor)", "Celia (Ceiling)", "Stella (Staircase)",
             "Dorian (Door)", "Wyndolyn (Window)", "Curt & Rod (Curtains)", "Shelley (Shelves)",
             "Hector (HVAC)"
         ]
@@ -499,7 +499,7 @@ class DateEverythingGame(Game):
         return [
             "Skylar (Date-viators)", "River (Water)", "Eddie & Volt (Electricity)", "Dolly (Dustbunny)",
             "Cam (Trashcan)", "Fantina (Fan)", "Stepford (Trophies/Awards)", "Tony (Toolbox)", "Beau (Cardboard Box)",
-            "Keith (Key)", "Bodhi Windbreaker (80's Time Capsule)", "Vaughn Trapp (Mouse Trap)", 
+            "Keith (Key)", "Bodhi Windbreaker (80's Time Capsule)", "Vaughn Trapp (Mouse Trap)",
             "Sophia (Safe)", "Monique (Wallet)", "Kristof (Treadmill)", "Dunk Shuttlecock (Sports Equipment)"
         ]
 
@@ -561,7 +561,7 @@ class DateEverythingGame(Game):
     def time_periods() -> List[str]:
         # Date Everything day cycle: starts 9am, ends midnight (must sleep), 3 hours per phase
         return [
-            "Morning (9am-12pm)", "Afternoon (12pm-3pm)", "Evening (3pm-6pm)", 
+            "Morning (9am-12pm)", "Afternoon (12pm-3pm)", "Evening (3pm-6pm)",
             "Night (6pm-9pm)", "Late Night (9pm-12am)"
         ]
 
@@ -666,5 +666,7 @@ class DERelationshipGoals(Choice):
     option_love_focused = "Love Focused"
     option_friendship_focused = "Friendship Focused"
     option_hate_focused = "Hate Focused"
-    default = option_balanced_relationships = "Balanced Relationships"
+    option_balanced_relationships = "Balanced Relationships"
     option_chaos_romance = "Chaos Romance"
+
+    default = "balanced_relationships"
