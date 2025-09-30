@@ -265,10 +265,10 @@ class TheBindingOfIsaacRebirthGame(Game):
                 weight=2,
             ),
             GameObjectiveTemplate(
-                label="Defeat COUNT of the following specific bosses in one run: BOSSES",
+                label="Defeat COUNT of the following specific chapter bosses in one run: CHAPTER_BOSSES",
                 data={
                     "COUNT": (self.specific_bosses_range, 1),
-                    "BOSSES": (self.specific_bosses, 5),
+                    "CHAPTER_BOSSES": (self.chapter_bosses, 5),
                 },
                 is_time_consuming=False,
                 is_difficult=False,
@@ -741,7 +741,7 @@ class TheBindingOfIsaacRebirthGame(Game):
             "Rotgut",
         ]
 
-    def specific_bosses(self) -> List[str]:
+    def chapter_bosses(self) -> List[str]:
         specific_bosses: List[str] = self.specific_bosses_base[:]
 
         if self.has_afterbirth:
