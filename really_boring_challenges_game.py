@@ -36,7 +36,7 @@ class ReallyBoringChallengesGame(Game):
 
     def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
         constraints = []
-        
+
         constraints.extend([
             GameObjectiveTemplate(
                 label="Complete this objective without any distractions (no music, videos, etc.)",
@@ -63,7 +63,7 @@ class ReallyBoringChallengesGame(Game):
                 data={"SPEED_LEVEL": (self.painfully_slow_speeds, 1)},
             ),
         ])
-        
+
         return constraints
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
@@ -360,7 +360,7 @@ class ReallyBoringChallengesGame(Game):
     @staticmethod
     def personal_countables() -> List[str]:
         return [
-            "books on bookshelf", "items in fridge", "clothes in wardrobe", "CDs in collection", 
+            "books on bookshelf", "items in fridge", "clothes in wardrobe", "CDs in collection",
             "spoons in drawer", "plates in cupboard", "bottles in recycling bin", "cans in pantry",
             "toys in toybox", "tools in toolbox", "jewellery in box", "makeup items in bag",
             "spices in rack", "shampoos in bathroom cabinet", "magazines on coffee table",
@@ -744,6 +744,7 @@ class RBCBoredomIntensity(Choice):
     option_extremely_dull = "Extremely Dull"
     option_soul_crushing = "Soul Crushing"
     option_mind_numbing = "Mind Numbing"
+
     default = "quite_boring"
 
 class RBCTaskCount(Choice):
@@ -751,16 +752,20 @@ class RBCTaskCount(Choice):
     display_name = "Task Count"
     option_all_fifty = "All Fifty"
     option_thirty_five = "Thirty Five"
-    default = option_twenty_five = "Twenty Five"
+    option_twenty_five = "Twenty Five"
     option_fifteen = "Fifteen"
     option_ten = "Ten"
     option_five = "Five"
+
+    default = "twenty_five"
 
 class RBCCompletionGoal(Choice):
     """What percentage of tasks should you aim to complete?"""
     display_name = "Completion Goal"
     option_complete_everything = "Complete Everything"
     option_most_tasks = "Most Tasks"
-    default = option_half_tasks = "Half Tasks"
+    option_half_tasks = "Half Tasks"
     option_minimal_engagement = "Minimal Engagement"
     option_survival_mode = "Survival Mode"
+
+    default = "half_tasks"
