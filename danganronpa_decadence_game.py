@@ -1005,6 +1005,7 @@ class DanganronpaIncludeUnderwearPresents(DefaultOnToggle):
 
 # ===== Difficulty =====
 class DanganronpaLogicDifficulty(Choice):
+    """Adjust the difficulty level for logic-based objectives."""
     display_name = "Logic Difficulty"
     option_gentle = "Gentle"
     option_kind = "Kind"
@@ -1013,8 +1014,8 @@ class DanganronpaLogicDifficulty(Choice):
 
     default = "kind"
 
-
 class DanganronpaActionDifficulty(Choice):
+    """Adjust the difficulty level for action-based objectives."""
     display_name = "Action Difficulty"
     option_gentle = "Gentle"
     option_kind = "Kind"
