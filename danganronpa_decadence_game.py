@@ -952,55 +952,72 @@ class DanganronpaOwnedGames(OptionSet):
 
 # ===== Mode Filters =====
 class DanganronpaEnableStoryMode(DefaultOnToggle):
+    """Enable main story mode objectives and progression."""
     display_name = "Enable Story Mode Objectives"
 
 class DanganronpaEnableBonusModes(DefaultOnToggle):
+    """Enable bonus mode objectives and additional content."""
     display_name = "Enable Bonus Mode Objectives"
 
 # ===== Category DefaultOnToggles =====
 class DanganronpaIncludeInvestigation(DefaultOnToggle):
+    """Include investigation and mystery-solving objectives."""
     display_name = "Include Investigation Objectives"
 
 class DanganronpaIncludeClassTrial(DefaultOnToggle):
+    """Include class trial and debate objectives."""
     display_name = "Include Class Trial Objectives"
 
 class DanganronpaIncludeFreeTime(DefaultOnToggle):
+    """Include free time and social interaction objectives."""
     display_name = "Include Free Time Objectives"
 
 class DanganronpaIncludeReportCard(DefaultOnToggle):
+    """Include report card and academic achievement objectives."""
     display_name = "Include Report Card Objectives"
 
 class DanganronpaIncludeSkills(DefaultOnToggle):
+    """Include skill development and talent objectives."""
     display_name = "Include Skill Objectives"
 
 class DanganronpaIncludePresents(DefaultOnToggle):
+    """Include present-giving and gift objectives."""
     display_name = "Include Present Objectives"
 
 class DanganronpaIncludeSchoolMode(DefaultOnToggle):
+    """Include school mode and educational objectives."""
     display_name = "Include School Mode Objectives"
 
 class DanganronpaIncludeIslandMode(DefaultOnToggle):
+    """Include island mode and vacation objectives."""
     display_name = "Include Island Mode Objectives"
 
 class DanganronpaIncludeUTDP(DefaultOnToggle):
+    """Include Ultimate Talent Development Plan objectives."""
     display_name = "Include UTDP Objectives"
 
 class DanganronpaIncludeSummerCamp(DefaultOnToggle):
+    """Include summer camp and team-building objectives."""
     display_name = "Include Summer Camp Objectives"
 
 class DanganronpaIncludeExtraMinigames(DefaultOnToggle):
+    """Include extra minigame and side activity objectives."""
     display_name = "Include Extra Minigame Objectives"
 
 class DanganronpaIncludeCollectibles(DefaultOnToggle):
+    """Include collectible hunting and completion objectives."""
     display_name = "Include Collectibles Objectives"
 
 class DanganronpaIncludeBonusPresents(DefaultOnToggle):
+    """Include bonus present and reward objectives."""
     display_name = "Include Bonus Presents"
 
 class DanganronpaIncludePostChapterPresents(DefaultOnToggle):
+    """Include post-chapter present and epilogue objectives."""
     display_name = "Include Post-Chapter Presents"
 
 class DanganronpaIncludeUnderwearPresents(DefaultOnToggle):
+    """Include underwear present and intimate objectives."""
     display_name = "Include Underwear Presents"
 
 # ===== Difficulty =====
