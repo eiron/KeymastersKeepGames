@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, Choice
+from Options import DefaultOnToggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -511,10 +511,11 @@ class ATSIncludeDlcContent(DefaultOnToggle):
     """Include DLC content objectives"""
     display_name = "Include DLC Content"
 
-class ATSDifficultyLevel(Choice):
+class ATSDifficultyLevel(TextChoice):
     """Set the difficulty level for objectives"""
     display_name = "Difficulty Level"
-    option_easy = "Easy"
-    option_medium = "Medium"
-    option_hard = "Hard"
-    default = "medium"
+    option_easy = 0
+    option_medium = 1
+    option_hard = 2
+    
+    default = 1

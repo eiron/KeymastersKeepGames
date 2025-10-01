@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, Toggle, Choice
+from Options import DefaultOnToggle, Toggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -1342,10 +1342,10 @@ class BloodstainedIncludeDominiquesCurse(Toggle):
     """Include objectives for the paid Dominique's Curse DLC (Classic II) - requires separate purchase."""
     display_name = "Include Dominique's Curse DLC"
 
-class BloodstainedFocusStyle(Choice):
+class BloodstainedFocusStyle(TextChoice):
     """Focus objectives on specific gameplay styles."""
     display_name = "Focus Style"
-    option_all = "All"
-    option_exploration = "Exploration"
-    option_combat = "Combat"
-    default = "all"
+    option_all = 0
+    option_exploration = 1
+    option_combat = 2
+    default = 0

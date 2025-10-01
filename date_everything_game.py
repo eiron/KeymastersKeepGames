@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, Choice
+from Options import DefaultOnToggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -660,12 +660,12 @@ class DEIncludeDLCCharacters(DefaultOnToggle):
     """Include dating DLC characters from the Lavish Edition (Characters 101-102)."""
     display_name = "Include DLC Characters"
 
-class DERelationshipGoals(Choice):
+class DERelationshipGoals(TextChoice):
     """What kind of relationship outcomes should you focus on?"""
     display_name = "Relationship Goals"
-    option_love_focused = "Love Focused"
-    option_friendship_focused = "Friendship Focused"
-    option_hate_focused = "Hate Focused"
-    option_balanced_relationships = "Balanced Relationships"
-    option_chaos_romance = "Chaos Romance"
-    default = "balanced_relationships"
+    option_love_focused = 0
+    option_friendship_focused = 1
+    option_hate_focused = 2
+    option_balanced_relationships = 3
+    option_chaos_romance = 4
+    default = 3

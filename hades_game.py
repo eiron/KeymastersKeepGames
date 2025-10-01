@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, Choice
+from Options import DefaultOnToggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -522,10 +522,10 @@ class HadesIncludeCollectionGoals(DefaultOnToggle):
     """Include resource collection and merchant objectives."""
     display_name = "Include Collection Goals"
 
-class HadesDifficultyLevel(Choice):
+class HadesDifficultyLevel(TextChoice):
     """Sets the difficulty level for objectives and constraints."""
     display_name = "Difficulty Level"
-    option_normal = "Normal"
-    option_hard = "Hard"
-    option_extreme = "Extreme"
-    default = "normal"
+    option_normal = 0
+    option_hard = 1
+    option_extreme = 2
+    default = 0

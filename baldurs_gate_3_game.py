@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, Choice
+from Options import DefaultOnToggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -953,19 +953,19 @@ class BG3IncludeAchievementHunting(DefaultOnToggle):
     """Include achievement and completion challenge objectives."""
     display_name = "Include Achievement Hunting"
 
-class BG3DifficultyPreference(Choice):
+class BG3DifficultyPreference(TextChoice):
     """Prefer certain difficulty levels for objectives."""
     display_name = "Difficulty Preference"
-    option_all = "All"
-    option_easy = "Easy"
-    option_hard = "Hard"
-    default = "all"
+    option_all = 0
+    option_easy = 1
+    option_hard = 2
+    default = 0
 
-class BG3PlaystyleFocus(Choice):
+class BG3PlaystyleFocus(TextChoice):
     """Focus objectives on specific playstyles."""
     display_name = "Playstyle Focus"
-    option_all = "All"
-    option_combat = "Combat"
-    option_story = "Story"
-    option_exploration = "Exploration"
-    default = "all"
+    option_all = 0
+    option_combat = 1
+    option_story = 2
+    option_exploration = 3
+    default = 0

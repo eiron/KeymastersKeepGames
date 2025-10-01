@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, DefaultOnToggle, Choice
+from Options import Toggle, DefaultOnToggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -1186,22 +1186,22 @@ class ACNHIncludeDecorating(DefaultOnToggle):
     """Include decorating objectives (room design, themes, HHA scoring)."""
     display_name = "Include Decorating Activities"
 
-class ACNHCollectionFocus(Choice):
+class ACNHCollectionFocus(TextChoice):
     """Focus collection objectives on specific categories."""
     display_name = "Collection Focus"
-    option_all = "All"
-    option_bugs = "Bugs"
-    option_fish = "Fish"
-    option_sea_creatures = "Sea Creatures"
-    option_fossils = "Fossils"
-    default = "all"
+    option_all = 0
+    option_bugs = 1
+    option_fish = 2
+    option_sea_creatures = 3
+    option_fossils = 4
+    default = 0
 
-class ACNHIslandType(Choice):
+class ACNHIslandType(TextChoice):
     """Choose between challenges for new or established islands."""
     display_name = "Island Type"
-    option_new = "New"
-    option_established = "Established"
-    default = "new"
+    option_new = 0
+    option_established = 1
+    default = 0
 
 class ACNHIncludeHappyHomeParadise(Toggle):
     """Include Happy Home Paradise DLC objectives (vacation home design, facilities)."""

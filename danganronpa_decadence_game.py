@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, Choice, OptionSet
+from Options import DefaultOnToggle, OptionSet, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -1021,20 +1021,20 @@ class DanganronpaIncludeUnderwearPresents(DefaultOnToggle):
     display_name = "Include Underwear Presents"
 
 # ===== Difficulty =====
-class DanganronpaLogicDifficulty(Choice):
+class DanganronpaLogicDifficulty(TextChoice):
     """Adjust the difficulty level for logic-based objectives."""
     display_name = "Logic Difficulty"
-    option_gentle = "Gentle"
-    option_kind = "Kind"
-    option_mean = "Mean"
-    option_cruel = "Cruel"
-    default = "kind"
+    option_gentle = 0
+    option_kind = 1
+    option_mean = 2
+    option_cruel = 3
+    default = 1
 
-class DanganronpaActionDifficulty(Choice):
+class DanganronpaActionDifficulty(TextChoice):
     """Adjust the difficulty level for action-based objectives."""
     display_name = "Action Difficulty"
-    option_gentle = "Gentle"
-    option_kind = "Kind"
-    option_mean = "Mean"
-    option_cruel = "Cruel"
-    default = "kind"
+    option_gentle = 0
+    option_kind = 1
+    option_mean = 2
+    option_cruel = 3
+    default = 1

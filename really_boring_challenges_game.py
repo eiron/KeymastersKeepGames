@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, Choice
+from Options import DefaultOnToggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -736,33 +736,33 @@ class RBCIncludeMindNumbingTasks(DefaultOnToggle):
     """Include precision and meditation objectives."""
     display_name = "Include Mind Numbing Tasks"
 
-class RBCBoredomIntensity(Choice):
+class RBCBoredomIntensity(TextChoice):
     """How boring should the challenges be?"""
     display_name = "Boredom Intensity"
-    option_mildly_tedious = "Mildly Tedious"
-    option_quite_boring = "Quite Boring"
-    option_extremely_dull = "Extremely Dull"
-    option_soul_crushing = "Soul Crushing"
-    option_mind_numbing = "Mind Numbing"
-    default = "quite_boring"
+    option_mildly_tedious = 0
+    option_quite_boring = 1
+    option_extremely_dull = 2
+    option_soul_crushing = 3
+    option_mind_numbing = 4
+    default = 1
 
-class RBCTaskCount(Choice):
+class RBCTaskCount(TextChoice):
     """How many boring challenges should be included?"""
     display_name = "Task Count"
-    option_all_fifty = "All Fifty"
-    option_thirty_five = "Thirty Five"
-    option_twenty_five = "Twenty Five"
-    option_fifteen = "Fifteen"
-    option_ten = "Ten"
-    option_five = "Five"
-    default = "twenty_five"
+    option_all_fifty = 0
+    option_thirty_five = 1
+    option_twenty_five = 2
+    option_fifteen = 3
+    option_ten = 4
+    option_five = 5
+    default = 2
 
-class RBCCompletionGoal(Choice):
+class RBCCompletionGoal(TextChoice):
     """What percentage of tasks should you aim to complete?"""
     display_name = "Completion Goal"
-    option_complete_everything = "Complete Everything"
-    option_most_tasks = "Most Tasks"
-    option_half_tasks = "Half Tasks"
-    option_minimal_engagement = "Minimal Engagement"
-    option_survival_mode = "Survival Mode"
-    default = "half_tasks"
+    option_complete_everything = 0
+    option_most_tasks = 1
+    option_half_tasks = 2
+    option_minimal_engagement = 3
+    option_survival_mode = 4
+    default = 2

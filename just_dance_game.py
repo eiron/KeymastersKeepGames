@@ -495,6 +495,7 @@ class JustDanceGame(Game):
             "Avishay Goren & Yossi Cohen - Movement is Happiness (Find Your Thing) [JD2015]",  # 60min unlock
         ]
 
+    @functools.cached_property
     def songs_just_dance_2015_exclusives(self) -> List[str]:
         """Just Dance 2015 exclusive content."""
         exclusives = []
@@ -555,6 +556,7 @@ class JustDanceGame(Game):
             "Imposs - Stadium Flow [JD2016]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2016_exclusives(self) -> List[str]:
         """Just Dance 2016 exclusive content."""
         exclusives = []
@@ -577,6 +579,7 @@ class JustDanceGame(Game):
         
         return exclusives
 
+    @functools.cached_property
     def songs_just_dance_2016_just_dance_unlimited(self) -> List[str]:
         """Just Dance 2016 DLC content (Just Dance Unlimited)."""
         dlc_songs = []
@@ -644,6 +647,7 @@ class JustDanceGame(Game):
             "Rossini - William Tell Overture [JD2017]",  # Switch exclusive
         ]
 
+    @functools.cached_property
     def songs_just_dance_2017_exclusives(self) -> List[str]:
         exclusive_songs = []
         
@@ -664,6 +668,7 @@ class JustDanceGame(Game):
         
         return exclusive_songs
 
+    @functools.cached_property
     def songs_just_dance_2017_platform_exclusives(self) -> List[str]:
         """Platform exclusive content for Just Dance 2017 (Nintendo Switch exclusives)"""
         return [
@@ -671,6 +676,7 @@ class JustDanceGame(Game):
             "Rossini - William Tell Overture [JD2017 Switch Exclusive]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2017_just_dance_unlimited(self) -> List[str]:
         if "JD2017 - Just Dance Unlimited" in self.dlc_content:
             return [
@@ -745,6 +751,7 @@ class JustDanceGame(Game):
             "Eiffel 65 - Blue (Da Ba Dee) (Hit The Electro Beat) [JD2018]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2018_exclusives(self) -> List[str]:
         """Ubisoft Connect exclusive and regional exclusive songs for Just Dance 2018"""
         exclusives = []
@@ -762,6 +769,7 @@ class JustDanceGame(Game):
             
         return exclusives
 
+    @functools.cached_property
     def songs_just_dance_2018_platform_exclusives(self) -> List[str]:
         """Platform exclusive content for Just Dance 2018 (Nintendo Switch Double Rumble)"""
         return [
@@ -772,6 +780,7 @@ class JustDanceGame(Game):
             "Artistas Varios - Tales Of The Cauldron [JD2018 Switch Double Rumble]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2018_just_dance_unlimited(self) -> List[str]:
         """Just Dance Unlimited tracks available for Just Dance 2018"""
         return [
@@ -842,30 +851,35 @@ class JustDanceGame(Game):
             "Janelle Monáe - Make Me Feel [JD2019]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2019_code_unlock(self) -> List[str]:
         """Code exclusive songs for Just Dance 2019"""
         return [
             "Michelle Delamor - Fire On The Dancefloor [JD2019 Code Unlock]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2019_middle_east_exclusive(self) -> List[str]:
         """Middle East exclusive songs for Just Dance 2019"""
         return [
             "Maan Barghouth - Hala Bel Khamis [JD2019 Middle East Exclusive]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2019_france_canada_exclusive(self) -> List[str]:
         """France/Canada exclusive songs for Just Dance 2019"""
         return [
             "McFly & Carlito - On Ne Porte Pas De Sous-Vêtements [JD2019 France/Canada Exclusive]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2019_russia_exclusive(self) -> List[str]:
         """Russia exclusive songs for Just Dance 2019"""
         return [
             "Bremenskiye Muzykanty - There Is Nothing Better In The World (Ничего на свете лучше нету) [JD2019 Russia Exclusive]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2019_just_dance_unlimited(self) -> List[str]:
         """Just Dance Unlimited tracks available for Just Dance 2019"""
         return [
@@ -965,6 +979,7 @@ class JustDanceGame(Game):
             "LOBODA - SuperStar [JD2020 Russia Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2020_just_dance_unlimited(self) -> List[str]:
         """Just Dance Unlimited tracks available for Just Dance 2020"""
         return [
@@ -1032,6 +1047,7 @@ class JustDanceGame(Game):
             "ONUKA - Zenit [JD2021]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2021_just_dance_unlimited(self) -> List[str]:
         """Just Dance Unlimited tracks available for Just Dance 2021"""
         return [
@@ -1053,16 +1069,19 @@ class JustDanceGame(Game):
             "Yi Yan/Zhao Fang Jing/Suika Kune/Feizaojun - Rainbow Beats [JD2021 DLC]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2021_japan_exclusive(self) -> List[str]:
         return [
             "Da Pump - U.S.A. [JD2021 Japan Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2021_france_exclusive(self) -> List[str]:
         return [
             "Bilal Hassani ft. Sundy Jules, Paola Locatelli & Sulivan Gwed - Flash (Just Dance Version) [JD2021 France Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2021_benelux_exclusive(self) -> List[str]:
         return [
             "K3 - Dans van de Farao [JD2021 Benelux Exclusive]"
@@ -1113,6 +1132,7 @@ class JustDanceGame(Game):
             "Sylvester - You Make Me Feel (Mighty Real) [JD2022]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2022_china_exclusive(self) -> List[str]:
         return [
             "阿里郎 - 作为你的兄弟 (As Your Brother) [JD2022 China Exclusive]",
@@ -1122,36 +1142,43 @@ class JustDanceGame(Game):
             "胡维纳 - 冰雪奇缘 (Let It Go Chinese Ver.) [JD2022 China Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2022_france_exclusive(self) -> List[str]:
         return [
             "Julien Granel & Lena Situations - À la Folie [JD2022 France Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2022_france_canada_exclusive(self) -> List[str]:
         return [
             "Julien Granel & Lena Situations - À la Folie [JD2022 France/Canada Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2022_japan_exclusive(self) -> List[str]:
         return [
             "Gen Hoshino - Koi [JD2022 Japan Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2022_benelux_exclusive(self) -> List[str]:
         return [
             "K3 - Waterval [JD2022 Benelux Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2022_germany_exclusive(self) -> List[str]:
         return [
             "Lisa Pac - Shoutout [JD2022 Germany Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2022_southeast_asia_exclusive(self) -> List[str]:
         return [
             "Jam Hsiao - Princess (王妃) [JD2022 Southeast Asia Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2022_just_dance_unlimited(self) -> List[str]:
         return [
             "Gen Hoshino - Koi [JD2022 JDU]",
@@ -1170,6 +1197,7 @@ class JustDanceGame(Game):
             "Dua Lipa - Break My Heart [JD2022 JDU]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2022_just_dance_plus(self) -> List[str]:
         return [
             "Stromae - L'enfer [JD2022 JD+]",
@@ -1224,26 +1252,31 @@ class JustDanceGame(Game):
             "Tigermonkey - Zooby Doo [JD2023]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2023_france_exclusive(self) -> List[str]:
         return [
             "Michou - Jamais Lâcher [JD2023 France Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2023_italy_exclusive(self) -> List[str]:
         return [
             "Sangiovanni - Farfalle [JD2023 Italy Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2023_japan_exclusive(self) -> List[str]:
         return [
             "Naniwa Danshi - Ubu Love [JD2023 Japan Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2023_benelux_exclusive(self) -> List[str]:
         return [
             "K3 - Vleugels [JD2023 Benelux Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2023_just_dance_unlimited(self) -> List[str]:
         return [
             "Purple Disco Machine & Sophie and the Giants - In The Dark [JD2023 JDU]",
@@ -1258,6 +1291,7 @@ class JustDanceGame(Game):
             "Billie Eilish - bad guy [JD2023 JDU]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2023_just_dance_plus(self) -> List[str]:
         return [
             "Stray Kids - CIRCUS [JD2023 JD+]",
@@ -1314,12 +1348,14 @@ class JustDanceGame(Game):
             "Billie Eilish - you should see me in a crown [JD2024]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2024_japan_exclusive(self) -> List[str]:
         """Just Dance 2024 Edition Japan exclusive songs."""
         return [
             "Atarashii Gakko! - OTONABLUE [Japan Exclusive]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2024_just_dance_unlimited(self) -> List[str]:
         return [
             "Miley Cyrus - Flowers [JD2024 JDU]",
@@ -1334,6 +1370,7 @@ class JustDanceGame(Game):
             "Beyoncé - Crazy in Love [JD2024 JDU]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2024_just_dance_plus(self) -> List[str]:
         return [
             "NewJeans - Get Up [JD2024 JD+]",
@@ -1389,6 +1426,7 @@ class JustDanceGame(Game):
             "Zara Larsson - You Love Who You Love [JD2025]"
         ]
 
+    @functools.cached_property
     def songs_just_dance_2025_just_dance_unlimited(self) -> List[str]:
         return [
             "Olivia Rodrigo - bad idea right? [JD2025 JDU]",
@@ -1403,6 +1441,7 @@ class JustDanceGame(Game):
             "Teddy Swims - Lose Control [JD2025 JDU]",
         ]
 
+    @functools.cached_property
     def songs_just_dance_2025_just_dance_plus(self) -> List[str]:
         return [
             "ITZY - CAKE [JD2025 JD+]",
@@ -1601,20 +1640,14 @@ class JustDanceGame(Game):
             elif exclusive == "JD2015 - PAL Exclusive":
                 song_collection.extend(self.songs_jd2015_pal_exclusive)
             elif exclusive == "JD2015 - Ubisoft Connect Unlockables":
-                song_collection.extend(self.songs_just_dance_2015_exclusives())
-            elif exclusive == "JD2016 - Ubisoft Connect Unlockables":
+                song_collection.extend(self.songs_just_dance_2015_exclusives)
+            elif exclusive in ["JD2016 - Ubisoft Connect Unlockables", "JD2016 - Russia Exclusive"]:
                 song_collection.extend(self.songs_just_dance_2016_exclusives)
-            elif exclusive == "JD2016 - Russia Exclusive":
-                song_collection.extend(self.songs_just_dance_2016_exclusives)
-            elif exclusive == "JD2017 - Ubisoft Connect Unlockables":
-                song_collection.extend(self.songs_just_dance_2017_exclusives)
-            elif exclusive == "JD2017 - Russia Exclusive":
+            elif exclusive in ["JD2017 - Ubisoft Connect Unlockables", "JD2017 - Russia Exclusive"]:
                 song_collection.extend(self.songs_just_dance_2017_exclusives)
             elif exclusive == "JD2017 - Switch Exclusive":
                 song_collection.extend(self.songs_just_dance_2017_platform_exclusives)
-            elif exclusive == "JD2018 - Ubisoft Connect Unlockables":
-                song_collection.extend(self.songs_just_dance_2018_exclusives)
-            elif exclusive == "JD2018 - Russia Exclusive":
+            elif exclusive in ["JD2018 - Ubisoft Connect Unlockables", "JD2018 - Russia Exclusive"]:
                 song_collection.extend(self.songs_just_dance_2018_exclusives)
             elif exclusive == "JD2018 - Switch Exclusive":
                 song_collection.extend(self.songs_just_dance_2018_platform_exclusives)
@@ -2143,8 +2176,6 @@ class JustDanceGame(Game):
         return [
             "Stromae - Papaoutai [JD2015 - PAL Exclusive]",
         ]
-
-# Archipelago Options Classes
 class JustDanceGamesOwned(OptionSet):
     """
     Indicates which Just Dance games the player owns.

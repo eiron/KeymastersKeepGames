@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, Toggle, Choice
+from Options import DefaultOnToggle, Toggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -796,18 +796,18 @@ class MinecraftIncludeChallengeRuns(Toggle): # Keep as False - challenge runs ar
     """Include challenge runs and restriction objectives."""
     display_name = "Include Challenge Runs"
 
-class MinecraftGameModeFocus(Choice):
+class MinecraftGameModeFocus(TextChoice):
     """Focus objectives on specific game modes."""
     display_name = "Game Mode Focus"
-    option_all = "All"
-    option_survival = "Survival"
-    option_creative = "Creative"
-    default = "all"
+    option_all = 0
+    option_survival = 1
+    option_creative = 2
+    default = 0
 
-class MinecraftDifficultyPreference(Choice):
+class MinecraftDifficultyPreference(TextChoice):
     """Prefer certain difficulty levels for objectives."""
     display_name = "Difficulty Preference"
-    option_all = "All"
-    option_easy = "Easy"
-    option_hard = "Hard"
-    default = "all"
+    option_all = 0
+    option_easy = 1
+    option_hard = 2
+    default = 0

@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, Choice
+from Options import DefaultOnToggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -557,11 +557,11 @@ class StardewIncludeSeasonalGoals(DefaultOnToggle):
     """Include seasonal objectives (festivals, seasonal profits)."""
     display_name = "Include Seasonal Goals"
 
-class StardewDifficultyLevel(Choice):
+class StardewDifficultyLevel(TextChoice):
     """Sets the difficulty level for objectives and constraints."""
     display_name = "Difficulty Level"
-    option_easy = "Easy"
-    option_normal = "Normal"  
-    option_hard = "Hard"
-    option_expert = "Expert"
-    default = "normal"
+    option_easy = 0
+    option_normal = 1  
+    option_hard = 2
+    option_expert = 3
+    default = 1

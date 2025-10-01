@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, Choice
+from Options import DefaultOnToggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -1217,28 +1217,28 @@ class ScavengerIncludeCommunityEngagement(DefaultOnToggle):
     """Include community participation and local support objectives."""
     display_name = "Include Community Engagement"
 
-class ScavengerDifficultyPreference(Choice):
+class ScavengerDifficultyPreference(TextChoice):
     """Prefer certain difficulty levels for objectives."""
     display_name = "Difficulty Preference"
-    option_all = "All"
-    option_easy = "Easy"
-    option_hard = "Hard"
-    default = "all"
+    option_all = 0
+    option_easy = 1
+    option_hard = 2
+    default = 0
 
-class ScavengerTravelScope(Choice):
+class ScavengerTravelScope(TextChoice):
     """Set the geographical scope for objectives."""
     display_name = "Travel Scope"
-    option_all = "All"
-    option_local = "Local"
-    option_regional = "Regional"
-    default = "all"
+    option_all = 0
+    option_local = 1
+    option_regional = 2
+    default = 0
 
-class ScavengerSeasonPreference(Choice):
+class ScavengerSeasonPreference(TextChoice):
     """Focus seasonal activities on a specific season."""
     display_name = "Season Preference"
-    option_all = "All"
-    option_spring = "Spring"
-    option_summer = "Summer"
-    option_fall = "Fall"
-    option_winter = "Winter"
-    default = "all"
+    option_all = 0
+    option_spring = 1
+    option_summer = 2
+    option_fall = 3
+    option_winter = 4
+    default = 0

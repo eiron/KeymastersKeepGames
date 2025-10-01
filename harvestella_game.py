@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, Choice, OptionSet
+from Options import DefaultOnToggle, OptionSet, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -616,7 +616,7 @@ class HarvestellaIncludeCollection(DefaultOnToggle):
     display_name = "Include Collection Objectives"
 
 
-class HarvestellaDifficultyLevel(Choice):
+class HarvestellaDifficultyLevel(TextChoice):
     """Difficulty level affects objective complexity and constraints"""
     display_name = "Difficulty Level"
     option_easy = 0

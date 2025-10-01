@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, Toggle, Choice
+from Options import DefaultOnToggle, Toggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -2405,23 +2405,23 @@ class Sims4IncludeAchievements(DefaultOnToggle):
     """Include achievement-style objectives and challenges."""
     display_name = "Include Achievement Goals"
 
-class Sims4DifficultyLevel(Choice):
+class Sims4DifficultyLevel(TextChoice):
     """Sets the difficulty level for objectives and constraints."""
     display_name = "Difficulty Level"
-    option_easy = "Easy"
-    option_normal = "Normal"
-    option_hard = "Hard"
-    option_expert = "Expert"
-    default = "normal"
+    option_easy = 0
+    option_normal = 1
+    option_hard = 2
+    option_expert = 3
+    default = 1
 
-class Sims4FocusStyle(Choice):
+class Sims4FocusStyle(TextChoice):
     """Focus objectives on specific gameplay styles."""
     display_name = "Focus Style"
-    option_all = "All"
-    option_creative = "Creative"
-    option_social = "Social"
-    option_achievement = "Achievement"
-    default = "all"
+    option_all = 0
+    option_creative = 1
+    option_social = 2
+    option_achievement = 3
+    default = 0
 
 
 # DLC Options - Expansion Packs

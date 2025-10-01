@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, Choice
+from Options import DefaultOnToggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -665,10 +665,10 @@ class COTLIncludeDoctrineDevelopment(DefaultOnToggle):
     """Include doctrine and commandment objectives."""
     display_name = "Include Doctrine Development"
 
-class COTLManagementStyle(Choice):
+class COTLManagementStyle(TextChoice):
     """Focus cult management on specific leadership styles."""
     display_name = "Management Style"
-    option_all = "All"
-    option_benevolent = "Benevolent"
-    option_ruthless = "Ruthless"
-    default = "all"
+    option_all = 0
+    option_benevolent = 1
+    option_ruthless = 2
+    default = 0

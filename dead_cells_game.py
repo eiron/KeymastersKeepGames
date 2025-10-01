@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, Toggle, Choice
+from Options import DefaultOnToggle, Toggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -565,11 +565,11 @@ class DeadCellsIncludeSpeedChallenges(Toggle):  # Keep as False by default - spe
     """Include speedrun and time challenge objectives."""
     display_name = "Include Speed Challenges"
 
-class DeadCellsPlaystyleFocus(Choice):
+class DeadCellsPlaystyleFocus(TextChoice):
     """Focus weapon objectives on specific stat builds."""
     display_name = "Playstyle Focus"
-    option_all = "All"
-    option_brutality = "Brutality"
-    option_tactics = "Tactics"
-    option_survival = "Survival"
-    default = "all"
+    option_all = 0
+    option_brutality = 1
+    option_tactics = 2
+    option_survival = 3
+    default = 0
