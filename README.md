@@ -150,6 +150,26 @@ Crafts: ``"MAKE Knitting Project"`` or ``"ATTEMPT Woodworking"``
 
 This includes options for customizing art project selections, writing goals, photography challenges, craft projects, and their respective action lists. The system will only generate objectives for creative categories that have been configured, allowing for flexible use whether you focus on visual arts, writing, photography, crafting, or all four!
 
+## Custom Categories
+A flexible meta-game system that allows players to create their own custom categories with weighted sub-tasks, perfect for organizing personal goals, projects, or any kind of tracked activities.
+
+This features a fully customizable category and task system with granular weight control:
+
+Category Examples: ``"Fitness & Health"``, ``"Home Improvement"``, ``"Learning & Skills"``, ``"Personal Development"``, ``"Career Development"``, ``"Financial Management"``
+
+Sample Objectives:
+- Specific Tasks: ``"[Fitness & Health] Complete a 30-minute workout"`` or ``"[Home Improvement] Organize the garage or storage area"``
+- Bulk Tasks: ``"[Learning & Skills] Complete 3 tasks"`` or ``"[Personal Development] Complete 2 tasks"``
+- Category Completion: ``"[Career Development] Complete all tasks in this category"``
+
+This includes comprehensive customization with a two-tier weighting system:
+- **Category Weight**: Controls how often objectives from each category appear overall (0-100+)
+- **Task Weight**: Controls how often specific tasks appear when their category is selected (0-100+)
+- **Task Properties**: Mark tasks as "difficult" or "time_consuming" for proper filtering
+- **Flexible Format**: Use simple strings for basic tasks or detailed format for full control
+
+The module comes with 8 default categories covering common life areas (Fitness, Home, Creative, Learning, Personal Development, Social, Career, Financial), each with 8-9 example tasks. Players can completely customize categories and tasks to match their personal goals and priorities. Perfect for anyone who wants to gamify their to-do lists, habit tracking, or personal development goals with fine-tuned control over objective frequency!
+
 ## Keymaster's Keep
 The ultimate meta module for generating challenges to play Keymaster's Keep itself! This module creates objectives for playing Keymaster's Keep in its two game modes: Keymaster's Challenge and Magic Key Heist, using the comprehensive game selection pool from the actual Keymaster's Keep configuration.
 
