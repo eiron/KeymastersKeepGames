@@ -691,32 +691,32 @@ class CursedRedDeadRedemption2Game(Game):
 # Archipelago Options
 class CURSEDRDR2IncludeAnimalCruelty(Toggle):
     """Include absolutely cursed animal-related objectives."""
-    display_name = "Include Animal Cruelty"
+    display_name = "Cursed Red Dead Redemption 2 Include Animal Cruelty"
 
 class CURSEDRDR2IncludeSocialDisasters(Toggle):
     """Include socially destructive and chaotic objectives."""
-    display_name = "Include Social Disasters"
+    display_name = "Cursed Red Dead Redemption 2 Include Social Disasters"
 
 class CURSEDRDR2IncludeTransportationChaos(Toggle):
     """Include vehicle and transportation mayhem objectives."""
-    display_name = "Include Transportation Chaos"
+    display_name = "Cursed Red Dead Redemption 2 Include Transportation Chaos"
 
 class CURSEDRDR2IncludeFashionCrimes(Toggle):
     """Include terrible outfit and appearance objectives."""
-    display_name = "Include Fashion Crimes"
+    display_name = "Cursed Red Dead Redemption 2 Include Fashion Crimes"
 
 class CURSEDRDR2IncludeRoleplayNightmares(Toggle):
     """Include painful roleplay restriction objectives."""
-    display_name = "Include Roleplay Nightmares"
+    display_name = "Cursed Red Dead Redemption 2 Include Roleplay Nightmares"
 
 class CURSEDRDR2IncludeTediousCollections(Toggle):
     """Include mind-numbingly boring collection objectives."""
-    display_name = "Include Tedious Collections"
+    display_name = "Cursed Red Dead Redemption 2 Include Tedious Collections"
 
 class CURSEDRDR2IncludeCombatAbsurdities(Toggle):
     """Include ridiculous and impractical combat objectives."""
-    display_name = "Include Combat Absurdities"
+    display_name = "Cursed Red Dead Redemption 2 Include Combat Absurdities"
 
 class CURSEDRDR2IncludeEconomyDestruction(Toggle):
     """Include money-wasting and economy-breaking objectives."""
-    display_name = "Include Economy Destruction"
+    display_name = "Cursed Red Dead Redemption 2 Include Economy Destruction"

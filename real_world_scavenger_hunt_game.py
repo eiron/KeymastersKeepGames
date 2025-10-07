@@ -1187,39 +1187,39 @@ class ScavengerHuntGame(Game):
 # Archipelago Options
 class ScavengerIncludePhotography(DefaultOnToggle):
     """Include photography and visual documentation objectives."""
-    display_name = "Include Photography"
+    display_name = "Real World Scavenger Hunt Include Photography"
 
 class ScavengerIncludeLocationHunting(DefaultOnToggle):
     """Include location discovery and exploration objectives."""
-    display_name = "Include Location Hunting"
+    display_name = "Real World Scavenger Hunt Include Location Hunting"
 
 class ScavengerIncludeObjectCollection(DefaultOnToggle):
     """Include item collection and specimen gathering objectives."""
-    display_name = "Include Object Collection"
+    display_name = "Real World Scavenger Hunt Include Object Collection"
 
 class ScavengerIncludeInteractionChallenges(DefaultOnToggle):
     """Include social interaction and communication objectives."""
-    display_name = "Include Interaction Challenges"
+    display_name = "Real World Scavenger Hunt Include Interaction Challenges"
 
 class ScavengerIncludeNatureExploration(DefaultOnToggle):
     """Include wildlife observation and nature study objectives."""
-    display_name = "Include Nature Exploration"
+    display_name = "Real World Scavenger Hunt Include Nature Exploration"
 
 class ScavengerIncludeCulturalDiscovery(DefaultOnToggle):
     """Include cultural learning and artistic exploration objectives."""
-    display_name = "Include Cultural Discovery"
+    display_name = "Real World Scavenger Hunt Include Cultural Discovery"
 
 class ScavengerIncludeSeasonalActivities(DefaultOnToggle):
     """Include weather and season-specific objectives."""
-    display_name = "Include Seasonal Activities"
+    display_name = "Real World Scavenger Hunt Include Seasonal Activities"
 
 class ScavengerIncludeCommunityEngagement(DefaultOnToggle):
     """Include community participation and local support objectives."""
-    display_name = "Include Community Engagement"
+    display_name = "Real World Scavenger Hunt Include Community Engagement"
 
 class ScavengerDifficultyPreference(TextChoice):
     """Prefer certain difficulty levels for objectives."""
-    display_name = "Difficulty Preference"
+    display_name = "Real World Scavenger Hunt Difficulty Preference"
     option_all = 0
     option_easy = 1
     option_hard = 2
@@ -1227,7 +1227,7 @@ class ScavengerDifficultyPreference(TextChoice):
 
 class ScavengerTravelScope(TextChoice):
     """Set the geographical scope for objectives."""
-    display_name = "Travel Scope"
+    display_name = "Real World Scavenger Hunt Travel Scope"
     option_all = 0
     option_local = 1
     option_regional = 2
@@ -1235,7 +1235,7 @@ class ScavengerTravelScope(TextChoice):
 
 class ScavengerSeasonPreference(TextChoice):
     """Focus seasonal activities on a specific season."""
-    display_name = "Season Preference"
+    display_name = "Real World Scavenger Hunt Season Preference"
     option_all = 0
     option_spring = 1
     option_summer = 2

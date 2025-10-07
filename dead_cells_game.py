@@ -534,40 +534,40 @@ class DeadCellsGame(Game):
 # Archipelago Options
 class DeadCellsIncludeProgressionRuns(DefaultOnToggle):
     """Include progression run objectives (completing runs, reaching biomes)."""
-    display_name = "Include Progression Runs"
+    display_name = "Dead Cells Include Progression Runs"
 
 class DeadCellsIncludeWeaponMastery(DefaultOnToggle):
     """Include weapon mastery objectives (unlocks, upgrades, kills)."""
-    display_name = "Include Weapon Mastery"
+    display_name = "Dead Cells Include Weapon Mastery"
 
 class DeadCellsIncludeBossChallenges(DefaultOnToggle):
     """Include boss challenge objectives (no damage, specific weapons)."""
-    display_name = "Include Boss Challenges"
+    display_name = "Dead Cells Include Boss Challenges"
 
 class DeadCellsIncludeBiomeExploration(DefaultOnToggle):
     """Include biome exploration objectives (secrets, challenge rooms)."""
-    display_name = "Include Biome Exploration"
+    display_name = "Dead Cells Include Biome Exploration"
 
 class DeadCellsIncludeBlueprintCollection(DefaultOnToggle):
     """Include blueprint collection objectives."""
-    display_name = "Include Blueprint Collection"
+    display_name = "Dead Cells Include Blueprint Collection"
 
 class DeadCellsIncludeMutationGoals(Toggle):
     """Include mutation and build objectives."""
-    display_name = "Include Mutation Goals"
+    display_name = "Dead Cells Include Mutation Goals"
 
 class DeadCellsIncludeDifficultyScaling(Toggle):  # Keep as False by default - difficulty scaling is specialized/harder
     """Include Boss Cell difficulty progression."""
-    display_name = "Include Difficulty Scaling"
+    display_name = "Dead Cells Include Difficulty Scaling"
     default = False
 
 class DeadCellsIncludeSpeedChallenges(Toggle):  # Keep as False by default - speed challenges are specialized/harder
     """Include speedrun and time challenge objectives."""
-    display_name = "Include Speed Challenges"
+    display_name = "Dead Cells Include Speed Challenges"
 
 class DeadCellsPlaystyleFocus(TextChoice):
     """Focus weapon objectives on specific stat builds."""
-    display_name = "Playstyle Focus"
+    display_name = "Dead Cells Playstyle Focus"
     option_all = 0
     option_brutality = 1
     option_tactics = 2

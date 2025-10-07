@@ -176,7 +176,7 @@ class CustomCategoriesCollection(OptionList):
         - "Simple task without options" (*simplified format)
     """
 
-    display_name = "Custom Categories Collection"
+    display_name = "Custom Categories Custom Categories Collection"
     default = [
         {
             "category": "Fitness & Health",
@@ -493,18 +493,18 @@ class CustomCategoriesIncludeSpecificTasks(DefaultOnToggle):
     """
     Whether to include specific task objectives like '[Category] Task Name'
     """
-    display_name = "Include Specific Task Objectives"
+    display_name = "Custom Categories Include Specific Task Objectives"
 
 
 class CustomCategoriesIncludeBulkTasks(DefaultOnToggle):
     """
     Whether to include bulk task objectives like '[Category] Complete 3 tasks'
     """
-    display_name = "Include Bulk Task Objectives"
+    display_name = "Custom Categories Include Bulk Task Objectives"
 
 
 class CustomCategoriesIncludeCategoryCompletion(DefaultOnToggle):
     """
     Whether to include category completion objectives like '[Category] Complete all tasks in this category'
     """
-    display_name = "Include Category Completion Objectives"
+    display_name = "Custom Categories Include Category Completion Objectives"

@@ -573,52 +573,52 @@ class HarvestellaGame(Game):
 # Archipelago Options
 class HarvestellaIncludeFarming(DefaultOnToggle):
     """Include farming-related objectives (growing crops, managing fields, etc.)"""
-    display_name = "Include Farming Objectives"
+    display_name = "Harvestella Include Farming Objectives"
 
 
 class HarvestellaIncludeExploration(DefaultOnToggle):
     """Include exploration objectives (discovering areas, collecting treasures, etc.)"""
-    display_name = "Include Exploration Objectives"
+    display_name = "Harvestella Include Exploration Objectives"
 
 
 class HarvestellaIncludeCombat(DefaultOnToggle):
     """Include combat objectives (defeating monsters, mastering jobs, etc.)"""
-    display_name = "Include Combat Objectives"
+    display_name = "Harvestella Include Combat Objectives"
 
 
 class HarvestellaIncludeRelationships(DefaultOnToggle):
     """Include relationship objectives (befriending characters, completing events, etc.)"""
-    display_name = "Include Relationship Objectives"
+    display_name = "Harvestella Include Relationship Objectives"
 
 
 class HarvestellaIncludeStory(DefaultOnToggle):
     """Include story progression objectives (completing chapters, restoring Seaslights, etc.)"""
-    display_name = "Include Story Objectives"
+    display_name = "Harvestella Include Story Objectives"
 
 
 class HarvestellaIncludeCrafting(DefaultOnToggle):
     """Include crafting objectives (creating items, upgrading equipment, etc.)"""
-    display_name = "Include Crafting Objectives"
+    display_name = "Harvestella Include Crafting Objectives"
 
 
 class HarvestellaIncludeCooking(DefaultOnToggle):
     """Include cooking objectives (learning recipes, preparing meals, etc.)"""
-    display_name = "Include Cooking Objectives"
+    display_name = "Harvestella Include Cooking Objectives"
 
 
 class HarvestellaIncludeSeasonalGoals(DefaultOnToggle):
     """Include seasonal objectives (seasonal activities, Quietus events, etc.)"""
-    display_name = "Include Seasonal Objectives"
+    display_name = "Harvestella Include Seasonal Objectives"
 
 
 class HarvestellaIncludeCollection(DefaultOnToggle):
     """Include collection objectives (gathering items, completing sets, etc.)"""
-    display_name = "Include Collection Objectives"
+    display_name = "Harvestella Include Collection Objectives"
 
 
 class HarvestellaDifficultyLevel(TextChoice):
     """Difficulty level affects objective complexity and constraints"""
-    display_name = "Difficulty Level"
+    display_name = "Harvestella Difficulty Level"
     option_easy = 0
     option_normal = 1
     option_hard = 2
@@ -628,7 +628,7 @@ class HarvestellaDifficultyLevel(TextChoice):
 
 class HarvestellaCropSelection(OptionSet):
     """Select which crops can appear in farming objectives"""
-    display_name = "Crop Selection"
+    display_name = "Harvestella Crop Selection"
     default = {
         "Turnip", "Cabbage", "Strawberry", "Potato", "Cucumber",
         "Tomato", "Corn", "Onion", "Eggplant", "Bell Pepper",
@@ -640,7 +640,7 @@ class HarvestellaCropSelection(OptionSet):
 
 class HarvestellaJobSelection(OptionSet):
     """Select which jobs can appear in combat objectives"""
-    display_name = "Job Selection"  
+    display_name = "Harvestella Job Selection"  
     default = {
         "Fighter", "Mage", "Mechanic", "Assault Savant", "Sky Lancer",
         "Shadow Walker", "Woglinde", "Lunamancer", "Avenger", "Pilgrim",
@@ -650,7 +650,7 @@ class HarvestellaJobSelection(OptionSet):
 
 class HarvestellaLocationSelection(OptionSet):
     """Select which locations can appear in exploration objectives"""
-    display_name = "Location Selection"
+    display_name = "Harvestella Location Selection"
     default = {
         "Lethe Village", "Shatolla", "Holy Capital Argene", "Abandoned Eden",
         "Coral Shrine", "Jade Forest", "Seaside Cave", "Autumn Falls",
@@ -661,7 +661,7 @@ class HarvestellaLocationSelection(OptionSet):
 
 class HarvestellaCharacterSelection(OptionSet):
     """Select which characters can appear in relationship objectives"""
-    display_name = "Character Selection"
+    display_name = "Harvestella Character Selection"
     default = {
         "Shrika", "Heine", "Asyl", "Aria", "Emo", "Istina", "Brakka", "Dianthus", "Cres", "Unicorn"
     }
@@ -669,7 +669,7 @@ class HarvestellaCharacterSelection(OptionSet):
 
 class HarvestellaMonsterSelection(OptionSet):
     """Select which monsters can appear in combat objectives"""
-    display_name = "Monster Selection"
+    display_name = "Harvestella Monster Selection"
     default = {
         "Goblin", "Gnome", "Dragon", "Unicorn", "Juggernaut", "Hornet", "Sahagin",
         "Slime", "Chloro Gel", "Cyano Gel", "Crawler", "Shadow Elemental", "Bone Dragon",
@@ -679,7 +679,7 @@ class HarvestellaMonsterSelection(OptionSet):
 
 class HarvestellaRecipeSelection(OptionSet):
     """Select which recipes can appear in cooking objectives"""
-    display_name = "Recipe Selection"
+    display_name = "Harvestella Recipe Selection"
     default = {
         "Vegetable Stir-fry", "Herb-grilled Fish", "Meat and Potato Stew",
         "Tomato Salad", "Corn Soup", "Pumpkin Pie", "Strawberry Jam",
@@ -690,7 +690,7 @@ class HarvestellaRecipeSelection(OptionSet):
 
 class HarvestellaItemSelection(OptionSet):
     """Select which items can appear in crafting objectives"""
-    display_name = "Craftable Item Selection"
+    display_name = "Harvestella Craftable Item Selection"
     default = {
         "Repair Kit", "Fertilizer", "Seed Maker", "Quality Fertilizer",
         "Sprinkler", "Chest", "Scarecrow", "Bridge", "Lamp",

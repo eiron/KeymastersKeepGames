@@ -523,43 +523,43 @@ class StardewValleyGame(Game):
 # Archipelago Options
 class StardewIncludeFarming(DefaultOnToggle):
     """Include farming objectives (crops, animals, profit goals)."""
-    display_name = "Include Farming Objectives"
+    display_name = "Stardew Valley Include Farming Objectives"
 
 class StardewIncludeMining(DefaultOnToggle):
     """Include mining objectives (floors, ores, monsters)."""
-    display_name = "Include Mining Objectives"
+    display_name = "Stardew Valley Include Mining Objectives"
 
 class StardewIncludeFishing(DefaultOnToggle):
     """Include fishing objectives (fish catches, legendary fish, crab pots)."""
-    display_name = "Include Fishing Objectives"
+    display_name = "Stardew Valley Include Fishing Objectives"
 
 class StardewIncludeForaging(DefaultOnToggle):
     """Include foraging objectives (wild items, tree tapping)."""
-    display_name = "Include Foraging Objectives"
+    display_name = "Stardew Valley Include Foraging Objectives"
 
 class StardewIncludeRelationships(DefaultOnToggle):
     """Include relationship objectives (villager hearts, marriage, gifts)."""
-    display_name = "Include Relationship Objectives"
+    display_name = "Stardew Valley Include Relationship Objectives"
 
 class StardewIncludeCommunityCenterBundles(DefaultOnToggle):
     """Include Community Center bundle objectives."""
-    display_name = "Include Community Center Bundles"
+    display_name = "Stardew Valley Include Community Center Bundles"
 
 class StardewIncludeCollections(DefaultOnToggle):
     """Include collection objectives (museum, artifacts, minerals)."""
-    display_name = "Include Collection Objectives"
+    display_name = "Stardew Valley Include Collection Objectives"
 
 class StardewIncludeCooking(DefaultOnToggle):
     """Include cooking objectives (recipes, dishes)."""
-    display_name = "Include Cooking Objectives"
+    display_name = "Stardew Valley Include Cooking Objectives"
 
 class StardewIncludeSeasonalGoals(DefaultOnToggle):
     """Include seasonal objectives (festivals, seasonal profits)."""
-    display_name = "Include Seasonal Goals"
+    display_name = "Stardew Valley Include Seasonal Goals"
 
 class StardewDifficultyLevel(TextChoice):
     """Sets the difficulty level for objectives and constraints."""
-    display_name = "Difficulty Level"
+    display_name = "Stardew Valley Difficulty Level"
     option_easy = 0
     option_normal = 1  
     option_hard = 2

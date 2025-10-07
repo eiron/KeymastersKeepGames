@@ -1611,25 +1611,25 @@ class ArchipelagourmetIngredientsIncludeRedMeatOptions(DefaultOnToggle):
     """
     Indicates whether to include red meat options in the game.
     """
-    display_name = "Include Red Meat Options"
+    display_name = "Archipelagourmet Include Red Meat Options"
 
 class ArchipelagourmetIngredientsIncludePoultryOptions(DefaultOnToggle):
     """
     Indicates whether to include poultry options in the game.
     """
-    display_name = "Include Poultry Options"
+    display_name = "Archipelagourmet Include Poultry Options"
 
 class ArchipelagourmetIngredientsIncludeSeafoodOptions(DefaultOnToggle):
     """
     Indicates whether to include seafood options in the game.
     """
-    display_name = "Include Seafood Options"
+    display_name = "Archipelagourmet Include Seafood Options"
 
 class ArchipelagourmetIngredientsIncludeNonVeganOptions(DefaultOnToggle):
     """
     Indicates whether to include non-vegan (non-meat) options in the game.
     """
-    display_name = "Include Non-Vegan (Non-Meat) Options"
+    display_name = "Archipelagourmet Include Non-Vegan (Non-Meat) Options"
 
 class ArchipelagourmetCustomIngredientsToInclude(OptionList):
     """

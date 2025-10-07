@@ -941,7 +941,7 @@ class DanganronpaGame(Game):
 # ===== Ownership =====
 class DanganronpaOwnedGames(OptionSet):
     """Select which Danganronpa games you own"""
-    display_name = "Owned Games"
+    display_name = "Danganronpa Owned Games"
     default = [
         "Danganronpa: Trigger Happy Havoc",
         "Danganronpa 2: Goodbye Despair",
@@ -953,77 +953,77 @@ class DanganronpaOwnedGames(OptionSet):
 # ===== Mode Filters =====
 class DanganronpaEnableStoryMode(DefaultOnToggle):
     """Enable main story mode objectives and progression."""
-    display_name = "Enable Story Mode Objectives"
+    display_name = "Danganronpa Enable Story Mode Objectives"
 
 class DanganronpaEnableBonusModes(DefaultOnToggle):
     """Enable bonus mode objectives and additional content."""
-    display_name = "Enable Bonus Mode Objectives"
+    display_name = "Danganronpa Enable Bonus Mode Objectives"
 
 # ===== Category DefaultOnToggles =====
 class DanganronpaIncludeInvestigation(DefaultOnToggle):
     """Include investigation and mystery-solving objectives."""
-    display_name = "Include Investigation Objectives"
+    display_name = "Danganronpa Include Investigation Objectives"
 
 class DanganronpaIncludeClassTrial(DefaultOnToggle):
     """Include class trial and debate objectives."""
-    display_name = "Include Class Trial Objectives"
+    display_name = "Danganronpa Include Class Trial Objectives"
 
 class DanganronpaIncludeFreeTime(DefaultOnToggle):
     """Include free time and social interaction objectives."""
-    display_name = "Include Free Time Objectives"
+    display_name = "Danganronpa Include Free Time Objectives"
 
 class DanganronpaIncludeReportCard(DefaultOnToggle):
     """Include report card and academic achievement objectives."""
-    display_name = "Include Report Card Objectives"
+    display_name = "Danganronpa Include Report Card Objectives"
 
 class DanganronpaIncludeSkills(DefaultOnToggle):
     """Include skill development and talent objectives."""
-    display_name = "Include Skill Objectives"
+    display_name = "Danganronpa Include Skill Objectives"
 
 class DanganronpaIncludePresents(DefaultOnToggle):
     """Include present-giving and gift objectives."""
-    display_name = "Include Present Objectives"
+    display_name = "Danganronpa Include Present Objectives"
 
 class DanganronpaIncludeSchoolMode(DefaultOnToggle):
     """Include school mode and educational objectives."""
-    display_name = "Include School Mode Objectives"
+    display_name = "Danganronpa Include School Mode Objectives"
 
 class DanganronpaIncludeIslandMode(DefaultOnToggle):
     """Include island mode and vacation objectives."""
-    display_name = "Include Island Mode Objectives"
+    display_name = "Danganronpa Include Island Mode Objectives"
 
 class DanganronpaIncludeUTDP(DefaultOnToggle):
     """Include Ultimate Talent Development Plan objectives."""
-    display_name = "Include UTDP Objectives"
+    display_name = "Danganronpa Include UTDP Objectives"
 
 class DanganronpaIncludeSummerCamp(DefaultOnToggle):
     """Include summer camp and team-building objectives."""
-    display_name = "Include Summer Camp Objectives"
+    display_name = "Danganronpa Include Summer Camp Objectives"
 
 class DanganronpaIncludeExtraMinigames(DefaultOnToggle):
     """Include extra minigame and side activity objectives."""
-    display_name = "Include Extra Minigame Objectives"
+    display_name = "Danganronpa Include Extra Minigame Objectives"
 
 class DanganronpaIncludeCollectibles(DefaultOnToggle):
     """Include collectible hunting and completion objectives."""
-    display_name = "Include Collectibles Objectives"
+    display_name = "Danganronpa Include Collectibles Objectives"
 
 class DanganronpaIncludeBonusPresents(DefaultOnToggle):
     """Include bonus present and reward objectives."""
-    display_name = "Include Bonus Presents"
+    display_name = "Danganronpa Include Bonus Presents"
 
 class DanganronpaIncludePostChapterPresents(DefaultOnToggle):
     """Include post-chapter present and epilogue objectives."""
-    display_name = "Include Post-Chapter Presents"
+    display_name = "Danganronpa Include Post-Chapter Presents"
 
 class DanganronpaIncludeUnderwearPresents(DefaultOnToggle):
     """Include underwear present and intimate objectives."""
-    display_name = "Include Underwear Presents"
+    display_name = "Danganronpa Include Underwear Presents"
 
 # ===== Difficulty =====
 class DanganronpaLogicDifficulty(TextChoice):
     """Adjust the difficulty level for logic-based objectives."""
-    display_name = "Logic Difficulty"
+    display_name = "Danganronpa Logic Difficulty"
     option_gentle = 0
     option_kind = 1
     option_mean = 2
@@ -1032,7 +1032,7 @@ class DanganronpaLogicDifficulty(TextChoice):
 
 class DanganronpaActionDifficulty(TextChoice):
     """Adjust the difficulty level for action-based objectives."""
-    display_name = "Action Difficulty"
+    display_name = "Danganronpa Action Difficulty"
     option_gentle = 0
     option_kind = 1
     option_mean = 2

@@ -706,39 +706,39 @@ class ReallyBoringChallengesGame(Game):
 # Archipelago Options
 class RBCIncludeRepetitiveCounting(DefaultOnToggle):
     """Include repetitive counting objectives that test patience."""
-    display_name = "Include Repetitive Counting"
+    display_name = "Really Boring Challenges Include Repetitive Counting"
 
 class RBCIncludeMindlessClicking(DefaultOnToggle):
     """Include mindless clicking and button pressing objectives."""
-    display_name = "Include Mindless Clicking"
+    display_name = "Really Boring Challenges Include Mindless Clicking"
 
 class RBCIncludeTediousWaiting(DefaultOnToggle):
     """Include waiting and observation objectives."""
-    display_name = "Include Tedious Waiting"
+    display_name = "Really Boring Challenges Include Tedious Waiting"
 
 class RBCIncludePointlessOrganising(DefaultOnToggle):
     """Include organising and sorting objectives."""
-    display_name = "Include Pointless Organising"
+    display_name = "Really Boring Challenges Include Pointless Organising"
 
 class RBCIncludeEndlessWalking(DefaultOnToggle):
     """Include walking and movement pattern objectives."""
-    display_name = "Include Endless Walking"
+    display_name = "Really Boring Challenges Include Endless Walking"
 
 class RBCIncludeMonotonousCollection(DefaultOnToggle):
     """Include collection and gathering objectives."""
-    display_name = "Include Monotonous Collection"
+    display_name = "Really Boring Challenges Include Monotonous Collection"
 
 class RBCIncludeSoulCrushingGrinds(DefaultOnToggle):
     """Include repetitive grinding and achievement objectives."""
-    display_name = "Include Soul Crushing Grinds"
+    display_name = "Really Boring Challenges Include Soul Crushing Grinds"
 
 class RBCIncludeMindNumbingTasks(DefaultOnToggle):
     """Include precision and meditation objectives."""
-    display_name = "Include Mind Numbing Tasks"
+    display_name = "Really Boring Challenges Include Mind Numbing Tasks"
 
 class RBCBoredomIntensity(TextChoice):
     """How boring should the challenges be?"""
-    display_name = "Boredom Intensity"
+    display_name = "Really Boring Challenges Boredom Intensity"
     option_mildly_tedious = 0
     option_quite_boring = 1
     option_extremely_dull = 2
@@ -748,7 +748,7 @@ class RBCBoredomIntensity(TextChoice):
 
 class RBCTaskCount(TextChoice):
     """How many boring challenges should be included?"""
-    display_name = "Task Count"
+    display_name = "Really Boring Challenges Task Count"
     option_all_fifty = 0
     option_thirty_five = 1
     option_twenty_five = 2
@@ -759,7 +759,7 @@ class RBCTaskCount(TextChoice):
 
 class RBCCompletionGoal(TextChoice):
     """What percentage of tasks should you aim to complete?"""
-    display_name = "Completion Goal"
+    display_name = "Really Boring Challenges Completion Goal"
     option_complete_everything = 0
     option_most_tasks = 1
     option_half_tasks = 2

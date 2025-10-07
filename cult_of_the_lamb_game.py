@@ -635,39 +635,39 @@ class CultOfTheLambGame(Game):
 # Archipelago Options
 class COTLIncludeCultManagement(DefaultOnToggle):
     """Include cult management objectives (followers, faith, sermons)."""
-    display_name = "Include Cult Management"
+    display_name = "Cult of the Lamb Include Cult Management"
 
 class COTLIncludeCrusadeObjectives(DefaultOnToggle):
     """Include crusade objectives (combat, exploration, rescues)."""
-    display_name = "Include Crusade Objectives"
+    display_name = "Cult of the Lamb Include Crusade Objectives"
 
 class COTLIncludeFollowerRelationships(DefaultOnToggle):
     """Include follower relationship objectives (loyalty, marriage, quests)."""
-    display_name = "Include Follower Relationships"
+    display_name = "Cult of the Lamb Include Follower Relationships"
 
 class COTLIncludeBaseBuilding(DefaultOnToggle):
     """Include base building objectives (construction, upgrades, decoration)."""
-    display_name = "Include Base Building"
+    display_name = "Cult of the Lamb Include Base Building"
 
 class COTLIncludeBossProgression(DefaultOnToggle):
     """Include boss and story progression objectives."""
-    display_name = "Include Boss Progression"
+    display_name = "Cult of the Lamb Include Boss Progression"
 
 class COTLIncludeRitualCeremonies(DefaultOnToggle):
     """Include ritual and ceremony objectives."""
-    display_name = "Include Ritual Ceremonies"
+    display_name = "Cult of the Lamb Include Ritual Ceremonies"
 
 class COTLIncludeResourceCollection(DefaultOnToggle):
     """Include resource collection and production objectives."""
-    display_name = "Include Resource Collection"
+    display_name = "Cult of the Lamb Include Resource Collection"
 
 class COTLIncludeDoctrineDevelopment(DefaultOnToggle):
     """Include doctrine and commandment objectives."""
-    display_name = "Include Doctrine Development"
+    display_name = "Cult of the Lamb Include Doctrine Development"
 
 class COTLManagementStyle(TextChoice):
     """Focus cult management on specific leadership styles."""
-    display_name = "Management Style"
+    display_name = "Cult of the Lamb Management Style"
     option_all = 0
     option_benevolent = 1
     option_ruthless = 2

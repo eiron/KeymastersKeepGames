@@ -1304,47 +1304,47 @@ class BloodstainedRitualOfTheNightGame(Game):
 # Archipelago Options
 class BloodstainedIncludeShardCollection(DefaultOnToggle):
     """Include shard collection and upgrade objectives."""
-    display_name = "Include Shard Collection"
+    display_name = "Bloodstained Ritual of the Night Include Shard Collection"
 
 class BloodstainedIncludeExploration(DefaultOnToggle):
     """Include map exploration and discovery objectives."""
-    display_name = "Include Exploration"
+    display_name = "Bloodstained Ritual of the Night Include Exploration"
 
 class BloodstainedIncludeBossChallenges(DefaultOnToggle):
     """Include boss fight and combat challenge objectives."""
-    display_name = "Include Boss Challenges"
+    display_name = "Bloodstained Ritual of the Night Include Boss Challenges"
 
 class BloodstainedIncludeAlchemyCrafting(DefaultOnToggle):
     """Include alchemy, crafting, and synthesis objectives."""
-    display_name = "Include Alchemy & Crafting"
+    display_name = "Bloodstained Ritual of the Night Include Alchemy & Crafting"
 
 class BloodstainedIncludeEquipmentMastery(DefaultOnToggle):
     """Include weapon mastery and equipment collection objectives."""
-    display_name = "Include Equipment Mastery"
+    display_name = "Bloodstained Ritual of the Night Include Equipment Mastery"
 
 class BloodstainedIncludeCompletionGoals(DefaultOnToggle):
     """Include story completion and achievement objectives."""
-    display_name = "Include Completion Goals"
+    display_name = "Bloodstained Ritual of the Night Include Completion Goals"
 
 class BloodstainedIncludeSpeedrunChallenges(Toggle):
     """Include speedrun and time-based challenge objectives."""
-    display_name = "Include Speedrun Challenges"
+    display_name = "Bloodstained Ritual of the Night Include Speedrun Challenges"
 
 class BloodstainedIncludeDifficultyChallenges(Toggle):
     """Include difficulty and restriction-based challenge objectives."""
-    display_name = "Include Difficulty Challenges"
+    display_name = "Bloodstained Ritual of the Night Include Difficulty Challenges"
 
 class BloodstainedIncludeGameModes(Toggle):
     """Include objectives for special game modes like Randomizer, Classic, Bloodless, etc."""
-    display_name = "Include Game Mode Challenges"
+    display_name = "Bloodstained Ritual of the Night Include Game Mode Challenges"
 
 class BloodstainedIncludeDominiquesCurse(Toggle):
     """Include objectives for the paid Dominique's Curse DLC (Classic II) - requires separate purchase."""
-    display_name = "Include Dominique's Curse DLC"
+    display_name = "Bloodstained Ritual of the Night Include Dominique's Curse DLC"
 
 class BloodstainedFocusStyle(TextChoice):
     """Focus objectives on specific gameplay styles."""
-    display_name = "Focus Style"
+    display_name = "Bloodstained Ritual of the Night Focus Style"
     option_all = 0
     option_exploration = 1
     option_combat = 2

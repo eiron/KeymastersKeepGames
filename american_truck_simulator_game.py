@@ -485,35 +485,35 @@ class AmericanTruckSimulatorGame(Game):
 # Option classes would typically be defined elsewhere, but including stubs for completeness
 class ATSIncludeInterstateDelivery(DefaultOnToggle):
     """Include interstate delivery objectives"""
-    display_name = "Include Interstate Delivery"
+    display_name = "American Truck Simulator Include Interstate Delivery"
 
 class ATSIncludeStateExploration(DefaultOnToggle):
     """Include state exploration objectives"""
-    display_name = "Include State Exploration"
+    display_name = "American Truck Simulator Include State Exploration"
 
 class ATSIncludeTruckOwnership(DefaultOnToggle):
     """Include truck ownership objectives"""
-    display_name = "Include Truck Ownership"
+    display_name = "American Truck Simulator Include Truck Ownership"
 
 class ATSIncludeLongHaul(DefaultOnToggle):
     """Include long haul objectives"""
-    display_name = "Include Long Haul"
+    display_name = "American Truck Simulator Include Long Haul"
 
 class ATSIncludeHeavyHaul(DefaultOnToggle):
     """Include heavy haul objectives"""
-    display_name = "Include Heavy Haul"
+    display_name = "American Truck Simulator Include Heavy Haul"
 
 class ATSIncludeBusinessObjectives(DefaultOnToggle):
     """Include business objectives"""
-    display_name = "Include Business Objectives"
+    display_name = "American Truck Simulator Include Business Objectives"
 
 class ATSIncludeDlcContent(DefaultOnToggle):
     """Include DLC content objectives"""
-    display_name = "Include DLC Content"
+    display_name = "American Truck Simulator Include DLC Content"
 
 class ATSDifficultyLevel(TextChoice):
     """Set the difficulty level for objectives"""
-    display_name = "Difficulty Level"
+    display_name = "American Truck Simulator Difficulty Level"
     option_easy = 0
     option_medium = 1
     option_hard = 2

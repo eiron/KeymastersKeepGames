@@ -454,35 +454,35 @@ class EuroTruckSimulator2Game(Game):
 # Option classes would typically be defined elsewhere, but including stubs for completeness
 class ETS2IncludeDeliveryObjectives(DefaultOnToggle):
     """Include delivery objectives"""
-    display_name = "Include Delivery Objectives"
+    display_name = "Euro Truck Simulator 2 Include Delivery Objectives"
 
 class ETS2IncludeCountryExploration(DefaultOnToggle):
     """Include country exploration objectives"""
-    display_name = "Include Country Exploration"
+    display_name = "Euro Truck Simulator 2 Include Country Exploration"
 
 class ETS2IncludeTruckOwnership(DefaultOnToggle):
     """Include truck ownership objectives"""
-    display_name = "Include Truck Ownership"
+    display_name = "Euro Truck Simulator 2 Include Truck Ownership"
 
 class ETS2IncludeLongDistance(DefaultOnToggle):
     """Include long distance objectives"""
-    display_name = "Include Long Distance"
+    display_name = "Euro Truck Simulator 2 Include Long Distance"
 
 class ETS2IncludeSpecialTransport(DefaultOnToggle):
     """Include special transport objectives"""
-    display_name = "Include Special Transport"
+    display_name = "Euro Truck Simulator 2 Include Special Transport"
 
 class ETS2IncludeBusinessObjectives(DefaultOnToggle):
     """Include business objectives"""
-    display_name = "Include Business Objectives"
+    display_name = "Euro Truck Simulator 2 Include Business Objectives"
 
 class ETS2IncludeDlcContent(DefaultOnToggle):
     """Include DLC content objectives"""
-    display_name = "Include DLC Content"
+    display_name = "Euro Truck Simulator 2 Include DLC Content"
 
 class ETS2DifficultyLevel(TextChoice):
     """Set the difficulty level for objectives"""
-    display_name = "Difficulty Level"
+    display_name = "Euro Truck Simulator 2 Difficulty Level"
     option_easy = 0
     option_medium = 1
     option_hard = 2

@@ -626,43 +626,43 @@ class DateEverythingGame(Game):
 # Archipelago Options
 class DEIncludeStructuralObjects(DefaultOnToggle):
     """Include dating structural elements like walls, floors, and doors (Characters 1-10)."""
-    display_name = "Include Structural Objects"
+    display_name = "Date Everything! Include Structural Objects"
 
 class DEIncludeFurnitureDecor(DefaultOnToggle):
     """Include dating furniture and decorative items (Characters 11-30)."""
-    display_name = "Include Furniture & Decor"
+    display_name = "Date Everything! Include Furniture & Decor"
 
 class DEIncludeKitchenAppliances(DefaultOnToggle):
     """Include dating kitchen appliances and food-related items (Characters 31-42)."""
-    display_name = "Include Kitchen Appliances"
+    display_name = "Date Everything! Include Kitchen Appliances"
 
 class DEIncludeBathroomItems(DefaultOnToggle):
     """Include dating bathroom fixtures and personal care items (Characters 43-52)."""
-    display_name = "Include Bathroom Items"
+    display_name = "Date Everything! Include Bathroom Items"
 
 class DEIncludeLaundryItems(DefaultOnToggle):
     """Include dating laundry room items and cleaning supplies (Characters 71-80)."""
-    display_name = "Include Laundry Items"
+    display_name = "Date Everything! Include Laundry Items"
 
 class DEIncludeOfficeBedroom(DefaultOnToggle):
     """Include dating office supplies, bedroom items, and personal belongings (Characters 53-70)."""
-    display_name = "Include Office & Bedroom Items"
+    display_name = "Date Everything! Include Office & Bedroom Items"
 
 class DEIncludeMiscItems(DefaultOnToggle):
     """Include dating miscellaneous items like tools, keys, and storage (Characters 81-90)."""
-    display_name = "Include Miscellaneous Items"
+    display_name = "Date Everything! Include Miscellaneous Items"
 
 class DEIncludeSpecialConcepts(DefaultOnToggle):
     """Include dating abstract concepts and special characters (Characters 91-100)."""
-    display_name = "Include Special Concepts"
+    display_name = "Date Everything! Include Special Concepts"
 
 class DEIncludeDLCCharacters(DefaultOnToggle):
     """Include dating DLC characters from the Lavish Edition (Characters 101-102)."""
-    display_name = "Include DLC Characters"
+    display_name = "Date Everything! Include DLC Characters"
 
 class DERelationshipGoals(TextChoice):
     """What kind of relationship outcomes should you focus on?"""
-    display_name = "Relationship Goals"
+    display_name = "Date Everything! Relationship Goals"
     option_love_focused = 0
     option_friendship_focused = 1
     option_hate_focused = 2

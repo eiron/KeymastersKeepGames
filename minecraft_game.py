@@ -766,39 +766,39 @@ class MinecraftGame(Game):
 # Archipelago Options
 class MinecraftIncludeSurvivalBasics(DefaultOnToggle):
     """Include basic survival objectives (tools, shelter, mining)."""
-    display_name = "Include Survival Basics"
+    display_name = "Minecraft Include Survival Basics"
 
 class MinecraftIncludeBuildingProjects(DefaultOnToggle):
     """Include building and construction objectives."""
-    display_name = "Include Building Projects"
+    display_name = "Minecraft Include Building Projects"
 
 class MinecraftIncludeExploration(DefaultOnToggle):
     """Include exploration and discovery objectives."""
-    display_name = "Include Exploration"
+    display_name = "Minecraft Include Exploration"
 
 class MinecraftIncludeRedstoneEngineering(DefaultOnToggle):
     """Include redstone contraption and automation objectives."""
-    display_name = "Include Redstone Engineering"
+    display_name = "Minecraft Include Redstone Engineering"
 
 class MinecraftIncludeFarmingAutomation(DefaultOnToggle):
     """Include farming, breeding, and automation objectives."""
-    display_name = "Include Farming & Automation"
+    display_name = "Minecraft Include Farming & Automation"
 
 class MinecraftIncludeBossProgression(DefaultOnToggle):
     """Include boss fights and major progression objectives."""
-    display_name = "Include Boss Progression"
+    display_name = "Minecraft Include Boss Progression"
 
 class MinecraftIncludeCollectionGoals(DefaultOnToggle):
     """Include item collection and museum objectives."""
-    display_name = "Include Collection Goals"
+    display_name = "Minecraft Include Collection Goals"
 
 class MinecraftIncludeChallengeRuns(Toggle): # Keep as False - challenge runs are specialized/harder
     """Include challenge runs and restriction objectives."""
-    display_name = "Include Challenge Runs"
+    display_name = "Minecraft Include Challenge Runs"
 
 class MinecraftGameModeFocus(TextChoice):
     """Focus objectives on specific game modes."""
-    display_name = "Game Mode Focus"
+    display_name = "Minecraft Game Mode Focus"
     option_all = 0
     option_survival = 1
     option_creative = 2
@@ -806,7 +806,7 @@ class MinecraftGameModeFocus(TextChoice):
 
 class MinecraftDifficultyPreference(TextChoice):
     """Prefer certain difficulty levels for objectives."""
-    display_name = "Difficulty Preference"
+    display_name = "Minecraft Difficulty Preference"
     option_all = 0
     option_easy = 1
     option_hard = 2

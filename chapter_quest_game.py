@@ -223,7 +223,7 @@ class BookCollection(OptionList):
       difficulty: "normal" (*optional, can be "normal" or "difficult")
     """
 
-    display_name = "Book Collection"
+    display_name = "Chapter Quest Book Collection"
     default = [
         {
             "title": "1984",
@@ -274,25 +274,25 @@ class ChapterQuestIncludeGenreChallenges(DefaultOnToggle):
     """
     Whether to include genre-based challenges like 'Read chapters from X Science Fiction books'
     """
-    display_name = "Include Genre Challenges"
+    display_name = "Chapter Quest Include Genre Challenges"
 
 
 class ChapterQuestIncludeAuthorChallenges(DefaultOnToggle):
     """
     Whether to include author-based challenges like 'Read chapters from X books by Jane Austen'
     """
-    display_name = "Include Author Challenges"
+    display_name = "Chapter Quest Include Author Challenges"
 
 
 class ChapterQuestIncludeSpecificChapters(DefaultOnToggle):
     """
     Whether to include specific chapter objectives like 'Read chapter 5'
     """
-    display_name = "Include Specific Chapter Objectives"
+    display_name = "Chapter Quest Include Specific Chapter Objectives"
 
 
 class ChapterQuestIncludeBulkChapters(DefaultOnToggle):
     """
     Whether to include bulk chapter objectives like 'Read 3 chapters from Book Title'
     """
-    display_name = "Include Bulk Chapter Objectives"
+    display_name = "Chapter Quest Include Bulk Chapter Objectives"

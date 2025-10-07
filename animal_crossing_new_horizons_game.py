@@ -1156,39 +1156,39 @@ class AnimalCrossingNewHorizonsGame(Game):
 # Archipelago Options
 class ACNHIncludeDailyActivities(DefaultOnToggle):
     """Include daily activity objectives (resource gathering, tasks)."""
-    display_name = "Include Daily Activities"
+    display_name = "Animal Crossing New Horizons Include Daily Activities"
 
 class ACNHIncludeCollections(DefaultOnToggle):
     """Include collection objectives (museum donations, critterpedia)."""
-    display_name = "Include Collection Activities"
+    display_name = "Animal Crossing New Horizons Include Collection Activities"
 
 class ACNHIncludeIslandDevelopment(DefaultOnToggle):
     """Include island development objectives (buildings, infrastructure, rating)."""
-    display_name = "Include Island Development"
+    display_name = "Animal Crossing New Horizons Include Island Development"
 
 class ACNHIncludeVillagerInteractions(DefaultOnToggle):
     """Include villager interaction objectives (friendship, gifts, help)."""
-    display_name = "Include Villager Interactions"
+    display_name = "Animal Crossing New Horizons Include Villager Interactions"
 
 class ACNHIncludeShopping(DefaultOnToggle):
     """Include shopping objectives (purchases, collections, sets)."""
-    display_name = "Include Shopping Activities"
+    display_name = "Animal Crossing New Horizons Include Shopping Activities"
 
 class ACNHIncludeCrafting(DefaultOnToggle):
     """Include crafting objectives (DIY recipes, customization)."""
-    display_name = "Include Crafting Activities"
+    display_name = "Animal Crossing New Horizons Include Crafting Activities"
 
 class ACNHIncludeSeasonalEvents(Toggle):
     """Include seasonal event objectives (limited-time activities)."""
-    display_name = "Include Seasonal Events"
+    display_name = "Animal Crossing New Horizons Include Seasonal Events"
 
 class ACNHIncludeDecorating(DefaultOnToggle):
     """Include decorating objectives (room design, themes, HHA scoring)."""
-    display_name = "Include Decorating Activities"
+    display_name = "Animal Crossing New Horizons Include Decorating Activities"
 
 class ACNHCollectionFocus(TextChoice):
     """Focus collection objectives on specific categories."""
-    display_name = "Collection Focus"
+    display_name = "Animal Crossing New Horizons Collection Focus"
     option_all = 0
     option_bugs = 1
     option_fish = 2
@@ -1198,11 +1198,11 @@ class ACNHCollectionFocus(TextChoice):
 
 class ACNHIslandType(TextChoice):
     """Choose between challenges for new or established islands."""
-    display_name = "Island Type"
+    display_name = "Animal Crossing New Horizons Island Type"
     option_new = 0
     option_established = 1
     default = 0
 
 class ACNHIncludeHappyHomeParadise(Toggle):
     """Include Happy Home Paradise DLC objectives (vacation home design, facilities)."""
-    display_name = "Include Happy Home Paradise DLC"
+    display_name = "Animal Crossing New Horizons Include Happy Home Paradise DLC"

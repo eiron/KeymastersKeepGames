@@ -492,39 +492,39 @@ class HadesGame(Game):
 # Archipelago Options
 class HadesIncludeEscapeAttempts(DefaultOnToggle):
     """Include escape attempt objectives (runs, bosses, heat)."""
-    display_name = "Include Escape Attempts"
+    display_name = "Hades Include Escape Attempts"
 
 class HadesIncludeWeaponMastery(DefaultOnToggle):
     """Include weapon mastery objectives (aspects, upgrades, runs)."""
-    display_name = "Include Weapon Mastery"
+    display_name = "Hades Include Weapon Mastery"
 
 class HadesIncludeRelationshipBuilding(DefaultOnToggle):
     """Include relationship objectives (characters, gifts, keepsakes)."""
-    display_name = "Include Relationship Building"
+    display_name = "Hades Include Relationship Building"
 
 class HadesIncludeStoryProgression(DefaultOnToggle):
     """Include story progression objectives (storylines, codex, endings)."""
-    display_name = "Include Story Progression"
+    display_name = "Hades Include Story Progression"
 
 class HadesIncludeMirrorUpgrades(DefaultOnToggle):
     """Include Mirror of Night upgrade objectives."""
-    display_name = "Include Mirror Upgrades"
+    display_name = "Hades Include Mirror Upgrades"
 
 class HadesIncludeProphecies(DefaultOnToggle):
     """Include Fated List prophecy objectives."""
-    display_name = "Include Prophecies"
+    display_name = "Hades Include Prophecies"
 
 class HadesIncludeContractorUpgrades(DefaultOnToggle):
     """Include House Contractor upgrade objectives."""
-    display_name = "Include Contractor Upgrades"
+    display_name = "Hades Include Contractor Upgrades"
 
 class HadesIncludeCollectionGoals(DefaultOnToggle):
     """Include resource collection and merchant objectives."""
-    display_name = "Include Collection Goals"
+    display_name = "Hades Include Collection Goals"
 
 class HadesDifficultyLevel(TextChoice):
     """Sets the difficulty level for objectives and constraints."""
-    display_name = "Difficulty Level"
+    display_name = "Hades Difficulty Level"
     option_normal = 0
     option_hard = 1
     option_extreme = 2

@@ -923,39 +923,39 @@ class BaldursGate3Game(Game):
 # Archipelago Options
 class BG3IncludeCharacterBuilds(DefaultOnToggle):
     """Include character build experimentation and multiclassing objectives."""
-    display_name = "Include Character Builds"
+    display_name = "Baldurs Gate 3 Include Character Builds"
 
 class BG3IncludeStoryProgression(DefaultOnToggle):
     """Include main story and narrative choice objectives."""
-    display_name = "Include Story Progression"
+    display_name = "Baldurs Gate 3 Include Story Progression"
 
 class BG3IncludeCompanionQuests(DefaultOnToggle):
     """Include companion relationship and personal quest objectives."""
-    display_name = "Include Companion Quests"
+    display_name = "Baldurs Gate 3 Include Companion Quests"
 
 class BG3IncludeExploration(DefaultOnToggle):
     """Include world exploration and discovery objectives."""
-    display_name = "Include Exploration"
+    display_name = "Baldurs Gate 3 Include Exploration"
 
 class BG3IncludeCombatChallenges(DefaultOnToggle):
     """Include tactical combat and boss fight objectives."""
-    display_name = "Include Combat Challenges"
+    display_name = "Baldurs Gate 3 Include Combat Challenges"
 
 class BG3IncludeSocialEncounters(DefaultOnToggle):
     """Include dialogue, persuasion, and social interaction objectives."""
-    display_name = "Include Social Encounters"
+    display_name = "Baldurs Gate 3 Include Social Encounters"
 
 class BG3IncludeCollectibles(DefaultOnToggle):
     """Include item collection and treasure hunting objectives."""
-    display_name = "Include Collectibles"
+    display_name = "Baldurs Gate 3 Include Collectibles"
 
 class BG3IncludeAchievementHunting(DefaultOnToggle):
     """Include achievement and completion challenge objectives."""
-    display_name = "Include Achievement Hunting"
+    display_name = "Baldurs Gate 3 Include Achievement Hunting"
 
 class BG3DifficultyPreference(TextChoice):
     """Prefer certain difficulty levels for objectives."""
-    display_name = "Difficulty Preference"
+    display_name = "Baldurs Gate 3 Difficulty Preference"
     option_all = 0
     option_easy = 1
     option_hard = 2
@@ -963,7 +963,7 @@ class BG3DifficultyPreference(TextChoice):
 
 class BG3PlaystyleFocus(TextChoice):
     """Focus objectives on specific playstyles."""
-    display_name = "Playstyle Focus"
+    display_name = "Baldurs Gate 3 Playstyle Focus"
     option_all = 0
     option_combat = 1
     option_story = 2

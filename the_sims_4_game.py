@@ -2375,39 +2375,39 @@ class TheSims4Game(Game):
 # Archipelago Options
 class Sims4IncludeSkills(DefaultOnToggle):
     """Include skill development and mastery objectives."""
-    display_name = "Include Skills Development"
+    display_name = "The Sims 4 Include Skills Development"
 
 class Sims4IncludeCareers(DefaultOnToggle):
     """Include career progression and work-related objectives."""
-    display_name = "Include Career Progression"
+    display_name = "The Sims 4 Include Career Progression"
 
 class Sims4IncludeAspirations(DefaultOnToggle):
     """Include aspiration completion and life goal objectives."""
-    display_name = "Include Aspiration Goals"
+    display_name = "The Sims 4 Include Aspiration Goals"
 
 class Sims4IncludeRelationships(DefaultOnToggle):
     """Include relationship building, family, and social objectives."""
-    display_name = "Include Relationship Building"
+    display_name = "The Sims 4 Include Relationship Building"
 
 class Sims4IncludeCollections(DefaultOnToggle):
     """Include collectible hunting and collection completion objectives."""
-    display_name = "Include Collection Hunting"
+    display_name = "The Sims 4 Include Collection Hunting"
 
 class Sims4IncludeCreativeGoals(DefaultOnToggle):
     """Include creative objectives like painting, writing, building, and programming."""
-    display_name = "Include Creative Goals"
+    display_name = "The Sims 4 Include Creative Goals"
 
 class Sims4IncludeLifeSimulation(DefaultOnToggle):
     """Include life simulation objectives like aging, emotions, and events."""
-    display_name = "Include Life Simulation"
+    display_name = "The Sims 4 Include Life Simulation"
 
 class Sims4IncludeAchievements(DefaultOnToggle):
     """Include achievement-style objectives and challenges."""
-    display_name = "Include Achievement Goals"
+    display_name = "The Sims 4 Include Achievement Goals"
 
 class Sims4DifficultyLevel(TextChoice):
     """Sets the difficulty level for objectives and constraints."""
-    display_name = "Difficulty Level"
+    display_name = "The Sims 4 Difficulty Level"
     option_easy = 0
     option_normal = 1
     option_hard = 2
@@ -2416,7 +2416,7 @@ class Sims4DifficultyLevel(TextChoice):
 
 class Sims4FocusStyle(TextChoice):
     """Focus objectives on specific gameplay styles."""
-    display_name = "Focus Style"
+    display_name = "The Sims 4 Focus Style"
     option_all = 0
     option_creative = 1
     option_social = 2
@@ -2427,131 +2427,131 @@ class Sims4FocusStyle(TextChoice):
 # DLC Options - Expansion Packs
 class Sims4IncludeGetToWork(Toggle):
     """Include Get to Work content: active careers (Doctor, Detective, Scientist), aliens, retail ownership."""
-    display_name = "Include Get to Work"
+    display_name = "The Sims 4 Include Get to Work"
 
 class Sims4IncludeGetTogether(Toggle):
     """Include Get Together content: clubs, Windenburg, DJ skill."""
-    display_name = "Include Get Together"
+    display_name = "The Sims 4 Include Get Together"
 
 class Sims4IncludeCityLiving(Toggle):
     """Include City Living content: apartments, San Myshuno, festivals, careers."""
-    display_name = "Include City Living"
+    display_name = "The Sims 4 Include City Living"
 
 class Sims4IncludeCatsAndDogs(Toggle):
     """Include Cats & Dogs content: pets, veterinarian career, Brindleton Bay."""
-    display_name = "Include Cats & Dogs"
+    display_name = "The Sims 4 Include Cats & Dogs"
 
 class Sims4IncludeSeasons(Toggle):
     """Include Seasons content: weather, holidays, gardening career."""
-    display_name = "Include Seasons"
+    display_name = "The Sims 4 Include Seasons"
 
 class Sims4IncludeGetFamous(Toggle):
     """Include Get Famous content: acting career, fame system, Del Sol Valley."""
-    display_name = "Include Get Famous"
+    display_name = "The Sims 4 Include Get Famous"
 
 class Sims4IncludeIslandLiving(Toggle):
     """Include Island Living content: mermaids, conservationist career, Sulani."""
-    display_name = "Include Island Living"
+    display_name = "The Sims 4 Include Island Living"
 
 class Sims4IncludeDiscoverUniversity(Toggle):
     """Include Discover University content: university, degrees, organizations."""
-    display_name = "Include Discover University"
+    display_name = "The Sims 4 Include Discover University"
 
 class Sims4IncludeEcoLifestyle(Toggle):
     """Include Eco Lifestyle content: civil designer career, eco footprint, Evergreen Harbor."""
-    display_name = "Include Eco Lifestyle"
+    display_name = "The Sims 4 Include Eco Lifestyle"
 
 class Sims4IncludeSnowyEscape(Toggle):
     """Include Snowy Escape content: skiing, hot springs, lifestyles, Mt. Komorebi."""
-    display_name = "Include Snowy Escape"
+    display_name = "The Sims 4 Include Snowy Escape"
 
 class Sims4IncludeCottageLiving(Toggle):
     """Include Cottage Living content: farming, animals, Henford-on-Bagley."""
-    display_name = "Include Cottage Living"
+    display_name = "The Sims 4 Include Cottage Living"
 
 class Sims4IncludeHighSchoolYears(Toggle):
     """Include High School Years content: teen gameplay, prom, graduation."""
-    display_name = "Include High School Years"
+    display_name = "The Sims 4 Include High School Years"
 
 class Sims4IncludeGrowingTogether(Toggle):
     """Include Growing Together content: family dynamics, milestones, San Sequoia."""
-    display_name = "Include Growing Together"
+    display_name = "The Sims 4 Include Growing Together"
 
 class Sims4IncludeHorseRanch(Toggle):
     """Include Horse Ranch content: horses, nectar making, Chestnut Ridge."""
-    display_name = "Include Horse Ranch"
+    display_name = "The Sims 4 Include Horse Ranch"
 
 class Sims4IncludeForRent(Toggle):
     """Include For Rent content: property rental, Tomarang."""
-    display_name = "Include For Rent"
+    display_name = "The Sims 4 Include For Rent"
 
 class Sims4IncludeLovestruck(Toggle):
     """Include Lovestruck content: romantic relationships, Ciudad Enamorada."""
-    display_name = "Include Lovestruck"
+    display_name = "The Sims 4 Include Lovestruck"
 
 
 # DLC Options - Game Packs
 class Sims4IncludeVampires(Toggle):
     """Include Vampires content: vampire gameplay, Forgotten Hollow."""
-    display_name = "Include Vampires"
+    display_name = "The Sims 4 Include Vampires"
 
 class Sims4IncludeParenthood(Toggle):
     """Include Parenthood content: parenting skill, character values."""
-    display_name = "Include Parenthood"
+    display_name = "The Sims 4 Include Parenthood"
 
 class Sims4IncludeJungleAdventure(Toggle):
     """Include Jungle Adventure content: archaeology, Selvadorada."""
-    display_name = "Include Jungle Adventure"
+    display_name = "The Sims 4 Include Jungle Adventure"
 
 class Sims4IncludeStrangerVille(Toggle):
     """Include StrangerVille content: mystery solving, military career."""
-    display_name = "Include StrangerVille"
+    display_name = "The Sims 4 Include StrangerVille"
 
 class Sims4IncludeRealmOfMagic(Toggle):
     """Include Realm of Magic content: spellcasters, Glimmerbrook."""
-    display_name = "Include Realm of Magic"
+    display_name = "The Sims 4 Include Realm of Magic"
 
 class Sims4IncludeStarWars(Toggle):
     """Include Star Wars content: Batuu, lightsabers, Force powers."""
-    display_name = "Include Star Wars: Journey to Batuu"
+    display_name = "The Sims 4 Include Star Wars: Journey to Batuu"
 
 class Sims4IncludeDreamHomeDecorator(Toggle):
     """Include Dream Home Decorator content: interior decorator career."""
-    display_name = "Include Dream Home Decorator"
+    display_name = "The Sims 4 Include Dream Home Decorator"
 
 class Sims4IncludeMyWeddingStories(Toggle):
     """Include My Wedding Stories content: wedding events, Tartosa."""
-    display_name = "Include My Wedding Stories"
+    display_name = "The Sims 4 Include My Wedding Stories"
 
 class Sims4IncludeWerewolves(Toggle):
     """Include Werewolves content: werewolf gameplay, Moonwood Mill."""
-    display_name = "Include Werewolves"
+    display_name = "The Sims 4 Include Werewolves"
 
 # Additional Base Game Categories
 class Sims4IncludeSocialExperiments(DefaultOnToggle):
     """Include experimental social scenarios and unusual relationship dynamics."""
-    display_name = "Include Social Experiments"
+    display_name = "The Sims 4 Include Social Experiments"
 
 class Sims4IncludeEconomicChallenges(DefaultOnToggle):
     """Include financial challenges, poverty simulations, and economic gameplay."""
-    display_name = "Include Economic Challenges"
+    display_name = "The Sims 4 Include Economic Challenges"
 
 class Sims4IncludeBehavioralQuirks(DefaultOnToggle):
     """Include unusual behavior patterns, quirky lifestyles, and trait experiments."""
-    display_name = "Include Behavioral Quirks"
+    display_name = "The Sims 4 Include Behavioral Quirks"
 
 class Sims4IncludeReputationChallenges(DefaultOnToggle):
     """Include negative reputation goals, social chaos, and neighborhood conflicts."""
-    display_name = "Include Reputation Challenges"
+    display_name = "The Sims 4 Include Reputation Challenges"
 
 class Sims4IncludeExperimentalLiving(DefaultOnToggle):
     """Include unconventional housing, unusual living situations, and lifestyle experiments."""
-    display_name = "Include Experimental Living"
+    display_name = "The Sims 4 Include Experimental Living"
 
 class Sims4IncludeRoutineBreaking(DefaultOnToggle):
     """Include anti-routine challenges, constant change, and unpredictable gameplay."""
-    display_name = "Include Routine Breaking"
+    display_name = "The Sims 4 Include Routine Breaking"
 
 class Sims4IncludeRandomEvents(Toggle):
     """Include disaster management, chaos survival, and random event challenges."""
-    display_name = "Include Random Events"
+    display_name = "The Sims 4 Include Random Events"
