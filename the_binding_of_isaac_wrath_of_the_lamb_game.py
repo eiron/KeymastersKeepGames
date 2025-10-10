@@ -286,16 +286,16 @@ class TheBindingOfIsaacWrathOfTheLambGame(Game):
 
     @property
     def has_wrath_of_the_lamb(self) -> bool:
-        return self.options.the_binding_of_isaac_wrath_of_the_lamb_include_wrath_of_the_lamb_dlc.value
+        return self.archipelago_options.the_binding_of_isaac_wrath_of_the_lamb_include_wrath_of_the_lamb_dlc.value
 
     @property
     def has_eternal_edition(self) -> bool:
         # Eternal Edition requires Wrath of the Lamb
-        return self.has_wrath_of_the_lamb and self.options.the_binding_of_isaac_wrath_of_the_lamb_include_eternal_edition.value
+        return self.has_wrath_of_the_lamb and self.archipelago_options.the_binding_of_isaac_wrath_of_the_lamb_include_eternal_edition.value
 
     @property
     def characters(self) -> List[str]:
-        chars = list(self.options.the_binding_of_isaac_wrath_of_the_lamb_characters.value)
+        chars = list(self.archipelago_options.the_binding_of_isaac_wrath_of_the_lamb_characters.value)
         # Filter out DLC characters if DLC is not enabled
         if not self.has_wrath_of_the_lamb:
             chars = [c for c in chars if c in self.characters_base]
