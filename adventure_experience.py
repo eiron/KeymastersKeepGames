@@ -139,7 +139,7 @@ class AdventureLocalExplorationSelection(OptionSet):
     Replace the placeholders with values of your own choosing.
     """
 
-    display_name = "Adventure Local Exploration Selection"
+    display_name = "Adventure Experience Local Exploration Selection"
 
     default = ["Downtown District", "Local Park", "Historic Neighborhood", "Nearby Trail", "..."]
 
@@ -151,7 +151,7 @@ class AdventureCulturalExperienceSelection(OptionSet):
     Replace the placeholders with values of your own choosing.
     """
 
-    display_name = "Adventure Cultural Experience Selection"
+    display_name = "Adventure Experience Cultural Experience Selection"
 
     default = ["Art Museum", "Live Theater Show", "Music Festival", "Cultural Workshop", "..."]
 
@@ -163,7 +163,7 @@ class AdventureOutdoorActivitySelection(OptionSet):
     Replace the placeholders with values of your own choosing.
     """
 
-    display_name = "Adventure Outdoor Activity Selection"
+    display_name = "Adventure Experience Outdoor Activity Selection"
 
     default = ["Hiking Trail", "Camping Trip", "Rock Climbing", "Kayaking Adventure", "..."]
 
@@ -175,7 +175,7 @@ class AdventureCulinaryAdventureSelection(OptionSet):
     Replace the placeholders with values of your own choosing.
     """
 
-    display_name = "Adventure Culinary Adventure Selection"
+    display_name = "Adventure Experience Culinary Adventure Selection"
 
     default = ["International Restaurant", "Food Festival", "Cooking Class", "Wine Tasting", "..."]
 
@@ -187,7 +187,7 @@ class AdventureLocalExplorationActions(OptionSet):
     You can customize this list to your liking.
     """
 
-    display_name = "Adventure Local Exploration Actions"
+    display_name = "Adventure Experience Local Exploration Actions"
 
     default = [
         "VISIT",
@@ -205,7 +205,7 @@ class AdventureCulturalExperienceActions(OptionSet):
     You can customize this list to your liking.
     """
 
-    display_name = "Adventure Cultural Experience Actions"
+    display_name = "Adventure Experience Cultural Experience Actions"
 
     default = [
         "ATTEND",
@@ -223,7 +223,7 @@ class AdventureOutdoorActivityActions(OptionSet):
     You can customize this list to your liking.
     """
 
-    display_name = "Adventure Outdoor Activity Actions"
+    display_name = "Adventure Experience Outdoor Activity Actions"
 
     default = [
         "ATTEMPT",
@@ -241,7 +241,7 @@ class AdventureCulinaryAdventureActions(OptionSet):
     You can customize this list to your liking.
     """
 
-    display_name = "Adventure Culinary Adventure Actions"
+    display_name = "Adventure Experience Culinary Adventure Actions"
 
     default = [
         "TRY",

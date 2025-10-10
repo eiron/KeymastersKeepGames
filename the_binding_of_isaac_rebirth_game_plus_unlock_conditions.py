@@ -581,8 +581,7 @@ class TheBindingOfIsaacRebirthGame(Game):
     def bosses_base(self) -> List[str]:
         return [
             "Mom",
-            "Mom's Heart", 
-            "It Lives",
+            "Mom's Heart/It Lives",
             "Isaac",
             "Satan",
             "???",
@@ -883,7 +882,7 @@ class TheBindingOfIsaacRebirthGame(Game):
 
     @staticmethod
     def specific_bosses_range() -> range:
-        return range(2, 3)
+        return range(2, 4)
 
     @functools.cached_property
     def seeds_base(self) -> List[str]:

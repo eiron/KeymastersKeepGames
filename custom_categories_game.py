@@ -176,7 +176,7 @@ class CustomCategoriesCollection(OptionList):
         - "Simple task without options" (*simplified format)
     """
 
-    display_name = "Custom Categories Custom Categories Collection"
+    display_name = "Custom Categories Collection"
     default = [
         {
             "category": "Fitness & Health",
