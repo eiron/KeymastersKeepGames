@@ -293,7 +293,6 @@ class TheBindingOfIsaacWrathOfTheLambGame(Game):
         # Eternal Edition requires Wrath of the Lamb
         return self.has_wrath_of_the_lamb and self.archipelago_options.the_binding_of_isaac_wrath_of_the_lamb_include_eternal_edition.value
 
-    @property
     def characters(self) -> List[str]:
         chars = list(self.archipelago_options.the_binding_of_isaac_wrath_of_the_lamb_characters.value)
         # Filter out DLC characters if DLC is not enabled
@@ -337,7 +336,6 @@ class TheBindingOfIsaacWrathOfTheLambGame(Game):
             "???",    # Chest boss
         ]
 
-    @functools.cached_property
     def bosses(self) -> List[str]:
         """All available final bosses"""
         bosses = self.bosses_base[:]
@@ -345,7 +343,6 @@ class TheBindingOfIsaacWrathOfTheLambGame(Game):
             bosses.extend(self.bosses_wrath_of_the_lamb)
         return bosses
 
-    @functools.cached_property
     def chapter_bosses(self) -> List[str]:
         """Regular chapter bosses (not final bosses)"""
         base_bosses = [
@@ -397,7 +394,6 @@ class TheBindingOfIsaacWrathOfTheLambGame(Game):
             return base_bosses + wrath_bosses
         return base_bosses
 
-    @functools.cached_property
     def challenges(self) -> List[str]:
         """Challenge names from Wrath of the Lamb"""
         return [
