@@ -629,71 +629,71 @@ class HarvestellaDifficultyLevel(TextChoice):
 class HarvestellaCropSelection(OptionSet):
     """Select which crops can appear in farming objectives"""
     display_name = "Harvestella Crop Selection"
-    default = {
+    default = [
         "Turnip", "Cabbage", "Strawberry", "Potato", "Cucumber",
         "Tomato", "Corn", "Onion", "Eggplant", "Bell Pepper",
         "Pumpkin", "Sweet Potato", "Carrot", "Radish", "Spinach",
         "Lettuce", "Broccoli", "Cauliflower", "Asparagus", "Artichoke",
         "Nemean Tomato", "Morrocorn", "Lightalfa", "Colorful Carrot"
-    }
+    ]
 
 
 class HarvestellaJobSelection(OptionSet):
     """Select which jobs can appear in combat objectives"""
     display_name = "Harvestella Job Selection"  
-    default = {
+    default = [
         "Fighter", "Mage", "Mechanic", "Assault Savant", "Sky Lancer",
         "Shadow Walker", "Woglinde", "Lunamancer", "Avenger", "Pilgrim",
         "Aristotle", "Samurai"
-    }
+    ]
 
 
 class HarvestellaLocationSelection(OptionSet):
     """Select which locations can appear in exploration objectives"""
     display_name = "Harvestella Location Selection"
-    default = {
+    default = [
         "Lethe Village", "Shatolla", "Holy Capital Argene", "Abandoned Eden",
         "Coral Shrine", "Jade Forest", "Seaside Cave", "Autumn Falls",
         "Emo Hot Springs", "Conellu", "Glacia Mountain", "Twilight Mine",
         "Floating Sanctum", "Avatar's Territory"
-    }
+    ]
 
 
 class HarvestellaCharacterSelection(OptionSet):
     """Select which characters can appear in relationship objectives"""
     display_name = "Harvestella Character Selection"
-    default = {
+    default = [
         "Shrika", "Heine", "Asyl", "Aria", "Emo", "Istina", "Brakka", "Dianthus", "Cres", "Unicorn"
-    }
+    ]
 
 
 class HarvestellaMonsterSelection(OptionSet):
     """Select which monsters can appear in combat objectives"""
     display_name = "Harvestella Monster Selection"
-    default = {
+    default = [
         "Goblin", "Gnome", "Dragon", "Unicorn", "Juggernaut", "Hornet", "Sahagin",
         "Slime", "Chloro Gel", "Cyano Gel", "Crawler", "Shadow Elemental", "Bone Dragon",
         "Ancient Golem", "Lorelei", "Malicid", "Mnemosyne", "Star Sleeper", "Venom Bouquet", "Writhing Kelpie"
-    }
+    ]
 
 
 class HarvestellaRecipeSelection(OptionSet):
     """Select which recipes can appear in cooking objectives"""
     display_name = "Harvestella Recipe Selection"
-    default = {
+    default = [
         "Vegetable Stir-fry", "Herb-grilled Fish", "Meat and Potato Stew",
         "Tomato Salad", "Corn Soup", "Pumpkin Pie", "Strawberry Jam",
         "Grilled Vegetables", "Seafood Pasta", "Mushroom Risotto",
         "Fruit Smoothie"
-    }
+    ]
 
 
 class HarvestellaItemSelection(OptionSet):
     """Select which items can appear in crafting objectives"""
     display_name = "Harvestella Craftable Item Selection"
-    default = {
+    default = [
         "Repair Kit", "Fertilizer", "Seed Maker", "Quality Fertilizer",
         "Sprinkler", "Chest", "Scarecrow", "Bridge", "Lamp",
         "Healing Potion", "Magic Potion", "Stamina Potion",
         "Iron Ingot", "Silver Ingot", "Gold Ingot", "Mythril Ingot"
-    }
+    ]
