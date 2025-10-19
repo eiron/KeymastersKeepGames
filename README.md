@@ -69,6 +69,37 @@ This tool is essential for validating that game implementations will work correc
 
 ---
 
+## Playnite Library Integration
+
+The **Playnite Library** module allows you to generate objectives based on your personal Playnite games database. This implementation supports filtering, sorting, and challenge generation using all the metadata Playnite provides (tags, genres, features, platforms, categories, sources, series, scores, and more).
+
+### How to Use
+
+1. **Export your Playnite games database** using the [Json Library Import Export add-on](https://playnite.link/addons.html#JsonLibraryImportExport_888ab97e-ea1b-40e5-a2da-ef917aee0603).
+    - In Playnite, install the add-on and export your library to a JSON file (e.g., `games.json`).
+    - Place the exported file somewhere accessible (e.g., your OneDrive or local folder).
+2. **Configure the file location in your Keymaster's Keep options YAML**:
+    - In your KMK options YAML, set the `playnite_library_json_path` to the path of your exported JSON file.
+    - Example:
+      ```yaml
+      playnite_library_json_path: C:/Users/yourname/Documents/games.json
+      ```
+3. **Run Keymaster's Keep** and select Playnite Library objectives as desired. The module will automatically read your exported file and generate objectives using your real game collection.
+
+### Features
+- Supports all Playnite metadata fields: tags, genres, features, platforms, categories, sources, series, scores, playtime, and more
+- Objective templates for playing games by tag, genre, platform, category, source, series, rating, and more
+- Ordering options: most recently added, oldest, newest, highest-rated (UserScore, CriticScore, CommunityScore), random
+- Fully integrated with Keymaster's Keep challenge generation and filtering
+
+### Requirements
+- Playnite (Windows only)
+- [Json Library Import Export add-on](https://playnite.link/addons.html#JsonLibraryImportExport_888ab97e-ea1b-40e5-a2da-ef917aee0603)
+- Exported games database JSON file
+- Correct path set in your KMK options YAML
+
+---
+
 ## Include Option Standards
 
 All game implementations follow a standardized approach for include Toggle options:
