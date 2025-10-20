@@ -158,7 +158,7 @@ class PlayniteLibraryGame(Game):
                 data={"GAME": (self.games, 1)},
                 is_time_consuming=False,
                 is_difficult=False,
-                weight=1,
+                weight=3,
             ),
             GameObjectiveTemplate(
                 label="Play a Playnite library game from the SERIES series",
@@ -200,7 +200,7 @@ class PlayniteLibraryGame(Game):
                     data={attr_label: (attr_func, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=1,
+                    weight=5,
                 )
             )
             for order_key, order_label in ordering_options:
@@ -210,7 +210,7 @@ class PlayniteLibraryGame(Game):
                         data={"NTH": (self.nth_choices, 1), attr_label: (attr_func, 1)},
                         is_time_consuming=False,
                         is_difficult=False,
-                        weight=1,
+                        weight=2,
                     )
                 )
             objectives.append(
@@ -219,7 +219,7 @@ class PlayniteLibraryGame(Game):
                     data={attr_label: (attr_func, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=1,
+                    weight=4,
                 )
             )
         for order_key, order_label in ordering_options:
@@ -229,7 +229,7 @@ class PlayniteLibraryGame(Game):
                     data={"NTH": (self.nth_choices, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=1,
+                    weight=2,
                 )
             )
         seen_labels = set()
