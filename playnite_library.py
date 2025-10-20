@@ -208,6 +208,17 @@ class PlayniteLibraryGame(Game):
                     weight=1,
                 )
             )
+            # Also provide a random YEAR variant when multiple years exist
+            if len(self.release_year_choices()) >= 2:
+                objectives.append(
+                    GameObjectiveTemplate(
+                        label="Play a random Playnite library game released in YEAR",
+                        data={"YEAR": (self.release_year_choices, 1)},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    )
+                )
 
         attribute_types = [
             ("TAG", self.tags),
@@ -218,12 +229,13 @@ class PlayniteLibraryGame(Game):
             ("SOURCE", self.sources),
         ]
         ordering_options = [
-            ("most recently added", "Most Recently Added"),
-            ("oldest", "Oldest"),
-            ("newest", "Newest"),
-            ("highest-rated (UserScore)", "Highest-Rated (UserScore)"),
-            ("highest-rated (CriticScore)", "Highest-Rated (CriticScore)"),
-            ("highest-rated (CommunityScore)", "Highest-Rated (CommunityScore)"),
+            "most recently added",
+            "oldest",
+            "newest",
+            "highest-rated (userscore)",
+            "highest-rated (criticscore)",
+            "highest-rated (communityscore)",
+            "alphabetical by name",
         ]
 
         for attr_label, attr_func in attribute_types:
@@ -251,7 +263,7 @@ class PlayniteLibraryGame(Game):
                         weight=4,
                     )
                 )
-        for order_key, order_label in ordering_options:
+        for order_label in ordering_options:
             if self.nth_choices():
                 objectives.append(
                     GameObjectiveTemplate(
@@ -262,6 +274,20 @@ class PlayniteLibraryGame(Game):
                         weight=2,
                     )
                 )
+                # Provide a variant scoped to a release YEAR as well
+                if self.release_year_choices():
+                    objectives.append(
+                        GameObjectiveTemplate(
+                            label=f"Play your NTH {order_label} Playnite library game released in YEAR",
+                            data={
+                                "NTH": (self.nth_choices, 1),
+                                "YEAR": (self.release_year_choices, 1),
+                            },
+                            is_time_consuming=False,
+                            is_difficult=False,
+                            weight=1,
+                        )
+                    )
         seen_labels = set()
         unique_objectives = []
         for obj in objectives:
@@ -316,8 +342,12 @@ class PlayniteLibraryGame(Game):
         years = set()
         for g in playnite_library.games(json_path):
             y = g.get("release_year", 0)
-            if y:
-                years.add(y)
+            try:
+                yi = int(y)
+                if yi:
+                    years.add(yi)
+            except (ValueError, TypeError):
+                pass
         return sorted(years)
 
     def games(self) -> List[str]:
@@ -377,17 +407,6 @@ class PlayniteLibraryGame(Game):
         # Compute excluded games once for logging and reuse
         excluded_games_set = self.excluded_games()
 
-        # Print filter summary only once per session to avoid flooding console
-        if not hasattr(self, '_playnite_filter_log_printed'):
-            print(
-                "Filtering Playnite library with "
-                f"min_time={min_time_played}, max_time={max_time_played}, "
-                f"min_year={min_release_year}, max_year={max_release_year}, "
-                f"min_user={min_user_score}, min_critic={min_critic_score}, min_community={min_community_score}, "
-                f"excluded_statuses={len(excluded_statuses)}, excluded_games={len(excluded_games_set)}"
-            )
-            self._playnite_filter_log_printed = True
-
         # If we still don't have a JSON path, return empty list rather than erroring during option generation
         if not json_path:
             return []
@@ -399,22 +418,26 @@ class PlayniteLibraryGame(Game):
                 continue
             if max_time_played != -1 and game.get("playtime_minutes", 0) > max_time_played:
                 continue
-            
+
             # Exclusion filter
             if game["name"] in excluded_games_set or str(game.get("id", "")) in excluded_games_set:
                 continue
-            
+
             # Completion status filter
             completion_status = game.get("completion_status")
             if completion_status and excluded_statuses and completion_status in excluded_statuses:
                 continue
-            
-            # Release year filter
-            release_year = game.get("release_year", 0)
+
+            # Release year filter (use normalized field)
+            release_year = 0
+            try:
+                release_year = int(game.get("release_year", 0) or 0)
+            except (ValueError, TypeError):
+                release_year = 0
             if release_year:
                 if release_year < min_release_year or release_year > max_release_year:
                     continue
-            
+
             # Score filters (User -> Critic -> Community)
             user_score = game.get("user_score", 0)
             if user_score < min_user_score:
@@ -600,6 +623,24 @@ class PlayniteLibraryHolder:
         if not self._printed_elements:
             self._printed_elements = True
             self._print_distinct_elements_from_data(normalized)
+            # Print filter summary after statistics, only once per session
+            from os import environ
+            min_time_played = int(environ.get("PLAYNITE_LIBRARY_MIN_TIME_PLAYED", 0))
+            max_time_played = int(environ.get("PLAYNITE_LIBRARY_MAX_TIME_PLAYED", -1))
+            min_release_year = int(environ.get("PLAYNITE_LIBRARY_MIN_RELEASE_YEAR", 0))
+            max_release_year = int(environ.get("PLAYNITE_LIBRARY_MAX_RELEASE_YEAR", 9999))
+            min_user_score = int(environ.get("PLAYNITE_LIBRARY_MIN_USER_SCORE", 0))
+            min_critic_score = int(environ.get("PLAYNITE_LIBRARY_MIN_CRITIC_SCORE", 0))
+            min_community_score = int(environ.get("PLAYNITE_LIBRARY_MIN_COMMUNITY_SCORE", 0))
+            excluded_statuses = environ.get("PLAYNITE_LIBRARY_EXCLUDED_COMPLETION_STATUSES", "")
+            excluded_games = environ.get("PLAYNITE_LIBRARY_EXCLUDED_GAMES", "")
+            print(
+                "Filtering Playnite library with "
+                f"min_time={min_time_played}, max_time={max_time_played}, "
+                f"min_year={min_release_year}, max_year={max_release_year}, "
+                f"min_user={min_user_score}, min_critic={min_critic_score}, min_community={min_community_score}, "
+                f"excluded_statuses={excluded_statuses}, excluded_games={excluded_games}"
+            )
         return normalized
     
     def _print_distinct_elements_from_data(self, normalized: List[Dict[str, Any]]):
@@ -611,7 +652,8 @@ class PlayniteLibraryHolder:
         categories: Set[str] = set()
         series: Set[str] = set()
         sources: Set[str] = set()
-        
+        years: Set[int] = set()
+
         for g in normalized:
             # Tags
             for tag in g.get("Tags") or []:
@@ -619,40 +661,40 @@ class PlayniteLibraryHolder:
                     tags.add(tag["Name"])
                 elif isinstance(tag, str):
                     tags.add(tag)
-            
+
             # Genres
             for genre in g.get("Genres") or []:
                 if isinstance(genre, dict) and "Name" in genre:
                     genres.add(genre["Name"])
                 elif isinstance(genre, str):
                     genres.add(genre)
-            
+
             # Features
             for feat in g.get("Features") or []:
                 if isinstance(feat, dict) and "Name" in feat:
                     features.add(feat["Name"])
                 elif isinstance(feat, str):
                     features.add(feat)
-            
+
             # Platforms
             for plat in g.get("Platforms") or []:
                 if isinstance(plat, dict) and "Name" in plat:
                     platforms.add(plat["Name"])
                 elif isinstance(plat, str):
                     platforms.add(plat)
-            
+
             # Categories
             for cat in g.get("Categories") or []:
                 if isinstance(cat, dict) and "Name" in cat:
                     categories.add(cat["Name"])
                 elif isinstance(cat, str):
                     categories.add(cat)
-            
-            # Sources
+
+            # Sources (normalized key)
             src = g.get("source")
             if src:
                 sources.add(src)
-            
+
             # Series (can be a list of series objects, a single dict, a string, or None)
             ser = g.get("Series")
             if isinstance(ser, list):
@@ -665,7 +707,16 @@ class PlayniteLibraryHolder:
                 series.add(ser["Name"])
             elif isinstance(ser, str) and ser:
                 series.add(ser)
-        
+
+            # Years (normalized key)
+            year = g.get("release_year", 0)
+            try:
+                year_int = int(year)
+                if year_int:
+                    years.add(year_int)
+            except (ValueError, TypeError):
+                pass
+
         print("\n=== Playnite Library Statistics ===")
         print(f"Tags: {len(tags)}")
         print(f"Genres: {len(genres)}")
@@ -674,6 +725,7 @@ class PlayniteLibraryHolder:
         print(f"Categories: {len(categories)}")
         print(f"Sources: {len(sources)}")
         print(f"Series: {len(series)}")
+        print(f"Years: {len(years)}")
         print(f"Total Games: {len(normalized)}")
         print("=" * 36 + "\n")
 
