@@ -15,7 +15,7 @@ from typing import List, Dict, Set, Any
 from dataclasses import dataclass
 
 # Project-specific imports (provide stubs for standalone WIP testing)
-from Options import NamedRange, FreeText, OptionSet  # type: ignore
+from Options import NamedRange, FreeText, OptionSet, Toggle, Range  # type: ignore
 from ..game import Game  # type: ignore
 from ..game_objective_template import GameObjectiveTemplate  # type: ignore
 from ..enums import KeymastersKeepGamePlatforms  # type: ignore
@@ -33,6 +33,8 @@ class PlayniteLibraryArchipelagoOptions:
     playnite_library_min_user_score: "PlayniteLibraryMinUserScore"
     playnite_library_min_critic_score: "PlayniteLibraryMinCriticScore"
     playnite_library_min_community_score: "PlayniteLibraryMinCommunityScore"
+    playnite_library_use_play_next: "PlayniteLibraryUsePlayNext"
+    playnite_library_play_next_count: "PlayniteLibraryPlayNextCount"
 
 
 class PlayniteLibraryGame(Game):
@@ -146,6 +148,40 @@ class PlayniteLibraryGame(Game):
                     features.add(feat)
         return sorted(features)
 
+    def play_next_nth_choices(self) -> List[str]:
+        """Generate NTH ordinal choices for Play Next suggestions.
+        
+        Play Next is a Playnite plugin with its own internal display - we cannot access
+        its data from JSON exports. This simply generates ordinal numbers (1st, 2nd, 3rd...)
+        up to the configured play_next_count. The user manually looks at their Play Next
+        list in Playnite and plays the Nth game from that list.
+        
+        Returns ordinals from 1 up to play_next_count.
+        If Play Next is disabled, returns an empty list.
+        """
+        arch_opts = getattr(self, "archipelago_options", None)
+        use_play_next = False
+        play_next_count = 10
+        
+        if arch_opts is not None:
+            try:
+                # Toggle options are boolean
+                use_play_next = bool(getattr(arch_opts.playnite_library_use_play_next, "value", False))
+            except Exception:
+                use_play_next = False
+            try:
+                # Range is 1-100, no "no limit" option
+                play_next_count = int(getattr(arch_opts.playnite_library_play_next_count, "value", 10))
+            except Exception:
+                play_next_count = 10
+        
+        if not use_play_next:
+            return []
+        
+        # Simply generate ordinals up to the configured count
+        # User will manually check their Play Next list in Playnite
+        return [self._ordinal(n) for n in range(1, play_next_count + 1)]
+
     def _get_json_path(self) -> str:
         arch_opts = getattr(self, "archipelago_options", None)
         json_path = ""
@@ -187,6 +223,19 @@ class PlayniteLibraryGame(Game):
                 weight=3,
             ),
         ]
+        
+        # Play Next suggestions: NTH game from the suggestion list (if enabled and available)
+        if self.play_next_nth_choices():
+            objectives.append(
+                GameObjectiveTemplate(
+                    label="Play the NTH game from your Playnite Play Next suggestions",
+                    data={"NTH": (self.play_next_nth_choices, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=4,
+                )
+            )
+        
         # Only add series/year objectives if choices exist
         if self.series():
             objectives.append(
@@ -232,9 +281,9 @@ class PlayniteLibraryGame(Game):
             "most recently added",
             "oldest",
             "newest",
-            "highest-rated (userscore)",
-            "highest-rated (criticscore)",
-            "highest-rated (communityscore)",
+            "highest-rated (UserScore)",
+            "highest-rated (CriticScore)",
+            "highest-rated (CommunityScore)",
             "alphabetical by name",
         ]
 
@@ -601,6 +650,32 @@ class PlayniteLibraryMinCommunityScore(NamedRange):
     special_range_names = {
         "no_limit": 0,
     }
+
+
+class PlayniteLibraryUsePlayNext(Toggle):
+    """
+    Enable using Play Next plugin suggestions from your Playnite library.
+    
+    The Play Next plugin provides curated game suggestions based on your play history and preferences.
+    When enabled, objectives can be generated from these suggestions.
+    """
+
+    display_name = "Playnite Library Use Play Next"
+
+
+class PlayniteLibraryPlayNextCount(Range):
+    """
+    Number of Play Next suggestions to include when generating objectives.
+    
+    Only used if Play Next is enabled. Limits the pool of suggested games.
+    The Play Next plugin provides its own curated list that cannot be accessed like tags,
+    so this setting controls how many games from that list to consider.
+    """
+
+    display_name = "Playnite Library Play Next Count"
+    default = 10
+    range_start = 1
+    range_end = 100
 
 
 class PlayniteLibraryHolder:
