@@ -38,115 +38,204 @@ class PlayniteLibraryArchipelagoOptions:
 
 
 class PlayniteLibraryGame(Game):
-    def print_distinct_elements(self):
-        """Print a summary of distinct element counts from the Playnite library."""
-        tags = self.tags()
-        genres = self.genres()
-        features = self.features()
-        platforms = self.platforms()
-        categories = self.categories()
-        series = self.series()
-        print("Distinct element counts from Playnite library:")
-        print(f"- Tags: {len(tags)}")
-        print(f"- Genres: {len(genres)}")
-        print(f"- Features: {len(features)}")
-        print(f"- Platforms: {len(platforms)}")
-        print(f"- Categories: {len(categories)}")
-        print(f"- Series: {len(series)}")
-    # === Attribute extraction helpers ===
-    def categories(self) -> List[str]:
-        json_path = self._get_json_path()
-        if not json_path:
-            return []
-        cats: Set[str] = set()
-        for g in playnite_library.games(json_path):
-            for cat in g.get("Categories") or []:
-                if isinstance(cat, dict) and "Name" in cat:
-                    cats.add(cat["Name"])
-                elif isinstance(cat, str):
-                    cats.add(cat)
-        return sorted(cats)
+    # -------- Computation and caching --------
+    def _ensure_computed(self) -> None:
+        """Build and cache all derived lists/sets in one pass for this instance/options."""
+        if getattr(self, "_computed_ready", False):
+            return
+        self._compute_all()
 
-    def series(self) -> List[str]:
-        json_path = self._get_json_path()
-        if not json_path:
-            return []
-        sers: Set[str] = set()
-        for g in playnite_library.games(json_path):
-            ser = g.get("Series")
+    def _compute_all(self) -> None:
+        """Compute filtered games and all attribute sets in a single traversal."""
+        # Defaults in case options are not yet available (during options JSON build)
+        arch_opts = getattr(self, "archipelago_options", None)
+        min_time_played = 0
+        max_time_played = -1
+        excluded_statuses: Set[str] = set()
+        min_release_year = 0
+        max_release_year = 9999
+        min_user_score = 0
+        min_critic_score = 0
+        min_community_score = 0
+
+        if arch_opts is not None:
+            try:
+                min_time_played = int(getattr(arch_opts.playnite_library_min_time_played, "value", 0))
+            except Exception:
+                min_time_played = 0
+            try:
+                max_time_played = int(getattr(arch_opts.playnite_library_max_time_played, "value", -1))
+            except Exception:
+                max_time_played = -1
+            try:
+                excluded_statuses = getattr(arch_opts.playnite_library_excluded_completion_statuses, "value", set())
+            except Exception:
+                excluded_statuses = set()
+            try:
+                min_release_year = int(getattr(arch_opts.playnite_library_min_release_year, "value", 0))
+            except Exception:
+                min_release_year = 0
+            try:
+                max_release_year = int(getattr(arch_opts.playnite_library_max_release_year, "value", 9999))
+            except Exception:
+                max_release_year = 9999
+            try:
+                min_user_score = int(getattr(arch_opts.playnite_library_min_user_score, "value", 0))
+            except Exception:
+                min_user_score = 0
+            try:
+                min_critic_score = int(getattr(arch_opts.playnite_library_min_critic_score, "value", 0))
+            except Exception:
+                min_critic_score = 0
+            try:
+                min_community_score = int(getattr(arch_opts.playnite_library_min_community_score, "value", 0))
+            except Exception:
+                min_community_score = 0
+
+        excluded_games_set = self.excluded_games()
+
+        # Initialize caches
+        self._filtered_games_display: List[str] = []
+        self._filtered_games_items: List[Dict[str, Any]] = []
+        self._cats: Set[str] = set()
+        self._series: Set[str] = set()
+        self._tags: Set[str] = set()
+        self._genres: Set[str] = set()
+        self._platforms: Set[str] = set()
+        self._features: Set[str] = set()
+        self._sources: Set[str] = set()
+        self._years: Set[int] = set()
+        self._tag_to_games: Dict[str, List[str]] = {}
+
+        for game in self._get_library_games():
+            # Playtime filter
+            if game.get("playtime_minutes", 0) < min_time_played:
+                continue
+            if max_time_played != -1 and game.get("playtime_minutes", 0) > max_time_played:
+                continue
+
+            # Exclusion filter by name/id
+            if game["name"] in excluded_games_set or str(game.get("id", "")) in excluded_games_set:
+                continue
+
+            # Completion status filter
+            completion_status = game.get("completion_status")
+            if completion_status and excluded_statuses and completion_status in excluded_statuses:
+                continue
+
+            # Release year filter
+            try:
+                release_year = int(game.get("release_year", 0) or 0)
+            except (ValueError, TypeError):
+                release_year = 0
+            if release_year:
+                if release_year < min_release_year or release_year > max_release_year:
+                    continue
+
+            # Score filters
+            if game.get("user_score", 0) < min_user_score:
+                continue
+            if game.get("critic_score", 0) < min_critic_score:
+                continue
+            if game.get("community_score", 0) < min_community_score:
+                continue
+
+            # Passed all filters -> include
+            display_name = game["name"]
+            src = game.get("source")
+            if src:
+                display_name = f"{display_name} [Source: {src}]"
+
+            self._filtered_games_display.append(display_name)
+            self._filtered_games_items.append(game)
+
+            # Attribute sets from filtered items
+            # Categories
+            for cat in game.get("Categories") or []:
+                if isinstance(cat, dict) and "Name" in cat:
+                    self._cats.add(cat["Name"])
+                elif isinstance(cat, str):
+                    self._cats.add(cat)
+            # Series
+            ser = game.get("Series")
             if isinstance(ser, list):
                 for s in ser:
                     if isinstance(s, dict) and "Name" in s:
-                        sers.add(s["Name"])
+                        self._series.add(s["Name"])
                     elif isinstance(s, str) and s:
-                        sers.add(s)
+                        self._series.add(s)
             elif isinstance(ser, dict) and "Name" in ser:
-                sers.add(ser["Name"])
+                self._series.add(ser["Name"])
             elif isinstance(ser, str) and ser:
-                sers.add(ser)
-        return sorted(sers)
-    def tags(self) -> List[str]:
+                self._series.add(ser)
+            # Tags
+            names_for_this_game: Set[str] = set()
+            for t in game.get("Tags") or []:
+                if isinstance(t, dict) and "Name" in t:
+                    names_for_this_game.add(t["Name"])
+                elif isinstance(t, str):
+                    names_for_this_game.add(t)
+            self._tags.update(names_for_this_game)
+            # Genres
+            for gname in game.get("Genres") or []:
+                if isinstance(gname, dict) and "Name" in gname:
+                    self._genres.add(gname["Name"])
+                elif isinstance(gname, str):
+                    self._genres.add(gname)
+            # Platforms
+            for plat in game.get("Platforms") or []:
+                if isinstance(plat, dict) and "Name" in plat:
+                    self._platforms.add(plat["Name"])
+                elif isinstance(plat, str):
+                    self._platforms.add(plat)
+            # Features
+            for feat in game.get("Features") or []:
+                if isinstance(feat, dict) and "Name" in feat:
+                    self._features.add(feat["Name"])
+                elif isinstance(feat, str):
+                    self._features.add(feat)
+            # Source
+            if src:
+                self._sources.add(src)
+            # Years
+            if release_year:
+                self._years.add(release_year)
+
+        self._computed_ready = True
+    def _get_library_games(self) -> List[Dict[str, Any]]:
+        """Get the library games, using lru_cache on PlayniteLibraryHolder.games()."""
         json_path = self._get_json_path()
         if not json_path:
             return []
-        tags: Set[str] = set()
-        for g in playnite_library.games(json_path):
-            for tag in g.get("Tags") or []:
-                if isinstance(tag, dict) and "Name" in tag:
-                    tags.add(tag["Name"])
-                elif isinstance(tag, str):
-                    tags.add(tag)
-        return sorted(tags)
+        return playnite_library.games(json_path)
+
+    # === Attribute extraction helpers ===
+    def categories(self) -> List[str]:
+        self._ensure_computed()
+        return sorted(self._cats)
+
+    def series(self) -> List[str]:
+        self._ensure_computed()
+        return sorted(self._series)
+    def tags(self) -> List[str]:
+        self._ensure_computed()
+        return sorted(self._tags)
 
     def genres(self) -> List[str]:
-        json_path = self._get_json_path()
-        if not json_path:
-            return []
-        genres: Set[str] = set()
-        for g in playnite_library.games(json_path):
-            for genre in g.get("Genres") or []:
-                if isinstance(genre, dict) and "Name" in genre:
-                    genres.add(genre["Name"])
-                elif isinstance(genre, str):
-                    genres.add(genre)
-        return sorted(genres)
+        self._ensure_computed()
+        return sorted(self._genres)
 
     def sources(self) -> List[str]:
-        json_path = self._get_json_path()
-        if not json_path:
-            return []
-        sources: Set[str] = set()
-        for g in playnite_library.games(json_path):
-            src = g.get("source")
-            if src:
-                sources.add(src)
-        return sorted(sources)
+        self._ensure_computed()
+        return sorted(self._sources)
 
     def platforms(self) -> List[str]:
-        json_path = self._get_json_path()
-        if not json_path:
-            return []
-        platforms: Set[str] = set()
-        for g in playnite_library.games(json_path):
-            for plat in g.get("Platforms") or []:
-                if isinstance(plat, dict) and "Name" in plat:
-                    platforms.add(plat["Name"])
-                elif isinstance(plat, str):
-                    platforms.add(plat)
-        return sorted(platforms)
+        self._ensure_computed()
+        return sorted(self._platforms)
 
     def features(self) -> List[str]:
-        json_path = self._get_json_path()
-        if not json_path:
-            return []
-        features: Set[str] = set()
-        for g in playnite_library.games(json_path):
-            for feat in g.get("Features") or []:
-                if isinstance(feat, dict) and "Name" in feat:
-                    features.add(feat["Name"])
-                elif isinstance(feat, str):
-                    features.add(feat)
-        return sorted(features)
+        self._ensure_computed()
+        return sorted(self._features)
 
     def play_next_nth_choices(self) -> List[str]:
         """Generate NTH ordinal choices for Play Next suggestions.
@@ -207,12 +296,29 @@ class PlayniteLibraryGame(Game):
         no Playnite objectives are generated.
         """
         # Early out if we have no games (e.g., JSON missing)
-        json_path = self._get_json_path()
-        if not json_path or not playnite_library.games(json_path):
+        library_games = self._get_library_games()
+        if not library_games:
             return []
+        
         # Also skip if filters result in no playable games
-        if not self.games():
+        filtered_games = self.games()
+        if not filtered_games:
+            if not playnite_library._printed_filter_result:
+                playnite_library._printed_filter_result = True
+                print(f"\n[Playnite] WARNING: Library loaded with {len(library_games)} games, but ALL were filtered out!")
+                print("[Playnite] No Playnite objectives will be generated.")
+                print("[Playnite] Common causes:")
+                print("[Playnite]   - Min/Max time played filters are too restrictive")
+                print("[Playnite]   - Excluded completion statuses removing all games")
+                print("[Playnite]   - Release year range doesn't match any games")
+                print("[Playnite]   - Score filters (User/Critic/Community) too high")
+                print("[Playnite]   - Too many games in excluded_games list")
+                print("[Playnite] Tip: Check your YAML options or reduce filtering.\n")
             return []
+        
+        if not playnite_library._printed_filter_result:
+            playnite_library._printed_filter_result = True
+            print(f"[Playnite] {len(filtered_games)} games available after filtering (from {len(library_games)} total).\n")
 
         objectives = [
             GameObjectiveTemplate(
@@ -265,7 +371,7 @@ class PlayniteLibraryGame(Game):
                         data={"YEAR": (self.release_year_choices, 1)},
                         is_time_consuming=False,
                         is_difficult=False,
-                        weight=1,
+                        weight=2,
                     )
                 )
 
@@ -292,13 +398,15 @@ class PlayniteLibraryGame(Game):
             # Only add objectives if there are enough values to sample from
             if not attr_values or len(attr_values) < 1:
                 continue
+            attr_count = len(attr_values)
+            attr_weight = len(str(attr_count))  # number of digits in count
             objectives.append(
                 GameObjectiveTemplate(
                     label=f"Play a Playnite library game with the {attr_label} {attr_label.lower()}",
                     data={attr_label: (attr_func, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=5,
+                    weight=attr_weight,
                 )
             )
             # Only add random objective if there are at least 2 values to sample from
@@ -309,7 +417,7 @@ class PlayniteLibraryGame(Game):
                         data={attr_label: (attr_func, 1)},
                         is_time_consuming=False,
                         is_difficult=False,
-                        weight=4,
+                        weight=attr_weight,
                     )
                 )
         for order_label in ordering_options:
@@ -323,20 +431,40 @@ class PlayniteLibraryGame(Game):
                         weight=2,
                     )
                 )
-                # Provide a variant scoped to a release YEAR as well
+                # NTH + YEAR: independent selection using universal NTH (1st–10th)
                 if self.release_year_choices():
                     objectives.append(
                         GameObjectiveTemplate(
                             label=f"Play your NTH {order_label} Playnite library game released in YEAR",
                             data={
-                                "NTH": (self.nth_choices, 1),
                                 "YEAR": (self.release_year_choices, 1),
+                                "NTH": (self.nth_choices, 1),
                             },
                             is_time_consuming=False,
                             is_difficult=False,
-                            weight=1,
+                            weight=3,
                         )
                     )
+                # NTH + attribute: independent selection using universal NTH (1st–10th)
+                for attr_label, attr_func in attribute_types:
+                    attr_values = attr_func()
+                    if not attr_values:
+                        continue
+                    attr_count = len(attr_values)
+                    attr_weight = len(str(attr_count))
+                    objectives.append(
+                        GameObjectiveTemplate(
+                            label=f"Play your NTH {order_label} Playnite library game with the {attr_label} {attr_label.lower()}",
+                            data={
+                                attr_label: (attr_func, 1),
+                                "NTH": (self.nth_choices, 1),
+                            },
+                            is_time_consuming=False,
+                            is_difficult=False,
+                            weight=attr_weight,
+                        )
+                    )
+
         seen_labels = set()
         unique_objectives = []
         for obj in objectives:
@@ -345,35 +473,16 @@ class PlayniteLibraryGame(Game):
                 seen_labels.add(obj.label)
         return unique_objectives
 
-    def games_with_tag(self, tag: str) -> List[str]:
-        json_path = self._get_json_path()
-        result: List[str] = []
-        for game in playnite_library.games(json_path):
-            tags = set()
-            for t in game.get("Tags", []):
-                if isinstance(t, dict) and "Name" in t:
-                    tags.add(t["Name"])
-                elif isinstance(t, str):
-                    tags.add(t)
-            if tag in tags:
-                display_name = game["name"]
-                source = game.get("source")
-                if source:
-                    display_name = f"{display_name} [Source: {source}]"
-                result.append(display_name)
-        return result
-
     def nth_choices(self) -> List[str]:
-        """Offer NTH choices bounded by available games to avoid out-of-range indices.
+        """Offer a universal NTH set (1st–10th) without subset counting.
 
-        Returns ordinals from 1 up to min(10, total_available_games). If there are
-        no available games, returns an empty list.
+        These are independent tokens used to construct the objective; the player applies
+        the NTH to the chosen ordering and subset when executing the objective.
         """
-        total = len(self.games())
-        if total <= 0:
-            return []
-        max_n = min(10, total)
-        return [self._ordinal(n) for n in range(1, max_n + 1)]
+        return [self._ordinal(n) for n in range(1, 11)]
+
+    # Note: We intentionally do not compute per-subset caps for NTH to avoid costly counting
+    # and to keep objectives broad and fast to generate.
 
     def _ordinal(self, n: int) -> str:
         # Grammar-correct ordinal: 1st, 2nd, 3rd, 4th, ... including 11th/12th/13th exceptions
@@ -384,130 +493,15 @@ class PlayniteLibraryGame(Game):
         return f"{n}{suffix}"
 
     def release_year_choices(self) -> List[int]:
-        # Offer a range of years from the games
-        json_path = self._get_json_path()
-        if not json_path:
-            return []
-        years = set()
-        for g in playnite_library.games(json_path):
-            y = g.get("release_year", 0)
-            try:
-                yi = int(y)
-                if yi:
-                    years.add(yi)
-            except (ValueError, TypeError):
-                pass
-        return sorted(years)
+        self._ensure_computed()
+        return sorted(self._years)
 
     def games(self) -> List[str]:
-        # Be resilient when options aren't set yet (during options JSON generation)
-        arch_opts = getattr(self, "archipelago_options", None)
-        min_time_played = 0
-        max_time_played = -1
-        json_path = ""
-        excluded_statuses: Set[str] = set()
-        min_release_year = 0
-        max_release_year = 9999
-        min_user_score = 0
-        min_critic_score = 0
-        min_community_score = 0
-        
-        if arch_opts is not None:
-            try:
-                min_time_played = int(getattr(arch_opts.playnite_library_min_time_played, "value", 0))
-            except Exception:
-                min_time_played = 0
-            try:
-                max_time_played = int(getattr(arch_opts.playnite_library_max_time_played, "value", -1))
-            except Exception:
-                max_time_played = -1
-            try:
-                json_path = str(getattr(arch_opts.playnite_library_json_path, "value", "") or "").strip()
-            except Exception:
-                json_path = ""
-            try:
-                excluded_statuses = getattr(arch_opts.playnite_library_excluded_completion_statuses, "value", set())
-            except Exception:
-                excluded_statuses = set()
-            try:
-                min_release_year = int(getattr(arch_opts.playnite_library_min_release_year, "value", 0))
-            except Exception:
-                min_release_year = 0
-            try:
-                max_release_year = int(getattr(arch_opts.playnite_library_max_release_year, "value", 9999))
-            except Exception:
-                max_release_year = 9999
-            try:
-                min_user_score = int(getattr(arch_opts.playnite_library_min_user_score, "value", 0))
-            except Exception:
-                min_user_score = 0
-            try:
-                min_critic_score = int(getattr(arch_opts.playnite_library_min_critic_score, "value", 0))
-            except Exception:
-                min_critic_score = 0
-            try:
-                min_community_score = int(getattr(arch_opts.playnite_library_min_community_score, "value", 0))
-            except Exception:
-                min_community_score = 0
-
-        if not json_path:
-            json_path = (environ.get("PLAYNITE_LIBRARY_JSON") or "").strip()
-
-        # Compute excluded games once for logging and reuse
-        excluded_games_set = self.excluded_games()
-
-        # If we still don't have a JSON path, return empty list rather than erroring during option generation
-        if not json_path:
+        # If no JSON path is available, return empty to avoid errors during option generation
+        if not self._get_json_path():
             return []
-
-        result: List[str] = []
-        for game in playnite_library.games(json_path):
-            # Playtime filter
-            if game.get("playtime_minutes", 0) < min_time_played:
-                continue
-            if max_time_played != -1 and game.get("playtime_minutes", 0) > max_time_played:
-                continue
-
-            # Exclusion filter
-            if game["name"] in excluded_games_set or str(game.get("id", "")) in excluded_games_set:
-                continue
-
-            # Completion status filter
-            completion_status = game.get("completion_status")
-            if completion_status and excluded_statuses and completion_status in excluded_statuses:
-                continue
-
-            # Release year filter (use normalized field)
-            release_year = 0
-            try:
-                release_year = int(game.get("release_year", 0) or 0)
-            except (ValueError, TypeError):
-                release_year = 0
-            if release_year:
-                if release_year < min_release_year or release_year > max_release_year:
-                    continue
-
-            # Score filters (User -> Critic -> Community)
-            user_score = game.get("user_score", 0)
-            if user_score < min_user_score:
-                continue
-
-            critic_score = game.get("critic_score", 0)
-            if critic_score < min_critic_score:
-                continue
-
-            community_score = game.get("community_score", 0)
-            if community_score < min_community_score:
-                continue
-
-            display_name = game["name"]
-            source = game.get("source")
-            if source:
-                display_name = f"{display_name} [Source: {source}]"
-
-            result.append(display_name)
-
-        return result
+        self._ensure_computed()
+        return list(self._filtered_games_display)
 
     def excluded_games(self) -> Set[str]:
         arch_opts = getattr(self, "archipelago_options", None)
@@ -681,6 +675,7 @@ class PlayniteLibraryPlayNextCount(Range):
 class PlayniteLibraryHolder:
     def __init__(self):
         self._printed_elements = False
+        self._printed_filter_result = False
         # Print a one-time notice if JSON is missing/unreadable so we don't spam logs
         self._missing_ok_notice_printed = False
     
@@ -792,7 +787,7 @@ class PlayniteLibraryHolder:
             except (ValueError, TypeError):
                 pass
 
-        print("\n=== Playnite Library Statistics ===")
+        print("\n=== Playnite Library Statistics (Before Filtering) ===")
         print(f"Tags: {len(tags)}")
         print(f"Genres: {len(genres)}")
         print(f"Features: {len(features)}")
@@ -802,7 +797,7 @@ class PlayniteLibraryHolder:
         print(f"Series: {len(series)}")
         print(f"Years: {len(years)}")
         print(f"Total Games: {len(normalized)}")
-        print("=" * 36 + "\n")
+        print("=" * 55 + "\n")
 
     def _read_and_normalize(self, json_path: str) -> List[Dict[str, Any]]:
         if not json_path:

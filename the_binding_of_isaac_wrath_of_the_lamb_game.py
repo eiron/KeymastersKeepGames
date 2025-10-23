@@ -74,13 +74,6 @@ class TheBindingOfIsaacWrathOfTheLambGame(Game):
                 weight=2,
             ),
             GameObjectiveTemplate(
-                label="Pick up any 2 of the following items in a single run: Bob's Rotten Head, Dead Cat, Cricket's Head, and Tammy's Head",
-                data=dict(),
-                is_time_consuming=False,
-                is_difficult=False,
-                weight=2,
-            ),
-            GameObjectiveTemplate(
                 label="Collect Mom's Eye and any other Mom's item in a single run",
                 data=dict(),
                 is_time_consuming=False,
@@ -397,16 +390,16 @@ class TheBindingOfIsaacWrathOfTheLambGame(Game):
     def challenges(self) -> List[str]:
         """Challenge names from Wrath of the Lamb"""
         return [
-            "1 (Pitch Black)",
-            "2 (High Brow)",
-            "3 (Head Trauma)",
-            "4 (Darkness Falls)",
-            "5 (The Tank)",
-            "6 (Solar System)",
-            "7 (Suicide King)",
-            "8 (Cat Got Your Tongue)",
-            "9 (Demo Man)",
-            "10 (Cursed!)",
+            "1 (Dark Was the Night)",
+            "2 (7 Years Bad Luck)",
+            "3 (Large Marge)",
+            "4 (9 Deaths)",
+            "5 (Lord of the Flies)",
+            "6 (The Doctors Revenge!)",
+            "7 (Meat 4 Evar!)",
+            "8 (Spider Boy!)",
+            "9 (Isaac Was Good Today)",
+            "10 (The Purist)",
         ]
 
 
