@@ -320,18 +320,23 @@ class PlayniteLibraryGame(Game):
             playnite_library._printed_filter_result = True
             print(f"[Playnite] {len(filtered_games)} games available after filtering (from {len(library_games)} total).\n")
 
-        objectives = [
-            GameObjectiveTemplate(
-                label="Play GAME from your Playnite library",
-                data={"GAME": (self.games, 1)},
-                is_time_consuming=False,
-                is_difficult=False,
-                weight=3,
-            ),
-        ]
+        objectives = []
+        
+        # Only add game objectives if we have at least one game to pick from
+        if self.games():
+            objectives.append(
+                GameObjectiveTemplate(
+                    label="Play GAME from your Playnite library",
+                    data={"GAME": (self.games, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=3,
+                )
+            )
         
         # Play Next suggestions: NTH game from the suggestion list (if enabled and available)
-        if self.play_next_nth_choices():
+        play_next_choices = self.play_next_nth_choices()
+        if play_next_choices:
             objectives.append(
                 GameObjectiveTemplate(
                     label="Play the NTH game from your Playnite Play Next suggestions",
@@ -343,7 +348,8 @@ class PlayniteLibraryGame(Game):
             )
         
         # Only add series/year objectives if choices exist
-        if self.series():
+        series_list = self.series()
+        if series_list:
             objectives.append(
                 GameObjectiveTemplate(
                     label="Play a Playnite library game from the SERIES series",
@@ -353,7 +359,8 @@ class PlayniteLibraryGame(Game):
                     weight=1,
                 )
             )
-        if self.release_year_choices():
+        year_choices = self.release_year_choices()
+        if year_choices:
             objectives.append(
                 GameObjectiveTemplate(
                     label="Play a Playnite library game released in YEAR",
@@ -364,7 +371,7 @@ class PlayniteLibraryGame(Game):
                 )
             )
             # Also provide a random YEAR variant when multiple years exist
-            if len(self.release_year_choices()) >= 2:
+            if len(year_choices) >= 2:
                 objectives.append(
                     GameObjectiveTemplate(
                         label="Play a random Playnite library game released in YEAR",
@@ -421,7 +428,8 @@ class PlayniteLibraryGame(Game):
                     )
                 )
         for order_label in ordering_options:
-            if self.nth_choices():
+            nth_list = self.nth_choices()
+            if nth_list:
                 objectives.append(
                     GameObjectiveTemplate(
                         label=f"Play your NTH {order_label} Playnite library game",
@@ -432,7 +440,7 @@ class PlayniteLibraryGame(Game):
                     )
                 )
                 # NTH + YEAR: independent selection using universal NTH (1st–10th)
-                if self.release_year_choices():
+                if year_choices:
                     objectives.append(
                         GameObjectiveTemplate(
                             label=f"Play your NTH {order_label} Playnite library game released in YEAR",
@@ -836,11 +844,53 @@ class PlayniteLibraryHolder:
 
             print(f"Loading Playnite library from {path}...")
             # Read JSON content; allow either a list of games or a dict with a games collection
+            # Be permissive with encodings and formats (Playnite's games.json can be NDJSON)
+            load_error: Exception | None = None
+            data = None
+            # 1) Try strict UTF-8 JSON
             try:
                 with path.open("r", encoding="utf-8") as f:
                     data = json.load(f)
-            except Exception as e:
-                raise RuntimeError(f"Failed to read Playnite library JSON: {e}")
+            except Exception as e1:
+                load_error = e1
+                # 2) Try UTF-8 with BOM
+                try:
+                    with path.open("r", encoding="utf-8-sig") as f:
+                        data = json.load(f)
+                        load_error = None
+                except Exception as e2:
+                    load_error = e2
+            # 3) If still failing, try a tolerant text read and handle NDJSON
+            if data is None:
+                try:
+                    raw_text = path.read_text(encoding="utf-8", errors="replace")
+                    raw = raw_text.strip()
+                    # If it's a normal JSON container, try loading again
+                    if raw.startswith("{") or raw.startswith("["):
+                        try:
+                            data = json.loads(raw)
+                            load_error = None
+                        except Exception as e3:
+                            load_error = e3
+                    # If not a normal container, treat as NDJSON (one JSON object per line)
+                    if data is None:
+                        lines = [ln.strip() for ln in raw_text.splitlines() if ln.strip()]
+                        ndjson_items = []
+                        ndjson_failed = False
+                        for ln in lines:
+                            try:
+                                ndjson_items.append(json.loads(ln))
+                            except Exception:
+                                ndjson_failed = True
+                                break
+                        if not ndjson_failed and ndjson_items:
+                            data = ndjson_items
+                            load_error = None
+                except Exception as e4:
+                    load_error = e4
+
+            if data is None:
+                raise RuntimeError(f"Failed to read Playnite library JSON: {load_error}")
 
         games_raw: List[Dict[str, Any]]
         if isinstance(data, list):

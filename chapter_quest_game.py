@@ -98,40 +98,46 @@ class ChapterQuestGame(Game):
             
             # Generate specific chapter objectives (if enabled)
             if self.archipelago_options.chapter_quest_include_specific_chapters:
-                # Generate multiple chapter objectives per book (up to 10 random chapters)
-                num_chapters_for_book = min(10, book_info["total_chapters"] - book_info["starting_chapter"] + 1)
-                # random.sample() will return all available chapters if num_chapters_for_book equals total available chapters
-                selected_chapters = self.random.sample(range(book_info["starting_chapter"], book_info["total_chapters"] + 1), num_chapters_for_book)
-                
-                for chapter in selected_chapters:
-                    chapter_objective = GameObjectiveTemplate(
-                        label=f"[{book_info['genre']}] {current_book} by {book_info['author']} -> Read chapter {chapter}",
-                        data={},
-                        is_difficult=(book_info["difficulty"] == "difficult"),
-                        is_time_consuming=False,  # Reading a single chapter is not time-consuming
-                        weight=2
+                # Compute available chapters safely
+                available_chapters = max(0, book_info["total_chapters"] - book_info["starting_chapter"] + 1)
+                if available_chapters > 0:
+                    # Generate multiple chapter objectives per book (up to 10 random chapters)
+                    num_chapters_for_book = min(10, available_chapters)
+                    # random.sample() will return all available chapters if num_chapters_for_book equals total available
+                    selected_chapters = self.random.sample(
+                        range(book_info["starting_chapter"], book_info["total_chapters"] + 1),
+                        num_chapters_for_book,
                     )
-                    objectives.append(chapter_objective)
+                    for chapter in selected_chapters:
+                        chapter_objective = GameObjectiveTemplate(
+                            label=f"[{book_info['genre']}] {current_book} by {book_info['author']} -> Read chapter {chapter}",
+                            data={},
+                            is_difficult=(book_info["difficulty"] == "difficult"),
+                            is_time_consuming=False,  # Reading a single chapter is not time-consuming
+                            weight=2
+                        )
+                        objectives.append(chapter_objective)
 
             # Generate bulk chapter objectives (if enabled)
             if self.archipelago_options.chapter_quest_include_bulk_chapters:
                 # Calculate remaining chapters after starting_chapter
                 remaining_chapters = book_info["total_chapters"] - book_info["starting_chapter"] + 1
-                # Generate "Read X chapters from Y book" objectives that favor lower numbers
-                max_bulk_chapters = min(remaining_chapters, 10)  # Cap at 10 chapters max
-                # Use weighted random to favor lower numbers (1-3 are more likely than 7-10)
-                weights = [max_bulk_chapters - i for i in range(max_bulk_chapters)]  # Higher weight for lower numbers
-                num_bulk_chapters = self.random.choices(range(1, max_bulk_chapters + 1), weights=weights)[0]
-                
-                chapter_text = "chapter" if num_bulk_chapters == 1 else "chapters"
-                bulk_objective = GameObjectiveTemplate(
-                    label=f"[{book_info['genre']}] {current_book} by {book_info['author']} -> Read {num_bulk_chapters} {chapter_text}",
-                    data={},
-                    is_difficult=(book_info["difficulty"] == "difficult"),
-                    is_time_consuming=(num_bulk_chapters > 3),  # More than 3 chapters is time-consuming
-                    weight=20
-                )
-                objectives.append(bulk_objective)
+                if remaining_chapters > 0:
+                    # Generate "Read X chapters from Y book" objectives that favor lower numbers
+                    max_bulk_chapters = min(remaining_chapters, 10)  # Cap at 10 chapters max
+                    if max_bulk_chapters > 0:
+                        # Use weighted random to favor lower numbers (1-3 are more likely than 7-10)
+                        weights = [max_bulk_chapters - i for i in range(max_bulk_chapters)]  # Higher weight for lower numbers
+                        num_bulk_chapters = self.random.choices(range(1, max_bulk_chapters + 1), weights=weights)[0]
+                        chapter_text = "chapter" if num_bulk_chapters == 1 else "chapters"
+                        bulk_objective = GameObjectiveTemplate(
+                            label=f"[{book_info['genre']}] {current_book} by {book_info['author']} -> Read {num_bulk_chapters} {chapter_text}",
+                            data={},
+                            is_difficult=(book_info["difficulty"] == "difficult"),
+                            is_time_consuming=(num_bulk_chapters > 3),  # More than 3 chapters is time-consuming
+                            weight=20
+                        )
+                        objectives.append(bulk_objective)
 
             # Add completion objective (completing entire book IS time-consuming)
             completion_objective = GameObjectiveTemplate(
