@@ -744,8 +744,8 @@ class BaldursGate3Game(Game):
     @staticmethod
     def achievement_categories() -> List[str]:
         return [
-            "Combat achievements", "Story achievements", "Exploration achievements", "Social achievements",
-            "Character achievements", "Collection achievements", "Challenge achievements", "Hidden achievements"
+            "Combat", "Story", "Exploration", "Social",
+            "Character", "Collection", "Challenge", "Hidden"
         ]
 
     @staticmethod
