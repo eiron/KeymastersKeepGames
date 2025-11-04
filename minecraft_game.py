@@ -99,7 +99,7 @@ class MinecraftGame(Game):
             
             survival_templates.extend([
                 GameObjectiveTemplate(
-                    label="Craft and use TOOL_SET tools",
+                    label="Craft and use TOOL_SET",
                     data={"TOOL_SET": (self.tool_sets, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
