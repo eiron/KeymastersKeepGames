@@ -392,8 +392,9 @@ class PlayniteLibraryGame(Game):
         ]
         ordering_options = [
             "most recently added",
-            "oldest",
+            "least recently added",
             "newest",
+            "oldest",
             "highest-rated (UserScore)",
             "highest-rated (CriticScore)",
             "highest-rated (CommunityScore)",
