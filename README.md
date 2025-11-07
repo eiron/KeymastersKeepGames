@@ -127,6 +127,24 @@ Culinary Adventures: ``"TRY International Restaurant"`` or ``"SAMPLE Wine Tastin
 
 This includes options for customizing local exploration targets, cultural experiences, outdoor activities, culinary adventures, and their respective action lists. The system will only generate objectives for adventure categories that have been configured, allowing for flexible use whether you prefer local discovery, cultural immersion, outdoor challenges, food exploration, or all four!
 
+## Archipelocal
+A real-world exploration module that generates location-based objectives using the Geoapify Places API. Visit cafes, parks, museums, and other nearby places based on your actual location! Supports both concrete place suggestions (with coordinates and distances) and generic category-based objectives.
+
+**Powered by [Geoapify](https://www.geoapify.com/)**
+
+**Setup Required:** Free Geoapify API key and home location configuration. See [ARCHIPELOCAL_SETUP.md](ARCHIPELOCAL_SETUP.md) for detailed setup instructions.
+
+Core Categories: ``Food & Drink``, ``Leisure & Tourism``, ``Entertainment & Culture``, ``Natural & Man-Made Sights``, ``Shopping``, ``Services``
+
+Sample Objectives: ``"Visit Starbucks @ 40.78509, -73.96829 – 0.42 km • Cafe"`` or ``"Visit your 3rd-closest Park near your home"`` or ``"Visit a random Museum near your max distance"``
+
+Features:
+- **Live Suggestions**: Fetches real nearby places with names, coordinates, and distances
+- **Lazy Loading**: API calls only when objectives are actually selected (session-cached)
+- **Flexible Strategies**: Choose between only concrete suggestions, prefer concrete, or random mix
+- **Customizable**: Set max distances globally or per-category, choose your preferred categories
+- **Privacy-Friendly**: Use nearby public locations instead of exact addresses
+
 ## Archipelagourmet
 A meta-game in which the options generarated will be recipes, and/or takeaway and restaurant options provided by the player.
 Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
