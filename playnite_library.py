@@ -289,99 +289,87 @@ class PlayniteLibraryGame(Game):
 
     options_cls = PlayniteLibraryArchipelagoOptions
 
+    def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
+        """Runs before generating this game's objectives when the game is selected.
+
+        Use this hook to compute caches lazily so we don't touch the library
+        unless Playnite is actually the chosen game.
+        """
+        # Keep this a no-op to preserve strict laziness across engines that might
+        # probe all games. Actual data is resolved via callables at selection time.
+        return []
+
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
         """Generate all unique Playnite library challenge objectives.
 
         If the Playnite JSON is missing or unreadable, return an empty list so
         no Playnite objectives are generated.
         """
-        # Early out if we have no games (e.g., JSON missing)
-        library_games = self._get_library_games()
-        if not library_games:
-            return []
-        
-        # Also skip if filters result in no playable games
-        filtered_games = self.games()
-        if not filtered_games:
-            if not playnite_library._printed_filter_result:
-                playnite_library._printed_filter_result = True
-                print(f"\n[Playnite] WARNING: Library loaded with {len(library_games)} games, but ALL were filtered out!")
-                print("[Playnite] No Playnite objectives will be generated.")
-                print("[Playnite] Common causes:")
-                print("[Playnite]   - Min/Max time played filters are too restrictive")
-                print("[Playnite]   - Excluded completion statuses removing all games")
-                print("[Playnite]   - Release year range doesn't match any games")
-                print("[Playnite]   - Score filters (User/Critic/Community) too high")
-                print("[Playnite]   - Too many games in excluded_games list")
-                print("[Playnite] Tip: Check your YAML options or reduce filtering.\n")
-            return []
-        
-        if not playnite_library._printed_filter_result:
-            playnite_library._printed_filter_result = True
-            print(f"[Playnite] {len(filtered_games)} games available after filtering (from {len(library_games)} total).\n")
+        objectives: List[GameObjectiveTemplate] = []
 
-        objectives = []
-        
-        # Only add game objectives if we have at least one game to pick from
-        if self.games():
-            objectives.append(
-                GameObjectiveTemplate(
-                    label="Play GAME from your Playnite library",
-                    data={"GAME": (self.games, 1)},
-                    is_time_consuming=False,
-                    is_difficult=False,
-                    weight=3,
-                )
+        # Do not touch the library here; all data providers are callables that
+        # will only resolve when this game is actually selected for generation.
+
+        # 1) Plain game pick from filtered Playnite library
+        #    - Presents a concrete list of (filtered) games.
+        objectives.append(
+            GameObjectiveTemplate(
+                label="Play GAME from your Playnite library",
+                data={"GAME": (lambda: list(self.games()), 1)},
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=5,
             )
-        
-        # Play Next suggestions: NTH game from the suggestion list (if enabled and available)
+        )
+
+        # 2) Play Next plugin – ordinal choice only (manual lookup in Playnite UI)
+        #    - We cannot query the plugin list from JSON; users select an NTH (e.g., 1st/2nd/3rd)
+        #      and then look at their Play Next panel in Playnite.
+        #    - Only emitted when the Play Next feature is enabled and has at least one ordinal.
         play_next_choices = self.play_next_nth_choices()
         if play_next_choices:
             objectives.append(
                 GameObjectiveTemplate(
                     label="Play the NTH game from your Playnite Play Next suggestions",
-                    data={"NTH": (self.play_next_nth_choices, 1)},
+                    data={"NTH": (lambda: list(self.play_next_nth_choices()), 1)},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=4,
                 )
             )
-        
-        # Only add series/year objectives if choices exist
-        series_list = self.series()
-        if series_list:
-            objectives.append(
-                GameObjectiveTemplate(
-                    label="Play a Playnite library game from the SERIES series",
-                    data={"SERIES": (self.series, 1)},
-                    is_time_consuming=False,
-                    is_difficult=False,
-                    weight=1,
-                )
-            )
-        year_choices = self.release_year_choices()
-        if year_choices:
-            objectives.append(
-                GameObjectiveTemplate(
-                    label="Play a Playnite library game released in YEAR",
-                    data={"YEAR": (self.release_year_choices, 1)},
-                    is_time_consuming=False,
-                    is_difficult=False,
-                    weight=1,
-                )
-            )
-            # Also provide a random YEAR variant when multiple years exist
-            if len(year_choices) >= 2:
-                objectives.append(
-                    GameObjectiveTemplate(
-                        label="Play a random Playnite library game released in YEAR",
-                        data={"YEAR": (self.release_year_choices, 1)},
-                        is_time_consuming=False,
-                        is_difficult=False,
-                        weight=2,
-                    )
-                )
 
+        # 3) Series filter – choose any game in a selected series
+        objectives.append(
+            GameObjectiveTemplate(
+                label="Play a Playnite library game from the SERIES series",
+                data={"SERIES": (lambda: list(self.series()), 1)},
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=1,
+            )
+        )
+
+        # 4) Release year constraints – pick a specific year, and optionally a random pick within that year
+        objectives.append(
+            GameObjectiveTemplate(
+                label="Play a Playnite library game released in YEAR",
+                data={"YEAR": (lambda: list(self.release_year_choices()), 1)},
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=1,
+            )
+        )
+        objectives.append(
+            GameObjectiveTemplate(
+                label="Play a random Playnite library game released in YEAR",
+                data={"YEAR": (lambda: list(self.release_year_choices()), 1)},
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=2,
+            )
+        )
+
+        # Supported attribute filters and ordering options used below
         attribute_types = [
             ("TAG", self.tags),
             ("GENRE", self.genres),
@@ -401,78 +389,67 @@ class PlayniteLibraryGame(Game):
             "alphabetical by name",
         ]
 
+        # 5) Attribute-based filters – TAG/GENRE/FEATURE/PLATFORM/CATEGORY/SOURCE
+        #    - Always include; providers resolve lazily and may yield empty choices if no data.
         for attr_label, attr_func in attribute_types:
-            attr_values = attr_func()
-            # Only add objectives if there are enough values to sample from
-            if not attr_values or len(attr_values) < 1:
-                continue
-            attr_count = len(attr_values)
-            attr_weight = len(str(attr_count))  # number of digits in count
+            attr_weight = 1
             objectives.append(
                 GameObjectiveTemplate(
                     label=f"Play a Playnite library game with the {attr_label} {attr_label.lower()}",
-                    data={attr_label: (attr_func, 1)},
+                    data={attr_label: (lambda f=attr_func: list(f()), 1)},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=attr_weight,
                 )
             )
-            # Only add random objective if there are at least 2 values to sample from
-            if len(attr_values) >= 2:
-                objectives.append(
-                    GameObjectiveTemplate(
-                        label=f"Play a random Playnite library game with the {attr_label} {attr_label.lower()}",
-                        data={attr_label: (attr_func, 1)},
-                        is_time_consuming=False,
-                        is_difficult=False,
-                        weight=attr_weight,
-                    )
+            objectives.append(
+                GameObjectiveTemplate(
+                    label=f"Play a random Playnite library game with the {attr_label} {attr_label.lower()}",
+                    data={attr_label: (lambda f=attr_func: list(f()), 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=attr_weight,
                 )
+            )
+        # 6) Ordering + NTH objectives – universal ordinal tokens applied to various subsets
+        #    - Base ordering over the whole filtered library (requires at least one game).
+        #    - Ordering + YEAR when year choices exist.
+        #    - Ordering + attribute when that attribute set is non-empty.
         for order_label in ordering_options:
-            nth_list = self.nth_choices()
-            if nth_list:
+            objectives.append(
+                GameObjectiveTemplate(
+                    label=f"Play your NTH {order_label} Playnite library game",
+                    data={"NTH": (lambda: list(self.nth_choices()), 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                )
+            )
+            objectives.append(
+                GameObjectiveTemplate(
+                    label=f"Play your NTH {order_label} Playnite library game released in YEAR",
+                    data={
+                        "YEAR": (lambda: list(self.release_year_choices()), 1),
+                        "NTH": (lambda: list(self.nth_choices()), 1),
+                    },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                )
+            )
+            for attr_label, attr_func in attribute_types:
                 objectives.append(
                     GameObjectiveTemplate(
-                        label=f"Play your NTH {order_label} Playnite library game",
-                        data={"NTH": (self.nth_choices, 1)},
+                        label=f"Play your NTH {order_label} Playnite library game with the {attr_label} {attr_label.lower()}",
+                        data={
+                            attr_label: (lambda f=attr_func: list(f()), 1),
+                            "NTH": (lambda: list(self.nth_choices()), 1),
+                        },
                         is_time_consuming=False,
                         is_difficult=False,
-                        weight=2,
+                        weight=1,
                     )
                 )
-                # NTH + YEAR: independent selection using universal NTH (1st–10th)
-                if year_choices:
-                    objectives.append(
-                        GameObjectiveTemplate(
-                            label=f"Play your NTH {order_label} Playnite library game released in YEAR",
-                            data={
-                                "YEAR": (self.release_year_choices, 1),
-                                "NTH": (self.nth_choices, 1),
-                            },
-                            is_time_consuming=False,
-                            is_difficult=False,
-                            weight=3,
-                        )
-                    )
-                # NTH + attribute: independent selection using universal NTH (1st–10th)
-                for attr_label, attr_func in attribute_types:
-                    attr_values = attr_func()
-                    if not attr_values:
-                        continue
-                    attr_count = len(attr_values)
-                    attr_weight = len(str(attr_count))
-                    objectives.append(
-                        GameObjectiveTemplate(
-                            label=f"Play your NTH {order_label} Playnite library game with the {attr_label} {attr_label.lower()}",
-                            data={
-                                attr_label: (attr_func, 1),
-                                "NTH": (self.nth_choices, 1),
-                            },
-                            is_time_consuming=False,
-                            is_difficult=False,
-                            weight=attr_weight,
-                        )
-                    )
 
         seen_labels = set()
         unique_objectives = []

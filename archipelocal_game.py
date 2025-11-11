@@ -59,6 +59,11 @@ DEFAULT_GEOAPIFY_CATEGORIES: Tuple[str, ...] = (
     "entertainment.aquarium",
     "entertainment.activity_park",
     "entertainment.bowling_alley",
+    
+    # NOTE: If you're not finding results for museums or bowling alleys, try these alternatives:
+    # - For museums: Try "tourism.museum" or just "tourism.attraction"
+    # - For bowling: Try "sport.bowling" or "leisure.bowling_alley"
+    # Geoapify's taxonomy can vary by region and data source.
 
     # Sports & wellness
     "sport.fitness",
@@ -101,7 +106,6 @@ DEFAULT_GEOAPIFY_CATEGORIES: Tuple[str, ...] = (
 CATEGORY_FALLBACKS: Dict[str, str] = {
     # Legacy fallbacks for old/deprecated category names that users might have in configs
     "sport.gym": "sport.fitness",
-    "sport": "sport.sports_centre",
     "catering.bakery": "commercial.food_and_drink.bakery",
     "commercial.bakery": "commercial.food_and_drink.bakery",
     "commercial.mall": "commercial.shopping_mall",
@@ -278,7 +282,7 @@ class ArchipelocalGame(Game):
             templates.append(
                 GameObjectiveTemplate(
                     label="Visit a CATEGORY near your home (within your max distance)",
-                    data={"CATEGORY": (self.allowed_categories_friendly, 1)},
+                    data={"CATEGORY": (lambda: self.allowed_categories_friendly(), 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=cat_w,
@@ -288,8 +292,8 @@ class ArchipelocalGame(Game):
                 GameObjectiveTemplate(
                     label="Visit your NTH-closest CATEGORY near your home (within your max distance)",
                     data={
-                        "CATEGORY": (self.allowed_categories_friendly, 1),
-                        "NTH": (self.nth_choices, 1),
+                        "CATEGORY": (lambda: self.allowed_categories_friendly(), 1),
+                        "NTH": (lambda: self.nth_choices(), 1),
                     },
                     is_time_consuming=True,
                     is_difficult=False,
@@ -300,7 +304,7 @@ class ArchipelocalGame(Game):
                 templates.append(
                     GameObjectiveTemplate(
                         label="Visit a random CATEGORY near your home (within your max distance)",
-                        data={"CATEGORY": (self.allowed_categories_friendly, 1)},
+                        data={"CATEGORY": (lambda: self.allowed_categories_friendly(), 1)},
                         is_time_consuming=True,
                         is_difficult=False,
                         weight=rand_w,
@@ -317,7 +321,7 @@ class ArchipelocalGame(Game):
                 templates.append(
                     GameObjectiveTemplate(
                         label="Visit PLACE (from live suggestions near your home)",
-                        data={"PLACE": (self._place_name_choices, 1)},
+                        data={"PLACE": (lambda: self._place_name_choices(), 1)},
                         is_time_consuming=True,
                         is_difficult=False,
                         weight=3,
@@ -332,7 +336,7 @@ class ArchipelocalGame(Game):
             templates.append(
                 GameObjectiveTemplate(
                     label="Visit PLACE (from live suggestions near your home)",
-                    data={"PLACE": (self._place_name_choices, 1)},
+                    data={"PLACE": (lambda: self._place_name_choices(), 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=place_weight,
@@ -488,19 +492,58 @@ class ArchipelocalGame(Game):
         global _ARCHIPELOCAL_GEOCODE_CACHE
         if cache_key in _ARCHIPELOCAL_GEOCODE_CACHE:
             return _ARCHIPELOCAL_GEOCODE_CACHE[cache_key]
-        try:
-            print(f"[Archipelocal] Geocoding address: '{addr}' ...")
-            params = {"text": addr, "format": "json", "apiKey": key}
-            if cc:
-                params["filter"] = f"countrycode:{cc}"
-            resp = requests.get(
-                "https://api.geoapify.com/v1/geocode/search",
-                params=params,
-                timeout=15,
-            )
-            if resp.status_code != 200:
-                print(f"[Archipelocal] Geocoding failed with HTTP {resp.status_code}.")
+        
+        print(f"[Archipelocal] Geocoding address: '{addr}' ...")
+        params = {"text": addr, "format": "json", "apiKey": key}
+        if cc:
+            params["filter"] = f"countrycode:{cc}"
+        
+        # Retry logic with exponential backoff for timeouts
+        max_retries = 3
+        base_timeout = 30  # Increased from 15s since queries consistently need more time
+        import time
+        
+        for attempt in range(max_retries):
+            try:
+                timeout = base_timeout + (base_timeout * attempt)  # 30s, 60s, 90s
+                if attempt > 0:
+                    print(f"[Archipelocal] Geocoding retry {attempt}/{max_retries - 1} with {timeout}s timeout...")
+                
+                resp = requests.get(
+                    "https://api.geoapify.com/v1/geocode/search",
+                    params=params,
+                    timeout=timeout,
+                )
+                
+                if resp.status_code != 200:
+                    print(f"[Archipelocal] Geocoding failed with HTTP {resp.status_code}.")
+                    try:
+                        error_body = resp.text[:500]  # First 500 chars of error response
+                        print(f"[Archipelocal] Response body: {error_body}")
+                    except Exception:
+                        pass
+                    return None
+                
+                # Success - break out of retry loop
+                break
+                
+            except requests.exceptions.Timeout:
+                if attempt < max_retries - 1:
+                    wait_time = 0.5 * (2 ** attempt)  # 0.5s, 1s, 2s
+                    print(f"[Archipelocal] Geocoding timeout, waiting {wait_time:.1f}s before retry...")
+                    time.sleep(wait_time)
+                    continue
+                else:
+                    print(f"[Archipelocal] Geocoding timeout after {max_retries} attempts, skipping.")
+                    return None
+            except Exception as e:
+                print(f"[Archipelocal] Geocoding error occurred: {type(e).__name__}: {e}")
+                import traceback
+                traceback.print_exc()
                 return None
+        
+        # Parse the successful response
+        try:
             js = resp.json()
             results = js.get("results") or []
             if not results:
@@ -513,8 +556,10 @@ class ArchipelocalGame(Game):
             print(f"[Archipelocal] Geocoded to lat={lat_val:.5f}, lon={lon_val:.5f} (country={country}).")
             _ARCHIPELOCAL_GEOCODE_CACHE[cache_key] = (lat_val, lon_val)
             return lat_val, lon_val
-        except Exception:
-            print("[Archipelocal] Geocoding error occurred; skipping.")
+        except Exception as e:
+            print(f"[Archipelocal] Geocoding parse error: {type(e).__name__}: {e}")
+            import traceback
+            traceback.print_exc()
             return None
 
     def _get_global_max_distance_m(self) -> Optional[int]:
@@ -624,43 +669,106 @@ class ArchipelocalGame(Game):
         return enabled
 
     # ------- Live suggestions (optional) -------
-    @functools.lru_cache(maxsize=None)
     def _fetch_places(self, lat: float, lon: float, category: str, radius_m: int, limit: int) -> List[Dict[str, Any]]:
+        """Fetch places from Geoapify API. Results are cached only if successful."""
+        # Check cache first (manual caching to avoid caching failures)
+        cache_key = (lat, lon, category, radius_m, limit)
+        global _ARCHIPELOCAL_SESSION_SUGGESTIONS_CACHE
+        
+        # Use a separate cache for individual place fetches
+        if not hasattr(self.__class__, '_place_fetch_cache'):
+            self.__class__._place_fetch_cache = {}
+        
+        if cache_key in self.__class__._place_fetch_cache:
+            return self.__class__._place_fetch_cache[cache_key]
+        
         key = self._get_api_key()
         if not key or requests is None:
             return []
-        try:
-            # Console feedback before the call
-            unit = self._get_unit()
-            radius_disp = (radius_m / 1000.0) if unit == "km" else (radius_m / 1609.344)
-            query_cat = self._normalize_category(category)
-            conditions = self._get_conditions()
-            conditions_str = f" with conditions [{', '.join(conditions)}]" if conditions else ""
-            print(f"[Archipelocal] Fetching '{query_cat}'{conditions_str} within {radius_disp:.2f} {unit} around ({lat:.5f}, {lon:.5f}) ...")
-            
-            # Build request parameters
-            params = {
-                "categories": query_cat,
-                "filter": f"circle:{lon},{lat},{radius_m}",
-                "bias": f"proximity:{lon},{lat}",
-                "limit": max(1, min(100, int(limit))),
-                "apiKey": key,
-            }
-            
-            # Add conditions if specified
-            if conditions:
-                params["conditions"] = ",".join(conditions)
-            
-            resp = requests.get(
-                "https://api.geoapify.com/v2/places",
-                params=params,
-                timeout=15,
-            )
-            if resp.status_code != 200:
-                print(f"[Archipelocal] Places API HTTP {resp.status_code} for category '{query_cat}'.")
+        
+        # Console feedback before the call
+        unit = self._get_unit()
+        radius_disp = (radius_m / 1000.0) if unit == "km" else (radius_m / 1609.344)
+        query_cat = self._normalize_category(category)
+        conditions = self._get_conditions()
+        conditions_str = f" with conditions [{', '.join(conditions)}]" if conditions else ""
+        print(f"[Archipelocal] Fetching '{query_cat}'{conditions_str} within {radius_disp:.2f} {unit} around ({lat:.5f}, {lon:.5f}) ...")
+        
+        # Build request parameters
+        params = {
+            "categories": query_cat,
+            "filter": f"circle:{lon},{lat},{radius_m}",
+            "bias": f"proximity:{lon},{lat}",
+            "limit": max(1, min(100, int(limit))),
+            "apiKey": key,
+        }
+        
+        # Add conditions if specified
+        if conditions:
+            params["conditions"] = ",".join(conditions)
+        
+        # Retry logic with exponential backoff for timeouts
+        max_retries = 3
+        base_timeout = 30  # Increased from 15s since queries consistently need more time
+        import time
+        
+        for attempt in range(max_retries):
+            try:
+                timeout = base_timeout + (base_timeout * attempt)  # 30s, 60s, 90s
+                if attempt > 0:
+                    print(f"[Archipelocal] Retry {attempt}/{max_retries - 1} for '{query_cat}' with {timeout}s timeout...")
+                
+                resp = requests.get(
+                    "https://api.geoapify.com/v2/places",
+                    params=params,
+                    timeout=timeout,
+                )
+                
+                if resp.status_code != 200:
+                    print(f"[Archipelocal] Places API HTTP {resp.status_code} for category '{query_cat}'.")
+                    try:
+                        error_body = resp.text[:500]  # First 500 chars of error response
+                        print(f"[Archipelocal] Response body: {error_body}")
+                    except Exception:
+                        pass
+                    return []
+                
+                # Success - break out of retry loop
+                break
+                
+            except requests.exceptions.Timeout:
+                if attempt < max_retries - 1:
+                    wait_time = 0.5 * (2 ** attempt)  # 0.5s, 1s, 2s
+                    print(f"[Archipelocal] Timeout for '{query_cat}', waiting {wait_time:.1f}s before retry...")
+                    time.sleep(wait_time)
+                    continue
+                else:
+                    print(f"[Archipelocal] Timeout for '{query_cat}' after {max_retries} attempts, skipping.")
+                    return []
+            except Exception as e:
+                print(f"[Archipelocal] Error fetching places for '{query_cat}': {type(e).__name__}: {e}")
+                import traceback
+                traceback.print_exc()
                 return []
+        
+        # Parse the successful response
+        try:
             js = resp.json() or {}
             feats = (js.get("features") or [])
+            
+            # Debug logging to understand what we received
+            if len(feats) == 0:
+                print(f"[Archipelocal] DEBUG: Response JSON keys: {list(js.keys())}")
+                if "properties" in js:
+                    print(f"[Archipelocal] DEBUG: Response properties: {js['properties']}")
+                print(f"[Archipelocal] DEBUG: Request params: categories={query_cat}, filter=circle:{lon},{lat},{radius_m}, limit={params['limit']}")
+                if conditions:
+                    print(f"[Archipelocal] DEBUG: Conditions: {conditions}")
+                # Check if conditions might be too restrictive
+                if conditions:
+                    print(f"[Archipelocal] ⚠️  WARNING: You have conditions set ({conditions}) which may be filtering out all results.")
+                    print(f"[Archipelocal] Try temporarily removing conditions to see if places appear.")
+            
             out: List[Dict[str, Any]] = []
             for f in feats:
                 props = f.get("properties") or {}
@@ -685,10 +793,23 @@ class ArchipelocalGame(Game):
                     "lon": feat_lon,
                     "display_name": self._format_place_display(name, dist_m, query_cat, feat_lat, feat_lon, addr),
                 })
-            print(f"[Archipelocal] Received {len(out)} places for '{query_cat}'.")
+            if len(out) == 0:
+                print(f"[Archipelocal] ⚠️  Received 0 places for '{query_cat}'.")
+                print(f"[Archipelocal] Search parameters: radius={radius_m}m ({radius_disp:.2f} {unit}), limit={limit}")
+                if conditions:
+                    print(f"[Archipelocal] Active conditions: {', '.join(conditions)}")
+                print(f"[Archipelocal] If you verified this category returns results in the API playground with the same")
+                print(f"[Archipelocal] coordinates and radius, check if you have restrictive conditions enabled.")
+                # Don't cache empty results - might be a transient error
+            else:
+                print(f"[Archipelocal] Received {len(out)} places for '{query_cat}'.")
+                # Cache successful results only
+                self.__class__._place_fetch_cache[cache_key] = out
             return out
-        except Exception:
-            print(f"[Archipelocal] Error fetching places for '{category}'.")
+        except Exception as e:
+            print(f"[Archipelocal] Error parsing response for '{query_cat}': {type(e).__name__}: {e}")
+            import traceback
+            traceback.print_exc()
             return []
 
     def _format_place_display(self, name: Optional[str], distance_m: Optional[float], category: str, lat: Optional[float] = None, lon: Optional[float] = None, address: Optional[str] = None) -> str:
