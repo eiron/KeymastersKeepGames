@@ -307,11 +307,24 @@ class PlayniteLibraryGame(Game):
         """
         objectives: List[GameObjectiveTemplate] = []
 
+        # Lazy-load safeguard: only proceed if a path (file or folder) exists on disk.
+        # We DO NOT parse the JSON here; we only test for existence to avoid expensive IO.
+        json_path = self._get_json_path()
+        if not json_path:
+            return []
+        json_path_obj = Path(json_path).expanduser()
+        # If it's a directory, ensure games.json exists inside; if it's a file, ensure file exists.
+        if json_path_obj.is_dir():
+            if not (json_path_obj / "games.json").exists():
+                return []
+        else:
+            if not json_path_obj.exists():
+                return []
+
         # Do not touch the library here; all data providers are callables that
         # will only resolve when this game is actually selected for generation.
 
-        # 1) Plain game pick from filtered Playnite library
-        #    - Presents a concrete list of (filtered) games.
+        # 1) Plain game pick from filtered Playnite library (deferred)
         objectives.append(
             GameObjectiveTemplate(
                 label="Play GAME from your Playnite library",
@@ -326,8 +339,8 @@ class PlayniteLibraryGame(Game):
         #    - We cannot query the plugin list from JSON; users select an NTH (e.g., 1st/2nd/3rd)
         #      and then look at their Play Next panel in Playnite.
         #    - Only emitted when the Play Next feature is enabled and has at least one ordinal.
-        play_next_choices = self.play_next_nth_choices()
-        if play_next_choices:
+        # 2) Play Next – we must evaluate choices to know if feature enabled; this is inexpensive
+        if self.play_next_nth_choices():
             objectives.append(
                 GameObjectiveTemplate(
                     label="Play the NTH game from your Playnite Play Next suggestions",
@@ -339,6 +352,7 @@ class PlayniteLibraryGame(Game):
             )
 
         # 3) Series filter – choose any game in a selected series
+        # 3) Series filter – defer actual series list until objective resolution
         objectives.append(
             GameObjectiveTemplate(
                 label="Play a Playnite library game from the SERIES series",
@@ -350,6 +364,7 @@ class PlayniteLibraryGame(Game):
         )
 
         # 4) Release year constraints – pick a specific year, and optionally a random pick within that year
+        # 4) Release year constraints – defer evaluation
         objectives.append(
             GameObjectiveTemplate(
                 label="Play a Playnite library game released in YEAR",
@@ -390,7 +405,7 @@ class PlayniteLibraryGame(Game):
         ]
 
         # 5) Attribute-based filters – TAG/GENRE/FEATURE/PLATFORM/CATEGORY/SOURCE
-        #    - Always include; providers resolve lazily and may yield empty choices if no data.
+        #    - Only include if attribute list is non-empty
         for attr_label, attr_func in attribute_types:
             attr_weight = 1
             objectives.append(
@@ -412,9 +427,7 @@ class PlayniteLibraryGame(Game):
                 )
             )
         # 6) Ordering + NTH objectives – universal ordinal tokens applied to various subsets
-        #    - Base ordering over the whole filtered library (requires at least one game).
-        #    - Ordering + YEAR when year choices exist.
-        #    - Ordering + attribute when that attribute set is non-empty.
+        #    - Only add if there are games available
         for order_label in ordering_options:
             objectives.append(
                 GameObjectiveTemplate(
