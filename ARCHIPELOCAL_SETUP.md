@@ -117,10 +117,15 @@ See [Geoapify's full taxonomy](https://apidocs.geoapify.com/docs/places/#categor
 Apply optional conditions to filter all place searches. Great for accessibility needs or dietary requirements!
 
 ```yaml
+archipelocal_named_locations_only: true  # Default: true - only show places with proper names
 archipelocal_conditions:
   - wheelchair
   - vegan
 ```
+
+**Named Locations Only:**
+- **`archipelocal_named_locations_only: true`** (default) - Only returns places with proper names, filtering out unnamed or poorly-labeled locations
+- **`archipelocal_named_locations_only: false`** - Includes all places, even those without proper names (may include generic addresses or POIs)
 
 **Common conditions:**
 - `wheelchair` - Wheelchair accessible places
@@ -172,8 +177,9 @@ archipelocal_suggestion_strategy: only_concrete
 # Categories (leave empty to use defaults)
 archipelocal_allowed_categories: []
 
-# Conditions - filter places by accessibility/dietary needs (optional)
-archipelocal_conditions:
+# Named Locations & Conditions
+archipelocal_named_locations_only: true  # Default: only show places with proper names
+archipelocal_conditions:  # Optional: filter places by accessibility/dietary needs
   - wheelchair
   - internet_access
 

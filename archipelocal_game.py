@@ -187,6 +187,7 @@ class ArchipelocalArchipelagoOptions:
     archipelocal_home_longitude: "ArchipelocalHomeLongitude"
     archipelocal_allowed_categories: "ArchipelocalAllowedCategories"
     archipelocal_conditions: "ArchipelocalConditions"
+    archipelocal_named_locations_only: "ArchipelocalNamedLocationsOnly"
     archipelocal_distance_unit: "ArchipelocalDistanceUnit"
     archipelocal_global_max_distance: "ArchipelocalGlobalMaxDistance"
     archipelocal_per_category_max_distance: "ArchipelocalPerCategoryMaxDistance"
@@ -423,19 +424,39 @@ class ArchipelocalGame(Game):
     def _get_conditions(self) -> List[str]:
         """Return list of Geoapify conditions to apply to place searches.
         
+        The 'named' condition is included by default (when archipelocal_named_locations_only is True)
+        to ensure all results have proper names.
+        
         Examples: wheelchair, vegan, kosher, internet_access, dogs, no_fee
         Full list: https://apidocs.geoapify.com/docs/places/#conditions
         """
         opts = getattr(self, "archipelago_options", None)
-        if not opts:
-            return []
-        try:
-            conditions_set = getattr(opts.archipelocal_conditions, "value", set())
-            if isinstance(conditions_set, set):
-                return sorted([str(c).strip() for c in conditions_set if str(c).strip()])
-            return []
-        except Exception:
-            return []
+        conditions = []
+        
+        # Check if 'named' condition should be included (default: True)
+        require_named = True
+        if opts:
+            try:
+                require_named = bool(getattr(opts.archipelocal_named_locations_only, "value", True))
+            except Exception:
+                require_named = True
+        
+        if require_named:
+            conditions.append("named")
+        
+        if opts:
+            try:
+                conditions_set = getattr(opts.archipelocal_conditions, "value", set())
+                if isinstance(conditions_set, set):
+                    user_conditions = [str(c).strip() for c in conditions_set if str(c).strip()]
+                    # Add user conditions, avoiding duplicates
+                    for cond in user_conditions:
+                        if cond not in conditions:
+                            conditions.append(cond)
+            except Exception:
+                pass
+        
+        return sorted(conditions)
 
     def _suggestion_strategy(self) -> str:
         opts = getattr(self, "archipelago_options", None)
@@ -756,19 +777,6 @@ class ArchipelocalGame(Game):
             js = resp.json() or {}
             feats = (js.get("features") or [])
             
-            # Debug logging to understand what we received
-            if len(feats) == 0:
-                print(f"[Archipelocal] DEBUG: Response JSON keys: {list(js.keys())}")
-                if "properties" in js:
-                    print(f"[Archipelocal] DEBUG: Response properties: {js['properties']}")
-                print(f"[Archipelocal] DEBUG: Request params: categories={query_cat}, filter=circle:{lon},{lat},{radius_m}, limit={params['limit']}")
-                if conditions:
-                    print(f"[Archipelocal] DEBUG: Conditions: {conditions}")
-                # Check if conditions might be too restrictive
-                if conditions:
-                    print(f"[Archipelocal] ⚠️  WARNING: You have conditions set ({conditions}) which may be filtering out all results.")
-                    print(f"[Archipelocal] Try temporarily removing conditions to see if places appear.")
-            
             out: List[Dict[str, Any]] = []
             for f in feats:
                 props = f.get("properties") or {}
@@ -947,6 +955,17 @@ class ArchipelocalConditions(OptionSet):
     Full list: https://apidocs.geoapify.com/docs/places/#conditions
     """
     display_name = "Archipelocal Conditions (filters)"
+
+
+class ArchipelocalNamedLocationsOnly(Toggle):
+    """
+    When enabled, only places with proper names will be returned (using the 'named' condition).
+    This filters out unnamed or poorly-labeled locations.
+    
+    Enabled by default to ensure better quality results.
+    """
+    display_name = "Archipelocal Named Locations Only"
+    default = True
 
 
 class ArchipelocalDistanceUnit(OptionSet):
