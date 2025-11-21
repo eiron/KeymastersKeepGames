@@ -321,7 +321,7 @@ class ArchipelocalGame(Game):
                 # Add PLACE objective only
                 templates.append(
                     GameObjectiveTemplate(
-                        label="Visit PLACE (from live suggestions near your home)",
+                        label="Visit PLACE",
                         data={"PLACE": (lambda: self._place_name_choices(), 1)},
                         is_time_consuming=True,
                         is_difficult=False,
@@ -336,7 +336,7 @@ class ArchipelocalGame(Game):
             place_weight = 4 if strategy == "prefer_concrete" else 2
             templates.append(
                 GameObjectiveTemplate(
-                    label="Visit PLACE (from live suggestions near your home)",
+                    label="Visit PLACE",
                     data={"PLACE": (lambda: self._place_name_choices(), 1)},
                     is_time_consuming=True,
                     is_difficult=False,
