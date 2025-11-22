@@ -173,6 +173,22 @@ This includes extensive customization options for book collections, meta-challen
 
 The system generates individual chapter reading goals, book completion objectives, and intelligent meta-challenges that encourage exploring different genres and authors in your collection. Perfect for readers who want to gamify their reading goals and discover variety in their personal libraries!
 
+## Chart Attack
+A meta-game that lets you follow charts (music, books, films, games, restaurants, etc.) and generates objectives that pick a specific chart and a chart position.
+
+This features a flexible system for defining charts and how you want to interact with them:
+
+Configuration: ``"Billboard Hot 100 | Follow | 1-50 | 3"`` or ``"Goodreads Fantasy | Read | 1-100"``
+
+Sample Objectives: ``"Follow Billboard Hot 100 #7"`` or ``"Read Goodreads Fantasy #42"``
+
+Features:
+- **Custom Charts**: Define any ranked list you want to follow
+- **Custom Verbs**: Set the action for each chart (Follow, Watch, Read, Play, Visit)
+- **Position Ranges**: Focus on the top 10, top 50, or any specific range
+- **Weighted Selection**: Optional "Weight Top Positions" feature makes higher-ranked items (e.g., #1) more likely to appear than lower-ranked ones
+- **Chart Weighting**: Make specific charts appear more frequently than others
+
 ## Christmas/Holiday Challenges
 A meta-game in which the options generated will be holiday decorations, gift preparations, baking projects, and festive traditions from the player's Christmas and holiday backlog, paired with appropriate seasonal actions.
 Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
@@ -301,6 +317,30 @@ Networking: ``"NETWORK AT Professional Meetup"`` or ``"PARTICIPATE IN Industry C
 
 This includes options for customizing meetup types, family activities, community events, networking opportunities, and their respective action lists. Most importantly, it includes a **People Selection** option where you can list actual friends, family members, colleagues, and other people you want to connect with. The system will only generate objectives for social categories that have been configured, allowing for flexible use whether you focus on friend connections, family time, community involvement, professional networking, or all four!
 
+## Steam Achievements
+A meta-game that generates objectives based on your Steam library and achievement progress, automatically fetching your games via the Steam API.
+
+**Setup Required:**
+1. **Get a Steam Web API Key**: Visit [https://steamcommunity.com/dev/apikey](https://steamcommunity.com/dev/apikey) to generate one.
+2. **Set the Environment Variable**:
+   - **Windows (System)**: Search for "Edit the system environment variables", click "Environment Variables", add a new User variable named `STEAM_API_KEY` with your key as the value. Restart your terminal/editor.
+   - **PowerShell (Temporary)**: `$env:STEAM_API_KEY="your_key_here"`
+   - **Command Prompt (Temporary)**: `set STEAM_API_KEY=your_key_here`
+3. **Configure Steam ID**: Set your Steam ID in the YAML options.
+
+This features objective templates for different levels of mastery across your Steam library:
+
+Game Completion: ``"Beat Elden Ring"``
+Progress Goals: ``"Unlock at least 25% of the achievements in Hollow Knight"``
+Mastery: ``"Unlock all the achievements in Vampire Survivors"``
+
+Features:
+- **Automatic Library Fetching**: Pulls your owned games directly from Steam
+- **Playtime Filtering**: Filter games by minimum or maximum playtime (e.g., only games you've played at least 2 hours, or haven't played too much)
+- **Smart Filtering**: Automatically excludes games without community visible stats (achievements)
+- **Exclusions**: Option to manually exclude specific games or App IDs
+- **Percentage Ranges**: Configurable min/max percentages for achievement progress objectives
+
 ## Watchlist
 A meta-game in which the options generated will be films and TV shows from the player's watchlist, paired with appropriate viewing actions.
 Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
@@ -313,6 +353,19 @@ TV Shows: ``"BINGE TV Series Title"`` or ``"CATCH UP Miniseries Title"``
 This includes options for customizing film selections, TV show selections, and their respective action lists. The system will only generate objectives for media types that have been configured, allowing for flexible use whether you prefer films, television, or both!
 
 ## Individual Game Modules
+
+### American Truck Simulator
+A trucking simulation module covering deliveries, exploration, and business management across the vast landscapes of the USA.
+
+Core Categories: ``Interstate Delivery``, ``State Exploration``, ``Truck Ownership``, ``Long Haul``, ``Heavy Haul``, ``Business Objectives``, ``DLC Content``
+
+Sample Objectives: ``"Transport Electronics from Los Angeles to Phoenix"`` or ``"Complete deliveries to 3 different cities in Nevada"`` or ``"Purchase and own a Peterbilt truck"``
+
+Features:
+- **Comprehensive Coverage**: Supports base game and all state DLCs (California to Missouri)
+- **Specialized Hauling**: Objectives for heavy haul, hazardous materials, and oversized loads
+- **Business Management**: Goals for hiring drivers, expanding garages, and earning revenue
+- **Realistic Constraints**: Optional challenges for fuel economy, perfect parking, and DOT compliance
 
 ### Animal Crossing: New Horizons
 An island life simulation module focusing on island development, social interaction, decoration, and seasonal activities across the charming world of Animal Crossing.
@@ -389,6 +442,19 @@ Core Categories: ``Combat Mastery``, ``Weapon Experimentation``, ``Biome Progres
 
 Sample Objectives: ``"Defeat 25 different Elite enemies"`` or ``"Complete a run using only Survival weapons"`` or ``"Reach 3BC difficulty level"``
 
+### Euro Truck Simulator 2
+A trucking simulation module covering deliveries, exploration, and business management across the diverse countries of Europe.
+
+Core Categories: ``Delivery Objectives``, ``Country Exploration``, ``Truck Ownership``, ``Long Distance``, ``Special Transport``, ``Business Objectives``, ``DLC Content``
+
+Sample Objectives: ``"Deliver Medical Supplies from Berlin to Paris"`` or ``"Complete deliveries to 3 different cities in Italy"`` or ``"Complete the challenging 1800km route from London to Rome"``
+
+Features:
+- **Comprehensive Coverage**: Supports base game and all country DLCs (Going East! to Greece)
+- **Specialized Hauling**: Objectives for special transport, high-value cargo, and fragile goods
+- **Business Management**: Goals for fleet expansion, garage acquisition, and financial milestones
+- **Skill Challenges**: Objectives for fuel efficiency, perfect parking, and violation-free driving
+
 ### Hades
 A roguelike action module covering escape attempts, weapon mastery, relationship building with gods and underworld denizens, and the compelling narrative of Zagreus's journey.
 
@@ -454,3 +520,29 @@ Core Categories: ``Skill Mastery``, ``Career Progression``, ``Relationship Build
 Sample Objectives: ``"Master the Painting skill to level 10"`` or ``"Reach the top of the Writer career branch"`` or ``"Build a SOULMATE relationship with another Sim"`` or ``"Complete the Renaissance Sim aspiration"`` or ``"Build a 50,000 simoleon house with a CONFIDENT emotion focus"`` or ``"Experience the MORTIFIED emotion"`` or ``"Collect 15 different Space Rocks"``
 
 Features comprehensive objectives covering skills, careers, aspirations, collections, emotions, and creative building challenges from both base game and expansion pack content. Includes expanded career paths, additional skills, new aspirations, and exclusive collections from DLC packs. The module automatically adapts objectives based on available content, ensuring players can engage with their full Sims 4 library.
+
+### The Binding of Isaac: Rebirth
+A massive roguelike module covering the extensive content of Rebirth and its DLCs (Afterbirth, Afterbirth+, and Repentance).
+
+Core Categories: ``Character Victories``, ``Boss Defeats``, ``Challenge Runs``, ``Item Collection``, ``Transformations``, ``Specific Achievements``
+
+Sample Objectives: ``"Defeat The Lamb as The Lost"`` or ``"Complete Challenge #34 (Ultra Hard)"`` or ``"Collect both Knife Pieces and defeat Mother as Tainted Jacob in a single run"``
+
+Features:
+- **Full DLC Support**: Automatically adjusts objectives based on owned DLCs (Afterbirth, Afterbirth+, Repentance)
+- **Character Roster**: Supports all 34 characters including Tainted versions
+- **Deep Integration**: Objectives for specific bosses, rare rooms, transformations, and item sets
+- **Hardcore Constraints**: Optional challenges for Hard Mode, specific seeds, or item restrictions
+
+### The Binding of Isaac: Wrath of the Lamb
+A module for the original Flash game, covering the base game, Wrath of the Lamb expansion, and the Eternal Edition update.
+
+Core Categories: ``Character Victories``, ``Boss Defeats``, ``Challenge Runs``, ``Eternal Edition Challenges``
+
+Sample Objectives: ``"Defeat Satan as Judas"`` or ``"Complete Challenge #6 (The Doctors Revenge!)"`` or ``"Defeat Mom in Hard Mode (Eternal Edition)"``
+
+Features:
+- **Classic Content**: Covers the original game's unique mechanics and balance
+- **Expansion Support**: Toggles for Wrath of the Lamb and Eternal Edition content
+- **Eternal Challenges**: Specific objectives for the difficult Eternal Edition Hard Mode
+- **Character & Boss Tracking**: Objectives for all original characters and bosses
