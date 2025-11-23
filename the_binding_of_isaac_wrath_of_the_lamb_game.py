@@ -40,6 +40,31 @@ class TheBindingOfIsaacWrathOfTheLambGame(Game):
                 label="Cannot use any Cards",
                 data=dict(),
             ),
+            # Additional challenge/constraint options
+            GameObjectiveTemplate(
+                label="Change your active item every time you're given one",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Never buy the right-hand Devil Deal",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Always take a Devil Deal unless it would kill you",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Enter at least 3 Curse Rooms in a run",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Complete a Boss Challenge Room",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Pick up and eat at least 4 different pills",
+                data=dict(),
+            ),
         ]
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
