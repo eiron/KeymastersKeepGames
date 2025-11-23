@@ -37,7 +37,7 @@ class BrotatoGame(Game):
 
     @property
     def include_dlc_characters(self) -> Toggle:
-        return self.include_dlc_characters
+        return self.options.brotato_include_dlc_characters
 
     def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
         return [
