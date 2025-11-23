@@ -5,7 +5,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import OptionSet
+from Options import OptionSet, DefaultOnToggle
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -17,6 +17,8 @@ from ..enums import KeymastersKeepGamePlatforms
 class TheBindingOfIsaacRebirthArchipelagoOptions:
     the_binding_of_isaac_rebirth_dlc_owned: TheBindingOfIsaacRebirthDLCsOwned
     the_binding_of_isaac_rebirth_characters: TheBindingOfIsaacRebirthCharacters
+    the_binding_of_isaac_rebirth_modded_characters: TheBindingOfIsaacRebirthModdedCharacters
+    the_binding_of_isaac_rebirth_include_difficult_seeds: TheBindingOfIsaacRebirthIncludeDifficultSeeds
 
 
 class TheBindingOfIsaacRebirthGame(Game):
@@ -38,7 +40,7 @@ class TheBindingOfIsaacRebirthGame(Game):
     options_cls = TheBindingOfIsaacRebirthArchipelagoOptions
 
     def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
-        return [
+        templates: List[GameObjectiveTemplate] = [
             GameObjectiveTemplate(
                 label="Play on Hard Mode (or Greedier, if applicable)",
                 data=dict(),
@@ -61,7 +63,117 @@ class TheBindingOfIsaacRebirthGame(Game):
                 label="Cannot use any Runes",
                 data=dict(),
             ),
+            # Additional player-specified challenge constraints
+            GameObjectiveTemplate(
+                label="No Devil Deals; only Angel Deals allowed",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="No Angel Deals; only Devil Deals allowed",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Skip two Item Room items (leave them uncollected)",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Skip one Boss Room item",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Use every bomb you own before descending each floor (except Golden Bombs)",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Only use 1 pill/card/rune per floor (no Blank Card / Placebo / Clear Rune)",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Using the debug console, spawn in Bob's Brain and skip your first Item Room",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Using the debug console, spawn in ITEM and skip your first Item Room",
+                data={
+                    "ITEM": (self.items, 1),
+                },
+            ),
+            GameObjectiveTemplate(
+                label="Bomb yourself with the first bomb you receive",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Enter every Cursed Room",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Find at least two Secret Rooms",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Get at least one Angel Deal",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Only take Angel Deals; if you enter an Angel Room you must bomb the Angel Statue (do not enter without a way to blow it up)",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Spend every coin, bomb, and key you have at a beggar when you see them",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Change your trinket every time you find a new one (if you can afford one in a shop, you must buy it)",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Change your active item every time you find a new one",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Skip an item room and enter the first cursed room you see if it will not kill you immediately to do so",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Spend as much money as you can on each floor",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Install and use the Blood Shoots Upward mod",
+                data=dict(),
+            ),
         ]
+
+        # Repentance-specific constraints (only added if Repentance is owned)
+        if self.has_repentance:
+            templates.extend([
+                GameObjectiveTemplate(
+                    label="Open at least 7 Secret, Super Secret, or Ultra Secret rooms",
+                    data=dict(),
+                ),
+                GameObjectiveTemplate(
+                    label="Visit every room in the Mirror Dimension",
+                    data=dict(),
+                ),
+                GameObjectiveTemplate(
+                    label="Get both Angel key pieces (Mega Satan)",
+                    data=dict(),
+                ),
+                GameObjectiveTemplate(
+                    label="Always take the '?' item in Alt Path Treasure Rooms; take at least two in the run",
+                    data=dict(),
+                ),
+                GameObjectiveTemplate(
+                    label="Collect both Knife Pieces (Alt Path)",
+                    data=dict(),
+                ),
+                GameObjectiveTemplate(
+                    label="Take every unknown pill at least once (ignoring repeats of the '???' pill)",
+                    data=dict(),
+                ),
+            ])
+
+        return templates
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
         templates: List[GameObjectiveTemplate] = [
@@ -495,6 +607,10 @@ class TheBindingOfIsaacRebirthGame(Game):
         return "Repentance" in self.dlc_owned
 
     @property
+    def include_difficult_seeds(self) -> bool:
+        return self.archipelago_options.the_binding_of_isaac_rebirth_include_difficult_seeds.value
+
+    @property
     def character_pool(self) -> List[str]:
         return sorted(self.archipelago_options.the_binding_of_isaac_rebirth_characters.value)
 
@@ -574,6 +690,10 @@ class TheBindingOfIsaacRebirthGame(Game):
             for character in self.characters_repentance:
                 if character in character_pool:
                     characters.append(character)
+
+        # Add modded characters
+        if self.the_binding_of_isaac_rebirth_modded_characters:
+            characters.extend(self.the_binding_of_isaac_rebirth_modded_characters)
 
         return sorted(characters)
 
@@ -886,40 +1006,119 @@ class TheBindingOfIsaacRebirthGame(Game):
 
     @functools.cached_property
     def seeds_base(self) -> List[str]:
+        # Safe Rebirth-era special seeds (exclude game-looping like BASE MENT)
         return [
-            "KEEP AWAY",
-            "FREE 2PAY",
-            "HARD HARD",
-            "H0H0 H0H0",
-            "MED1 C1NE",
-            "FACE D0WN",
-            "CAM0 DR0P",
-            "CAM0 F0ES",
+            "KEEP AWAY",  # Pickups mimic Isaac's movements
+            "FREE 2PAY",  # Isaac starts with 69 coins but must buy all items/consumables
+            "H0H0 H0H0",  # Isaac wears a Christmas hat
+            "MED1 C1NE",  # All pill names/descriptions show ???
+            "FACE D0WN",  # All card names/descriptions show ???
+            "CAM0 DR0P",  # Pickups blend into the ground
+            "CAM0 F0ES",  # All enemies blend into the ground
+            "CAM0 K1DD",  # Isaac blends into the ground
+            "WH0A WHAT",  # Everything (Isaac, enemies, pickups, items) blends into ground
+            "FART SNDS",  # All sound effects replaced with farts
+            "B00B T00B",  # Cathode ray tube filter
+            "DYSL EX1A",  # All in-game text is rearranged
+            "KEEP TRAK",  # Removes the HUD entirely
+            "CHAM P10N",  # All enemies turn into champions
+            "1MN0 B0DY",  # Isaac becomes completely invisible
+            "BL1N DEYE",  # All enemies become completely invisible
+            "THEB LANK",  # Isaac has no face
+            "T0PH EAVY",  # Isaac's head is large
+            "T1NY D0ME",  # Isaac's head is small
+            "PTCH BLCK",  # Isaac and tears turn completely black
+            "TEAR GL0W",  # Isaac's tears glow
+            "BL00 00DY",  # Makes much more blood appear after enemies die
+            "DRAW KCAB",  # All movement and firing keys are reversed
+            "C0CK FGHT",  # All enemies are permanently charmed
+            "C0NF ETT1",  # All enemies are permanently confused
+            "FEAR M1NT",  # All enemies are permanently scared
+            "FRA1 DN0T",  # Every few seconds, all enemies become scared
+            "CLST RPH0",  # All enemies are permanently charmed and scared
+            "SL0W 4ME2",  # Music speed affected by Isaac's walking speed
+            "HART BEAT",  # Music speed affected by Isaac's health
+            "ANDA NTE",  # Music is slowed down
+            "LARG HET0",  # Music is significantly slowed down
+            "ALLE GR0",  # Music is sped up
+            "PRES T0",  # Music is significantly sped up
+        ]
+
+    @functools.cached_property
+    def seeds_base_difficult(self) -> List[str]:
+        # High-difficulty Rebirth seeds (damage modifiers, time limits)
+        return [
+            "HARD HARD",  # Isaac takes a full heart of damage from all sources
+            "BRTL B0NS",  # Isaac takes twelve hearts of damage from all sources
+            "D0NT ST0P",  # Isaac takes damage if he stops moving
+            "THEG H0ST",  # Every 45s, timer ticks; after 5s, Isaac takes 1/2 heart damage (1 heart in Ch4+)
+            "30M1 N1TS",  # 30 minute time limit; damage every second after 30:00
         ]
 
     @functools.cached_property
     def seeds_afterbirth(self) -> List[str]:
+        # Afterbirth & later (those marked "except in Rebirth"), excluding BASE MENT
         return [
-            "G0NE S00N",
-            "N0RE TVRN",
-            "DARK NESS",
-            "LABY RNTH",
-            "L0ST",
-            "VNKN 0WN",
-            "MAZE",
-            "BL1N D",
-            "1CES KATE",
-            "BRAV ERY",
-            "C0WR D1CE",
-            "DRAW KCAB",
-            "AX1S ALGN",
+            "G0NE S00N",  # Pickups quickly fade (pedestal items, shops, devil deals, boss chest)
+            "DARK NESS",  # Permanent Curse of Darkness
+            "LABY RNTH",  # Permanent Curse of the Labyrinth
+            "L0ST",  # Permanent Curse of the Lost
+            "VNKN 0WN",  # Permanent Curse of the Unknown
+            "MAZE",  # Permanent Curse of the Maze
+            "BL1N D",  # Permanent Curse of the Blind
+            "CVRS ED",  # Permanent Curse of the Cursed
+            "N1TE L1TE",  # Immunity to Curse of Darkness
+            "THRE AD",  # Immunity to Curse of the Labyrinth
+            "F0VN D",  # Immunity to Curse of the Lost
+            "N0W1 KN0W",  # Immunity to Curse of the Unknown
+            "PATH F1ND",  # Immunity to Curse of the Maze
+            "BRA1 LLE",  # Immunity to Curse of the Blind
+            "BLCK CNDL",  # Immunity to all curses
+            "AX1S ALGN",  # Isaac cannot move diagonally
+        ]
+
+    @functools.cached_property
+    def seeds_afterbirth_difficult(self) -> List[str]:
+        # High-difficulty Afterbirth seeds (control modifiers, boss room locks)
+        return [
+            "N0RE TVRN",  # Boss rooms lock Isaac in (like Mom fight); Blue Womb bug!
+            "1CES KATE",  # Ice physics; makes ground slippery (dangerous with purple champions)
+            "BRAV ERY",  # Isaac auto-fires tears in movement direction; removes manual firing
+            "C0WR D1CE",  # Isaac auto-fires tears opposite to movement; removes manual firing
+        ]
+
+    @functools.cached_property
+    def seeds_afterbirth_plus(self) -> List[str]:
+        # Seeds introduced in Afterbirth+
+        return [
+            "ALM1 GHTY",  # Dog mode; Isaac is invincible
+            "K1DS M0DE",  # Co-op babies are invincible
+        ]
+
+    @functools.cached_property
+    def seeds_repentance(self) -> List[str]:
+        # Repentance-only seeds
+        return [
+            "SVPE RH0T",  # SuperHot; time runs extremely slowly when Isaac not moving
+            "M0DE SEVN",  # Permanent Retro-Vision effect (Mode 7 pixelation)
+            "GFVE LLLL",  # G Fuel!; spawns G FUEL! item each floor with gamer effects
         ]
 
     def seeds(self) -> List[str]:
         seeds: List[str] = self.seeds_base[:]
 
+        if self.include_difficult_seeds:
+            seeds.extend(self.seeds_base_difficult)
+
         if self.has_afterbirth:
             seeds.extend(self.seeds_afterbirth)
+            if self.include_difficult_seeds:
+                seeds.extend(self.seeds_afterbirth_difficult)
+
+        if self.has_afterbirth_plus:
+            seeds.extend(self.seeds_afterbirth_plus)
+        if self.has_repentance:
+            seeds.extend(self.seeds_repentance)
 
         return seeds
 
@@ -1750,3 +1949,21 @@ class TheBindingOfIsaacRebirthCharacters(OptionSet):
     ]
 
     default = valid_keys
+
+
+class TheBindingOfIsaacRebirthModdedCharacters(OptionSet):
+    """
+    Add custom modded characters to the character pool for objectives.
+    Enter any modded character names you have installed (e.g., Fiend, Samael, etc.).
+    """
+
+    display_name = "The Binding of Isaac: Rebirth Modded Characters"
+
+
+class TheBindingOfIsaacRebirthIncludeDifficultSeeds(DefaultOnToggle):
+    """
+    Include high-difficulty special seeds (e.g., HARD HARD, N0RE TVRN) in seed selection pool.
+    These seeds add challenging modifiers like increased damage taken or locked boss rooms.
+    """
+
+    display_name = "The Binding of Isaac: Rebirth Include Difficult Seeds"
