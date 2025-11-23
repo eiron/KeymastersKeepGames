@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 import functools
+import random
 from os import environ
 import requests
 from typing import List, Set, Dict
 
 from dataclasses import dataclass
 
-from Options import NamedRange, OptionSet, FreeText, Range
+from Options import NamedRange, OptionSet, FreeText, Range, DefaultOnToggle
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -21,6 +22,7 @@ class SteamAchievementsArchipelagoOptions:
     steam_achievements_excluded_games: SteamAchievementsExcludedGames
     steam_achievements_percentage_min: SteamAchievementsPercentageMin
     steam_achievements_percentage_max: SteamAchievementsPercentageMax
+    steam_achievements_include_specific_achievements: SteamAchievementsIncludeSpecificAchievements
 
 class SteamAchievementsGame(Game):
     name = "Steam Achievements"
@@ -28,8 +30,13 @@ class SteamAchievementsGame(Game):
     is_adult_only_or_unrated = False
     options_cls = SteamAchievementsArchipelagoOptions
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._cached_specific_game = None
+        self._cached_locked_achievements = None
+
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
-        return [
+        templates = [
             GameObjectiveTemplate(
                 label="Beat STEAM_GAME_NAME",
                 data={
@@ -60,12 +67,27 @@ class SteamAchievementsGame(Game):
             ),
         ]
 
-    def games(self) -> List[str]:
+        if self.archipelago_options.steam_achievements_include_specific_achievements.value:
+            templates.append(
+                GameObjectiveTemplate(
+                    label="Unlock the achievement 'ACHIEVEMENT_NAME' in SPECIFIC_GAME",
+                    data={
+                        "ACHIEVEMENT_NAME": (self.specific_game_achievements, 1),
+                        "SPECIFIC_GAME": (self.specific_game_name, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=5,
+                )
+            )
+            
+        return templates
+
+    def _get_eligible_games_data(self) -> List[Dict[str, any]]:
         min_time_played = self.archipelago_options.steam_achievements_min_time_played.value
         max_time_played = self.archipelago_options.steam_achievements_max_time_played.value
         steam_id = self.archipelago_options.steam_achievements_steam_id.value
         
-        # Reuse the steam_library holder to fetch games
         try:
             all_games = steam_library.games(steam_id)
         except Exception as e:
@@ -73,25 +95,56 @@ class SteamAchievementsGame(Game):
             return []
         
         filtered_games = []
+        excluded = self.excluded_games()
+        
         for game in all_games:
-            # Filter by playtime
             if game.get("playtime_forever", 0) < min_time_played:
                 continue
             if max_time_played != -1 and game.get("playtime_forever", 0) > max_time_played:
                 continue
             
-            # Filter excluded games
-            if game["name"] in self.excluded_games() or str(game["appid"]) in self.excluded_games():
+            if game["name"] in excluded or str(game["appid"]) in excluded:
                 continue
 
-            # Filter for achievements presence
-            # has_community_visible_stats is usually true for games with achievements/stats
             if not game.get("has_community_visible_stats", False):
                 continue
                 
-            filtered_games.append(game["name"])
+            filtered_games.append(game)
+        return filtered_games
+
+    def games(self) -> List[str]:
+        return sorted([g["name"] for g in self._get_eligible_games_data()])
+
+    def _get_random_game_with_achievements(self):
+        if self._cached_specific_game:
+            return self._cached_specific_game, self._cached_locked_achievements
             
-        return sorted(filtered_games)
+        eligible = self._get_eligible_games_data()
+        if not eligible:
+            return None, []
+            
+        # Shuffle eligible list to pick random ones
+        shuffled = eligible[:]
+        random.shuffle(shuffled)
+        
+        steam_id = self.archipelago_options.steam_achievements_steam_id.value
+        
+        for game in shuffled[:5]: # Try up to 5 games
+            achievements = steam_library.get_locked_achievements(steam_id, game["appid"])
+            if achievements:
+                self._cached_specific_game = game["name"]
+                self._cached_locked_achievements = achievements
+                return self._cached_specific_game, self._cached_locked_achievements
+                
+        return None, []
+
+    def specific_game_name(self) -> List[str]:
+        game, _ = self._get_random_game_with_achievements()
+        return [game] if game else []
+
+    def specific_game_achievements(self) -> List[str]:
+        _, achs = self._get_random_game_with_achievements()
+        return achs
 
     def excluded_games(self) -> Set[str]:
         return self.archipelago_options.steam_achievements_excluded_games.value
@@ -163,6 +216,12 @@ class SteamAchievementsPercentageMax(Range):
     range_start = 1
     range_end = 100
 
+class SteamAchievementsIncludeSpecificAchievements(DefaultOnToggle):
+    """
+    Include objectives to unlock specific achievements from a random game in your library.
+    """
+    display_name = "Steam Achievements Include Specific Achievements"
+
 class SteamLibraryHolder:
     @functools.lru_cache(maxsize=None)
     def games(self, steam_id) -> List[Dict[str, any]]:
@@ -182,4 +241,43 @@ class SteamLibraryHolder:
         games_data = steam_response.json().get("response", {}).get("games", [])
 
         return games_data
+
+    def get_locked_achievements(self, steam_id, app_id) -> List[str]:
+        key = environ.get("STEAM_API_KEY")
+        if not key:
+            return []
+        
+        # 1. Get Player Achievements
+        try:
+            resp = requests.get("https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1/",
+                                params={"key": key, "steamid": steam_id, "appid": app_id})
+            if resp.status_code != 200:
+                return []
+            data = resp.json()
+        except Exception:
+            return []
+
+        if not data.get("playerstats", {}).get("success"):
+            return []
+            
+        achievements = data["playerstats"].get("achievements", [])
+        locked_apinames = [a["apiname"] for a in achievements if a["achieved"] == 0]
+        
+        if not locked_apinames:
+            return []
+
+        # 2. Get Schema for Display Names
+        try:
+            resp = requests.get("https://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/",
+                                params={"key": key, "appid": app_id})
+            if resp.status_code != 200:
+                return locked_apinames
+            schema = resp.json()
+        except Exception:
+            return locked_apinames
+
+        available_stats = schema.get("game", {}).get("availableGameStats", {}).get("achievements", [])
+        name_map = {a["name"]: a["displayName"] for a in available_stats}
+        
+        return [name_map.get(api, api) for api in locked_apinames]
 steam_library = SteamLibraryHolder()
