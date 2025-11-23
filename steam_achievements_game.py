@@ -8,7 +8,7 @@ from typing import List, Set, Dict
 
 from dataclasses import dataclass
 
-from Options import NamedRange, OptionSet, FreeText, Range, DefaultOnToggle
+from Options import NamedRange, OptionSet, FreeText, Range, DefaultOnToggle, Toggle
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -23,6 +23,7 @@ class SteamAchievementsArchipelagoOptions:
     steam_achievements_percentage_min: SteamAchievementsPercentageMin
     steam_achievements_percentage_max: SteamAchievementsPercentageMax
     steam_achievements_include_specific_achievements: SteamAchievementsIncludeSpecificAchievements
+    steam_achievements_include_hidden_achievements: SteamAchievementsIncludeHiddenAchievements
 
 class SteamAchievementsGame(Game):
     name = "Steam Achievements"
@@ -128,9 +129,10 @@ class SteamAchievementsGame(Game):
         random.shuffle(shuffled)
         
         steam_id = self.archipelago_options.steam_achievements_steam_id.value
+        include_hidden = self.archipelago_options.steam_achievements_include_hidden_achievements.value
         
         for game in shuffled[:5]: # Try up to 5 games
-            achievements = steam_library.get_locked_achievements(steam_id, game["appid"])
+            achievements = steam_library.get_locked_achievements(steam_id, game["appid"], include_hidden)
             if achievements:
                 self._cached_specific_game = game["name"]
                 self._cached_locked_achievements = achievements
@@ -222,6 +224,12 @@ class SteamAchievementsIncludeSpecificAchievements(DefaultOnToggle):
     """
     display_name = "Steam Achievements Include Specific Achievements"
 
+class SteamAchievementsIncludeHiddenAchievements(Toggle):
+    """
+    Include hidden achievements when selecting specific achievements.
+    """
+    display_name = "Steam Achievements Include Hidden Achievements"
+
 class SteamLibraryHolder:
     @functools.lru_cache(maxsize=None)
     def games(self, steam_id) -> List[Dict[str, any]]:
@@ -242,7 +250,7 @@ class SteamLibraryHolder:
 
         return games_data
 
-    def get_locked_achievements(self, steam_id, app_id) -> List[str]:
+    def get_locked_achievements(self, steam_id, app_id, include_hidden=True) -> List[str]:
         key = environ.get("STEAM_API_KEY")
         if not key:
             return []
@@ -277,7 +285,12 @@ class SteamLibraryHolder:
             return locked_apinames
 
         available_stats = schema.get("game", {}).get("availableGameStats", {}).get("achievements", [])
-        name_map = {a["name"]: a["displayName"] for a in available_stats}
         
-        return [name_map.get(api, api) for api in locked_apinames]
+        name_map = {}
+        for a in available_stats:
+            if not include_hidden and a.get("hidden", 0) == 1:
+                continue
+            name_map[a["name"]] = a["displayName"]
+        
+        return [name_map.get(api, api) for api in locked_apinames if include_hidden or api in name_map]
 steam_library = SteamLibraryHolder()
