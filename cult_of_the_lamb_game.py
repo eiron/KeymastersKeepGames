@@ -61,6 +61,42 @@ class CultOfTheLambGame(Game):
                 label="Complete this objective with FOLLOWER_COUNT or more followers",
                 data={"FOLLOWER_COUNT": (self.follower_count_requirements, 1)},
             ),
+            GameObjectiveTemplate(
+                label="Skip at least 2 Tarot Readings during a Crusade",
+                data={},
+            ),
+            GameObjectiveTemplate(
+                label="Enter all of the rooms during a single Crusade loop",
+                data={},
+            ),
+            GameObjectiveTemplate(
+                label="Only change your starting weapon once",
+                data={},
+            ),
+            GameObjectiveTemplate(
+                label="Only change your starting curse once",
+                data={},
+            ),
+            GameObjectiveTemplate(
+                label="Do not use a roll for a single Crusade loop",
+                data={},
+            ),
+            GameObjectiveTemplate(
+                label="Recruit all possible followers during a single Crusade loop",
+                data={},
+            ),
+            GameObjectiveTemplate(
+                label="Skip the Pool of Hearts once if possible",
+                data={},
+            ),
+            GameObjectiveTemplate(
+                label="Enter a Random room at least once if possible",
+                data={},
+            ),
+            GameObjectiveTemplate(
+                label="Only use a curse once per room (does not apply to Boss fights)",
+                data={},
+            ),
         ])
         
         return constraints
@@ -277,6 +313,13 @@ class CultOfTheLambGame(Game):
                     data={"MINI_BOSS": (self.mini_bosses, 1)},
                     is_time_consuming=False,
                     is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Defeat MINI_BOSS",
+                    data={"MINI_BOSS": (self.mini_bosses, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
