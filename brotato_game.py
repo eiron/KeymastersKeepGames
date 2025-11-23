@@ -35,6 +35,10 @@ class BrotatoGame(Game):
 
     options_cls = BrotatoArchipelagoOptions
 
+    @property
+    def include_dlc_characters(self) -> Toggle:
+        return self.options.brotato_include_dlc_characters
+
     def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
         return [
             GameObjectiveTemplate(
@@ -256,7 +260,7 @@ class BrotatoGame(Game):
 
     def characters(self) -> List[str]:
         chars = self.characters_base()
-        if self.brotato_include_dlc_characters:
+        if self.include_dlc_characters:
             chars += self.characters_dlc()
         return chars
 
