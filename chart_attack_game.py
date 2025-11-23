@@ -186,7 +186,7 @@ class ChartAttackGame(Game):
             GameObjectiveTemplate(
                 label="CHART_AND_POSITION",
                 data={"CHART_AND_POSITION": (choices, 1)},
-                is_time_consuming=False,
+                is_time_consuming=True,
                 is_difficult=False,
                 weight=3,
             )
