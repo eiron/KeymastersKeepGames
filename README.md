@@ -354,6 +354,104 @@ This includes options for customizing film selections, TV show selections, and t
 
 ## Individual Game Modules
 
+### Recent Additions & Changes (Nov 2025)
+The following modules and systemic improvements were recently added and standardized:
+
+• Brotato: New arena roguelite module with objectives across character unlocks, weapon synergy runs, danger level completions, boss wave clears, economy scaling, and endless experimentation.
+• Circadian Dice: Dice-building roguelike objectives for scenario clears, class mastery, relic unlocks, high-score thresholds, challenge modifiers, and perfect-turn efficiency goals.
+• Crypt of the NecroDancer: Rhythm roguelike module covering zone progression, character victories, boss defeats, speed/score cadence challenges, item/shop interactions, mode variants, and DLC content (Amplified, Synchrony, Hatsune Miku, Shovel Knight) gated behind new Toggle options.
+• Chess.com Integration: Competitive chess objectives including daily puzzle streaks, rapid/blitz/bullet rating milestones, accuracy goals, opening exploration, time control diversity, and win-condition variety.
+• Caves of Qud: Deep science-fantasy roguelike coverage for mutation acquisition, faction reputation, exploration tiers, artifact identification, survival milestones, and legendary creature hunts. Limb dismemberment moved from objective list into an optional constraint for cleaner generation.
+• Binding of Isaac (Rebirth) Modded Characters: Added an OptionSet allowing user-defined modded characters that integrate seamlessly into character victory and achievement templates.
+• Toggle Standardization: Older DefaultOnToggle usages converted to consistent Toggle patterns (e.g., Brotato DLC, NecroDancer DLC) with property access for clarity (`self.include_amplified_dlc.value`).
+
+These changes improve extensibility (user-supplied characters), clarity (uniform toggle access), and accuracy (constraint vs objective classification).
+
+### Brotato
+An arena wave-based roguelite module focused on weapon builds, character diversity, scaling economy, and escalating enemy waves.
+
+Core Categories: ``Character Unlocks``, ``Weapon Synergy Runs``, ``Wave Survival``, ``Boss & Elite Clears``, ``Economic Scaling``, ``Stat Thresholds``, ``Endless / Danger Levels``
+
+Sample Objectives: ``"Clear Danger Level 5 with Ghost character"`` or ``"Reach 200% attack speed before wave 15"`` or ``"Defeat an Elite using only elemental weapons"``
+
+Features:
+- Build Diversity: Objectives forcing single-damage-type, hybrid, or specific synergy builds
+- Difficulty Scaling: Targets for Danger level completions and post-Danger endless survival
+- Resource Economy: Harvest/material accumulation, shop reroll efficiency, selective upgrade paths
+- Character Progression: Unlock & mastery goals for base and secret characters
+- Boss Pressure: Timed boss wave clears, elite exterminations under constraints (no lifesteal, limited armor)
+- Optional Constraints: Item blacklists, stat caps, shop reroll limits for hardcore runs
+
+### Circadian Dice
+Dice-building roguelike module emphasizing scenario strategy, face crafting, relic combinations, and long-term progression.
+
+Core Categories: ``Scenario Clears``, ``Class Mastery``, ``Relic Unlocks``, ``High Score Targets``, ``Status / Combo Challenges``, ``Perfect / Efficient Turns``
+
+Sample Objectives: ``"Clear Forest scenario with Alchemist at 3+ relics"`` or ``"Reach 25,000 score in Temple run"`` or ``"Win a scenario without taking damage"``
+
+Features:
+- Scenario Variety: Objectives tied to specific environments & escalating difficulty tiers
+- Class Progression: Mastery levels, ability utilization counts, class-specific relic synergy goals
+- Dice Engineering: Face craft counts, combo activation (multi-status, multi-resource) objectives
+- Scoring Milestones: Threshold goals encouraging optimization & risk management
+- Efficiency Challenges: Win with limited rerolls, single die upgrades, or turn count caps
+- Relic & Unlock Tracking: Acquire or utilize specific relic sets under constraint conditions
+
+### Crypt of the NecroDancer
+Rhythm-based roguelike module spanning zone clears, character-specific completion, boss mastery, cadence/rhythm challenges, and DLC expansions.
+
+Core Categories: ``Zone Progression``, ``Character Victories``, ``Boss Defeats``, ``Rhythm / Cadence Challenges``, ``Item / Shop Interaction``, ``Mode Variants``, ``DLC Content``
+
+Sample Objectives: ``"Clear Zone 4 with Cadence without missing a beat"`` or ``"Defeat Dead Ringer using only shovel damage (Monk)"`` or ``"Complete All Zones with Hatsune Miku"``
+
+Features:
+- DLC Toggles: Amplified, Synchrony, Hatsune Miku, Shovel Knight gated behind consistent toggles
+- Character Depth: Base + DLC + special guest characters with tailored victory/constraint templates
+- Rhythm Mastery: Beat streaks, no-miss zone clears, speed (real-time & beat count) challenges
+- Boss Variants: Diverse kill-condition goals (weapon restriction, environmental kills, phase manipulation)
+- Item Economy: Shop purchase caps, minimal gold runs, single-gear-slot challenges
+- Mode Variety: All Zones, story progression, seeded/speed modes, shrine interactions
+- Structured Difficulty: Time-consuming vs non-time-consuming labeling for balanced selection
+
+### Chess.com Integration
+Competitive chess module generating goals from live, rapid, blitz, bullet, puzzle, and thematic training activities via your Chess.com profile metrics.
+
+Core Categories: ``Rating Milestones``, ``Time Control Diversity``, ``Opening Exploration``, ``Puzzle Streaks``, ``Accuracy / Quality Goals``, ``Win Condition Variety``
+
+Sample Objectives: ``"Achieve 5-day puzzle streak"`` or ``"Reach 1450 Blitz rating"`` or ``"Play 10 rapid games using the French Defense as Black"``
+
+Features:
+- Multi Time Control: Distinct rating & volume targets (Bullet/Blitz/Rapid/Daily)
+- Opening Coverage: Play counts / result thresholds for chosen ECO families
+- Puzzle & Tactics: Streak length, highscore improvements, accuracy percentage goals
+- Accuracy Metrics: Average centipawn loss, minimum game accuracy thresholds
+- Win Condition Diversity: Checkmate patterns, endgame technique completions
+- Improvement Tracking: Rating delta objectives over session intervals
+
+### Caves of Qud
+Science-fantasy roguelike module capturing the mutation-driven exploration, faction dynamics, and emergent survival of Qud.
+
+Core Categories: ``Mutation Acquisition``, ``Exploration & Biomes``, ``Faction Reputation``, ``Artifact Identification``, ``Survival Milestones``, ``Legend Hunts``, ``Build Constraints``
+
+Sample Objectives: ``"Acquire 4 new mutations without visiting a Grit Gate vendor"`` or ``"Reach reputation Trusted with the Mechanimists"`` or ``"Identify 12 artifacts in one run"``
+
+Features:
+- Mutation Depth: New mutation thresholds, specific rare mutation acquisition, synergy limitations
+- Faction Systems: Reputation tier goals, diplomacy constraints, multi-faction neutrality runs
+- Biome Exploration: Layered region progression & landmark discovery counts
+- Artifact Mastery: Identification streaks, tinkering/crafting milestones
+- Survival Challenges: Food/water scarcity, limb loss persistence, quick rebuild constraints
+- Legendary Hunts: Defeat specific named creatures under gear or turn limits
+- Constraint Reclassification: Limb dismemberment now an optional constraint (not objective) for less repetitive generation
+
+### Binding of Isaac (Rebirth) – Modded Character Support
+Extended character victory objectives now include user-specified modded characters via a new OptionSet. Any names added populate victory, boss defeat, and achievement templates automatically, preserving weighting and difficulty tagging.
+
+Benefits:
+- Player Freedom: Drop in custom characters without code changes
+- Seamless Integration: Uses same provider logic as official roster
+- Future-Proof: Scales with community content and personal mods
+
 ### American Truck Simulator
 A trucking simulation module covering deliveries, exploration, and business management across the vast landscapes of the USA.
 
