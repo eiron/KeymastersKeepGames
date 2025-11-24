@@ -85,6 +85,35 @@ class CavesOfQudGame(Game):
                 label="Dismember and eat one of your own limbs before leaving the starting area",
                 data=dict(),
             ),
+            GameObjectiveTemplate(
+                label="Take the Evil Twin defect during character creation and kill them",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Take the Nerve Poppy defect during character creation",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Take the Space-Time Vortex mutation and enter it before leaving your starting village",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="While in your starting village, use the wish console to infect yourself with glowcrust",
+                data=dict(),
+            ),
+            GameObjectiveTemplate(
+                label="Manifest morphotype MORPHOTYPE at character creation",
+                data={
+                    "MORPHOTYPE": (self.morphotypes, 1),
+                },
+            ),
+            GameObjectiveTemplate(
+                label="Start with DEFECT and survive to level SURVIVOR_LEVEL",
+                data={
+                    "DEFECT": (self.defects, 1),
+                    "SURVIVOR_LEVEL": (self.mutation_survival_levels, 1),
+                },
+            ),
         ]
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
@@ -212,13 +241,6 @@ class CavesOfQudGame(Game):
                 weight=1,
             ),
             GameObjectiveTemplate(
-                label="Infect yourself with glowcrust fungi",
-                data=dict(),
-                is_time_consuming=False,
-                is_difficult=True,
-                weight=1,
-            ),
-            GameObjectiveTemplate(
                 label="Break through a solid wall",
                 data=dict(),
                 is_time_consuming=False,
@@ -254,38 +276,10 @@ class CavesOfQudGame(Game):
                 weight=1,
             ),
             GameObjectiveTemplate(
-                label="Take the Evil Twin defect during character creation and kill them",
-                data=dict(),
-                is_time_consuming=True,
-                is_difficult=True,
-                weight=1,
-            ),
-            GameObjectiveTemplate(
-                label="Take the Nerve Poppy defect during character creation",
-                data=dict(),
-                is_time_consuming=False,
-                is_difficult=False,
-                weight=1,
-            ),
-            GameObjectiveTemplate(
-                label="Take the Space-Time Vortex mutation and enter it before leaving your starting village",
-                data=dict(),
-                is_time_consuming=False,
-                is_difficult=True,
-                weight=1,
-            ),
-            GameObjectiveTemplate(
                 label="Learn Trash Divining and gain a secret from rifling through trash",
                 data=dict(),
                 is_time_consuming=True,
                 is_difficult=False,
-                weight=1,
-            ),
-            GameObjectiveTemplate(
-                label="While in your starting village, use the wish console to infect yourself with glowcrust",
-                data=dict(),
-                is_time_consuming=False,
-                is_difficult=True,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -300,36 +294,6 @@ class CavesOfQudGame(Game):
                 data={
                     "LEVEL": (self.mutation_target_levels, 1),
                     "MUTATION": (self.all_tracked_mutations, 1),
-                },
-                is_time_consuming=True,
-                is_difficult=True,
-                weight=1,
-            ),
-            # Mutation & defect oriented objectives
-            GameObjectiveTemplate(
-                label="Reach mutation level LEVEL on MUTATION",
-                data={
-                    "LEVEL": (self.mutation_target_levels, 1),
-                    "MUTATION": (self.all_tracked_mutations, 1),
-                },
-                is_time_consuming=True,
-                is_difficult=True,
-                weight=1,
-            ),
-            GameObjectiveTemplate(
-                label="Manifest morphotype MORPHOTYPE at character creation",
-                data={
-                    "MORPHOTYPE": (self.morphotypes, 1),
-                },
-                is_time_consuming=False,
-                is_difficult=False,
-                weight=2,
-            ),
-            GameObjectiveTemplate(
-                label="Start with DEFECT and survive to level SURVIVOR_LEVEL",
-                data={
-                    "DEFECT": (self.defects, 1),
-                    "SURVIVOR_LEVEL": (self.mutation_survival_levels, 1),
                 },
                 is_time_consuming=True,
                 is_difficult=True,
