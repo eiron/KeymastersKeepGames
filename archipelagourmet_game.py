@@ -921,7 +921,7 @@ class ArchipelagourmetGame(Game):
             "tamari",
             "tamarillo",
             "tamarind",
-            "tamgerine",
+            "tangerine",
             "tapenade",
             "tapioca",
             "tapioca flour",
