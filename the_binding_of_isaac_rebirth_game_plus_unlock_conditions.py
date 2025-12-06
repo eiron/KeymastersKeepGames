@@ -668,7 +668,6 @@ class TheBindingOfIsaacRebirthGame(Game):
             "Tainted Jacob",
         ]
 
-    @functools.cached_property
     def characters(self) -> List[str]:
         characters: List[str] = list()
         character_pool = self.character_pool
