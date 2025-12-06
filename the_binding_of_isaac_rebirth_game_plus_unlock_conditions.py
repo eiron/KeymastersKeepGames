@@ -692,8 +692,9 @@ class TheBindingOfIsaacRebirthGame(Game):
                     characters.append(character)
 
         # Add modded characters
-        if self.the_binding_of_isaac_rebirth_modded_characters:
-            characters.extend(self.the_binding_of_isaac_rebirth_modded_characters)
+        modded_characters = self.archipelago_options.the_binding_of_isaac_rebirth_modded_characters.value
+        if modded_characters:
+            characters.extend(modded_characters)
 
         return sorted(characters)
 
