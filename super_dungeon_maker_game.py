@@ -7,10 +7,10 @@ from dataclasses import dataclass
 
 from Options import OptionSet, Range, DefaultOnToggle
 
-from .game import Game
-from .game_objective_template import GameObjectiveTemplate
+from ..game import Game
+from ..game_objective_template import GameObjectiveTemplate
 
-from .enums import KeymastersKeepGamePlatforms
+from ..enums import KeymastersKeepGamePlatforms
 
 
 @dataclass
