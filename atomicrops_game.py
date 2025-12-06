@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle
+from Options import DefaultOnToggle
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -212,14 +212,14 @@ class AtomicropsGame(Game):
 
 
 # Archipelago Options
-class AtomicropsIncludeCharacterObjectives(Toggle):
+class AtomicropsIncludeCharacterObjectives(DefaultOnToggle):
     """
     Indicates whether to include objectives that require winning with specific characters.
     """
     display_name = "Atomicrops: Include Character Objectives"
 
 
-class AtomicropsIncludeYearObjectives(Toggle):
+class AtomicropsIncludeYearObjectives(DefaultOnToggle):
     """
     Indicates whether to include objectives that require playing on higher Years (difficulty).
     """
