@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle
+from Options import DefaultOnToggle
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -220,14 +220,14 @@ class BabaIsYouGame(Game):
 
 
 # Archipelago Options
-class BabaIsYouIncludeWorldObjectives(Toggle):
+class BabaIsYouIncludeWorldObjectives(DefaultOnToggle):
     """
     Indicates whether to include objectives that require completing levels in specific worlds.
     """
     display_name = "Baba Is You: Include World Objectives"
 
 
-class BabaIsYouIncludeTransformationObjectives(Toggle):
+class BabaIsYouIncludeTransformationObjectives(DefaultOnToggle):
     """
     Indicates whether to include objectives that require winning as specific characters.
     """

@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle
+from Options import DefaultOnToggle
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -288,7 +288,7 @@ class ApexLegendsGame(Game):
 
 
 # Archipelago Options
-class ApexLegendsIncludeLegendObjectives(Toggle):
+class ApexLegendsIncludeLegendObjectives(DefaultOnToggle):
     """
     Indicates whether to include objectives that require playing as specific Legends.
     """

@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle
+from Options import DefaultOnToggle
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -338,7 +338,7 @@ class BeyondTheLongNightGame(Game):
 
 
 # Archipelago Options
-class BeyondTheLongNightIncludeNPCObjectives(Toggle):
+class BeyondTheLongNightIncludeNPCObjectives(DefaultOnToggle):
     """Indicates whether to include objectives involving rescuing NPC villagers and their quests."""
     display_name = "Beyond the Long Night: Include NPC Objectives"
 
@@ -346,10 +346,10 @@ class BeyondTheLongNightIncludeChallengeObjectives(Toggle):
     """Indicates whether to include difficult challenge run objectives."""
     display_name = "Beyond the Long Night: Include Challenge Objectives"
 
-class BeyondTheLongNightIncludeUpgradeObjectives(Toggle):
+class BeyondTheLongNightIncludeUpgradeObjectives(DefaultOnToggle):
     """Indicates whether to include objectives related to unlocking or upgrading powers/meta progression."""
     display_name = "Beyond the Long Night: Include Upgrade Objectives"
 
-class BeyondTheLongNightIncludeHatObjectives(Toggle):
+class BeyondTheLongNightIncludeHatObjectives(DefaultOnToggle):
     """Indicates whether to include objectives that require wearing specific hats."""
     display_name = "Beyond the Long Night: Include Hat Objectives"

@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle
+from Options import DefaultOnToggle
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -219,7 +219,7 @@ class AstronarchIncludeAscensionObjectives(Toggle):
     display_name = "Astronarch: Include Ascension Objectives"
 
 
-class AstronarchIncludeHeroObjectives(Toggle):
+class AstronarchIncludeHeroObjectives(DefaultOnToggle):
     """
     Indicates whether to include objectives that require winning with specific heroes.
     """

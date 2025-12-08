@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle
+from Options import DefaultOnToggle
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -221,14 +221,14 @@ class BackpackHeroGame(Game):
 
 
 # Archipelago Options
-class BackpackHeroIncludeCharacterObjectives(Toggle):
+class BackpackHeroIncludeCharacterObjectives(DefaultOnToggle):
     """
     Indicates whether to include objectives that require winning with specific characters.
     """
     display_name = "Backpack Hero: Include Character Objectives"
 
 
-class BackpackHeroIncludeChallengeObjectives(Toggle):
+class BackpackHeroIncludeChallengeObjectives(DefaultOnToggle):
     """
     Indicates whether to include difficult challenge objectives.
     """

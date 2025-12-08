@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle
+from Options import DefaultOnToggle
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -286,7 +286,7 @@ class AlinaOfTheArenaGame(Game):
 
 
 # Archipelago Options
-class AlinaOfTheArenaIncludeClassObjectives(Toggle):
+class AlinaOfTheArenaIncludeClassObjectives(DefaultOnToggle):
     """
     Indicates whether to include objectives that require winning with specific classes.
     """
