@@ -99,11 +99,11 @@ class DateEverythingGame(Game):
                     weight=8,
                 ),
                 GameObjectiveTemplate(
-                    label="Navigate Wallace (Wall) and Florence (Floor) relationships without conflict",
-                    data={},
-                    is_time_consuming=False,
+                    label="Get all STRUCTURE_COUNT structural elements to LOVE status",
+                    data={"STRUCTURE_COUNT": (self.structure_counts, 1)},
+                    is_time_consuming=True,
                     is_difficult=True,
-                    weight=2,
+                    weight=4,
                 ),
             ])
 
@@ -121,37 +121,47 @@ class DateEverythingGame(Game):
                     weight=10,
                 ),
                 GameObjectiveTemplate(
-                    label="Complete FURNITURE_COUNT furniture relationships across different rooms",
-                    data={"FURNITURE_COUNT": (self.furniture_counts, 1)},
+                    label="Get FURNITURE_COUNT furniture items to RELATIONSHIP_OUTCOME status",
+                    data={
+                        "FURNITURE_COUNT": (self.furniture_counts, 1),
+                        "RELATIONSHIP_OUTCOME": (self.preferred_relationship_outcomes, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=6,
+                ),
+                GameObjectiveTemplate(
+                    label="Achieve a LOVE ending with FURNITURE_CHARACTER",
+                    data={"FURNITURE_CHARACTER": (self.furniture_characters, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
-                    label="Help Telly (Television) with entertainment choices and reach RELATIONSHIP_OUTCOME",
-                    data={"RELATIONSHIP_OUTCOME": (self.preferred_relationship_outcomes, 1)},
+                    label="Achieve any relationship status with ANY_CHARACTER",
+                    data={"ANY_CHARACTER": (self.all_characters, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=6,
+                    weight=10,
                 ),
                 GameObjectiveTemplate(
-                    label="Share a quick greeting with QUICK_CHARACTER",
-                    data={"QUICK_CHARACTER": (self.all_characters, 1)},
-                    is_time_consuming=False,
-                    is_difficult=False,
-                    weight=8,
-                ),
-                GameObjectiveTemplate(
-                    label="Give a simple compliment to EASY_CHARACTER",
-                    data={"EASY_CHARACTER": (self.all_characters, 1)},
+                    label="Find COLLECTABLE_COUNT collectables",
+                    data={"COLLECTABLE_COUNT": (self.collectable_counts, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=8,
                 ),
                 GameObjectiveTemplate(
-                    label="Ask BASIC_CHARACTER about their day",
-                    data={"BASIC_CHARACTER": (self.all_characters, 1)},
+                    label="Complete the seance ritual",
+                    data={},
                     is_time_consuming=False,
+                    is_difficult=False,
+                    weight=4,
+                ),
+                GameObjectiveTemplate(
+                    label="Obtain MATCH_COUNT matches (positive relationship endings)",
+                    data={"MATCH_COUNT": (self.match_counts, 1)},
+                    is_time_consuming=True,
                     is_difficult=False,
                     weight=6,
                 ),
@@ -171,23 +181,23 @@ class DateEverythingGame(Game):
                     weight=10,
                 ),
                 GameObjectiveTemplate(
-                    label="Help Stefan (Stove) with cooking tasks COOKING_COUNT times",
-                    data={"COOKING_COUNT": (self.cooking_counts, 1)},
+                    label="Achieve a relationship with APPLIANCE_COUNT different kitchen appliances",
+                    data={"APPLIANCE_COUNT": (self.appliance_counts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
+                    weight=6,
+                ),
+                GameObjectiveTemplate(
+                    label="Get all KITCHEN_COUNT kitchen appliances to a positive relationship status",
+                    data={"KITCHEN_COUNT": (self.appliance_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=True,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
-                    label="Get APPLIANCE_COUNT kitchen appliances to work together harmoniously",
-                    data={"APPLIANCE_COUNT": (self.appliance_counts, 1)},
-                    is_time_consuming=False,
-                    is_difficult=True,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Offer a friendly wave to KITCHEN_GREETING_CHARACTER",
-                    data={"KITCHEN_GREETING_CHARACTER": (self.kitchen_characters, 1)},
-                    is_time_consuming=False,
+                    label="Achieve RELATIONSHIP_OUTCOME with both Stefan (Stove) and another kitchen item",
+                    data={"RELATIONSHIP_OUTCOME": (self.preferred_relationship_outcomes, 1)},
+                    is_time_consuming=True,
                     is_difficult=False,
                     weight=4,
                 ),
@@ -207,18 +217,11 @@ class DateEverythingGame(Game):
                     weight=10,
                 ),
                 GameObjectiveTemplate(
-                    label="Navigate Jean-Loo (Toilet) and Johnny Splash (Shower) bathroom politics",
-                    data={},
-                    is_time_consuming=False,
+                    label="Achieve RELATIONSHIP_OUTCOME with both bathroom fixtures (Jean-Loo and Johnny Splash)",
+                    data={"RELATIONSHIP_OUTCOME": (self.preferred_relationship_outcomes, 1)},
+                    is_time_consuming=True,
                     is_difficult=True,
-                    weight=3,
-                ),
-                GameObjectiveTemplate(
-                    label="Smile at BATHROOM_CHARACTER in passing",
-                    data={"BATHROOM_CHARACTER": (self.bathroom_characters, 1)},
-                    is_time_consuming=False,
-                    is_difficult=False,
-                    weight=4,
+                    weight=5,
                 ),
                 GameObjectiveTemplate(
                     label="Get BATHROOM_COUNT bathroom items to RELATIONSHIP_OUTCOME status",
@@ -228,7 +231,14 @@ class DateEverythingGame(Game):
                     },
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=8,
+                    weight=6,
+                ),
+                GameObjectiveTemplate(
+                    label="Achieve any relationship outcome with all bathroom characters",
+                    data={},
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=3,
                 ),
             ])
 
@@ -246,18 +256,18 @@ class DateEverythingGame(Game):
                     weight=10,
                 ),
                 GameObjectiveTemplate(
-                    label="Resolve the Harper (Hamper) and Dirk (Dirty Laundry) relationship drama",
-                    data={},
-                    is_time_consuming=False,
-                    is_difficult=True,
-                    weight=3,
-                ),
-                GameObjectiveTemplate(
-                    label="Get Washford (Washing Machine) and Drysdale (Dryer) to work as a team",
+                    label="Achieve a positive relationship with both Washford (Washer) and Drysdale (Dryer)",
                     data={},
                     is_time_consuming=True,
                     is_difficult=True,
-                    weight=2,
+                    weight=5,
+                ),
+                GameObjectiveTemplate(
+                    label="Get all LAUNDRY_COUNT laundry items to a relationship outcome",
+                    data={"LAUNDRY_COUNT": (self.laundry_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=4,
                 ),
             ])
 
@@ -275,25 +285,28 @@ class DateEverythingGame(Game):
                     weight=10,
                 ),
                 GameObjectiveTemplate(
-                    label="Help Mac (Computer) with WORK_COUNT work projects",
-                    data={"WORK_COUNT": (self.work_counts, 1)},
+                    label="Achieve RELATIONSHIP_OUTCOME with Mac (Computer)",
+                    data={"RELATIONSHIP_OUTCOME": (self.preferred_relationship_outcomes, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
-                    label="Read Diana's (Diary) secrets to achieve RELATIONSHIP_OUTCOME",
+                    label="Achieve RELATIONSHIP_OUTCOME with Diana (Diary)",
                     data={"RELATIONSHIP_OUTCOME": (self.preferred_relationship_outcomes, 1)},
-                    is_time_consuming=False,
+                    is_time_consuming=True,
                     is_difficult=True,
-                    weight=6,
+                    weight=4,
                 ),
                 GameObjectiveTemplate(
-                    label="Give a thumbs up to OFFICE_CHARACTER",
-                    data={"OFFICE_CHARACTER": (self.office_bedroom_characters, 1)},
-                    is_time_consuming=False,
+                    label="Get BEDROOM_COUNT bedroom or office items to RELATIONSHIP_OUTCOME status",
+                    data={
+                        "BEDROOM_COUNT": (self.bedroom_counts, 1),
+                        "RELATIONSHIP_OUTCOME": (self.preferred_relationship_outcomes, 1)
+                    },
+                    is_time_consuming=True,
                     is_difficult=False,
-                    weight=4,
+                    weight=6,
                 ),
             ])
 
@@ -311,25 +324,28 @@ class DateEverythingGame(Game):
                     weight=10,
                 ),
                 GameObjectiveTemplate(
-                    label="Help Tony (Toolbox) fix REPAIR_COUNT household problems",
-                    data={"REPAIR_COUNT": (self.repair_counts, 1)},
+                    label="Achieve RELATIONSHIP_OUTCOME with Tony (Toolbox)",
+                    data={"RELATIONSHIP_OUTCOME": (self.preferred_relationship_outcomes, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
-                    label="Solve Vaughn Trapp's (Mouse Trap) puzzle challenges",
+                    label="Achieve positive relationship outcomes with Sophia (Safe) and Keith (Key)",
                     data={},
-                    is_time_consuming=False,
+                    is_time_consuming=True,
                     is_difficult=True,
-                    weight=2,
+                    weight=4,
                 ),
                 GameObjectiveTemplate(
-                    label="Unlock secrets from Sophia (Safe) and Keith (Key) partnership",
-                    data={},
-                    is_time_consuming=False,
-                    is_difficult=True,
-                    weight=2,
+                    label="Get MISC_COUNT miscellaneous items to RELATIONSHIP_OUTCOME status",
+                    data={
+                        "MISC_COUNT": (self.misc_counts, 1),
+                        "RELATIONSHIP_OUTCOME": (self.preferred_relationship_outcomes, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=5,
                 ),
             ])
 
@@ -347,32 +363,28 @@ class DateEverythingGame(Game):
                     weight=10,
                 ),
                 GameObjectiveTemplate(
-                    label="Transform TRANSFORMATION_TARGET into human form through deep connection",
-                    data={"TRANSFORMATION_TARGET": (self.transformation_targets, 1)},
+                    label="Achieve a SPECS_TARGET score in SPECS_CATEGORY",
+                    data={
+                        "SPECS_TARGET": (self.specs_score_targets, 1),
+                        "SPECS_CATEGORY": (self.specs_categories, 1)
+                    },
                     is_time_consuming=True,
                     is_difficult=True,
-                    weight=1,
+                    weight=6,
                 ),
                 GameObjectiveTemplate(
-                    label="Confront Doug (Existential Dread) and achieve personal growth",
+                    label="Confront Doug (Existential Dread) and achieve a relationship outcome",
                     data={},
                     is_time_consuming=False,
                     is_difficult=True,
-                    weight=2,
+                    weight=3,
                 ),
                 GameObjectiveTemplate(
-                    label="Survive NIGHTMARE_COUNT encounters with Nightmare and maintain sanity",
+                    label="Survive NIGHTMARE_COUNT encounters with Nightmare",
                     data={"NIGHTMARE_COUNT": (self.nightmare_counts, 1)},
                     is_time_consuming=True,
                     is_difficult=True,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Handle Reggie (Rejection) gracefully and learn from the experience",
-                    data={},
-                    is_time_consuming=False,
-                    is_difficult=True,
-                    weight=2,
+                    weight=3,
                 ),
             ])
 
@@ -390,11 +402,11 @@ class DateEverythingGame(Game):
                     weight=10,
                 ),
                 GameObjectiveTemplate(
-                    label="Navigate the luxury lifestyle of Lucinda Lavish (Deluxe Edition)",
-                    data={},
-                    is_time_consuming=False,
-                    is_difficult=True,
-                    weight=3,
+                    label="Realize (awaken) REALIZATION_COUNT dateable objects",
+                    data={"REALIZATION_COUNT": (self.realization_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=6,
                 ),
             ])
 
@@ -621,6 +633,34 @@ class DateEverythingGame(Game):
     @staticmethod
     def repair_counts() -> range:
         return range(2, 6, 1)
+
+    @staticmethod
+    def collectable_counts() -> List[str]:
+        return ["5", "10", "25", "50"]
+
+    @staticmethod
+    def match_counts() -> List[str]:
+        return ["3", "5", "7"]
+
+    @staticmethod
+    def laundry_counts() -> List[str]:
+        return ["3", "5", "7"]
+
+    @staticmethod
+    def bedroom_counts() -> List[str]:
+        return ["3", "5", "8"]
+
+    @staticmethod
+    def misc_counts() -> List[str]:
+        return ["3", "5", "7"]
+
+    @staticmethod
+    def specs_score_targets() -> List[str]:
+        return ["50", "75", "100"]
+
+    @staticmethod
+    def realization_counts() -> List[str]:
+        return ["10", "25", "50"]
 
 
 # Archipelago Options
