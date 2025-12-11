@@ -173,8 +173,8 @@ class BaldursGate3Game(Game):
                     weight=6,
                 ),
                 GameObjectiveTemplate(
-                    label="Read BOOK_COUNT different books",
-                    data={"BOOK_COUNT": (self.book_read_counts, 1)},
+                    label="Discover WAYPOINT_COUNT waypoints",
+                    data={"WAYPOINT_COUNT": (self.waypoint_counts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=8,
@@ -602,10 +602,6 @@ class BaldursGate3Game(Game):
         return ["5", "10", "15"]
 
     @staticmethod
-    def book_read_counts() -> List[str]:
-        return ["50", "100", "150"]
-
-    @staticmethod
     def long_rest_counts() -> List[str]:
         return ["4", "8", "12"]
 
@@ -632,6 +628,10 @@ class BaldursGate3Game(Game):
     @staticmethod
     def alchemy_potion_counts() -> List[str]:
         return ["3", "5", "10"]
+
+    @staticmethod
+    def waypoint_counts() -> List[str]:
+        return ["10", "15", "20"]
 
 
 # Archipelago Options
