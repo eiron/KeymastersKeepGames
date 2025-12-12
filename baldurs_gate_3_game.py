@@ -303,7 +303,7 @@ class BaldursGate3Game(Game):
                     weight=4,
                 ),
                 GameObjectiveTemplate(
-                    label="CREATURE_INTERACTION with CREATURE_NAME",
+                    label="CREATURE_INTERACTION CREATURE_NAME",
                     data={
                         "CREATURE_INTERACTION": (self.creature_interactions, 1),
                         "CREATURE_NAME": (self.creature_names, 1)
