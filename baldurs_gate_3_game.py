@@ -46,7 +46,7 @@ class BaldursGate3Game(Game):
         if self.include_character_builds:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Multiclass into MULTICLASS_COUNT different classes without respeccing and reach LEVEL_THRESHOLD",
+                    label="Multiclass into MULTICLASS_COUNT different classes without respeccing and reach level LEVEL_THRESHOLD",
                     data={
                         "MULTICLASS_COUNT": (self.multiclass_progression_counts, 1),
                         "LEVEL_THRESHOLD": (self.level_thresholds, 1)
@@ -63,7 +63,7 @@ class BaldursGate3Game(Game):
                     weight=10,
                 ),
                 GameObjectiveTemplate(
-                    label="Build a character focused on ABILITY_SCORE_FOCUS (reaching HIGH_STAT in that stat) and reach LEVEL_THRESHOLD",
+                    label="Build a character focused on ABILITY_SCORE_FOCUS (reaching HIGH_STAT in that stat) and reach level LEVEL_THRESHOLD",
                     data={
                         "ABILITY_SCORE_FOCUS": (self.ability_score_focuses, 1),
                         "HIGH_STAT": (self.high_stat_targets, 1),
