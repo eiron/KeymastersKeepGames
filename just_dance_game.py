@@ -1380,52 +1380,6 @@ class JustDanceGame(Game):
         ]
 
     @functools.cached_property
-    def songs_just_dance_2026(self) -> List[str]:
-        """Base tracklist for Just Dance 2026 Edition."""
-        return [
-            "Lady Gaga - Abracadabra [JD2026]",
-            "Smash Mouth - All Star [JD2026]",
-            "Doechii - Anxiety [JD2026]",
-            "ROSÉ & Bruno Mars - APT. [JD2026]",
-            "Ed Sheeran - Azizam [JD2026]",
-            "Austin & Colin - Big Bad Frog [JD2026]",
-            "Bluey - Bluey Medley [JD2026]",
-            "Patrick Hernandez - Born to Be Alive (Reborn Version) [JD2026]",
-            "MariaDennis ft. METAMAMI - Chichika [JD2026]",
-            "OneRepublic - Counting Stars [JD2026]",
-            "Melanie Martinez - Cry Baby [JD2026]",
-            "Su Real & DISTORT - Don Raja [JD2026]",
-            "Elton John & Kiki Dee - Don't Go Breaking My Heart [JD2026]",
-            "BABYMONSTER - DRIP [JD2026]",
-            "Sabrina Carpenter - Feather [JD2026]",
-            "Cyndi Lauper - Girls Just Want to Have Fun [JD2026]",
-            "Humphrey Dennis ft. Zanillya - Good Girls [JD2026]",
-            "Chappell Roan - Good Luck, Babe! [JD2026]",
-            "Dua Lipa - Houdini [JD2026]",
-            "Madonna - Hung Up [JD2026]",
-            "Post Malone ft. Morgan Wallen - I Had Some Help [JD2026]",
-            "Tate McRae - It's ok I'm ok [JD2026]",
-            "Dixson Waz, La Tukiti & Amenazandel - Kitipo [JD2026]",
-            "Los Lobos - La Bamba [JD2026]",
-            "Don Elektron & Derek - Louder [JD2026]",
-            "Dua Lipa - Love Again [JD2026]",
-            "Lola Young - Messy [JD2026]",
-            "Aileen-O - Moonlight [JD2026]",
-            "M / Robin Scott - Pop Muzik [JD2026]",
-            "Ricky Stone - Prehistorock [JD2026]",
-            "Brenda Lee - Rockin' Around the Christmas Tree [JD2026]",
-            "Paul Russell - Say Cheese [JD2026]",
-            "Boomborg - Show Me What You Got [JD2026]",
-            "Wanko Ni Mero Mero - Sokusu [JD2026]",
-            "Kevin J Simon - Spin Your Love [JD2026]",
-            "Sigrid - Strangers [JD2026]",
-            "Macklemore & Ryan Lewis ft. Wanz - Thrift Shop [JD2026]",
-            "Coldplay - Viva la Vida [JD2026]",
-            "Stush & WOST - We Just Begun [JD2026]",
-            "Lady Gaga - Zombieboy [JD2026]"
-        ]
-
-    @functools.cached_property
     def songs_just_dance_2025(self) -> List[str]:
         """Base tracklist for Just Dance 2025 Edition."""
         return [
@@ -1473,11 +1427,6 @@ class JustDanceGame(Game):
         ]
 
     @functools.cached_property
-    def songs_just_dance_2026_just_dance_unlimited(self) -> List[str]:
-        """Just Dance Unlimited exclusive songs for JD2026 Edition."""
-        return []  # No confirmed Unlimited songs at launch
-
-    @functools.cached_property
     def songs_just_dance_2025_just_dance_unlimited(self) -> List[str]:
         return [
             "Olivia Rodrigo - bad idea right? [JD2025 JDU]",
@@ -1500,6 +1449,57 @@ class JustDanceGame(Game):
             "Bad Bunny & Feid - PERRO NEGRO [JD2025 JD+]",
             "Anitta - Funk Rave [JD2025 JD+]",
         ]
+
+    @functools.cached_property
+    def songs_just_dance_2026(self) -> List[str]:
+        """Base tracklist for Just Dance 2026 Edition."""
+        return [
+            "Lady Gaga - Abracadabra [JD2026]",
+            "Smash Mouth - All Star [JD2026]",
+            "Doechii - Anxiety [JD2026]",
+            "ROSÉ & Bruno Mars - APT. [JD2026]",
+            "Ed Sheeran - Azizam [JD2026]",
+            "Austin & Colin - Big Bad Frog [JD2026]",
+            "Bluey - Bluey Medley [JD2026]",
+            "Patrick Hernandez - Born to Be Alive (Reborn Version) [JD2026]",
+            "MariaDennis ft. METAMAMI - Chichika [JD2026]",
+            "OneRepublic - Counting Stars [JD2026]",
+            "Melanie Martinez - Cry Baby [JD2026]",
+            "Su Real & DISTORT - Don Raja [JD2026]",
+            "Elton John & Kiki Dee - Don't Go Breaking My Heart [JD2026]",
+            "BABYMONSTER - DRIP [JD2026]",
+            "Sabrina Carpenter - Feather [JD2026]",
+            "Cyndi Lauper - Girls Just Want to Have Fun [JD2026]",
+            "Humphrey Dennis ft. Zanillya - Good Girls [JD2026]",
+            "Chappell Roan - Good Luck, Babe! [JD2026]",
+            "Dua Lipa - Houdini [JD2026]",
+            "Madonna - Hung Up [JD2026]",
+            "Post Malone ft. Morgan Wallen - I Had Some Help [JD2026]",
+            "Tate McRae - It's ok I'm ok [JD2026]",
+            "Dixson Waz, La Tukiti & Amenazandel - Kitipo [JD2026]",
+            "Los Lobos - La Bamba [JD2026]",
+            "Don Elektron & Derek - Louder [JD2026]",
+            "Dua Lipa - Love Again [JD2026]",
+            "Lola Young - Messy [JD2026]",
+            "Aileen-O - Moonlight [JD2026]",
+            "M / Robin Scott - Pop Muzik [JD2026]",
+            "Ricky Stone - Prehistorock [JD2026]",
+            "Brenda Lee - Rockin' Around the Christmas Tree [JD2026]",
+            "Paul Russell - Say Cheese [JD2026]",
+            "Boomborg - Show Me What You Got [JD2026]",
+            "Wanko Ni Mero Mero - Sokusu [JD2026]",
+            "Kevin J Simon - Spin Your Love [JD2026]",
+            "Sigrid - Strangers [JD2026]",
+            "Macklemore & Ryan Lewis ft. Wanz - Thrift Shop [JD2026]",
+            "Coldplay - Viva la Vida [JD2026]",
+            "Stush & WOST - We Just Begun [JD2026]",
+            "Lady Gaga - Zombieboy [JD2026]"
+        ]
+
+    @functools.cached_property
+    def songs_just_dance_2026_just_dance_unlimited(self) -> List[str]:
+        """Just Dance Unlimited exclusive songs for JD2026 Edition."""
+        return []  # No confirmed Unlimited songs at launch
 
     @functools.cached_property
     def songs_just_dance_2026_just_dance_plus(self) -> List[str]:
