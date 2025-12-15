@@ -303,11 +303,18 @@ class BaldursGate3Game(Game):
                     weight=4,
                 ),
                 GameObjectiveTemplate(
-                    label="CREATURE_INTERACTION CREATURE_NAME",
+                    label="ANIMAL_INTERACTION ANIMAL_COMPANION",
                     data={
-                        "CREATURE_INTERACTION": (self.creature_interactions, 1),
-                        "CREATURE_NAME": (self.creature_names, 1)
+                        "ANIMAL_INTERACTION": (self.animal_interactions, 1),
+                        "ANIMAL_COMPANION": (self.animal_companions, 1)
                     },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=4,
+                ),
+                GameObjectiveTemplate(
+                    label="Recruit COMPANION_RECRUIT",
+                    data={"COMPANION_RECRUIT": (self.recruitable_companions, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=4,
@@ -534,21 +541,29 @@ class BaldursGate3Game(Game):
         ]
 
     @staticmethod
-    def creature_interactions() -> List[str]:
+    def animal_interactions() -> List[str]:
         return [
-            "Pet both",
-            "Play fetch with",
-            "Find and summon",
-            "Recruit"
+            "Pet",
+            "Play fetch with"
         ]
 
     @staticmethod
-    def creature_names() -> List[str]:
+    def animal_companions() -> List[str]:
         return [
-            "Scratch and Owlbear cub (You Have Two Hands for a Reason)",
-            "Scratch (Fetch Quest)",
-            "Shovel the quasit (Rude, Crude, and Full of Attitude)",
-            "Us the intellect devourer"
+            "Scratch",
+            "Owlbear cub",
+            "Shovel"
+        ]
+
+    @staticmethod
+    def recruitable_companions() -> List[str]:
+        return [
+            "Wyll",
+            "Astarion",
+            "Karlach",
+            "Gale",
+            "Lae'zel",
+            "Halsin"
         ]
 
     @staticmethod
