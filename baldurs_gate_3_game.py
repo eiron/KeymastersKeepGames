@@ -415,10 +415,10 @@ class BaldursGate3Game(Game):
     @staticmethod
     def game_endings() -> List[str]:
         return [
-            "Destroy the Absolute (Hero ending)",
-            "Control the Netherbrain for yourself (Absolute Power)",
-            "Control the Netherbrain for Bhaal (Sins of the Father)",
-            "Become a mindflayer to defeat the Netherbrain (Ceremorphosis)"
+            "Destroy the Absolute",
+            "Control the Netherbrain for yourself",
+            "Control the Netherbrain for Bhaal",
+            "Become a mindflayer to defeat the Netherbrain"
         ]
 
     @staticmethod
@@ -451,9 +451,9 @@ class BaldursGate3Game(Game):
         return [
             "Shadowheart's Sharran crisis",
             "Astarion's confrontation with Cazador",
-            "Gale's stabilization (Repairing the Weave)",
-            "Lae'zel's alliance with Voss (The Lich-Queen's Wrath)",
-            "Wyll's pact with Mizora (Loophole)",
+            "Gale's stabilization",
+            "Lae'zel's alliance with Voss",
+            "Wyll's pact with Mizora",
             "Karlach's engine and hot date",
             "Halsin's shadow curse quest",
             "Minthara's recruitment",
@@ -463,15 +463,15 @@ class BaldursGate3Game(Game):
     @staticmethod
     def romance_companions() -> List[str]:
         return [
-            "Shadowheart (To Bloom in Darkest Night)",
-            "Astarion (Just a Nibble)",
-            "Karlach (Hot Date)",
+            "Shadowheart",
+            "Astarion",
+            "Karlach",
             "Gale",
             "Lae'zel",
             "Wyll",
             "Halsin",
             "Minthara",
-            "The Emperor (Mind Blown)"
+            "The Emperor"
         ]
 
     @staticmethod
@@ -493,22 +493,22 @@ class BaldursGate3Game(Game):
     def boss_challenges() -> List[str]:
         return [
             "Defeat Commander Zhalk on the Nautiloid",
-            "Kill the Spider Matriarch before eggs hatch (Pest Control)",
-            "Kill the Adamantine Golem without Forge Hammer (A Grym Fate)",
-            "Kill the Surgeon before surgery (Non-invasive Procedure)",
-            "Defeat Toll Collector without her using gold (Penny Pincher)",
-            "Defeat Apostle of Myrkul before it consumes Necromites (No Free Lunches)",
-            "Defeat Gortash without activating traps (Fancy Footwork)",
-            "Kill Orin during ritual chant (First Blood)",
-            "Kill the Red Dragon in Upper City (Interfectorem Draconis)",
-            "Knock dragon from sky in Wyrmway (Crash Landing)"
+            "Kill the Spider Matriarch before eggs hatch",
+            "Kill the Adamantine Golem without Forge Hammer",
+            "Kill the Surgeon before surgery",
+            "Defeat Toll Collector without her using gold",
+            "Defeat Apostle of Myrkul before it consumes Necromites",
+            "Defeat Gortash without activating traps",
+            "Kill Orin during ritual chant",
+            "Kill the Red Dragon in Upper City",
+            "Knock dragon from sky in Wyrmway"
         ]
 
     @staticmethod
     def kill_methods() -> List[str]:
         return [
-            "falling damage (Shove Off)",
-            "an unarmed strike (Fists of Fury)"
+            "falling damage",
+            "an unarmed strike"
         ]
 
     @staticmethod
@@ -522,7 +522,7 @@ class BaldursGate3Game(Game):
     @staticmethod
     def prison_locations() -> List[str]:
         return [
-            "Moonrise Towers (Under Lock and Key)",
+            "Moonrise Towers",
             "the Emerald Grove",
             "the Goblin Camp",
             "Baldur's Gate prison"
@@ -531,7 +531,7 @@ class BaldursGate3Game(Game):
     @staticmethod
     def legendary_items() -> List[str]:
         return [
-            "the Blood of Lathander (Taking Blood)",
+            "the Blood of Lathander",
             "a legendary weapon from Adamantine Forge",
             "Netherstones from the Chosen Three",
             "the Silver Sword of the Astral Plane",
@@ -569,8 +569,8 @@ class BaldursGate3Game(Game):
     @staticmethod
     def difficulty_modes() -> List[str]:
         return [
-            "Tactician mode (Critical Hit)",
-            "Honour mode (Foehammer)"
+            "Tactician mode",
+            "Honour mode"
         ]
 
     @staticmethod
@@ -580,8 +580,8 @@ class BaldursGate3Game(Game):
     @staticmethod
     def playthrough_restrictions() -> List[str]:
         return [
-            "Embrace Dark Urge and become Bhaal's Slayer (Embrace Your Urge)",
-            "Become Unholy Assassin of Bhaal (Murder in Baldur's Gate)",
+            "Embrace Dark Urge and become Bhaal's Slayer",
+            "Become Unholy Assassin of Bhaal",
             "Pure Good choices only",
             "Solo (no companions)",
             "Pacifist approach where possible"
