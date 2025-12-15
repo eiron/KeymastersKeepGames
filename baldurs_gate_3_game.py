@@ -406,11 +406,11 @@ class BaldursGate3Game(Game):
 
     @staticmethod
     def high_stat_targets() -> List[str]:
-        return ["18", "20", "22"]
+        return ["16", "18", "20", "22"]
 
     @staticmethod
     def level_thresholds() -> List[str]:
-        return ["8", "10", "12"]
+        return ["5", "8", "10", "12"]
 
     @staticmethod
     def game_endings() -> List[str]:
