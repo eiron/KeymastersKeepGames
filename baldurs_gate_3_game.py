@@ -56,8 +56,11 @@ class BaldursGate3Game(Game):
                     weight=8,
                 ),
                 GameObjectiveTemplate(
-                    label="Reach level 12 with a pure CLASS character",
-                    data={"CLASS": (self.character_classes, 1)},
+                    label="Reach level LEVEL_THRESHOLD with a pure CLASS character",
+                    data={
+                        "CLASS": (self.character_classes, 1),
+                        "LEVEL_THRESHOLD": (self.level_thresholds, 1)
+                    },
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=10,
@@ -85,6 +88,16 @@ class BaldursGate3Game(Game):
                     data={"BACKGROUND_GOAL_COUNT": (self.background_goal_counts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
+                    weight=8,
+                ),
+                GameObjectiveTemplate(
+                    label="Create a multiclass combining CLASSES and reach level LEVEL_THRESHOLD",
+                    data={
+                        "CLASSES": (self.character_classes, 2),
+                        "LEVEL_THRESHOLD": (self.level_thresholds, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=True,
                     weight=8,
                 ),
             ])
