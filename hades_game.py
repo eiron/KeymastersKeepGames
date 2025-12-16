@@ -68,6 +68,36 @@ class HadesGame(Game):
                 ),
             ])
         
+        constraints.extend([
+            GameObjectiveTemplate(label="Don't change Keepsakes midrun", data={}),
+            GameObjectiveTemplate(label="Purge at least 1 Boon each region", data={}),
+            GameObjectiveTemplate(label="Do not pick up Poms unless forced to", data={}),
+            GameObjectiveTemplate(label="Start the run with at least 5 levels of Heat", data={}),
+            GameObjectiveTemplate(label="Do not buy anything from at least one shop", data={}),
+            GameObjectiveTemplate(label="Completely invert your current mirror (left to right)", data={}),
+            GameObjectiveTemplate(label="Have at least 1000 Obols at any point", data={}),
+            GameObjectiveTemplate(label="Have at least 300 Max HP at any point", data={}),
+            GameObjectiveTemplate(label="Go through exactly two Chaos gates, if possible", data={}),
+            GameObjectiveTemplate(label="End with all Death Defiances", data={}),
+            GameObjectiveTemplate(label="Finish the run in less than 25 minutes (according to the in game timer)", data={}),
+            GameObjectiveTemplate(label="Start the run with the Cosmic Egg", data={}),
+            GameObjectiveTemplate(label="Complete without taking any Legendary or Duo boons", data={}),
+            GameObjectiveTemplate(label="Never reroll boons at the fountain", data={}),
+            GameObjectiveTemplate(label="Complete with boons from at least GOD_COUNT different gods", data={"GOD_COUNT": (self.god_counts, 1)}),
+            GameObjectiveTemplate(label="Don't use Call or Greater Call during boss fights", data={}),
+            GameObjectiveTemplate(label="Complete with only Common and Rare boons (no Epic or Heroic)", data={}),
+            GameObjectiveTemplate(label="Sell at least 3 boons to the Broker", data={}),
+            GameObjectiveTemplate(label="Complete without entering any side chambers (only main path)", data={}),
+            GameObjectiveTemplate(label="Have at least one boon at level 5 or higher", data={}),
+            GameObjectiveTemplate(label="Complete without using any Daedalus Hammers", data={}),
+            GameObjectiveTemplate(label="Don't take damage in any mini-boss rooms", data={}),
+            GameObjectiveTemplate(label="Complete with at least 10 different boons", data={}),
+            GameObjectiveTemplate(label="Never enter a Erebus gate", data={}),
+            GameObjectiveTemplate(label="Finish with at least 500 gold", data={}),
+            GameObjectiveTemplate(label="Take damage from traps at least 5 times", data={}),
+            GameObjectiveTemplate(label="Use the same Keepsake for the entire run", data={"KEEPSAKE": (self.keepsakes, 1)}),
+        ])
+        
         return constraints
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
@@ -347,8 +377,8 @@ class HadesGame(Game):
     @staticmethod
     def weapons() -> List[str]:
         return [
-            "Stygian Blade", "Eternal Spear", "Shield of Chaos", 
-            "Heart-Seeking Bow", "Twin Fists", "Adamant Rail"
+            "Stygius", "Varatha", "Aegis", 
+            "Coronacht", "Malphon", "Exagryph"
         ]
 
     @staticmethod
@@ -417,6 +447,10 @@ class HadesGame(Game):
             "Chthonic Colleagues", "Olympian Gods", "The Exiled", "Sworn Enemies",
             "Heart-Seekers", "Distant Relatives", "Minor Prophesies"
         ]
+
+    @staticmethod
+    def god_counts() -> range:
+        return range(5, 9)
 
     @staticmethod
     def house_areas() -> List[str]:
