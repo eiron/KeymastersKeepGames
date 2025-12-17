@@ -101,6 +101,26 @@ class StardewValleyGame(Game):
                     is_difficult=False,
                     weight=2,
                 ),
+                GameObjectiveTemplate(
+                    label="Plant CROPS_PLANTED crops within DAYS days",
+                    data={
+                        "CROPS_PLANTED": (self.crop_plant_counts, 1),
+                        "DAYS": (self.day_windows, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Hoe PLOT_COUNT plots of land within DAYS days",
+                    data={
+                        "PLOT_COUNT": (self.plot_counts, 1),
+                        "DAYS": (self.day_windows_short, 1)
+                    },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
             ])
 
         # Mining objectives
@@ -129,6 +149,27 @@ class StardewValleyGame(Game):
                         "MONSTER_COUNT": (self.monster_counts, 1),
                         "MONSTER": (self.monsters, 1)
                     },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Reach floor FLOOR within DAYS days",
+                    data={"FLOOR": (self.mine_floors, 1), "DAYS": (self.day_windows, 1)},
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Open GEODE_COUNT geodes within DAYS days",
+                    data={"GEODE_COUNT": (self.geode_open_counts, 1), "DAYS": (self.day_windows_short, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Smelt a copper bar within DAYS days",
+                    data={"DAYS": (self.day_windows_short, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
@@ -162,6 +203,27 @@ class StardewValleyGame(Game):
                     is_difficult=False,
                     weight=2,
                 ),
+                GameObjectiveTemplate(
+                    label="Catch FISH_TOTAL fish within DAYS days",
+                    data={"FISH_TOTAL": (self.total_catch_counts, 1), "DAYS": (self.day_windows, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Catch a fish in 4 different bodies of water within DAYS days",
+                    data={"DAYS": (self.day_windows_short, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Catch a Catfish within DAYS days",
+                    data={"DAYS": (self.day_windows, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
             ])
 
         # Foraging objectives
@@ -183,6 +245,20 @@ class StardewValleyGame(Game):
                         "TREE_COUNT": (self.tree_counts, 1),
                         "TREE_TYPE": (self.tree_types, 1)
                     },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Forage FORAGE_TOTAL items within DAYS days",
+                    data={"FORAGE_TOTAL": (self.total_forage_counts, 1), "DAYS": (self.day_windows, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Chop TREE_CHOP_COUNT trees within DAYS days",
+                    data={"TREE_CHOP_COUNT": (self.tree_chop_counts, 1), "DAYS": (self.day_windows_short, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -216,6 +292,16 @@ class StardewValleyGame(Game):
                         "VILLAGER": (self.villagers, 1)
                     },
                     is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Give COUNT 'like' gifts to COUNT different villagers within DAYS days",
+                    data={
+                        "COUNT": (self.like_gift_counts, 1),
+                        "DAYS": (self.day_windows, 1),
+                    },
+                    is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
                 ),
@@ -305,6 +391,52 @@ class StardewValleyGame(Game):
                     weight=2,
                 ),
             ])
+
+        # General time-window objectives
+        game_objective_templates.extend([
+            GameObjectiveTemplate(
+                label="Open all 8 garbage cans each day for DAYS days",
+                data={"DAYS": (self.day_windows_short, 1)},
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Put out Linus's fire each day for DAYS days",
+                data={"DAYS": (self.day_windows_short, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=1,
+            ),
+            GameObjectiveTemplate(
+                label="Sell UNIQUE_SELL_COUNT unique items on the same day within DAYS days",
+                data={"UNIQUE_SELL_COUNT": (self.unique_sell_counts, 1), "DAYS": (self.day_windows_short, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Earn GOLD_TOTAL gold within DAYS days",
+                data={"GOLD_TOTAL": (self.gold_total_targets, 1), "DAYS": (self.day_windows, 1)},
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Buy the first backpack upgrade within DAYS days",
+                data={"DAYS": (self.day_windows_short, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Craft CRAFT_ITEM",
+                data={"CRAFT_ITEM": (self.craft_items, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=2,
+            ),
+        ])
 
         return game_objective_templates
 
@@ -518,6 +650,68 @@ class StardewValleyGame(Game):
     @staticmethod
     def year_limits() -> range:
         return range(1, 4)
+
+    # New providers for time-window and counts
+    @staticmethod
+    def day_windows() -> range:
+        # Generous windows to keep goals possible across RNG factors
+        return range(14, 57, 7)
+
+    @staticmethod
+    def total_catch_counts() -> range:
+        return range(10, 60, 10)
+
+    @staticmethod
+    def crop_plant_counts() -> range:
+        return range(10, 80, 10)
+
+    @staticmethod
+    def like_gift_counts() -> range:
+        return range(3, 12, 3)
+
+    @staticmethod
+    def villager_diff_counts() -> range:
+        return range(3, 12, 3)
+
+    @staticmethod
+    def total_forage_counts() -> range:
+        return range(20, 120, 20)
+
+    @staticmethod
+    def geode_open_counts() -> range:
+        return range(10, 40, 5)
+
+    @staticmethod
+    def gold_total_targets() -> range:
+        return range(2000, 20000, 2000)
+
+    @staticmethod
+    def tree_chop_counts() -> range:
+        return range(10, 60, 10)
+
+    @staticmethod
+    def plot_counts() -> range:
+        return range(20, 120, 20)
+
+    @staticmethod
+    def unique_sell_counts() -> range:
+        return range(5, 20, 5)
+
+    @staticmethod
+    def craft_items() -> List[str]:
+        return [
+            "Chest", "Furnace", "Scarecrow", "Basic Sprinkler", "Bomb",
+            "Mayonnaise Machine", "Bee House", "Oil Maker", "Charcoal Kiln"
+        ]
+
+    # Short/long windows variants
+    @staticmethod
+    def day_windows_short() -> range:
+        return range(7, 22, 7)
+
+    @staticmethod
+    def day_windows_long() -> range:
+        return range(28, 85, 7)
 
 
 # Archipelago Options
