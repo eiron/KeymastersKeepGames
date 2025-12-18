@@ -72,6 +72,8 @@ class KeymastersKeepGame(Game):
             challenge_types.append("Keymaster's Challenge")
         if "magic_key_heist" in selection:
             challenge_types.append("Magic Key Heist")
+        if "area_domination" in selection:
+            challenge_types.append("Area Domination")
             
         return challenge_types
 
@@ -350,6 +352,7 @@ class KeymastersKeepChallengeTypeSelection(OptionList):
     default = [
         "keymasters_challenge",
         "magic_key_heist",
+        "area_domination",
     ]
 
 
