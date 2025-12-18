@@ -320,7 +320,7 @@ class ScavengerHuntGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Explore TRAIL_COUNT different TRAIL_TYPE trails",
+                    label="Explore TRAIL_COUNT different TRAIL_TYPE",
                     data={
                         "TRAIL_COUNT": (self.trail_counts, 1),
                         "TRAIL_TYPE": (self.trail_types, 1)
