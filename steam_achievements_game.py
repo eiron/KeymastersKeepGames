@@ -33,8 +33,6 @@ class SteamAchievementsGame(Game):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._cached_specific_game = None
-        self._cached_locked_achievements = None
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
         templates = [
@@ -69,12 +67,12 @@ class SteamAchievementsGame(Game):
         ]
 
         if self.archipelago_options.steam_achievements_include_specific_achievements.value:
+            # Build a list of formatted strings with achievement and game already combined
             templates.append(
                 GameObjectiveTemplate(
-                    label="Unlock the achievement 'ACHIEVEMENT_NAME' in SPECIFIC_GAME",
+                    label="ACHIEVEMENT_WITH_GAME",
                     data={
-                        "ACHIEVEMENT_NAME": (self.specific_game_achievements, 1),
-                        "SPECIFIC_GAME": (self.specific_game_name, 1)
+                        "ACHIEVEMENT_WITH_GAME": (self.specific_achievements_with_games, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=True,
@@ -116,37 +114,31 @@ class SteamAchievementsGame(Game):
     def games(self) -> List[str]:
         return sorted([g["name"] for g in self._get_eligible_games_data()])
 
-    def _get_random_game_with_achievements(self):
-        if self._cached_specific_game:
-            return self._cached_specific_game, self._cached_locked_achievements
-            
+    def specific_achievements_with_games(self) -> List[str]:
+        """
+        Picks a random eligible game and fetches its achievements via the Steam API.
+        Returns list of formatted strings like "Unlock the achievement 'Achievement Name' in Game Name"
+        This is called each time the template needs data, so different objectives can get different games.
+        """
         eligible = self._get_eligible_games_data()
         if not eligible:
-            return None, []
-            
-        # Shuffle eligible list to pick random ones
+            return []
+        
+        # Shuffle and try games until we find one with achievements
         shuffled = eligible[:]
         random.shuffle(shuffled)
         
         steam_id = self.archipelago_options.steam_achievements_steam_id.value
         include_hidden = self.archipelago_options.steam_achievements_include_hidden_achievements.value
         
-        for game in shuffled[:5]: # Try up to 5 games
+        for game in shuffled:
             achievements = steam_library.get_locked_achievements(steam_id, game["appid"], include_hidden)
             if achievements:
-                self._cached_specific_game = game["name"]
-                self._cached_locked_achievements = achievements
-                return self._cached_specific_game, self._cached_locked_achievements
-                
-        return None, []
-
-    def specific_game_name(self) -> List[str]:
-        game, _ = self._get_random_game_with_achievements()
-        return [game] if game else []
-
-    def specific_game_achievements(self) -> List[str]:
-        _, achs = self._get_random_game_with_achievements()
-        return achs
+                # Return all achievements from this one game, formatted
+                return [f"Unlock the achievement '{achievement}' in {game['name']}" 
+                        for achievement in achievements]
+        
+        return []
 
     def excluded_games(self) -> Set[str]:
         return self.archipelago_options.steam_achievements_excluded_games.value
