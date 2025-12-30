@@ -210,29 +210,37 @@ class PlayniteLibraryGame(Game):
         return playnite_library.games(json_path)
 
     # === Attribute extraction helpers ===
+    @property
     def categories(self) -> List[str]:
         self._ensure_computed()
         return sorted(self._cats)
 
+    @property
     def series(self) -> List[str]:
         self._ensure_computed()
         return sorted(self._series)
+
+    @property
     def tags(self) -> List[str]:
         self._ensure_computed()
         return sorted(self._tags)
 
+    @property
     def genres(self) -> List[str]:
         self._ensure_computed()
         return sorted(self._genres)
 
+    @property
     def sources(self) -> List[str]:
         self._ensure_computed()
         return sorted(self._sources)
 
+    @property
     def platforms(self) -> List[str]:
         self._ensure_computed()
         return sorted(self._platforms)
 
+    @property
     def features(self) -> List[str]:
         self._ensure_computed()
         return sorted(self._features)
@@ -386,12 +394,12 @@ class PlayniteLibraryGame(Game):
 
         # Supported attribute filters and ordering options used below
         attribute_types = [
-            ("TAG", self.tags),
-            ("GENRE", self.genres),
-            ("FEATURE", self.features),
-            ("PLATFORM", self.platforms),
-            ("CATEGORY", self.categories),
-            ("SOURCE", self.sources),
+            ("TAG", lambda: list(self.tags)),
+            ("GENRE", lambda: list(self.genres)),
+            ("FEATURE", lambda: list(self.features)),
+            ("PLATFORM", lambda: list(self.platforms)),
+            ("CATEGORY", lambda: list(self.categories)),
+            ("SOURCE", lambda: list(self.sources)),
         ]
         ordering_options = [
             "most recently added",
@@ -407,6 +415,9 @@ class PlayniteLibraryGame(Game):
         # 5) Attribute-based filters – TAG/GENRE/FEATURE/PLATFORM/CATEGORY/SOURCE
         #    - Only include if attribute list is non-empty
         for attr_label, attr_func in attribute_types:
+            # Only create templates for attributes that have values
+            if not attr_func():
+                continue
             attr_weight = 1
             objectives.append(
                 GameObjectiveTemplate(
@@ -451,6 +462,9 @@ class PlayniteLibraryGame(Game):
                 )
             )
             for attr_label, attr_func in attribute_types:
+                # Only create templates for attributes that have values
+                if not attr_func():
+                    continue
                 objectives.append(
                     GameObjectiveTemplate(
                         label=f"Play your NTH {order_label} Playnite library game with the {attr_label} {attr_label.lower()}",
