@@ -186,7 +186,7 @@ class DeadEstateGame(Game):
             GameObjectiveTemplate(
                 label="Complete a run without taking any damage as CHARACTER",
                 data={
-                    "CHARACTER": (self.characters, 1),
+                    "CHARACTER": (self.available_characters, 1),
                 },
                 is_time_consuming=True,
                 is_difficult=True,
@@ -195,7 +195,7 @@ class DeadEstateGame(Game):
             GameObjectiveTemplate(
                 label="Find all 5 secret rooms in a run as CHARACTER",
                 data={
-                    "CHARACTER": (self.characters, 1),
+                    "CHARACTER": (self.available_characters, 1),
                 },
                 is_time_consuming=True,
                 is_difficult=True,
@@ -204,7 +204,7 @@ class DeadEstateGame(Game):
             GameObjectiveTemplate(
                 label="Flawless at least 3 bosses in one run as CHARACTER",
                 data={
-                    "CHARACTER": (self.characters, 1),
+                    "CHARACTER": (self.available_characters, 1),
                 },
                 is_time_consuming=True,
                 is_difficult=True,
@@ -213,7 +213,7 @@ class DeadEstateGame(Game):
             GameObjectiveTemplate(
                 label="Buy Ambrosia while at full HP as CHARACTER",
                 data={
-                    "CHARACTER": (self.characters, 1),
+                    "CHARACTER": (self.available_characters, 1),
                 },
                 is_time_consuming=False,
                 is_difficult=False,
@@ -222,7 +222,7 @@ class DeadEstateGame(Game):
             GameObjectiveTemplate(
                 label="Destroy two weapons without using either even once and win the run as CHARACTER",
                 data={
-                    "CHARACTER": (self.characters, 1),
+                    "CHARACTER": (self.available_characters, 1),
                 },
                 is_time_consuming=False,
                 is_difficult=True,
@@ -231,7 +231,7 @@ class DeadEstateGame(Game):
             GameObjectiveTemplate(
                 label="Upgrade your health at the Doctor 4 times and win the run as CHARACTER",
                 data={
-                    "CHARACTER": (self.characters, 1),
+                    "CHARACTER": (self.available_characters, 1),
                 },
                 is_time_consuming=True,
                 is_difficult=False,
@@ -240,7 +240,7 @@ class DeadEstateGame(Game):
             GameObjectiveTemplate(
                 label="Finish a floor before Chunks shows up as CHARACTER",
                 data={
-                    "CHARACTER": (self.characters, 1),
+                    "CHARACTER": (self.available_characters, 1),
                 },
                 is_time_consuming=False,
                 is_difficult=True,
@@ -249,7 +249,7 @@ class DeadEstateGame(Game):
             GameObjectiveTemplate(
                 label="Get down to 1 HP then return to full without using Ambrosia as CHARACTER",
                 data={
-                    "CHARACTER": (self.characters, 1),
+                    "CHARACTER": (self.available_characters, 1),
                 },
                 is_time_consuming=True,
                 is_difficult=True,
@@ -258,7 +258,7 @@ class DeadEstateGame(Game):
             GameObjectiveTemplate(
                 label="Buy out an entire shop as CHARACTER",
                 data={
-                    "CHARACTER": (self.characters, 1),
+                    "CHARACTER": (self.available_characters, 1),
                 },
                 is_time_consuming=False,
                 is_difficult=False,
