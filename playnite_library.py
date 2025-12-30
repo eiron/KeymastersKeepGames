@@ -310,8 +310,8 @@ class PlayniteLibraryGame(Game):
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
         """Generate all unique Playnite library challenge objectives.
 
-        If the Playnite JSON is missing or unreadable, return an empty list so
-        no Playnite objectives are generated.
+        If the Playnite JSON is missing or unreadable, return a fallback objective
+        that can be completed manually.
         """
         objectives: List[GameObjectiveTemplate] = []
 
@@ -319,18 +319,60 @@ class PlayniteLibraryGame(Game):
         # We DO NOT parse the JSON here; we only test for existence to avoid expensive IO.
         json_path = self._get_json_path()
         if not json_path:
-            return []
+            # No path configured - provide generic fallback
+            objectives.append(
+                GameObjectiveTemplate(
+                    label="Play a random game from your Playnite library",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                )
+            )
+            return objectives
+            
         json_path_obj = Path(json_path).expanduser()
         # If it's a directory, ensure games.json exists inside; if it's a file, ensure file exists.
         if json_path_obj.is_dir():
             if not (json_path_obj / "games.json").exists():
-                return []
+                # Path configured but file missing - provide generic fallback
+                objectives.append(
+                    GameObjectiveTemplate(
+                        label="Play a random game from your Playnite library",
+                        data={},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    )
+                )
+                return objectives
         else:
             if not json_path_obj.exists():
-                return []
+                # Path configured but file missing - provide generic fallback
+                objectives.append(
+                    GameObjectiveTemplate(
+                        label="Play a random game from your Playnite library",
+                        data={},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    )
+                )
+                return objectives
 
-        # Do not touch the library here; all data providers are callables that
-        # will only resolve when this game is actually selected for generation.
+        # Check if library actually loads and has games
+        # If it fails to load or is empty, provide generic fallback
+        if not self.games():
+            objectives.append(
+                GameObjectiveTemplate(
+                    label="Play a random game from your Playnite library",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                )
+            )
+            return objectives
 
         # 1) Plain game pick from filtered Playnite library (deferred)
         objectives.append(
@@ -895,7 +937,8 @@ class PlayniteLibraryHolder:
                     load_error = e4
 
             if data is None:
-                raise RuntimeError(f"Failed to read Playnite library JSON: {load_error}")
+                error_msg = str(load_error) if load_error else "Unknown error - file may be empty or severely malformed"
+                raise RuntimeError(f"Failed to read Playnite library JSON: {error_msg}")
 
         games_raw: List[Dict[str, Any]]
         if isinstance(data, list):
