@@ -421,7 +421,7 @@ class ScavengerHuntGame(Game):
                         label="Participate in SEASONAL_ACTIVITY during SEASON_PREFERENCE",
                         data={
                             "SEASONAL_ACTIVITY": (self.seasonal_activities, 1),
-                            "SEASON_PREFERENCE": ([self.season_preference], 1)
+                            "SEASON_PREFERENCE": (self.preferred_season, 1)
                         },
                         is_time_consuming=True,
                         is_difficult=False,
@@ -431,7 +431,7 @@ class ScavengerHuntGame(Game):
                         label="Experience WEATHER_ACTIVITY during SEASON_PREFERENCE weather",
                         data={
                             "WEATHER_ACTIVITY": (self.weather_activities, 1),
-                            "SEASON_PREFERENCE": ([self.season_preference], 1)
+                            "SEASON_PREFERENCE": (self.preferred_season, 1)
                         },
                         is_time_consuming=False,
                         is_difficult=False,
@@ -980,6 +980,10 @@ class ScavengerHuntGame(Game):
     @staticmethod
     def seasons() -> List[str]:
         return ["Spring", "Summer", "Fall", "Winter"]
+
+    def preferred_season(self) -> List[str]:
+        # Wrap the chosen season in a list so GameObjectiveTemplate receives a callable
+        return [self.season_preference]
 
     @staticmethod
     def weather_activities() -> List[str]:

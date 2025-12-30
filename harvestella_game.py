@@ -134,7 +134,7 @@ class HarvestellaGame(Game):
             constraints.extend([
                 GameObjectiveTemplate(
                     label="Complete this objective within DAYS days",
-                    data={"DAYS": ([30, 45, 60, 90], 1)},
+                    data={"DAYS": (self.nightmare_day_limits, 1)},
                 ),
                 GameObjectiveTemplate(
                     label="Complete this objective without using revival items",
@@ -155,6 +155,10 @@ class HarvestellaGame(Game):
             ])
         
         return constraints
+
+    @staticmethod
+    def nightmare_day_limits() -> List[int]:
+        return [30, 45, 60, 90]
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
         game_objective_templates: List[GameObjectiveTemplate] = []
