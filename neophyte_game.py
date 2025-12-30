@@ -247,8 +247,8 @@ class NeophyteGame(Game):
     def include_loadout_objectives(self) -> bool:
         return self.archipelago_options.neophyte_include_loadout_objectives.value
     
-    @staticmethod
-    def bosses() -> List[str]:
+    @property
+    def bosses(self) -> List[str]:
         return [
             "Wraith",
             "Construct",
@@ -257,8 +257,8 @@ class NeophyteGame(Game):
             "Final Boss",
         ]
 
-    @staticmethod
-    def loadouts() -> List[str]:
+    @property
+    def loadouts(self) -> List[str]:
         return [
             "Sword and Shield",
             "Dual Blades",
@@ -270,8 +270,8 @@ class NeophyteGame(Game):
             "Light Armor",
         ]
 
-    @staticmethod
-    def challenge_levels() -> List[str]:
+    @property
+    def challenge_levels(self) -> List[str]:
         return [
             "1",
             "2",
@@ -280,16 +280,16 @@ class NeophyteGame(Game):
             "5",
         ]
 
-    @staticmethod
-    def spell_locations() -> List[str]:
+    @property
+    def spell_locations(self) -> List[str]:
         return [
             "leftmost",
             "centre",
             "rightmost",
         ]
 
-    @staticmethod
-    def spell_rarities() -> List[str]:
+    @property
+    def spell_rarities(self) -> List[str]:
         return [
             "common",
             "uncommon",
@@ -297,8 +297,8 @@ class NeophyteGame(Game):
             "legendary",
         ]
 
-    @staticmethod
-    def run_conditions() -> List[str]:
+    @property
+    def run_conditions(self) -> List[str]:
         return [
             "Without rerolling in the first or third arenas",
             "Taking all mana or mana per second increases",
