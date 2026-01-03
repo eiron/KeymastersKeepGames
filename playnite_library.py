@@ -526,6 +526,19 @@ class PlayniteLibraryGame(Game):
             if obj.label not in seen_labels:
                 unique_objectives.append(obj)
                 seen_labels.add(obj.label)
+        
+        # Safety check: ensure at least one objective exists for players with default options
+        if not unique_objectives:
+            unique_objectives.append(
+                GameObjectiveTemplate(
+                    label="Play a random game from your Playnite library",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                )
+            )
+        
         return unique_objectives
 
     def nth_choices(self) -> List[str]:
