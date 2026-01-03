@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import Toggle, Choice
+from Options import Toggle, DefaultOnToggle, Choice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -155,6 +155,20 @@ class CursedRedDeadRedemption2Game(Game):
                     is_difficult=True,
                     weight=1,
                 ),
+                GameObjectiveTemplate(
+                    label="Greet GREETING_COUNT strangers in a row, then immediately pull your gun on them (don't fire)",
+                    data={"GREETING_COUNT": (self.quick_interaction_counts, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=3,
+                ),
+                GameObjectiveTemplate(
+                    label="Punch a lawman in TOWN and immediately surrender",
+                    data={"TOWN": (self.towns, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
             ])
 
         # Transportation Chaos
@@ -197,6 +211,20 @@ class CursedRedDeadRedemption2Game(Game):
                     is_difficult=True,
                     weight=2,
                 ),
+                GameObjectiveTemplate(
+                    label="Steal someone's horse right in front of them and ride exactly 10 feet away before dismounting",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=3,
+                ),
+                GameObjectiveTemplate(
+                    label="Hijack a stagecoach and immediately drive it into the nearest body of water",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
             ])
 
         # Fashion Crimes
@@ -228,6 +256,20 @@ class CursedRedDeadRedemption2Game(Game):
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Strip down to your underwear in the middle of TOWN and wave at people",
+                    data={"TOWN": (self.towns, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=3,
+                ),
+                GameObjectiveTemplate(
+                    label="Buy the most expensive outfit in the catalog and immediately throw it in a river",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
                 ),
             ])
 
@@ -334,6 +376,20 @@ class CursedRedDeadRedemption2Game(Game):
                     is_difficult=True,
                     weight=1,
                 ),
+                GameObjectiveTemplate(
+                    label="Start a gunfight, throw all your weapons on the ground, and then run away screaming",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=3,
+                ),
+                GameObjectiveTemplate(
+                    label="Empty all your guns by shooting into the sky in the middle of TOWN, then reload them all",
+                    data={"TOWN": (self.towns, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
             ])
 
         # Economy Destruction
@@ -362,6 +418,23 @@ class CursedRedDeadRedemption2Game(Game):
                 GameObjectiveTemplate(
                     label="Donate your entire fortune to DONATION_TARGET and become completely broke",
                     data={"DONATION_TARGET": (self.donation_targets, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Rob a store, then immediately buy everything back at full price from the same store",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=3,
+                ),
+                GameObjectiveTemplate(
+                    label="Drop $DROP_AMOUNT in cash on the ground in TOWN and watch NPCs fight over it",
+                    data={
+                        "DROP_AMOUNT": (self.quick_money_amounts, 1),
+                        "TOWN": (self.towns, 1)
+                    },
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
@@ -687,21 +760,29 @@ class CursedRedDeadRedemption2Game(Game):
     def bounty_levels() -> range:
         return range(100, 1500, 200)
 
+    @staticmethod
+    def quick_interaction_counts() -> range:
+        return range(5, 25, 5)
+
+    @staticmethod
+    def quick_money_amounts() -> range:
+        return range(50, 500, 50)
+
 
 # Archipelago Options
 class CURSEDRDR2IncludeAnimalCruelty(Toggle):
     """Include absolutely cursed animal-related objectives."""
     display_name = "Cursed Red Dead Redemption 2 Include Animal Cruelty"
 
-class CURSEDRDR2IncludeSocialDisasters(Toggle):
+class CURSEDRDR2IncludeSocialDisasters(DefaultOnToggle):
     """Include socially destructive and chaotic objectives."""
     display_name = "Cursed Red Dead Redemption 2 Include Social Disasters"
 
-class CURSEDRDR2IncludeTransportationChaos(Toggle):
+class CURSEDRDR2IncludeTransportationChaos(DefaultOnToggle):
     """Include vehicle and transportation mayhem objectives."""
     display_name = "Cursed Red Dead Redemption 2 Include Transportation Chaos"
 
-class CURSEDRDR2IncludeFashionCrimes(Toggle):
+class CURSEDRDR2IncludeFashionCrimes(DefaultOnToggle):
     """Include terrible outfit and appearance objectives."""
     display_name = "Cursed Red Dead Redemption 2 Include Fashion Crimes"
 
@@ -709,14 +790,14 @@ class CURSEDRDR2IncludeRoleplayNightmares(Toggle):
     """Include painful roleplay restriction objectives."""
     display_name = "Cursed Red Dead Redemption 2 Include Roleplay Nightmares"
 
-class CURSEDRDR2IncludeTediousCollections(Toggle):
+class CURSEDRDR2IncludeTediousCollections(DefaultOnToggle):
     """Include mind-numbingly boring collection objectives."""
     display_name = "Cursed Red Dead Redemption 2 Include Tedious Collections"
 
-class CURSEDRDR2IncludeCombatAbsurdities(Toggle):
+class CURSEDRDR2IncludeCombatAbsurdities(DefaultOnToggle):
     """Include ridiculous and impractical combat objectives."""
     display_name = "Cursed Red Dead Redemption 2 Include Combat Absurdities"
 
-class CURSEDRDR2IncludeEconomyDestruction(Toggle):
+class CURSEDRDR2IncludeEconomyDestruction(DefaultOnToggle):
     """Include money-wasting and economy-breaking objectives."""
     display_name = "Cursed Red Dead Redemption 2 Include Economy Destruction"
