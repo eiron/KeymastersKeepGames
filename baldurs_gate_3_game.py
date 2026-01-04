@@ -219,7 +219,7 @@ class BaldursGate3Game(Game):
         if self.include_combat_challenges:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="BOSS_CHALLENGE boss challenge",
+                    label="BOSS_CHALLENGE",
                     data={"BOSS_CHALLENGE": (self.boss_challenges, 1)},
                     is_time_consuming=False,
                     is_difficult=True,
