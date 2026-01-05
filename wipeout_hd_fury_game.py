@@ -51,7 +51,6 @@ class WipeoutHDFuryGame(Game):
     def include_weapon_challenges(self) -> bool:
         return self.archipelago_options.wipeout_hd_fury_include_weapon_challenges.value
     
-    @property
     def race_count_range(self) -> range:
         return range(
             self.archipelago_options.wipeout_hd_fury_race_count.value,
