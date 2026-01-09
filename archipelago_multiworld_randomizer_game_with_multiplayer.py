@@ -13,20 +13,20 @@ from ..enums import KeymastersKeepGamePlatforms
 
 
 @dataclass
-class ArchipelagoMultiworldRandomizerArchipelagoOptions:
-    archipelago_multiworld_randomizer_game_selection: ArchipelagoMultiworldRandomizerGameSelection
-    archipelago_multiworld_randomizer_objective_types: ArchipelagoMultiworldRandomizerObjectiveTypes
-    archipelago_multiworld_randomizer_bingo_release_always_off: ArchipelagoMultiworldRandomizerBingoReleaseAlwaysOff
+class ArchipelagoMultiworldRandomizerWithMultiplayerArchipelagoOptions:
+    archipelago_multiworld_randomizer_multiplayer_game_selection: ArchipelagoMultiworldRandomizerWithMultiplayerGameSelection
+    archipelago_multiworld_randomizer_multiplayer_objective_types: ArchipelagoMultiworldRandomizerWithMultiplayerObjectiveTypes
+    archipelago_multiworld_randomizer_multiplayer_bingo_release_always_off: ArchipelagoMultiworldRandomizerWithMultiplayerBingoReleaseAlwaysOff
 
-class ArchipelagoMultiworldRandomizerGame(Game):
-    name = "Archipelago Multiworld Randomizer"
+class ArchipelagoMultiworldRandomizerWithMultiplayerGame(Game):
+    name = "Archipelago Multiworld Randomizer with Multiplayer"
     platform = KeymastersKeepGamePlatforms.META
 
     platforms_other = None
 
     is_adult_only_or_unrated = False
 
-    options_cls = ArchipelagoMultiworldRandomizerArchipelagoOptions
+    options_cls = ArchipelagoMultiworldRandomizerWithMultiplayerArchipelagoOptions
 
     def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
         return list()
@@ -188,7 +188,7 @@ class ArchipelagoMultiworldRandomizerGame(Game):
 
     @property
     def objective_types(self) -> List[str]:
-        return sorted(self.archipelago_options.archipelago_multiworld_randomizer_objective_types.value)
+        return sorted(self.archipelago_options.archipelago_multiworld_randomizer_multiplayer_objective_types.value)
 
     @property
     def include_solo_randomizer_objectives(self) -> bool:
@@ -208,7 +208,7 @@ class ArchipelagoMultiworldRandomizerGame(Game):
     
     @property
     def apbingo_release_always_off(self) -> bool:
-        return self.archipelago_options.archipelago_multiworld_randomizer_bingo_release_always_off.value
+        return self.archipelago_options.archipelago_multiworld_randomizer_multiplayer_bingo_release_always_off.value
     
     @property
     def include_multiplayer_multiworld_objectives(self) -> bool:
@@ -227,7 +227,7 @@ class ArchipelagoMultiworldRandomizerGame(Game):
         return ["Off", "On", "On", "On", "On"]
 
     def games(self) -> List[str]:
-        games: List[str] = list(self.archipelago_options.archipelago_multiworld_randomizer_game_selection.value)
+        games: List[str] = list(self.archipelago_options.archipelago_multiworld_randomizer_multiplayer_game_selection.value)
         return sorted(games)
 
     @staticmethod
@@ -240,7 +240,7 @@ class ArchipelagoMultiworldRandomizerGame(Game):
 
 
 # Archipelago Options
-class ArchipelagoMultiworldRandomizerGameSelection(OptionList):
+class ArchipelagoMultiworldRandomizerWithMultiplayerGameSelection(OptionList):
     """
     Defines which APWorlds to select from.
 
@@ -331,7 +331,7 @@ class ArchipelagoMultiworldRandomizerGameSelection(OptionList):
     ]
 
 
-class ArchipelagoMultiworldRandomizerObjectiveTypes(OptionSet):
+class ArchipelagoMultiworldRandomizerWithMultiplayerObjectiveTypes(OptionSet):
     """
     Defines which types of Archipelago Multiworld Randomizer objectives to use when generating.
     """
@@ -348,7 +348,7 @@ class ArchipelagoMultiworldRandomizerObjectiveTypes(OptionSet):
 
     default = valid_keys
 
-class ArchipelagoMultiworldRandomizerBingoReleaseAlwaysOff(DefaultOnToggle):
+class ArchipelagoMultiworldRandomizerWithMultiplayerBingoReleaseAlwaysOff(DefaultOnToggle):
     """
     Indicates whether to force the release parameter to always be "Off" for APBingo objectives.
     """
