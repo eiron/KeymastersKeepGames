@@ -52,7 +52,6 @@ class SpelunkyGame(Game):
     def include_no_gold(self) -> bool:
         return self.archipelago_options.spelunky_include_no_gold_runs.value
 
-    @property
     def run_count_range(self) -> range:
         step = self.archipelago_options.spelunky_run_count.value
         return range(step, step * 2 + 1, step)
