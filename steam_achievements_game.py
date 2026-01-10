@@ -35,6 +35,20 @@ class SteamAchievementsGame(Game):
         super().__init__(*args, **kwargs)
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
+        eligible_games = self._get_eligible_games_data()
+
+        # Fallback when no Steam data is available with defaults
+        if not eligible_games:
+            return [
+                GameObjectiveTemplate(
+                    label="Play any game from your Steam library",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                )
+            ]
+
         templates = [
             GameObjectiveTemplate(
                 label="Beat STEAM_GAME_NAME",
