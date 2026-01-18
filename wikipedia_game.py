@@ -145,19 +145,8 @@ class WikipediaGame(Game):
         ]
     
     def specific_path_objectives(self) -> List[GameObjectiveTemplate]:
-        return [
-            GameObjectiveTemplate(
-                label="Get from START_ARTICLE to END_ARTICLE in MAX_CLICKS clicks or fewer",
-                data={
-                    "START_ARTICLE": (self.start_articles, 1),
-                    "END_ARTICLE": (self.end_articles, 1),
-                    "MAX_CLICKS": (self.max_clicks_range, 1),
-                },
-                is_time_consuming=True,
-                is_difficult=True,
-                weight=7,
-            ),
-        ]
+        # Note: Starter->finisher objectives are in base_objectives with expert_clicks_range
+        return []
 
     def category_path_objectives(self) -> List[GameObjectiveTemplate]:
         return [
@@ -704,12 +693,7 @@ class WikipediaGame(Game):
             # Historical figures
             "Steve Jobs",
             "Bill Gates",
-            "Adolf Hitler",
             "Winston Churchill",
-            "Michael Jordan",
-            "Charles Darwin",
-            "Shakespeare",
-            "Isaac Newton",
             "Socrates",
             "Aristotle",
             "Plato",
@@ -721,7 +705,6 @@ class WikipediaGame(Game):
             "Muhammad",
             "Confucius",
             "Alexander the Great",
-            "Napoleon Bonaparte",
             
             # Sciences and fields of study
             "Mathematics",
@@ -755,7 +738,6 @@ class WikipediaGame(Game):
             "Capitalism",
             "Communism",
             "Socialism",
-            "Fascism",
             "Anarchism",
             "Religion",
             "Atheism",
