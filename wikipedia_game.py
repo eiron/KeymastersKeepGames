@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import List
+from threading import Lock
 
 from dataclasses import dataclass
 
@@ -12,11 +13,19 @@ from ..game_objective_template import GameObjectiveTemplate
 from ..enums import KeymastersKeepGamePlatforms
 
 
+# Module-level cache that persists across class reloads
+_WIKIPEDIA_TRENDING_CACHE = None
+_WIKIPEDIA_TRENDING_CACHE_TIME = None
+_WIKIPEDIA_TRENDING_CACHE_TTL = 3600  # Cache for 1 hour
+_WIKIPEDIA_TRENDING_CACHE_LOCK = Lock()  # Thread-safe lock
+
+
 @dataclass
 class WikipediaGameArchipelagoOptions:
     wikipedia_game_include_specific_paths: WikipediaGameIncludeSpecificPaths
     wikipedia_game_include_category_paths: WikipediaGameIncludeCategoryPaths
     wikipedia_game_include_random_paths: WikipediaGameIncludeRandomPaths
+    wikipedia_game_include_trending_articles: WikipediaGameIncludeTrendingArticles
     wikipedia_game_max_clicks: WikipediaGameMaxClicks
 
 
@@ -151,9 +160,9 @@ class WikipediaGame(Game):
     def category_path_objectives(self) -> List[GameObjectiveTemplate]:
         return [
             GameObjectiveTemplate(
-                label="Get from START_CATEGORY to END_CATEGORY in MAX_CLICKS clicks or fewer",
+                label="Get from START_ARTICLE to END_CATEGORY in MAX_CLICKS clicks or fewer",
                 data={
-                    "START_CATEGORY": (self.categories, 1),
+                    "START_ARTICLE": (self.start_articles, 1),
                     "END_CATEGORY": (self.categories, 1),
                     "MAX_CLICKS": (self.max_clicks_range, 1),
                 },
@@ -162,9 +171,9 @@ class WikipediaGame(Game):
                 weight=7,
             ),
             GameObjectiveTemplate(
-                label="Get from CATEGORY article to 'Philosophy' in MAX_CLICKS clicks or fewer",
+                label="Get from START_ARTICLE to 'Philosophy' in MAX_CLICKS clicks or fewer",
                 data={
-                    "CATEGORY": (self.categories, 1),
+                    "START_ARTICLE": (self.start_articles, 1),
                     "MAX_CLICKS": (self.max_clicks_range, 1),
                 },
                 is_time_consuming=True,
@@ -174,7 +183,7 @@ class WikipediaGame(Game):
         ]
 
     def random_path_objectives(self) -> List[GameObjectiveTemplate]:
-        return [
+        objectives = [
             GameObjectiveTemplate(
                 label="Use 'Random Article' button twice, get from first to second in MAX_CLICKS clicks",
                 data={
@@ -224,6 +233,48 @@ class WikipediaGame(Game):
                 weight=10,
             ),
         ]
+        
+        # Add trending article objectives if enabled
+        if self.include_trending_articles:
+            trending = self.get_trending_articles_cached(limit=100)
+            if trending:  # Only add if API succeeded
+                objectives.extend([
+                    GameObjectiveTemplate(
+                        label="Get from TRENDING_ARTICLE to END_ARTICLE in MAX_CLICKS clicks",
+                        data={
+                            "TRENDING_ARTICLE": (lambda: trending, 1),
+                            "END_ARTICLE": (self.end_articles, 1),
+                            "MAX_CLICKS": (self.max_clicks_range, 1),
+                        },
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=10,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Get from START_ARTICLE to TRENDING_ARTICLE in MAX_CLICKS clicks",
+                        data={
+                            "START_ARTICLE": (self.start_articles, 1),
+                            "TRENDING_ARTICLE": (lambda: trending, 1),
+                            "MAX_CLICKS": (self.max_clicks_range, 1),
+                        },
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=10,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Get from TRENDING_START to TRENDING_END in MAX_CLICKS clicks",
+                        data={
+                            "TRENDING_START": (lambda: trending, 1),
+                            "TRENDING_END": (lambda: trending, 1),
+                            "MAX_CLICKS": (self.max_clicks_range, 1),
+                        },
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=12,
+                    ),
+                ])
+        
+        return objectives
     
     @property
     def include_specific_paths(self) -> bool:
@@ -236,6 +287,10 @@ class WikipediaGame(Game):
     @property
     def include_random_paths(self) -> bool:
         return self.archipelago_options.wikipedia_game_include_random_paths.value
+    
+    @property
+    def include_trending_articles(self) -> bool:
+        return self.archipelago_options.wikipedia_game_include_trending_articles.value
     
     @property
     def max_clicks(self) -> int:
@@ -271,6 +326,106 @@ class WikipediaGame(Game):
         base = self.max_clicks
         return range(base + 1, min(20, base + 7))
 
+    @staticmethod
+    def fetch_trending_articles(limit: int = 10) -> List[str]:
+        """Fetch recently changed Wikipedia articles using the MediaWiki API.
+        Returns a list of article titles, or empty list if API fails.
+        """
+        import requests
+        
+        try:
+            print(f"[Wikipedia Game] Fetching trending articles...")
+            
+            # Use MediaWiki API to get recent changes
+            url = "https://en.wikipedia.org/w/api.php"
+            params = {
+                "action": "query",
+                "list": "recentchanges",
+                "rcnamespace": "0",  # Main namespace only
+                "rclimit": limit * 3,  # Get more to filter
+                "rctype": "new|edit",  # New articles and edits
+                "format": "json"
+            }
+            headers = {
+                "User-Agent": "KeymastersKeep/1.0 (Wikipedia Game objectives)"
+            }
+            
+            response = requests.get(url, params=params, headers=headers, timeout=5)
+            
+            if response.status_code == 200:
+                data = response.json()
+                changes = data.get("query", {}).get("recentchanges", [])
+                
+                # Extract unique article titles, filtering out meta pages
+                articles = []
+                seen = set()
+                for change in changes:
+                    title = change.get("title", "")
+                    if (title and 
+                        title not in seen and
+                        not title.startswith(("Special:", "Wikipedia:", "User:", "User talk:", "Template:", "File:")) and
+                        title not in ["Main Page"]):
+                        articles.append(title)
+                        seen.add(title)
+                        if len(articles) >= limit:
+                            break
+                
+                print(f"[Wikipedia Game] Successfully fetched {len(articles)} trending articles")
+                return articles
+            else:
+                print(f"[Wikipedia Game] API returned status code {response.status_code}")
+            
+        except requests.exceptions.Timeout:
+            print("[Wikipedia Game] API request timed out")
+        except requests.exceptions.RequestException as e:
+            print(f"[Wikipedia Game] Network error fetching trending articles: {e}")
+        except Exception as e:
+            print(f"[Wikipedia Game] Error fetching trending articles: {e}")
+        
+        print("[Wikipedia Game] Trending articles disabled - API unavailable")
+        return []
+    
+    def get_trending_articles_cached(self, limit: int = 10) -> List[str]:
+        """Get trending articles with caching to avoid repeated API calls.
+        Returns cached results if available and fresh, otherwise fetches new ones.
+        Thread-safe implementation prevents multiple simultaneous fetches.
+        Uses module-level cache to persist across class reloads.
+        """
+        global _WIKIPEDIA_TRENDING_CACHE, _WIKIPEDIA_TRENDING_CACHE_TIME, _WIKIPEDIA_TRENDING_CACHE_LOCK
+        
+        import time
+        
+        current_time = time.time()
+        
+        # Fast path: check cache without lock first
+        if (_WIKIPEDIA_TRENDING_CACHE is not None and 
+            _WIKIPEDIA_TRENDING_CACHE_TIME is not None and
+            current_time - _WIKIPEDIA_TRENDING_CACHE_TIME < _WIKIPEDIA_TRENDING_CACHE_TTL):
+            return _WIKIPEDIA_TRENDING_CACHE
+        
+        # Use stale cache if available (better than multiple fetches)
+        if _WIKIPEDIA_TRENDING_CACHE is not None and len(_WIKIPEDIA_TRENDING_CACHE) > 0:
+            return _WIKIPEDIA_TRENDING_CACHE
+        
+        # Acquire lock for fetch operation
+        with _WIKIPEDIA_TRENDING_CACHE_LOCK:
+            # Double-check: another thread may have just populated the cache
+            if _WIKIPEDIA_TRENDING_CACHE is not None and len(_WIKIPEDIA_TRENDING_CACHE) > 0:
+                return _WIKIPEDIA_TRENDING_CACHE
+            
+            # Cache is empty, fetch new articles
+            articles = self.fetch_trending_articles(limit=limit)
+            
+            # Only update cache if fetch was successful (non-empty)
+            if articles:
+                _WIKIPEDIA_TRENDING_CACHE = articles
+                _WIKIPEDIA_TRENDING_CACHE_TIME = current_time
+            elif _WIKIPEDIA_TRENDING_CACHE:
+                # API failed but we have old cache - keep using it
+                return _WIKIPEDIA_TRENDING_CACHE
+            
+            return articles
+    
     @staticmethod
     def start_articles() -> List[str]:
         """Returns list of interesting start articles"""
@@ -1218,6 +1373,15 @@ class WikipediaGameIncludeRandomPaths(Toggle):
     These are more challenging as the start/end articles are unknown.
     """
     display_name = "Wikipedia Game: Include Random Paths"
+
+
+class WikipediaGameIncludeTrendingArticles(Toggle):
+    """
+    Indicates whether to include objectives using currently trending Wikipedia articles.
+    These articles are fetched from Wikipedia's most-viewed pages API and change daily.
+    """
+    display_name = "Wikipedia Game: Include Trending Articles"
+    default = 0
 
 
 class WikipediaGameMaxClicks(Range):
