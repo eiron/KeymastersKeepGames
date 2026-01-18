@@ -103,25 +103,51 @@ class CustomCategoriesGame(Game):
             # Generate specific task objectives (if enabled)
             if self.archipelago_options.custom_categories_include_specific_tasks:
                 for task in tasks:
+                    # Calculate effective weight: category weight is primary, task weight is secondary modifier
+                    # Formula: (category_weight * task_weight) / 50
+                    # Divisor 50 is the default weight, normalizing so defaults produce default result
+                    # This ensures category weight dominates while task weight provides fine-tuning
+                    effective_weight = max(1, round((category_weight * task["weight"]) / 50))
+                    
                     task_objective = GameObjectiveTemplate(
                         label=f"[{category_name}] {task['task']}",
                         data={},
                         is_difficult=(task["difficulty"] == "difficult"),
                         is_time_consuming=task["time_consuming"],
-                        weight=task["weight"]
+                        weight=effective_weight
                     )
                     objectives.append(task_objective)
 
             # Generate bulk task objectives (if enabled)
             if self.archipelago_options.custom_categories_include_bulk_tasks and len(tasks) > 1:
+                # Calculate median task weight for bulk objectives
+                # This ensures bulk tasks are weighted similarly to a median-difficulty task
+                task_weights = sorted([task["weight"] for task in tasks])
+                median_idx = len(task_weights) // 2
+                if len(task_weights) % 2 == 0:
+                    median_task_weight = (task_weights[median_idx - 1] + task_weights[median_idx]) / 2
+                else:
+                    median_task_weight = task_weights[median_idx]
+                
                 # Calculate how many tasks to include in bulk objectives
                 max_bulk_tasks = min(len(tasks), 10)  # Cap at 10 tasks max
+                num_bulk_objectives = min(3, max_bulk_tasks)  # Number of different bulk objectives we'll create
                 
                 # Generate a few different bulk options with weighted randomness
                 # Favor lower numbers (1-3 tasks more likely than 7-10 tasks)
-                for _ in range(min(3, max_bulk_tasks)):  # Generate up to 3 different bulk objectives per category
+                for _ in range(num_bulk_objectives):
                     weights = [max_bulk_tasks - i for i in range(max_bulk_tasks)]
                     num_tasks = self.random.choices(range(1, max_bulk_tasks + 1), weights=weights)[0]
+                    
+                    # Calculate effective weight for this specific bulk task
+                    # Base weight from category and median task weight
+                    # Divide by num_bulk_objectives since we're creating multiple (prevents tripling weight)
+                    # Divide by square root of num_tasks to make larger bulk objectives rarer
+                    import math
+                    bulk_weight = max(1, round(
+                        (category_weight * median_task_weight) / 
+                        (50 * num_bulk_objectives * math.sqrt(num_tasks))
+                    ))
                     
                     task_text = "task" if num_tasks == 1 else "tasks"
                     
@@ -136,12 +162,21 @@ class CustomCategoriesGame(Game):
                         data={},
                         is_difficult=is_difficult,
                         is_time_consuming=is_time_consuming,
-                        weight=category_weight
+                        weight=bulk_weight
                     )
                     objectives.append(bulk_objective)
 
             # Add category completion objective (if enabled)
             if self.archipelago_options.custom_categories_include_category_completion and len(tasks) > 1:
+                # Calculate minimum task weight for completion objectives
+                # Use minimum weight with heavier penalty (divide by 100 instead of 50)
+                # DIVIDE by square root of task count to make larger categories even rarer
+                # Higher weight = more likely, so we want LOW weights for completion (especially for big categories)
+                import math
+                min_task_weight = min(task["weight"] for task in tasks)
+                task_count_factor = math.sqrt(len(tasks))
+                completion_weight = max(1, round((category_weight * min_task_weight) / (100 * task_count_factor)))
+                
                 # Determine difficulty based on any difficult task in category
                 is_difficult = any(task["difficulty"] == "difficult" for task in tasks)
                 # Completing entire category is always time-consuming if there are multiple tasks
@@ -152,7 +187,7 @@ class CustomCategoriesGame(Game):
                     data={},
                     is_difficult=is_difficult,
                     is_time_consuming=is_time_consuming,
-                    weight=max(10, category_weight // 2)  # Lower weight for completion objectives
+                    weight=completion_weight
                 )
                 objectives.append(completion_objective)
 
