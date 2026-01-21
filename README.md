@@ -1,17 +1,27 @@
-# KeymastersKeepGames
-Keymaster's Keep games maintained by eiron
+# Keymaster's Keep Games
+Game implementations for Keymaster's Keep maintained by eiron
+
+## 📋 Table of Contents
+- [Universal Game Tester](#universal-game-tester-)
+- [Include Option Standards](#include-option-standards)
+- [Integration Guides](#integration-guides)
+- [Meta-Game Implementations](#meta-game-implementations)
+- [Individual Game Implementations](#individual-game-implementations)
+- [Recent Updates](#recent-updates)
+
+---
 
 ## Universal Game Tester 🔧
 
-The **Universal Game Tester** (located in `UniversalGameTester/`) is a comprehensive testing and analysis tool that works with **ANY** Keymaster's Keep game implementation. It automatically discovers, loads, and tests game modules regardless of their structure, option types, or complexity.
+The **Universal Game Tester** (located in `UniversalGameTester/`) is a comprehensive testing and analysis tool that works with **ANY** Keymaster's Keep game implementation.
 
 ### Key Features
 
-- **🔍 Automatic Discovery**: Scans directory for game implementation files using pattern recognition
-- **🎯 Universal Compatibility**: Works with any game module, including custom option types and complex data structures
-- **⚖️ Authentic Simulation**: Reproduces the Keep's weighted objective selection system for realistic testing
-- **📊 Comprehensive Analysis**: Provides detailed metrics on objectives, weights, features, and complexity
-- **🎮 Interactive Testing**: Menu-driven interface for testing individual games or running full test suites
+- **🔍 Automatic Discovery**: Scans directory for game implementation files
+- **🎯 Universal Compatibility**: Works with any game module and custom option types
+- **⚖️ Authentic Simulation**: Reproduces Keep's weighted objective selection system
+- **📊 Comprehensive Analysis**: Provides detailed metrics on objectives, weights, features
+- **🎮 Interactive Testing**: Menu-driven interface for testing individual games or full suites
 
 ### Usage
 
@@ -20,83 +30,12 @@ The **Universal Game Tester** (located in `UniversalGameTester/`) is a comprehen
 cd UniversalGameTester
 python universal_game_tester.py
 
-# Test a specific game implementation
+# Test a specific game
 python universal_game_tester.py stardew_valley_game.py
 
 # Test with shortened filename
 python universal_game_tester.py hades
 ```
-
-### What It Tests
-
-- **Dynamic Objective Generation**: Simulates the Keep's weighted selection process
-- **Option System Compatibility**: Validates all option types (Toggle, Choice, Range, OptionSet, custom types)
-- **Template Population**: Tests objective template data population with real values
-- **Constraint Systems**: Analyzes optional constraint templates
-- **Feature Detection**: Identifies relationship systems, difficulty scaling, and special features
-- **Import Resolution**: Handles relative imports and missing dependencies automatically
-
-### Sample Output
-
-```
-🎮 TESTING: Date Everything Game
-📊 IMPLEMENTATION ANALYSIS:
-   • Total Objectives: 29
-   • Complexity Score: 86
-   • Weight Distribution:
-     - Weight 10: 9 objectives █████████
-     - Weight 8: 2 objectives ██
-   • Features: Relationship System
-   • Categories: 10 options available
-
-🎯 DYNAMIC OBJECTIVE SELECTION:
-   1. 🔥 Achieve LOVE with Rebel (Rubber Duck)
-      └─ Weight: 10 | 😊 | ⏰ 📊x2 ⚖️10
-   2. ⭐ Get 5 structural elements to FRIENDS status
-      └─ Weight: 8 | 💪 | ⏰ 📊x2 ⚖️8
-```
-
-### Technical Details
-
-The tester handles:
-- **Custom Option Classes**: Automatically resolves string type annotations to actual classes
-- **Dynamic Mocking**: Creates universal mock environment for all possible imports
-- **Robust Error Handling**: Gracefully handles import failures, missing attributes, and malformed data
-- **Weight-Based Selection**: Implements the same probabilistic selection system used by the Keep
-- **Cross-Platform Compatibility**: Works on Windows, Mac, and Linux
-
-This tool is essential for validating that game implementations will work correctly within the Keymaster's Keep ecosystem before deployment.
-
----
-
-## Playnite Library Integration
-
-The **Playnite Library** module allows you to generate objectives based on your personal Playnite games database. This implementation supports filtering, sorting, and challenge generation using all the metadata Playnite provides (tags, genres, features, platforms, categories, sources, series, scores, and more).
-
-### How to Use
-
-1. **Export your Playnite games database** using the [Json Library Import Export add-on](https://playnite.link/addons.html#JsonLibraryImportExport_888ab97e-ea1b-40e5-a2da-ef917aee0603).
-    - In Playnite, install the add-on and export your library to a JSON file (e.g., `games.json`).
-    - Place the exported file somewhere accessible (e.g., your OneDrive or local folder).
-2. **Configure the file location in your Keymaster's Keep options YAML**:
-    - In your KMK options YAML, set the `playnite_library_json_path` to the path of your exported JSON file.
-    - Example:
-      ```yaml
-      playnite_library_json_path: C:/Users/yourname/Documents/games.json
-      ```
-3. **Run Keymaster's Keep** and select Playnite Library objectives as desired. The module will automatically read your exported file and generate objectives using your real game collection.
-
-### Features
-- Supports all Playnite metadata fields: tags, genres, features, platforms, categories, sources, series, scores, playtime, and more
-- Objective templates for playing games by tag, genre, platform, category, source, series, rating, and more
-- Ordering options: most recently added, oldest, newest, highest-rated (UserScore, CriticScore, CommunityScore), random
-- Fully integrated with Keymaster's Keep challenge generation and filtering
-
-### Requirements
-- Playnite (Windows only)
-- [Json Library Import Export add-on](https://playnite.link/addons.html#JsonLibraryImportExport_888ab97e-ea1b-40e5-a2da-ef917aee0603)
-- Exported games database JSON file
-- Correct path set in your KMK options YAML
 
 ---
 
@@ -104,543 +43,1322 @@ The **Playnite Library** module allows you to generate objectives based on your 
 
 All game implementations follow a standardized approach for include Toggle options:
 
-- **Basic Content**: All fundamental include options default to `True` for better objective generation
-- **Specialized/Harder Content**: Options for speedruns, difficulty challenges, or specialized content default to `False` 
-- **Cursed/Tedious Modules**: Games like "Cursed Red Dead Redemption 2" and "Really Boring Challenges" have all options default to `True`, as players are deliberately opting into that content type
-
-This ensures that casual players get comprehensive objective generation by default, while preserving the option to disable challenging or specialized content categories.
+- **Basic Content**: Fundamental options default to `True` for comprehensive objective generation
+- **Specialized/Harder Content**: Speedruns, difficulty challenges default to `False`
+- **Cursed/Tedious Modules**: Games like "Cursed Red Dead Redemption 2" default to `True` (players deliberately opt-in)
 
 ---
 
-## Game Implementation Modules
+## Integration Guides
 
-## Adventure/Experience Challenges
-A meta-game in which the options generated will be local exploration, cultural experiences, outdoor activities, and culinary adventures from the player's adventure backlog, paired with appropriate actions.
-Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
+### Playnite Library Setup
 
-This features separate objective templates for different types of adventure activities, with actions tailored to each category:
+Generate objectives from your Playnite games database.
 
-Local Exploration: ``"VISIT Downtown District"`` or ``"PHOTOGRAPH Historic Neighborhood"``
-Cultural Experiences: ``"ATTEND Live Theater Show"`` or ``"PARTICIPATE IN Cultural Workshop"``
-Outdoor Activities: ``"ATTEMPT Rock Climbing"`` or ``"CONQUER Hiking Trail"``
-Culinary Adventures: ``"TRY International Restaurant"`` or ``"SAMPLE Wine Tasting"``
+**Requirements:**
+1. Export database using [Json Library Import Export add-on](https://playnite.link/addons.html#JsonLibraryImportExport_888ab97e-ea1b-40e5-a2da-ef917aee0603)
+2. Set path in KMK YAML: `playnite_library_json_path: C:/path/to/games.json`
 
-This includes options for customizing local exploration targets, cultural experiences, outdoor activities, culinary adventures, and their respective action lists. The system will only generate objectives for adventure categories that have been configured, allowing for flexible use whether you prefer local discovery, cultural immersion, outdoor challenges, food exploration, or all four!
+### Steam Achievements Setup
 
-## Archipelocal
-A real-world exploration module that generates location-based objectives using the Geoapify Places API. Visit cafes, parks, museums, and other nearby places based on your actual location! Supports both concrete place suggestions (with coordinates and distances) and generic category-based objectives.
+Generate objectives from your Steam library via API.
 
-**Powered by [Geoapify](https://www.geoapify.com/)**
+**Requirements:**
+1. Get API key: [https://steamcommunity.com/dev/apikey](https://steamcommunity.com/dev/apikey)
+2. Set environment variable `STEAM_API_KEY`
+3. Configure Steam ID in YAML options
 
-**Setup Required:** Free Geoapify API key and home location configuration. See [ARCHIPELOCAL_SETUP.md](ARCHIPELOCAL_SETUP.md) for detailed setup instructions.
+### Archipelocal Setup
 
-Core Categories: ``Food & Drink``, ``Leisure & Tourism``, ``Entertainment & Culture``, ``Natural & Man-Made Sights``, ``Shopping``, ``Services``
+Real-world location-based exploration via Geoapify API.
 
-Sample Objectives: ``"Visit Starbucks @ 40.78509, -73.96829 – 0.42 km • Cafe"`` or ``"Visit your 3rd-closest Park near your home"`` or ``"Visit a random Museum near your max distance"``
+**Requirements:**
+See [ARCHIPELOCAL_SETUP.md](ARCHIPELOCAL_SETUP.md) for detailed instructions.
 
-Features:
-- **Live Suggestions**: Fetches real nearby places with names, coordinates, and distances
-- **Lazy Loading**: API calls only when objectives are actually selected (session-cached)
-- **Flexible Strategies**: Choose between only concrete suggestions, prefer concrete, or random mix
-- **Customizable**: Set max distances globally or per-category, choose your preferred categories
-- **Privacy-Friendly**: Use nearby public locations instead of exact addresses
+---
 
-## Archipelagourmet
-A meta-game in which the options generarated will be recipes, and/or takeaway and restaurant options provided by the player.
-Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
+## Meta-Game Implementations
 
-This also features a submodule that include challenges of the type:
-``"Make a meal using each of the following ingredients: {3-5 random ingredients}"``
+### Adventure/Experience Challenges
+**File**: `adventure_experience.py`
 
-This includes options for filtering by dietary requirements, as well as blocking unwanted ingredients and adding custom ingredients.
-You can also set the range for the number of random ingredients from 1 through 10, though there is a chance too high a number will cause the challenge to be unreadable in the client!
+Transform real-world adventure backlog into objectives.
 
-## Chapter Quest
-A meta-game that transforms your personal reading list into gaming objectives, creating targeted reading challenges based on your book collection with chapter-specific goals and meta-challenges.
+**Categories**: Local Exploration, Cultural Experiences, Outdoor Activities, Culinary Adventures
 
-This features comprehensive objective templates for different types of reading goals:
+**Sample**: `"VISIT Downtown District"`, `"ATTEMPT Rock Climbing"`, `"TRY International Restaurant"`
 
-Individual Chapters: ``"[Fantasy Fiction] The Hobbit by J.R.R. Tolkien -> Read chapter 7"`` or ``"[Science Fiction] Dune by Frank Herbert -> Read chapter 23"``
-Book Completion: ``"[Classic Literature] The Great Gatsby by F. Scott Fitzgerald -> Complete the entire book"``
-Genre Challenges: ``"Genre Challenge: Read 2 chapters from a Science Fiction book"`` or ``"Genre Challenge: Read 1 chapter from Fantasy Fiction book"``
-Author Challenges: ``"Author Challenge: Read 3 chapters from different books by J.R.R. Tolkien"`` or ``"Author Challenge: Read 1 chapter from book by Jane Austen"``
+---
 
-This includes extensive customization options for book collections, meta-challenges, and difficulty scaling:
-- **Book Collection**: Configure title, chapter count, author, genre, and difficulty for each book
-- **Meta-Challenges**: Optional genre-based and author-based challenges that scale dynamically based on your collection
-- **Difficulty System**: Mark challenging books as "difficult" to integrate with Keymaster's Keep difficulty filtering
-- **Smart Generation**: Up to 10 chapters per book, with single-chapter objectives marked as non-time-consuming and full book completion as time-consuming
+### Archipelago Multiworld Randomizer with Multiplayer
+**File**: `archipelago_multiworld_randomizer_game_with_multiplayer.py`
 
-The system generates individual chapter reading goals, book completion objectives, and intelligent meta-challenges that encourage exploring different genres and authors in your collection. Perfect for readers who want to gamify their reading goals and discover variety in their personal libraries!
+Create objectives for participating in Archipelago multiworld sessions.
 
-## Chart Attack
-A meta-game that lets you follow charts (music, books, films, games, restaurants, etc.) and generates objectives that pick a specific chart and a chart position.
+**Categories**: Multiworld Participation, Item Progression, Helper Activities, Community Engagement
 
-This features a flexible system for defining charts and how you want to interact with them:
+**Sample**: `"Complete your sphere 1 progression items"`, `"Send 10 useful items to other players"`
 
-Configuration: ``"Billboard Hot 100 | Follow | 1-50 | 3"`` or ``"Goodreads Fantasy | Read | 1-100"``
+---
 
-Sample Objectives: ``"Follow Billboard Hot 100 #7"`` or ``"Read Goodreads Fantasy #42"``
+### Archipelocal
+**File**: `archipelocal_game.py`
 
-Features:
-- **Custom Charts**: Define any ranked list you want to follow
-- **Custom Verbs**: Set the action for each chart (Follow, Watch, Read, Play, Visit)
-- **Position Ranges**: Focus on the top 10, top 50, or any specific range
-- **Weighted Selection**: Optional "Weight Top Positions" feature makes higher-ranked items (e.g., #1) more likely to appear than lower-ranked ones
-- **Chart Weighting**: Make specific charts appear more frequently than others
+Real-world exploration using Geoapify Places API. **Powered by [Geoapify](https://www.geoapify.com/)**
 
-## Christmas/Holiday Challenges
-A meta-game in which the options generated will be holiday decorations, gift preparations, baking projects, and festive traditions from the player's Christmas and holiday backlog, paired with appropriate seasonal actions.
-Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
+**Categories**: Food & Drink, Leisure & Tourism, Entertainment & Culture, Natural & Man-Made Sights, Shopping, Services
 
-This features separate objective templates for different types of holiday activities, with actions tailored to each category:
+**Sample**: `"Visit Starbucks @ 40.78509, -73.96829 – 0.42 km • Cafe"`, `"Visit your 3rd-closest Park near your home"`
 
-Decorations: ``"SET UP Christmas Tree"`` or ``"ARRANGE Mantel Decorations"``
-Gifts: ``"MAKE Handmade Gift"`` or ``"WRAP Secret Santa Gift"``
-Baking: ``"MAKE Christmas Cookies"`` or ``"CREATE Gingerbread House"``
-Traditions: ``"ENJOY Christmas Movie Marathon"`` or ``"ATTEND Christmas Market Visit"``
+**Features**: Live place suggestions, lazy loading, flexible strategies, customizable distances, privacy-friendly
 
-This includes options for customizing decoration plans, gift preparations, baking projects, holiday traditions, and their respective action lists. The system will only generate objectives for holiday categories that have been configured, allowing for flexible use whether you focus on decorating, gift-giving, holiday baking, festive traditions, or all four!
+---
 
-## Creative Challenges
-A meta-game in which the options generated will be art projects, writing endeavors, photography challenges, and craft projects from the player's creative backlog, paired with appropriate actions.
-Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
+### Archipelagourmet
+**File**: `archipelagourmet_game.py`
 
-This features separate objective templates for different types of creative activities, with actions tailored to each medium:
+Recipes, restaurants, and random ingredient cooking challenges.
 
-Art Projects: ``"CREATE Watercolor Painting"`` or ``"REFINE Mixed Media Piece"``
-Writing: ``"WRITE Short Story"`` or ``"REVISE Poetry Collection"``
-Photography: ``"CAPTURE Portrait Session"`` or ``"MASTER Macro Challenge"``
-Crafts: ``"MAKE Knitting Project"`` or ``"ATTEMPT Woodworking"``
+**Categories**: Recipes, Restaurants, Random Ingredient Challenges
 
-This includes options for customizing art project selections, writing goals, photography challenges, craft projects, and their respective action lists. The system will only generate objectives for creative categories that have been configured, allowing for flexible use whether you focus on visual arts, writing, photography, crafting, or all four!
+**Sample**: `"Make [Recipe Name]"`, `"Make a meal using each of the following ingredients: {3-5 random ingredients}"`
 
-## Custom Categories
-A flexible meta-game system that allows players to create their own custom categories with weighted sub-tasks, perfect for organizing personal goals, projects, or any kind of tracked activities.
+**Features**: Dietary filtering, ingredient blacklist, customizable ingredient pool (1-10)
 
-This features a fully customizable category and task system with granular weight control:
-
-Category Examples: ``"Fitness & Health"``, ``"Home Improvement"``, ``"Learning & Skills"``, ``"Personal Development"``, ``"Career Development"``, ``"Financial Management"``
-
-Sample Objectives:
-- Specific Tasks: ``"[Fitness & Health] Complete a 30-minute workout"`` or ``"[Home Improvement] Organize the garage or storage area"``
-- Bulk Tasks: ``"[Learning & Skills] Complete 3 tasks"`` or ``"[Personal Development] Complete 2 tasks"``
-- Category Completion: ``"[Career Development] Complete all tasks in this category"``
-
-This includes comprehensive customization with a two-tier weighting system:
-- **Category Weight**: Controls how often objectives from each category appear overall (0-100+)
-- **Task Weight**: Controls how often specific tasks appear when their category is selected (0-100+)
-- **Task Properties**: Mark tasks as "difficult" or "time_consuming" for proper filtering
-- **Flexible Format**: Use simple strings for basic tasks or detailed format for full control
-
-The module comes with 8 default categories covering common life areas (Fitness, Home, Creative, Learning, Personal Development, Social, Career, Financial), each with 8-9 example tasks. Players can completely customize categories and tasks to match their personal goals and priorities. Perfect for anyone who wants to gamify their to-do lists, habit tracking, or personal development goals with fine-tuned control over objective frequency!
-
-## Keymaster's Keep
-The ultimate meta module for generating challenges to play Keymaster's Keep itself! This module creates objectives for playing Keymaster's Keep in its two game modes: Keymaster's Challenge and Magic Key Heist, using the comprehensive game selection pool from the actual Keymaster's Keep configuration.
-
-This features objective templates that mirror the two main game modes, with games selected from the real Keymaster's Keep pool:
-
-Keymaster's Challenge: ``"Complete a Keymaster's Challenge including the games: Celeste, Hollow Knight, and Slay the Spire"``
-Magic Key Heist: ``"Complete a Magic Key Heist including the games: Balatro and Enter the Gungeon"``
-
-This includes options for customizing the game selection pool, challenge types, and game count ranges. Players can:
-- **Edit Game Selection**: Add, remove, or weight games in the selection pool (defaults to the 120+ games currently available)
-- **Choose Challenge Types**: Select which game modes to include (Keymaster's Challenge, Magic Key Heist, or both)
-- **Set Game Count Range**: Configure minimum (1-10) and maximum (1-10) games per challenge (defaults to 2-6)
-
-This creates a truly recursive meta-gaming experience where Keymaster's Keep challenges you to play the very games that Keymaster's Keep was designed to manage! Just like with other modules, players can completely customize their experience by editing the game selection to match their preferences and library.
-
-## Music Listening
-A meta-game in which the options generated will be albums, artists, and playlists from the player's music listening backlog, paired with appropriate listening actions.
-Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
-
-This features separate objective templates for different types of musical content, with actions tailored to each category:
-
-Albums: ``"LISTEN TO Album Title"`` or ``"ANALYZE Soundtrack Title"``
-Artists: ``"EXPLORE Artist Name"`` or ``"STUDY DISCOGRAPHY Composer Name"``
-Playlists: ``"COMPLETE Playlist Name"`` or ``"SHUFFLE THROUGH Mix Name"``
-
-This includes options for customizing album selections, artist selections, playlist selections, and their respective action lists. The system will only generate objectives for music categories that have been configured, allowing for flexible use whether you prefer exploring specific albums, discovering new artists, working through playlists, or all three!
-
-## Physical/Health Challenges
-A meta-game in which the options generated will be exercises, wellness activities, nutrition goals, and movement challenges from the player's health and fitness backlog, paired with appropriate actions.
-Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
-
-This features separate objective templates for different types of health activities, with actions tailored to each category:
-
-Exercise: ``"COMPLETE Push-up Challenge"`` or ``"PRACTICE Strength Circuit"``
-Wellness: ``"MAINTAIN Sleep Schedule"`` or ``"ESTABLISH Morning Routine"``
-Nutrition: ``"TRY Healthy Recipe"`` or ``"TRACK Water Intake"``
-Movement: ``"COMPLETE 10,000 Steps"`` or ``"PRACTICE Morning Stretch"``
-
-This includes options for customizing exercise selections, wellness activities, nutrition goals, movement challenges, and their respective action lists. The system will only generate objectives for health categories that have been configured, allowing for flexible use whether you focus on structured exercise, general wellness, nutrition tracking, daily movement, or all four!
-
-## Really Boring Challenges
-A deliberately mundane module that transforms everyday, routine activities into gaming objectives, celebrating the art of finding engagement in the most ordinary tasks.
-
-Core Categories: ``Household Maintenance``, ``Personal Organization``, ``Digital Housekeeping``, ``Routine Optimization``, ``Administrative Tasks``, ``Basic Self-Care``
-
-Sample Objectives: ``"Organize 50 digital files"`` or ``"Clean one room thoroughly"`` or ``"Update 3 different passwords"``
-
-## Real-World Scavenger Hunt
-A comprehensive real-world exploration game that encourages getting outside, discovering your local area, and engaging with your community. This module turns your surroundings into a game world with objectives focused on photography, location discovery, object collection, social interaction, nature exploration, cultural experiences, seasonal activities, and community engagement.
-
-This features 8 major categories of real-world objectives:
-
-Photography Challenges: ``"Take a photo of A street musician"`` or ``"Photograph Lightning during a storm in natural lighting without flash"``
-Location Hunting: ``"Find and visit A hidden garden"`` or ``"Visit 3 different Local cafes establishments"``
-Object Collection: ``"Collect 10 different Interesting rocks items"`` or ``"Find 2 Vintage postcards at thrift stores or markets"``
-Interaction Challenges: ``"Engage in 3 conversations with Local shop owners"`` or ``"Learn 5 basic phrases in Spanish"``
-Nature Exploration: ``"Identify 10 different Birds species"`` or ``"Explore 3 different Walking trails trails"``
-Cultural Discovery: ``"Visit 2 Art museums or galleries"`` or ``"Try 3 different Local specialties dishes"``
-Seasonal Activities: ``"Participate in Leaf collection during Fall"`` or ``"Experience Rain puddle photography during specific weather"``
-Community Engagement: ``"Support 3 local Restaurants businesses"`` or ``"Help with Community garden maintenance"``
-
-This includes extensive customization options with hundreds of possible targets, activities, and constraints. Players can:
-- **Focus Areas**: Choose from 8 different activity categories
-- **Difficulty Levels**: Easy, hard, or all challenge types
-- **Travel Scope**: Local, regional, or unlimited exploration
-- **Constraints**: Transportation methods, time limits, weather conditions, companions
-
-The module contains over 500 different objectives across photography subjects, discoverable locations, collectible items, people to meet, activities to try, and seasonal experiences. It's designed to encourage exploration, community connection, and getting outside your normal routine!
-
-## Social/Connections Challenges
-A meta-game in which the options generated will be friend meetups, family activities, community events, and networking opportunities from the player's social backlog, paired with appropriate social actions and customizable lists of people to interact with.
-Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
-
-This features separate objective templates for different types of social activities, with actions tailored to each category:
-
-Friend Meetups: ``"ARRANGE Coffee Meetup with Best Friend"`` or ``"CATCH UP WITH Game Night with College Friend"``
-Family Activities: ``"VISIT Family Dinner with Family Member"`` or ``"SPEND TIME WITH Holiday Visit with Family Member"``
-Community Events: ``"ATTEND Local Festival"`` or ``"VOLUNTEER FOR Community Meeting"``
-Networking: ``"NETWORK AT Professional Meetup"`` or ``"PARTICIPATE IN Industry Conference"``
-
-This includes options for customizing meetup types, family activities, community events, networking opportunities, and their respective action lists. Most importantly, it includes a **People Selection** option where you can list actual friends, family members, colleagues, and other people you want to connect with. The system will only generate objectives for social categories that have been configured, allowing for flexible use whether you focus on friend connections, family time, community involvement, professional networking, or all four!
-
-## Steam Achievements
-A meta-game that generates objectives based on your Steam library and achievement progress, automatically fetching your games via the Steam API.
-
-**Setup Required:**
-1. **Get a Steam Web API Key**: Visit [https://steamcommunity.com/dev/apikey](https://steamcommunity.com/dev/apikey) to generate one.
-2. **Set the Environment Variable**:
-   - **Windows (System)**: Search for "Edit the system environment variables", click "Environment Variables", add a new User variable named `STEAM_API_KEY` with your key as the value. Restart your terminal/editor.
-   - **PowerShell (Temporary)**: `$env:STEAM_API_KEY="your_key_here"`
-   - **Command Prompt (Temporary)**: `set STEAM_API_KEY=your_key_here`
-3. **Configure Steam ID**: Set your Steam ID in the YAML options.
-
-This features objective templates for different levels of mastery across your Steam library:
-
-Game Completion: ``"Beat Elden Ring"``
-Progress Goals: ``"Unlock at least 25% of the achievements in Hollow Knight"``
-Mastery: ``"Unlock all the achievements in Vampire Survivors"``
-
-Features:
-- **Automatic Library Fetching**: Pulls your owned games directly from Steam
-- **Playtime Filtering**: Filter games by minimum or maximum playtime (e.g., only games you've played at least 2 hours, or haven't played too much)
-- **Smart Filtering**: Automatically excludes games without community visible stats (achievements)
-- **Exclusions**: Option to manually exclude specific games or App IDs
-- **Percentage Ranges**: Configurable min/max percentages for achievement progress objectives
-
-## Watchlist
-A meta-game in which the options generated will be films and TV shows from the player's watchlist, paired with appropriate viewing actions.
-Some default options are provided for clarity, but can easily be overwritten with whatever the player desires.
-
-This features separate objective templates for films and television content, with actions tailored to each medium:
-
-Films: ``"WATCH Film Title"`` or ``"FINISH Documentary Title"``
-TV Shows: ``"BINGE TV Series Title"`` or ``"CATCH UP Miniseries Title"``
-
-This includes options for customizing film selections, TV show selections, and their respective action lists. The system will only generate objectives for media types that have been configured, allowing for flexible use whether you prefer films, television, or both!
-
-## Individual Game Modules
-
-### Recent Additions & Changes (Nov 2025)
-The following modules and systemic improvements were recently added and standardized:
-
-• Brotato: New arena roguelite module with objectives across character unlocks, weapon synergy runs, danger level completions, boss wave clears, economy scaling, and endless experimentation.
-• Circadian Dice: Dice-building roguelike objectives for scenario clears, class mastery, relic unlocks, high-score thresholds, challenge modifiers, and perfect-turn efficiency goals.
-• Crypt of the NecroDancer: Rhythm roguelike module covering zone progression, character victories, boss defeats, speed/score cadence challenges, item/shop interactions, mode variants, and DLC content (Amplified, Synchrony, Hatsune Miku, Shovel Knight) gated behind new Toggle options.
-• Chess.com Integration: Competitive chess objectives including daily puzzle streaks, rapid/blitz/bullet rating milestones, accuracy goals, opening exploration, time control diversity, and win-condition variety.
-• Caves of Qud: Deep science-fantasy roguelike coverage for mutation acquisition, faction reputation, exploration tiers, artifact identification, survival milestones, and legendary creature hunts. Limb dismemberment moved from objective list into an optional constraint for cleaner generation.
-• Binding of Isaac (Rebirth) Modded Characters: Added an OptionSet allowing user-defined modded characters that integrate seamlessly into character victory and achievement templates.
-• Toggle Standardization: Older DefaultOnToggle usages converted to consistent Toggle patterns (e.g., Brotato DLC, NecroDancer DLC) with property access for clarity (`self.include_amplified_dlc.value`).
-
-These changes improve extensibility (user-supplied characters), clarity (uniform toggle access), and accuracy (constraint vs objective classification).
-
-### Brotato
-An arena wave-based roguelite module focused on weapon builds, character diversity, scaling economy, and escalating enemy waves.
-
-Core Categories: ``Character Unlocks``, ``Weapon Synergy Runs``, ``Wave Survival``, ``Boss & Elite Clears``, ``Economic Scaling``, ``Stat Thresholds``, ``Endless / Danger Levels``
-
-Sample Objectives: ``"Clear Danger Level 5 with Ghost character"`` or ``"Reach 200% attack speed before wave 15"`` or ``"Defeat an Elite using only elemental weapons"``
-
-Features:
-- Build Diversity: Objectives forcing single-damage-type, hybrid, or specific synergy builds
-- Difficulty Scaling: Targets for Danger level completions and post-Danger endless survival
-- Resource Economy: Harvest/material accumulation, shop reroll efficiency, selective upgrade paths
-- Character Progression: Unlock & mastery goals for base and secret characters
-- Boss Pressure: Timed boss wave clears, elite exterminations under constraints (no lifesteal, limited armor)
-- Optional Constraints: Item blacklists, stat caps, shop reroll limits for hardcore runs
-
-### Circadian Dice
-Dice-building roguelike module emphasizing scenario strategy, face crafting, relic combinations, and long-term progression.
-
-Core Categories: ``Scenario Clears``, ``Class Mastery``, ``Relic Unlocks``, ``High Score Targets``, ``Status / Combo Challenges``, ``Perfect / Efficient Turns``
-
-Sample Objectives: ``"Clear Forest scenario with Alchemist at 3+ relics"`` or ``"Reach 25,000 score in Temple run"`` or ``"Win a scenario without taking damage"``
-
-Features:
-- Scenario Variety: Objectives tied to specific environments & escalating difficulty tiers
-- Class Progression: Mastery levels, ability utilization counts, class-specific relic synergy goals
-- Dice Engineering: Face craft counts, combo activation (multi-status, multi-resource) objectives
-- Scoring Milestones: Threshold goals encouraging optimization & risk management
-- Efficiency Challenges: Win with limited rerolls, single die upgrades, or turn count caps
-- Relic & Unlock Tracking: Acquire or utilize specific relic sets under constraint conditions
-
-### Crypt of the NecroDancer
-Rhythm-based roguelike module spanning zone clears, character-specific completion, boss mastery, cadence/rhythm challenges, and DLC expansions.
-
-Core Categories: ``Zone Progression``, ``Character Victories``, ``Boss Defeats``, ``Rhythm / Cadence Challenges``, ``Item / Shop Interaction``, ``Mode Variants``, ``DLC Content``
-
-Sample Objectives: ``"Clear Zone 4 with Cadence without missing a beat"`` or ``"Defeat Dead Ringer using only shovel damage (Monk)"`` or ``"Complete All Zones with Hatsune Miku"``
-
-Features:
-- DLC Toggles: Amplified, Synchrony, Hatsune Miku, Shovel Knight gated behind consistent toggles
-- Character Depth: Base + DLC + special guest characters with tailored victory/constraint templates
-- Rhythm Mastery: Beat streaks, no-miss zone clears, speed (real-time & beat count) challenges
-- Boss Variants: Diverse kill-condition goals (weapon restriction, environmental kills, phase manipulation)
-- Item Economy: Shop purchase caps, minimal gold runs, single-gear-slot challenges
-- Mode Variety: All Zones, story progression, seeded/speed modes, shrine interactions
-- Structured Difficulty: Time-consuming vs non-time-consuming labeling for balanced selection
-
-### Chess.com Integration
-Competitive chess module generating goals from live, rapid, blitz, bullet, puzzle, and thematic training activities via your Chess.com profile metrics.
-
-Core Categories: ``Rating Milestones``, ``Time Control Diversity``, ``Opening Exploration``, ``Puzzle Streaks``, ``Accuracy / Quality Goals``, ``Win Condition Variety``
-
-Sample Objectives: ``"Achieve 5-day puzzle streak"`` or ``"Reach 1450 Blitz rating"`` or ``"Play 10 rapid games using the French Defense as Black"``
-
-Features:
-- Multi Time Control: Distinct rating & volume targets (Bullet/Blitz/Rapid/Daily)
-- Opening Coverage: Play counts / result thresholds for chosen ECO families
-- Puzzle & Tactics: Streak length, highscore improvements, accuracy percentage goals
-- Accuracy Metrics: Average centipawn loss, minimum game accuracy thresholds
-- Win Condition Diversity: Checkmate patterns, endgame technique completions
-- Improvement Tracking: Rating delta objectives over session intervals
-
-### Caves of Qud
-Science-fantasy roguelike module capturing the mutation-driven exploration, faction dynamics, and emergent survival of Qud.
-
-Core Categories: ``Mutation Acquisition``, ``Exploration & Biomes``, ``Faction Reputation``, ``Artifact Identification``, ``Survival Milestones``, ``Legend Hunts``, ``Build Constraints``
-
-Sample Objectives: ``"Acquire 4 new mutations without visiting a Grit Gate vendor"`` or ``"Reach reputation Trusted with the Mechanimists"`` or ``"Identify 12 artifacts in one run"``
-
-Features:
-- Mutation Depth: New mutation thresholds, specific rare mutation acquisition, synergy limitations
-- Faction Systems: Reputation tier goals, diplomacy constraints, multi-faction neutrality runs
-- Biome Exploration: Layered region progression & landmark discovery counts
-- Artifact Mastery: Identification streaks, tinkering/crafting milestones
-- Survival Challenges: Food/water scarcity, limb loss persistence, quick rebuild constraints
-- Legendary Hunts: Defeat specific named creatures under gear or turn limits
-- Constraint Reclassification: Limb dismemberment now an optional constraint (not objective) for less repetitive generation
-
-### Binding of Isaac (Rebirth) – Modded Character Support
-Extended character victory objectives now include user-specified modded characters via a new OptionSet. Any names added populate victory, boss defeat, and achievement templates automatically, preserving weighting and difficulty tagging.
-
-Benefits:
-- Player Freedom: Drop in custom characters without code changes
-- Seamless Integration: Uses same provider logic as official roster
-- Future-Proof: Scales with community content and personal mods
-
-### American Truck Simulator
-A trucking simulation module covering deliveries, exploration, and business management across the vast landscapes of the USA.
-
-Core Categories: ``Interstate Delivery``, ``State Exploration``, ``Truck Ownership``, ``Long Haul``, ``Heavy Haul``, ``Business Objectives``, ``DLC Content``
-
-Sample Objectives: ``"Transport Electronics from Los Angeles to Phoenix"`` or ``"Complete deliveries to 3 different cities in Nevada"`` or ``"Purchase and own a Peterbilt truck"``
-
-Features:
-- **Comprehensive Coverage**: Supports base game and all state DLCs (California to Missouri)
-- **Specialized Hauling**: Objectives for heavy haul, hazardous materials, and oversized loads
-- **Business Management**: Goals for hiring drivers, expanding garages, and earning revenue
-- **Realistic Constraints**: Optional challenges for fuel economy, perfect parking, and DOT compliance
-
-### Animal Crossing: New Horizons
-An island life simulation module focusing on island development, social interaction, decoration, and seasonal activities across the charming world of Animal Crossing.
-
-Core Categories: ``Island Development``, ``Social Interaction``, ``Decoration & Design``, ``Collection & Catalog``, ``Seasonal Events``, ``Achievement Goals``
-
-Sample Objectives: ``"Develop 5 different Residential Areas areas"`` or ``"Achieve Best Friends relationship with 3 villagers"`` or ``"Collect 25 different Fish species"``
-
-### Archipelago Multiworld Randomizer
-A meta-gaming module that creates objectives for participating in Archipelago multiworld randomizer sessions, covering the collaborative puzzle-solving experience of linked randomized games.
-
-Core Categories: ``Multiworld Participation``, ``Item Progression``, ``Helper Activities``, ``Community Engagement``, ``Technical Setup``, ``Game Coordination``
-
-Sample Objectives: ``"Complete your sphere 1 progression items"`` or ``"Send 10 useful items to other players"`` or ``"Help troubleshoot another player's connection issues"``
-
-### Baldur's Gate 3
-A deep RPG module covering character builds, story choices, companion relationships, tactical combat, exploration, and the rich narrative possibilities of Faerûn.
-
-Core Categories: ``Character Builds``, ``Story Progression``, ``Companion Quests``, ``Exploration``, ``Combat Challenges``, ``Social Encounters``, ``Collectibles``, ``Achievement Hunting``
-
-Sample Objectives: ``"Complete Act 1 with a Paladin/Warlock multiclass build"`` or ``"Achieve Romance relationship with Shadowheart"`` or ``"Successfully pass 20 Persuasion skill checks"``
-
-### Bloodstained: Ritual of the Night
-A comprehensive Metroidvania module covering shard collection, exploration, boss battles, alchemy, equipment mastery, and Miriam's quest for answers.
-
-Core Categories: ``Shard Collection``, ``Exploration``, ``Boss Challenges``, ``Alchemy & Crafting``, ``Equipment Mastery``, ``Completion Goals``, ``Speedrun Challenges``
-
-Sample Objectives: ``"Collect 20 Conjure shards"`` or ``"Reach 90% map completion"`` or ``"Defeat Bloodless without using healing items"``
+---
 
 ### Board Game Collection
-A physical gaming module focused on exploring and mastering your board game collection, from quick card games to complex strategy epics, with emphasis on both solo and group play.
+**File**: `board_game_collection.py`
 
-Core Categories: ``Strategy Games``, ``Party Games``, ``Solo Gaming``, ``Learning New Games``, ``Game Night Hosting``, ``Collection Management``
+Physical board game exploration and mastery.
 
-Sample Objectives: ``"Learn and play 3 new games from your collection"`` or ``"Host a game night with 4+ different games"`` or ``"Complete a solo campaign game"``
+**Categories**: Strategy Games, Party Games, Solo Gaming, Learning New Games, Game Night Hosting
+
+**Sample**: `"Learn and play 3 new games from your collection"`, `"Host a game night with 4+ different games"`
+
+---
+
+### Chapter Quest
+**File**: `chapter_quest_game.py` | **Docs**: [CHAPTER_QUEST.md](CHAPTER_QUEST.md)
+
+Transform reading list into gaming objectives with chapter-specific goals.
+
+**Categories**: Individual Chapters, Book Completion, Genre Challenges, Author Challenges
+
+**Sample**: `"[Fantasy Fiction] The Hobbit by J.R.R. Tolkien -> Read chapter 7"`, `"Genre Challenge: Read 2 chapters from a Science Fiction book"`
+
+**Features**: Book configuration, meta-challenges, difficulty scaling, smart generation
+
+---
+
+### Chart Attack
+**File**: `chart_attack_game.py`
+
+Follow ranked charts (music, books, films, games, etc.) and pick specific positions.
+
+**Sample**: `"Follow Billboard Hot 100 #7"`, `"Read Goodreads Fantasy #42"`
+
+**Features**: Custom charts/verbs, position ranges, weighted selection, chart weighting
+
+---
+
+### Christmas/Holiday Challenges
+**File**: `christmas_holiday_challenges.py`
+
+Holiday activities from your seasonal backlog.
+
+**Categories**: Decorations, Gifts, Baking, Traditions
+
+**Sample**: `"SET UP Christmas Tree"`, `"MAKE Handmade Gift"`, `"CREATE Gingerbread House"`
+
+---
+
+### Creative Challenges
+**File**: `creative_challenges.py`
+
+Art projects, writing, photography, crafts from your creative backlog.
+
+**Categories**: Art Projects, Writing, Photography, Crafts
+
+**Sample**: `"CREATE Watercolor Painting"`, `"WRITE Short Story"`, `"CAPTURE Portrait Session"`
+
+---
+
+### Custom Categories
+**File**: `custom_categories_game.py` | **Docs**: [CUSTOM_CATEGORIES.md](CUSTOM_CATEGORIES.md)
+
+Fully customizable categories with weighted sub-tasks for personal goals.
+
+**Sample**: `"[Fitness & Health] Complete a 30-minute workout"`, `"[Learning & Skills] Complete 3 tasks"`
+
+**Features**: Category weight (0-100+), task weight (0-100+), task properties (difficult, time_consuming), 8 default categories
+
+---
+
+### Keymaster's Keep
+**File**: `keymasters_keep.py`
+
+Ultimate meta module for generating Keymaster's Keep challenges to play within Keep!
+
+**Game Modes**: Keymaster's Challenge, Magic Key Heist
+
+**Sample**: `"Complete a Keymaster's Challenge including the games: Celeste, Hollow Knight, and Slay the Spire"`
+
+**Features**: Customizable game pool (120+ games default), challenge type selection, game count range (1-10)
+
+---
+
+### Music Listening
+**File**: `music_listening.py`
+
+Albums, artists, and playlists from your music backlog.
+
+**Categories**: Albums, Artists, Playlists
+
+**Sample**: `"LISTEN TO Album Title"`, `"EXPLORE Artist Name"`, `"COMPLETE Playlist Name"`
+
+---
+
+### Physical/Health Challenges
+**File**: `physical_health_challenges.py`
+
+Exercise, wellness, nutrition, movement from your fitness backlog.
+
+**Categories**: Exercise, Wellness, Nutrition, Movement
+
+**Sample**: `"COMPLETE Push-up Challenge"`, `"MAINTAIN Sleep Schedule"`, `"TRY Healthy Recipe"`
+
+---
+
+### Playnite Library
+**File**: `playnite_library.py`
+
+Generate objectives from your Playnite games database.
+
+**Features**: All Playnite metadata support (tags, genres, features, platforms, categories, sources, series, scores, playtime), multiple ordering options
+
+**Requirements**: See [Integration Guides](#integration-guides)
+
+---
+
+### Real-World Scavenger Hunt
+**File**: `real_world_scavenger_hunt_game.py`
+
+Comprehensive real-world exploration encouraging outdoor discovery and community engagement.
+
+**Categories**: Photography, Location Hunting, Object Collection, Interaction, Nature, Cultural Discovery, Seasonal Activities, Community Engagement
+
+**Sample**: `"Take a photo of A street musician"`, `"Find and visit A hidden garden"`, `"Collect 10 different Interesting rocks"`
+
+**Features**: 500+ objectives, difficulty levels, travel scope options, constraints (transportation, time, weather)
+
+---
+
+### Really Boring Challenges
+**File**: `really_boring_challenges_game.py`
+
+Deliberately mundane everyday routine activities gamified.
+
+**Categories**: Household Maintenance, Personal Organization, Digital Housekeeping, Routine Optimization, Administrative Tasks
+
+**Sample**: `"Organize 50 digital files"`, `"Clean one room thoroughly"`, `"Update 3 different passwords"`
+
+---
+
+### Social/Connections Challenges
+**File**: `social_connections.py`
+
+Friend meetups, family activities, community events, networking from your social backlog.
+
+**Categories**: Friend Meetups, Family Activities, Community Events, Networking
+
+**Sample**: `"ARRANGE Coffee Meetup with Best Friend"`, `"VISIT Family Dinner with Family Member"`
+
+**Features**: Customizable people lists (friends, family, colleagues)
+
+---
+
+### Steam Achievements
+**File**: `steam_achievements_game.py`
+
+Generate objectives from your Steam library and achievement progress via API.
+
+**Categories**: Game Completion, Progress Goals, Mastery
+
+**Sample**: `"Beat Elden Ring"`, `"Unlock at least 25% of the achievements in Hollow Knight"`
+
+**Features**: Automatic library fetching, playtime filtering, smart filtering, exclusions, percentage ranges
+
+**Requirements**: See [Integration Guides](#integration-guides)
+
+---
+
+### Watchlist
+**File**: `watchlist.py`
+
+Films and TV shows from your watchlist.
+
+**Categories**: Films, TV Shows
+
+**Sample**: `"WATCH Film Title"`, `"BINGE TV Series Title"`
+
+---
+
+## Individual Game Implementations
+
+Alphabetically organized game-specific implementations. Games marked **[Details Needed]** have implementations but incomplete documentation.
+
+---
+
+### Against the Storm
+**File**: `against_the_storm_game.py`
+
+[Details Needed]
+
+---
+
+### Alina of the Arena
+**File**: `alina_of_the_arena_game.py`
+
+[Details Needed]
+
+---
+
+### American Truck Simulator
+**File**: `american_truck_simulator_game.py`
+
+Trucking simulation covering deliveries, exploration, business management across USA.
+
+**Categories**: Interstate Delivery, State Exploration, Truck Ownership, Long Haul, Heavy Haul, Business Objectives, DLC Content
+
+**Sample**: `"Transport Electronics from Los Angeles to Phoenix"`, `"Complete deliveries to 3 different cities in Nevada"`
+
+**Features**: Comprehensive DLC support (California to Missouri), specialized hauling, business management, realistic constraints
+
+---
+
+### Animal Crossing: New Horizons
+**File**: `animal_crossing_new_horizons_game.py`
+
+Island life simulation focusing on development, social interaction, decoration, seasonal activities.
+
+**Categories**: Island Development, Social Interaction, Decoration & Design, Collection & Catalog, Seasonal Events
+
+**Sample**: `"Develop 5 different Residential Areas"`, `"Achieve Best Friends relationship with 3 villagers"`
+
+---
+
+### Antonblast
+[Details Needed]
+
+---
+
+### Apex Legends
+**File**: `apex_legends_game.py`
+
+[Details Needed]
+
+---
+
+### Astronarch
+**File**: `astronarch_game.py`
+
+[Details Needed]
+
+---
+
+### Atomicrops
+**File**: `atomicrops_game.py`
+
+[Details Needed]
+
+---
+
+### Awaria
+**File**: `awaria_game.py`
+
+[Details Needed]
+
+---
+
+### Baba Is You
+**File**: `baba_is_you_game.py`
+
+[Details Needed]
+
+---
+
+### Backpack Hero
+**File**: `backpack_hero_game.py`
+
+[Details Needed]
+
+---
+
+### Baldur's Gate 3
+**File**: `baldurs_gate_3_game.py`
+
+Deep RPG covering character builds, story choices, companion relationships, tactical combat.
+
+**Categories**: Character Builds, Story Progression, Companion Quests, Exploration, Combat Challenges, Social Encounters
+
+**Sample**: `"Complete Act 1 with a Paladin/Warlock multiclass build"`, `"Achieve Romance relationship with Shadowheart"`
+
+---
+
+### Balatro
+[Details Needed]
+
+---
+
+### Beyond the Long Night
+**File**: `beyond_the_long_night_game.py`
+
+[Details Needed]
+
+---
+
+### Bloodstained: Ritual of the Night
+**File**: `bloodstained_ritual_of_the_night_game.py`
+
+Comprehensive Metroidvania covering shard collection, exploration, boss battles, alchemy.
+
+**Categories**: Shard Collection, Exploration, Boss Challenges, Alchemy & Crafting, Equipment Mastery, Speedrun Challenges
+
+**Sample**: `"Collect 20 Conjure shards"`, `"Reach 90% map completion"`, `"Defeat Bloodless without using healing items"`
+
+---
+
+### Bloons TD 6
+**File**: `bloons_td_6_game.py`
+
+[Details Needed]
+
+---
+
+### Blue Prince
+[Details Needed]
+
+---
+
+### BPM: BULLETS PER MINUTE
+**File**: `bpm_bullets_per_minute_game.py`
+
+[Details Needed]
+
+---
+
+### Brotato
+**File**: `brotato_game.py`
+
+Arena wave-based roguelite focused on weapon builds, character diversity, scaling economy.
+
+**Categories**: Character Unlocks, Weapon Synergy Runs, Wave Survival, Boss & Elite Clears, Economic Scaling, Danger Levels
+
+**Sample**: `"Clear Danger Level 5 with Ghost character"`, `"Reach 200% attack speed before wave 15"`
+
+**Features**: Build diversity, difficulty scaling, resource economy, character progression, optional constraints
+
+---
+
+### Brutal Orchestra
+**File**: `brutal_orchestra_game.py`
+
+[Details Needed]
+
+---
+
+### Caves of Qud
+**File**: `caves_of_qud_game.py`
+
+Science-fantasy roguelike capturing mutation-driven exploration, faction dynamics, emergent survival.
+
+**Categories**: Mutation Acquisition, Exploration & Biomes, Faction Reputation, Artifact Identification, Survival Milestones, Legend Hunts
+
+**Sample**: `"Acquire 4 new mutations without visiting a Grit Gate vendor"`, `"Reach reputation Trusted with the Mechanimists"`
+
+**Features**: Mutation depth, faction systems, biome exploration, artifact mastery, survival challenges, legendary hunts
+
+---
+
+### Caveblazers
+[Details Needed]
+
+---
+
+### Celeste
+[Details Needed]
+
+---
+
+### Chess.com
+**File**: `chess_com_game.py`
+
+Competitive chess objectives from live, rapid, blitz, bullet, puzzle, thematic training activities.
+
+**Categories**: Rating Milestones, Time Control Diversity, Opening Exploration, Puzzle Streaks, Accuracy Goals, Win Condition Variety
+
+**Sample**: `"Achieve 5-day puzzle streak"`, `"Reach 1450 Blitz rating"`, `"Play 10 rapid games using the French Defense as Black"`
+
+**Features**: Multi time control targets, opening coverage, puzzle/tactics, accuracy metrics, improvement tracking
+
+---
+
+### Circadian Dice
+**File**: `circadian_dice_game.py`
+
+Dice-building roguelike emphasizing scenario strategy, face crafting, relic combinations.
+
+**Categories**: Scenario Clears, Class Mastery, Relic Unlocks, High Score Targets, Status/Combo Challenges, Perfect/Efficient Turns
+
+**Sample**: `"Clear Forest scenario with Alchemist at 3+ relics"`, `"Reach 25,000 score in Temple run"`
+
+**Features**: Scenario variety, class progression, dice engineering, scoring milestones, efficiency challenges
+
+---
+
+### Cook, Serve, Delicious! 2!!
+[Details Needed]
+
+---
+
+### Crush Crush
+[Details Needed]
+
+---
+
+### Crypt of the NecroDancer
+**File**: `crypt_of_the_necrodancer_game.py`
+
+Rhythm-based roguelike spanning zone clears, character completion, boss mastery, DLC expansions.
+
+**Categories**: Zone Progression, Character Victories, Boss Defeats, Rhythm/Cadence Challenges, Item/Shop Interaction, Mode Variants, DLC Content
+
+**Sample**: `"Clear Zone 4 with Cadence without missing a beat"`, `"Defeat Dead Ringer using only shovel damage (Monk)"`
+
+**Features**: DLC toggles (Amplified, Synchrony, Hatsune Miku, Shovel Knight), character depth, rhythm mastery, boss variants
+
+---
 
 ### Cult of the Lamb
-A unique cult management and action module covering cult building, follower management, combat crusades, and the dark humor of leading a woodland cult.
+**File**: `cult_of_the_lamb_game.py`
 
-Core Categories: ``Cult Management``, ``Combat & Crusades``, ``Follower Care``, ``Base Building``, ``Resource Collection``, ``Ritual Performance``, ``Story Progression``
+Unique cult management and action covering cult building, follower management, combat crusades.
 
-Sample Objectives: ``"Recruit 15 new cult followers"`` or ``"Defeat Leshy in combat"`` or ``"Perform 5 different Blessing rituals"``
+**Categories**: Cult Management, Combat & Crusades, Follower Care, Base Building, Resource Collection, Ritual Performance
+
+**Sample**: `"Recruit 15 new cult followers"`, `"Defeat Leshy in combat"`, `"Perform 5 different Blessing rituals"`
+
+---
+
+### Cuphead
+**File**: `cuphead_game.py`
+
+[Details Needed]
+
+---
+
+### Cursed Red Dead Redemption 2
+**File**: `cursed_red_dead_redemption_2_game.py`
+
+Deliberately chaotic and humorous take on Wild West epic with absurd objectives.
+
+**Categories**: Absurd Combat, Ridiculous Exploration, Chaotic Social Interactions, Silly Customization, Nonsense Activities
+
+**Sample**: `"Kill 50 enemies using only throwing knives while wearing a fancy hat"`, `"Ride your horse backwards for 10 minutes straight"`
+
+---
+
+### Cytus II
+[Details Needed]
+
+---
 
 ### Danganronpa Decadence
-A collection of visual novel murder mystery games featuring students trapped in deadly games. This module supports objectives across all four included games in the Decadence collection.
+**File**: `danganronpa_decadence_game.py`
 
-**Supported Games:**
-- Danganronpa: Trigger Happy Havoc (with School Mode)
-- Danganronpa 2: Goodbye Despair (with Island Mode)  
-- Danganronpa V3: Killing Harmony (with UTDP mode)
-- Danganronpa S: Ultimate Summer Camp
+Visual novel murder mystery collection. Supports all four games in Decadence collection.
 
-**Core Categories:**
-- Story mode objectives: investigations, class trials, free time activities, report cards, skills, and presents
-- Bonus mode objectives: School Mode, Island Mode, UTDP, and Summer Camp challenges
-- Extra minigames: Death Road of Despair, Magical Girl Monomi, and challenge modes
-- Collectibles: Hidden Monokuma hunting and location-based collection goals
+**Supported Games**: Trigger Happy Havoc (+ School Mode), Goodbye Despair (+ Island Mode), V3: Killing Harmony (+ UTDP), Ultimate Summer Camp
 
-Sample Objectives: ``"Achieve S rank in the chapter 3 class trial"`` or ``"Max out friendship with Kyoko Kirigiri"`` or ``"Clear 5 segments of Nonstop Debate without mistakes"`` or ``"Reach turn 50 in Development Mode as Makoto Naegi"`` or ``"Clear floor 30 in Tower of Despair with a party that includes Hajime Hinata"``
+**Categories**: Story mode (investigations, trials, free time), bonus modes, extra minigames, collectibles
 
-The module provides comprehensive coverage of all gameplay modes and mechanics across the entire Danganronpa collection.
+**Sample**: `"Achieve S rank in the chapter 3 class trial"`, `"Max out friendship with Kyoko Kirigiri"`
+
+---
 
 ### Date Everything
-A whimsical dating simulation module where you romance household objects and abstract concepts in your own home. Features 100+ fully voice-acted characters from structural elements to existential dread, with branching relationships and transformation possibilities.
+**File**: `date_everything_game.py`
 
-Core Categories: ``Structural Objects``, ``Furniture & Decor``, ``Kitchen Appliances``, ``Bathroom Items``, ``Laundry Items``, ``Office & Bedroom``, ``Miscellaneous Items``, ``Special Concepts``, ``DLC Characters``
+Whimsical dating simulation romancing household objects and abstract concepts with 100+ voice-acted characters.
 
-Sample Objectives: ``"Achieve LOVE with Rebel (Rubber Duck)"`` or ``"Get 5 structural elements to FRIENDS status"`` or ``"Transform Teddy (Teddy Bear) into human form through deep connection"``
+**Categories**: Structural Objects, Furniture & Decor, Kitchen Appliances, Bathroom Items, Laundry Items, Office & Bedroom, Miscellaneous, Special Concepts, DLC
+
+**Sample**: `"Achieve LOVE with Rebel (Rubber Duck)"`, `"Get 5 structural elements to FRIENDS status"`
+
+---
+
+### Dead By Daylight
+[Details Needed]
+
+---
 
 ### Dead Cells
-A challenging metroidvania module focused on combat mastery, weapon experimentation, biome progression, and the brutal but rewarding world of the Prisoner's journey.
+**File**: `dead_cells_game.py`
 
-Core Categories: ``Combat Mastery``, ``Weapon Experimentation``, ``Biome Progression``, ``Mutation Builds``, ``Speed Running``, ``Achievement Hunting``
+Challenging metroidvania focused on combat mastery, weapon experimentation, biome progression.
 
-Sample Objectives: ``"Defeat 25 different Elite enemies"`` or ``"Complete a run using only Survival weapons"`` or ``"Reach 3BC difficulty level"``
+**Categories**: Combat Mastery, Weapon Experimentation, Biome Progression, Mutation Builds, Speed Running
+
+**Sample**: `"Defeat 25 different Elite enemies"`, `"Complete a run using only Survival weapons"`, `"Reach 3BC difficulty level"`
+
+---
+
+### Dead Estate
+**File**: `dead_estate_game.py`
+
+[Details Needed]
+
+---
+
+### Deadlock
+[Details Needed]
+
+---
+
+### Death Road to Canada
+**File**: `death_road_to_canada_game.py`
+
+[Details Needed]
+
+---
+
+### Deep Rock Galactic
+[Details Needed]
+
+---
+
+### DemonCrawl
+[Details Needed]
+
+---
+
+### Descenders
+[Details Needed]
+
+---
+
+### Despot's Game
+**File**: `despots_game.py`
+
+[Details Needed]
+
+---
+
+### Destiny 2
+[Details Needed]
+
+---
+
+### Dicey Dungeons
+**File**: `dicey_dungeons_game.py`
+
+[Details Needed]
+
+---
+
+### DJMax Respect V
+[Details Needed]
+
+---
+
+### Dome Keeper
+[Details Needed]
+
+---
+
+### Dominion
+[Details Needed]
+
+---
+
+### Dungeon Defenders
+[Details Needed]
+
+---
+
+### Embr
+[Details Needed]
+
+---
+
+### Ensemble Stars!! Music
+[Details Needed]
+
+---
+
+### Enter the Gungeon
+[Details Needed]
+
+---
+
+### Epic Battle Fantasy 3
+[Details Needed]
+
+---
 
 ### Euro Truck Simulator 2
-A trucking simulation module covering deliveries, exploration, and business management across the diverse countries of Europe.
+**File**: `euro_truck_simulator_2_game.py`
 
-Core Categories: ``Delivery Objectives``, ``Country Exploration``, ``Truck Ownership``, ``Long Distance``, ``Special Transport``, ``Business Objectives``, ``DLC Content``
+Trucking simulation covering deliveries, exploration, business management across Europe.
 
-Sample Objectives: ``"Deliver Medical Supplies from Berlin to Paris"`` or ``"Complete deliveries to 3 different cities in Italy"`` or ``"Complete the challenging 1800km route from London to Rome"``
+**Categories**: Delivery Objectives, Country Exploration, Truck Ownership, Long Distance, Special Transport, Business Objectives, DLC Content
 
-Features:
-- **Comprehensive Coverage**: Supports base game and all country DLCs (Going East! to Greece)
-- **Specialized Hauling**: Objectives for special transport, high-value cargo, and fragile goods
-- **Business Management**: Goals for fleet expansion, garage acquisition, and financial milestones
-- **Skill Challenges**: Objectives for fuel efficiency, perfect parking, and violation-free driving
+**Sample**: `"Deliver Medical Supplies from Berlin to Paris"`, `"Complete the challenging 1800km route from London to Rome"`
+
+**Features**: Comprehensive DLC support (Going East! to Greece), specialized hauling, business management, skill challenges
+
+---
+
+### Fall Guys
+[Details Needed]
+
+---
+
+### Fortnite
+[Details Needed]
+
+---
+
+### Freedom Planet 2
+[Details Needed]
+
+---
+
+### FTL: Multiverse
+[Details Needed]
+
+---
+
+### Garry's Mod
+[Details Needed]
+
+---
+
+### GeoGuessr
+[Details Needed]
+
+---
+
+### God Eater Resurrection
+[Details Needed]
+
+---
+
+### Guild Wars 2
+[Details Needed]
+
+---
 
 ### Hades
-A roguelike action module covering escape attempts, weapon mastery, relationship building with gods and underworld denizens, and the compelling narrative of Zagreus's journey.
+**File**: `hades_game.py`
 
-Core Categories: ``Escape Attempts``, ``Weapon Mastery``, ``Relationship Building``, ``Boon Collection``, ``House Upgrades``, ``Narrative Progress``, ``Challenge Runs``
+Roguelike action covering escape attempts, weapon mastery, relationship building, Zagreus's journey.
 
-Sample Objectives: ``"Complete 5 successful escape attempts"`` or ``"Master the Stygian Blade weapon"`` or ``"Max out relationship with Megaera"``
+**Categories**: Escape Attempts, Weapon Mastery, Relationship Building, Boon Collection, House Upgrades, Narrative Progress, Challenge Runs
+
+**Sample**: `"Complete 5 successful escape attempts"`, `"Master the Stygian Blade weapon"`, `"Max out relationship with Megaera"`
+
+---
 
 ### Harvestella
-A farming RPG module that brings the full breadth of Harvestella's systems to Keymaster's Keep. This implementation covers farming, exploration, combat, relationships, story progression, crafting, cooking, and seasonal events, with robust support for all major gameplay features and option types.
+**File**: `harvestella_game.py`
 
-Core Categories: ``Farming Objectives``, ``Exploration & Adventure``, ``Combat Challenges``, ``Relationship System``, ``Story Progression``, ``Crafting & Cooking``, ``Seasonal & Collection Goals``
+Farming RPG bringing full breadth of farming, exploration, combat, relationships, story, crafting, seasonal systems.
 
-Sample Objectives: ``"Harvest 50 crops across all seasons"`` or ``"Defeat 10 unique monsters in Quietus dungeons"`` or ``"Reach max relationship with a main character"`` or ``"Complete Chapter 5 and restore all Seaslight crystals"``
+**Categories**: Farming Objectives, Exploration & Adventure, Combat Challenges, Relationship System, Story Progression, Crafting & Cooking, Seasonal & Collection
 
-Features:
-- Dynamic crop selection, farming goals, and seasonal objectives
-- Exploration of locations, dungeons, and rare material collection
-- Combat with monsters, bosses, and job mastery
-- Relationship events and character-specific objectives
-- Story progression, chapter completion, and seasonal dungeon unlocks
-- Crafting, equipment upgrades, and recipe mastery
-- Collection goals for items, recipes, monsters, and more
+**Sample**: `"Harvest 50 crops across all seasons"`, `"Defeat 10 unique monsters in Quietus dungeons"`, `"Complete Chapter 5"`
 
-Harvestella brings all its farming, adventure, and relationship systems to Keymaster's Keep.
+**Features**: Dynamic crop/farming, exploration/dungeons, combat/jobs, relationships, story progression, crafting, collections
+
+---
+
+### HoloCure: Save the Fans!
+[Details Needed]
+
+---
+
+### Hollow Knight
+[Details Needed]
+
+---
+
+### Hotline Miami
+[Details Needed]
+
+---
+
+### Hyperspace Dogfights
+[Details Needed]
+
+---
+
+### I Was A Teenage Exocolonist
+[Details Needed]
+
+---
+
+### Identity V
+[Details Needed]
+
+---
+
+### Inscryption
+**File**: `inscryption_game.py`
+
+[Details Needed]
+
+---
 
 ### Just Dance
-A comprehensive rhythm gaming module covering the entire Just Dance franchise from 2014 through 2025, with support for base game tracks, regional exclusives, subscription content (Just Dance Unlimited), and premium content (Just Dance+).
+**File**: `just_dance_game.py`
 
-Game Coverage: ``Just Dance 2014-2025``, ``Just Dance Unlimited Subscription``, ``Just Dance+ Premium Content``, ``Regional Exclusives`` (China, France, Japan, Benelux, Germany, Italy, Southeast Asia, and more)
+Comprehensive rhythm gaming covering entire Just Dance franchise 2014-2025.
 
-Core Categories: ``Base Game Completion``, ``Subscription Service Mastery``, ``Regional Content Exploration``, ``Score Achievement``, ``Song Collection``, ``Dance Challenge Completion``
+**Game Coverage**: Just Dance 2014-2025, Just Dance Unlimited, Just Dance+, Regional Exclusives
 
-Sample Objectives: ``"Perfect 25 songs from Just Dance 2023 base tracklist"`` or ``"Complete 15 dances from Just Dance Unlimited subscription"`` or ``"Master 5 songs from Just Dance+ premium content"`` or ``"Achieve 4+ stars on 20 regional exclusive tracks"``
+**Categories**: Base Game Completion, Subscription Service Mastery, Regional Content Exploration, Score Achievement
 
-Features comprehensive song libraries with accurate track lists, regional exclusives, platform-specific content, and both subscription services. Supports granular customization of which games you own, which DLC/subscription content you have access to, and which regional exclusives are available in your region.
+**Sample**: `"Perfect 25 songs from Just Dance 2023 base tracklist"`, `"Complete 15 dances from Just Dance Unlimited"`
+
+**Features**: Comprehensive song libraries, accurate track lists, regional exclusives, subscription services, granular customization
+
+---
+
+### Just King
+**File**: `just_king_game.py`
+
+[Details Needed]
+
+---
+
+### Kirby Air Riders
+[Details Needed]
+
+---
+
+### League of Legends
+[Details Needed]
+
+---
+
+### Left 4 Dead 2
+[Details Needed]
+
+---
+
+### Lethal Company
+[Details Needed]
+
+---
+
+### Little Inferno
+[Details Needed]
+
+---
+
+### LUMINES REMASTERED
+[Details Needed]
+
+---
+
+### M.U.G.E.N.
+[Details Needed]
+
+---
+
+### Made in Abyss: Binary Star Falling into Darkness
+[Details Needed]
+
+---
+
+### Mages of Mystralia
+[Details Needed]
+
+---
+
+### Magic the Gathering
+[Details Needed]
+
+---
+
+### Mario Kart 8
+[Details Needed]
+
+---
+
+### Mario Kart World
+[Details Needed]
+
+---
+
+### Mario Party / Mario Party 2 / Mario Party 3
+[Details Needed]
+
+---
+
+### Marvel Rivals
+[Details Needed]
+
+---
+
+### Mega Man / Mega Man 2 / Mega Man 3 / Mega Man 4 / Mega Man 11
+[Details Needed]
+
+---
+
+### Melatonin
+[Details Needed]
+
+---
+
+### Melvor Idle
+[Details Needed]
+
+---
+
+### Meteos
+[Details Needed]
+
+---
 
 ### Minecraft
-An expansive sandbox module covering building projects, exploration, resource gathering, redstone engineering, and the limitless creativity of the block world.
+**File**: `minecraft_game.py`
 
-Core Categories: ``Building Projects``, ``Exploration & Adventure``, ``Resource Gathering``, ``Redstone Engineering``, ``Farming & Automation``, ``Combat Challenges``, ``Creative Builds``
+Expansive sandbox covering building projects, exploration, resource gathering, redstone, farming, combat.
 
-Sample Objectives: ``"Build a 50x50 Castle structure"`` or ``"Explore 10 different Ocean Monuments"`` or ``"Create an automated Crop farm system"``
+**Categories**: Building Projects, Exploration & Adventure, Resource Gathering, Redstone Engineering, Farming & Automation, Combat Challenges
 
-### Red Dead Redemption 2 (Cursed Edition)
-A deliberately chaotic and humorous take on the Wild West epic, featuring intentionally absurd objectives that subvert the serious tone of Arthur Morgan's story with ridiculous challenges.
+**Sample**: `"Build a 50x50 Castle structure"`, `"Explore 10 different Ocean Monuments"`, `"Create an automated Crop farm"`
 
-Core Categories: ``Absurd Combat``, ``Ridiculous Exploration``, ``Chaotic Social Interactions``, ``Silly Customization``, ``Nonsense Activities``, ``Bizarre Challenges``
+---
 
-Sample Objectives: ``"Kill 50 enemies using only throwing knives while wearing a fancy hat"`` or ``"Ride your horse backwards for 10 minutes straight"`` or ``"Get a 1000 dollar bounty in Valentine by only antagonizing people"``
+### Minesweeper Plus
+[Details Needed]
+
+---
+
+### MONSTER HUNTER RISE / Monster Hunter Wilds / Monster Hunter World
+[Details Needed]
+
+---
+
+### Monster Roadtrip
+**File**: `monster_roadtrip_game.py`
+
+[Details Needed]
+
+---
+
+### Neophyte
+**File**: `neophyte_game.py`
+
+[Details Needed]
+
+---
+
+### New York Times Games
+[Details Needed]
+
+---
+
+### NiGHTS into Dreams...
+[Details Needed]
+
+---
+
+### Nickelodeon All-Star Brawl 2
+[Details Needed]
+
+---
+
+### Nine Sols
+[Details Needed]
+
+---
+
+### No More Room In Hell
+[Details Needed]
+
+---
+
+### Nubby's Number Factory
+[Details Needed]
+
+---
+
+### Octodad: Dadliest Catch
+[Details Needed]
+
+---
+
+### OldTV
+[Details Needed]
+
+---
+
+### One Deck Dungeon
+[Details Needed]
+
+---
+
+### One Step From Eden
+**File**: `one_step_from_eden_game.py`
+
+[Details Needed]
+
+---
+
+### OpenRCT2
+[Details Needed]
+
+---
+
+### Ori and the Will of the Wisps
+[Details Needed]
+
+---
+
+### Overwatch 2
+[Details Needed]
+
+---
+
+### Paperball
+[Details Needed]
+
+---
+
+### Pawnbarian
+**File**: `pawnbarian_game.py`
+
+[Details Needed]
+
+---
+
+### PAYDAY 3
+[Details Needed]
+
+---
+
+### PEAK
+[Details Needed]
+
+---
+
+### Peggle Deluxe
+[Details Needed]
+
+---
+
+### Peglin
+[Details Needed]
+
+---
+
+### Pinball FX3
+[Details Needed]
+
+---
+
+### Placid Plastic Duck Simulator
+[Details Needed]
+
+---
+
+### Plants vs. Zombies
+[Details Needed]
+
+---
+
+### Pokemon Go
+[Details Needed]
+
+---
+
+### Pokémon Unite
+[Details Needed]
+
+---
+
+### Portal
+[Details Needed]
+
+---
+
+### PotionCraft
+[Details Needed]
+
+---
+
+### Project Sekai: Colorful Stage
+[Details Needed]
+
+---
+
+### Realm of the Mad God
+[Details Needed]
+
+---
+
+### Revita
+**File**: `revita_game.py`
+
+[Details Needed]
+
+---
+
+### Riichi Mahjong
+[Details Needed]
+
+---
+
+### Risk of Rain 2
+[Details Needed]
+
+---
+
+### Rock of Ages 2: Bigger & Boulder
+[Details Needed]
+
+---
+
+### Salt and Sacrifice
+[Details Needed]
+
+---
+
+### Sanctum
+[Details Needed]
+
+---
+
+### Sea of Thieves
+[Details Needed]
+
+---
+
+### Shiny Pokémon Hunt
+[Details Needed]
+
+---
+
+### Sid Meier's Pirates
+[Details Needed]
+
+---
+
+### Slay the Spire
+[Details Needed]
+
+---
+
+### Smite 2
+[Details Needed]
+
+---
+
+### Sonic Mania
+[Details Needed]
+
+---
+
+### Spelunky
+**File**: `spelunky_game.py`
+
+[Details Needed]
+
+---
+
+### Splitgate
+[Details Needed]
+
+---
+
+### Spyro Reignited Trilogy
+[Details Needed]
+
+---
+
+### Star Wars: Battlefront II (Classic)
+[Details Needed]
+
+---
 
 ### Stardew Valley
-A comprehensive farming simulation module covering all aspects of Pelican Town life, from crop management and animal care to community relationships and cave exploration.
+**File**: `stardew_valley_game.py`
 
-Core Categories: ``Farm Management``, ``Relationship Building``, ``Exploration & Combat``, ``Crafting & Collection``, ``Seasonal Activities``, ``Community Goals``, ``Achievement Hunting``
+Comprehensive farming simulation covering all aspects of Pelican Town life.
 
-Sample Objectives: ``"Earn 50000g through Crop sales"`` or ``"Reach 8 hearts relationship level with Abigail"`` or ``"Complete 15 different Community Center bundles"``
+**Categories**: Farm Management, Relationship Building, Exploration & Combat, Crafting & Collection, Seasonal Activities, Community Goals
 
-### The Sims 4
-A comprehensive life simulation module covering all aspects of Sim life across the base game and expansion packs, from skill development and career progression to relationships, emotions, and creative building challenges.
+**Sample**: `"Earn 50000g through Crop sales"`, `"Reach 8 hearts relationship level with Abigail"`, `"Complete 15 different Community Center bundles"`
 
-Core Categories: ``Skill Mastery``, ``Career Progression``, ``Relationship Building``, ``Aspiration Completion``, ``Creative Building``, ``Emotional Challenges``, ``Collection Goals``, ``Life Events``, ``Expansion Content``
+---
 
-Sample Objectives: ``"Master the Painting skill to level 10"`` or ``"Reach the top of the Writer career branch"`` or ``"Build a SOULMATE relationship with another Sim"`` or ``"Complete the Renaissance Sim aspiration"`` or ``"Build a 50,000 simoleon house with a CONFIDENT emotion focus"`` or ``"Experience the MORTIFIED emotion"`` or ``"Collect 15 different Space Rocks"``
+### Stellaris
+[Details Needed]
 
-Features comprehensive objectives covering skills, careers, aspirations, collections, emotions, and creative building challenges from both base game and expansion pack content. Includes expanded career paths, additional skills, new aspirations, and exclusive collections from DLC packs. The module automatically adapts objectives based on available content, ensuring players can engage with their full Sims 4 library.
+---
+
+### Strawberry Jam
+[Details Needed]
+
+---
+
+### Super Dungeon Maker
+**File**: `super_dungeon_maker_game.py`
+
+[Details Needed]
+
+---
+
+### Super Hexagon
+[Details Needed]
+
+---
+
+### Super Mario Galaxy / Super Mario Sunshine
+[Details Needed]
+
+---
+
+### Super Smash Bros. Ultimate
+[Details Needed]
+
+---
+
+### Synthetik: Legion Rising
+[Details Needed]
+
+---
+
+### Team Fortress 2
+[Details Needed]
+
+---
+
+### Terraria
+[Details Needed]
+
+---
+
+### The Bazaar
+[Details Needed]
+
+---
 
 ### The Binding of Isaac: Rebirth
-A massive roguelike module covering the extensive content of Rebirth and its DLCs (Afterbirth, Afterbirth+, and Repentance).
+**File**: `the_binding_of_isaac_rebirth_game_plus_unlock_conditions.py`
 
-Core Categories: ``Character Victories``, ``Boss Defeats``, ``Challenge Runs``, ``Item Collection``, ``Transformations``, ``Specific Achievements``
+Massive roguelike covering extensive content of Rebirth and DLCs (Afterbirth, Afterbirth+, Repentance).
 
-Sample Objectives: ``"Defeat The Lamb as The Lost"`` or ``"Complete Challenge #34 (Ultra Hard)"`` or ``"Collect both Knife Pieces and defeat Mother as Tainted Jacob in a single run"``
+**Categories**: Character Victories, Boss Defeats, Challenge Runs, Item Collection, Transformations, Specific Achievements, Modded Characters
 
-Features:
-- **Full DLC Support**: Automatically adjusts objectives based on owned DLCs (Afterbirth, Afterbirth+, Repentance)
-- **Character Roster**: Supports all 34 characters including Tainted versions
-- **Deep Integration**: Objectives for specific bosses, rare rooms, transformations, and item sets
-- **Hardcore Constraints**: Optional challenges for Hard Mode, specific seeds, or item restrictions
+**Sample**: `"Defeat The Lamb as The Lost"`, `"Complete Challenge #34 (Ultra Hard)"`
+
+**Features**: Full DLC support (auto-adjusts), all 34 characters including Tainted, deep integration, hardcore constraints, **modded character support via OptionSet**
+
+---
 
 ### The Binding of Isaac: Wrath of the Lamb
-A module for the original Flash game, covering the base game, Wrath of the Lamb expansion, and the Eternal Edition update.
+**File**: `the_binding_of_isaac_wrath_of_the_lamb_game.py`
 
-Core Categories: ``Character Victories``, ``Boss Defeats``, ``Challenge Runs``, ``Eternal Edition Challenges``
+Module for original Flash game covering base game, Wrath of the Lamb expansion, Eternal Edition.
 
-Sample Objectives: ``"Defeat Satan as Judas"`` or ``"Complete Challenge #6 (The Doctors Revenge!)"`` or ``"Defeat Mom in Hard Mode (Eternal Edition)"``
+**Categories**: Character Victories, Boss Defeats, Challenge Runs, Eternal Edition Challenges
 
-Features:
-- **Classic Content**: Covers the original game's unique mechanics and balance
-- **Expansion Support**: Toggles for Wrath of the Lamb and Eternal Edition content
-- **Eternal Challenges**: Specific objectives for the difficult Eternal Edition Hard Mode
-- **Character & Boss Tracking**: Objectives for all original characters and bosses
+**Sample**: `"Defeat Satan as Judas"`, `"Complete Challenge #6 (The Doctors Revenge!)"`, `"Defeat Mom in Hard Mode (Eternal Edition)"`
+
+**Features**: Classic content, expansion toggles (WotL, Eternal Edition), Eternal challenges, character & boss tracking
+
+---
+
+### The Elder Scrolls V: Skyrim - Special Edition
+[Details Needed]
+
+---
+
+### The Finals
+[Details Needed]
+
+---
+
+### The Sims 4
+**File**: `the_sims_4_game.py`
+
+Comprehensive life simulation covering all aspects of Sim life across base game and expansions.
+
+**Categories**: Skill Mastery, Career Progression, Relationship Building, Aspiration Completion, Creative Building, Emotional Challenges, Collection Goals, Life Events, Expansion Content
+
+**Sample**: `"Master the Painting skill to level 10"`, `"Build a SOULMATE relationship with another Sim"`, `"Experience the MORTIFIED emotion"`
+
+**Features**: Comprehensive coverage of skills, careers, aspirations, collections, emotions from base game + DLC, auto-adapts based on content
+
+---
+
+### The Void Rains Upon Her Heart
+**File**: `void_rains_upon_her_heart_game.py`
+
+[Details Needed]
+
+---
+
+### Tower Unite
+[Details Needed]
+
+---
+
+### Wario Ware: Get It Together!
+**File**: `wario_ware_get_it_together_game.py`
+
+[Details Needed]
+
+---
+
+### Wikipedia Game
+**File**: `wikipedia_game.py`
+
+[Details Needed]
+
+---
+
+### Wipeout HD Fury
+**File**: `wipeout_hd_fury_game.py`
+
+[Details Needed]
+
+---
+
+## Recent Updates
+
+**January 2026:**
+- README reorganized with table of contents, alphabetized game lists, clearer sections
+- All game files mapped to implementations for easier navigation
+
+**November 2025:**
+
+**New Modules:**
+- **Brotato**: Arena roguelite with character unlocks, weapon synergy, danger levels
+- **Circadian Dice**: Dice-building roguelike with scenario clears, class mastery, relic unlocks
+- **Crypt of the NecroDancer**: Rhythm roguelike with zone progression, DLC content (Amplified, Synchrony, Hatsune Miku, Shovel Knight)
+- **Chess.com Integration**: Competitive chess with puzzle streaks, rating milestones, accuracy goals
+- **Caves of Qud**: Science-fantasy roguelike with mutation acquisition, faction reputation, survival milestones
+
+**Systemic Improvements:**
+- **Binding of Isaac Modded Characters**: Added OptionSet for user-defined modded characters
+- **Toggle Standardization**: Converted older DefaultOnToggle to consistent Toggle patterns
+- **Constraint Reclassification**: Caves of Qud limb dismemberment moved to optional constraint
+
+**Benefits**: Improved extensibility (user-supplied characters), clarity (uniform toggle access), accuracy (constraint vs objective classification)
