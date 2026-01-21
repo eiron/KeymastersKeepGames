@@ -95,7 +95,7 @@ class DanganronpaGame(Game):
             if self.include_investigation:
                 templates.extend([
                     GameObjectiveTemplate(
-                        label="Collect QUANTITY pieces of evidence in LOCATION (Story Mode)",
+                        label="Collect QUANTITY pieces of evidence in LOCATION (Story Mode – DR1/DR2/V3)",
                         data={
                             "QUANTITY": (self.all_investigation_evidence_quantities, 1),
                             "LOCATION": (self.all_investigation_locations, 1),
@@ -105,35 +105,35 @@ class DanganronpaGame(Game):
                         weight=2,
                     ),
                     GameObjectiveTemplate(
-                        label="Finish all investigation tasks in chapter CHAPTER (Story Mode)",
+                        label="Finish all investigation tasks in chapter CHAPTER (Story Mode – DR1/DR2/V3)",
                         data={"CHAPTER": (self.all_chapters, 1)},
                         is_time_consuming=True,
                         is_difficult=True,
                         weight=3,
                     ),
                     GameObjectiveTemplate(
-                        label="Earn QUANTITY Monocoins during investigations (Story Mode)",
+                        label="Earn QUANTITY Monocoins during investigations (Story Mode – DR1/DR2/V3)",
                         data={"QUANTITY": (self.all_monocoins_quantities, 1)},
                         is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
-                        label="Find a single piece of evidence in LOCATION (Story Mode)",
+                        label="Find a single piece of evidence in LOCATION (Story Mode – DR1/DR2/V3)",
                         data={"LOCATION": (self.all_investigation_locations, 1)},
                         is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
-                        label="Complete a basic investigation task (Story Mode)",
+                        label="Complete a basic investigation task (Story Mode – DR1/DR2/V3)",
                         data={},
                         is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
-                        label="Examine an object in LOCATION (Story Mode)",
+                        label="Examine an object in LOCATION (Story Mode – DR1/DR2/V3)",
                         data={"LOCATION": (self.all_investigation_locations, 1)},
                         is_time_consuming=False,
                         is_difficult=False,
@@ -145,7 +145,7 @@ class DanganronpaGame(Game):
             if self.include_class_trial:
                 templates.extend([
                     GameObjectiveTemplate(
-                        label="Achieve RANK rank in the chapter CHAPTER class trial (Story Mode)",
+                        label="Achieve RANK rank in the chapter CHAPTER class trial (Story Mode – DR1/DR2/V3)",
                         data={
                             "RANK": (self.all_trial_ranks, 1),
                             "CHAPTER": (self.all_chapters, 1),
@@ -155,7 +155,7 @@ class DanganronpaGame(Game):
                         weight=4,
                     ),
                     GameObjectiveTemplate(
-                        label="Clear QUANTITY segments of MECHANIC without mistakes (Story Mode)",
+                        label="Clear QUANTITY segments of MECHANIC without mistakes (Story Mode – DR1/DR2/V3)",
                         data={
                             "QUANTITY": (self.all_perfect_segment_counts, 1),
                             "MECHANIC": (self.all_trial_mechanics, 1),
@@ -165,21 +165,21 @@ class DanganronpaGame(Game):
                         weight=3,
                     ),
                     GameObjectiveTemplate(
-                        label="Win a Debate Scrum with at least HEALTH percent health remaining (Story Mode)",
+                        label="Win a Debate Scrum with at least HEALTH percent health remaining (Story Mode – DR1/DR2/V3)",
                         data={"HEALTH": (self.all_health_thresholds, 1)},
                         is_time_consuming=False,
                         is_difficult=True,
                         weight=2,
                     ),
                     GameObjectiveTemplate(
-                        label="Participate in a class trial segment (Story Mode)",
+                        label="Participate in a class trial segment (Story Mode – DR1/DR2/V3)",
                         data={},
                         is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
-                        label="Make a correct statement in a trial (Story Mode)",
+                        label="Make a correct statement in a trial (Story Mode – DR1/DR2/V3)",
                         data={},
                         is_time_consuming=False,
                         is_difficult=False,
@@ -191,35 +191,35 @@ class DanganronpaGame(Game):
             if self.include_free_time:
                 templates.extend([
                     GameObjectiveTemplate(
-                        label="Max out friendship with STUDENT (Story Mode)",
+                        label="Max out friendship with STUDENT (Story Mode – DR1/DR2/V3)",
                         data={"STUDENT": (self.all_students, 1)},
                         is_time_consuming=True,
                         is_difficult=False,
                         weight=2,
                     ),
                     GameObjectiveTemplate(
-                        label="Spend QUANTITY Free Time sessions (Story Mode)",
+                        label="Spend QUANTITY Free Time sessions (Story Mode – DR1/DR2/V3)",
                         data={"QUANTITY": (self.all_free_time_targets, 1)},
                         is_time_consuming=True,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
-                        label="Have a single Free Time conversation with STUDENT (Story Mode)",
+                        label="Have a single Free Time conversation with STUDENT (Story Mode – DR1/DR2/V3)",
                         data={"STUDENT": (self.all_students, 1)},
                         is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
-                        label="Complete a basic Free Time event (Story Mode)",
+                        label="Complete a basic Free Time event (Story Mode – DR1/DR2/V3)",
                         data={},
                         is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
-                        label="Spend time in the dorms (Story Mode)",
+                        label="Spend time in the dorms (Story Mode – DR1/DR2/V3)",
                         data={},
                         is_time_consuming=False,
                         is_difficult=False,
@@ -231,14 +231,14 @@ class DanganronpaGame(Game):
             if self.include_report_card:
                 templates.extend([
                     GameObjectiveTemplate(
-                        label="Complete the Report Card for STUDENT (Story Mode)",
+                        label="Complete the Report Card for STUDENT (Story Mode – DR1/DR2/V3)",
                         data={"STUDENT": (self.all_students, 1)},
                         is_time_consuming=True,
                         is_difficult=False,
                         weight=2,
                     ),
                     GameObjectiveTemplate(
-                        label="Complete Report Cards for QUANTITY different students (Story Mode)",
+                        label="Complete Report Cards for QUANTITY different students (Story Mode – DR1/DR2/V3)",
                         data={"QUANTITY": (self.all_report_card_counts, 1)},
                         is_time_consuming=True,
                         is_difficult=True,
@@ -250,14 +250,14 @@ class DanganronpaGame(Game):
             if self.include_skills:
                 templates.extend([
                     GameObjectiveTemplate(
-                        label="Obtain the SKILL skill (Story Mode)",
+                        label="Obtain the SKILL skill (Story Mode – DR1/DR2/V3)",
                         data={"SKILL": (self.all_skills, 1)},
                         is_time_consuming=False,
                         is_difficult=True,
                         weight=2,
                     ),
                     GameObjectiveTemplate(
-                        label="Earn QUANTITY Hope Fragments (Story Mode)",
+                        label="Earn QUANTITY Hope Fragments (Story Mode – DR1/DR2/V3)",
                         data={"QUANTITY": (self.all_hope_fragment_quantities, 1)},
                         is_time_consuming=True,
                         is_difficult=False,
@@ -269,49 +269,49 @@ class DanganronpaGame(Game):
             if self.include_presents:
                 templates.extend([
                     GameObjectiveTemplate(
-                        label="Obtain PRESENT from the MonoMono machine (Story Mode)",
+                        label="Obtain PRESENT from the MonoMono machine (Story Mode – DR1/DR2/V3)",
                         data={"PRESENT": (self.all_presents, 1)},
                         is_time_consuming=True,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
-                        label="Collect QUANTITY different presents (Story Mode)",
+                        label="Collect QUANTITY different presents (Story Mode – DR1/DR2/V3)",
                         data={"QUANTITY": (self.all_present_quantities, 1)},
                         is_time_consuming=True,
                         is_difficult=False,
                         weight=2,
                     ),
                     GameObjectiveTemplate(
-                        label="Collect QUANTITY different presents (Story Mode)",
+                        label="Collect QUANTITY different presents (Story Mode – DR1/DR2/V3)",
                         data={"QUANTITY": (self.all_small_present_quantities, 1)},
                         is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
-                        label="Gift a Loved present to STUDENT (Story Mode)",
+                        label="Gift a Loved present to STUDENT (Story Mode – DR1/DR2/V3)",
                         data={"STUDENT": (self.all_students, 1)},
                         is_time_consuming=False,
                         is_difficult=True,
                         weight=2,
                     ),
                     GameObjectiveTemplate(
-                        label="Gift any present to STUDENT (Story Mode)",
+                        label="Gift any present to STUDENT (Story Mode – DR1/DR2/V3)",
                         data={"STUDENT": (self.all_students, 1)},
                         is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
-                        label="Visit LOCATION (Story Mode)",
+                        label="Visit LOCATION (Story Mode – DR1/DR2/V3)",
                         data={"LOCATION": (self.all_locations, 1)},
                         is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
-                        label="Talk to STUDENT once (Story Mode)",
+                        label="Talk to STUDENT once (Story Mode – DR1/DR2/V3)",
                         data={"STUDENT": (self.all_students, 1)},
                         is_time_consuming=False,
                         is_difficult=False,
@@ -382,35 +382,35 @@ class DanganronpaGame(Game):
         if self.include_extra_minigames:
             templates.extend([
                 GameObjectiveTemplate(
-                    label="Complete MINIGAME once without damage",
+                    label="Complete MINIGAME once without damage (Extra Minigames – see game tag)",
                     data={"MINIGAME": (self.all_extra_minigames, 1)},
                     is_time_consuming=False,
                     is_difficult=True,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Survive DISTANCE meters in Death Road of Despair",
+                    label="Survive DISTANCE meters in Death Road of Despair (V3 Extra Minigame)",
                     data={"DISTANCE": (self.all_death_road_distances, 1)},
                     is_time_consuming=True,
                     is_difficult=True,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
-                    label="Clear stage LEVEL in Magical Girl Monomi",
+                    label="Clear stage LEVEL in Magical Girl Monomi (DR2 Extra Minigame)",
                     data={"LEVEL": (self.all_monogirl_levels, 1)},
                     is_time_consuming=True,
                     is_difficult=True,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Play MINIGAME once",
+                    label="Play MINIGAME once (Extra Minigames – see game tag)",
                     data={"MINIGAME": (self.all_extra_minigames, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
-                    label="Complete a basic minigame level",
+                    label="Complete a basic minigame level (Extra Minigames)",
                     data={},
                     is_time_consuming=False,
                     is_difficult=False,
@@ -436,7 +436,7 @@ class DanganronpaGame(Game):
         if self.include_collectibles:
             templates.extend([
                 GameObjectiveTemplate(
-                    label="Find QUANTITY Hidden Monokuma in chapter CHAPTER",
+                    label="Find QUANTITY Hidden Monokuma in chapter CHAPTER (Mainline DR1/DR2/V3)",
                     data={
                         "QUANTITY": (self.all_hidden_monokuma_counts, 1),
                         "CHAPTER": (self.all_chapters, 1),
@@ -446,28 +446,28 @@ class DanganronpaGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Collect all collectibles in LOCATION",
+                    label="Collect all collectibles in LOCATION (Mainline DR1/DR2/V3)",
                     data={"LOCATION": (self.all_locations, 1)},
                     is_time_consuming=True,
                     is_difficult=True,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
-                    label="Find a single Hidden Monokuma",
+                    label="Find a single Hidden Monokuma (Mainline DR1/DR2/V3)",
                     data={},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
-                    label="Discover a collectible location",
+                    label="Discover a collectible location (Mainline DR1/DR2/V3)",
                     data={},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
-                    label="Check a suspicious spot",
+                    label="Check a suspicious spot (Mainline DR1/DR2/V3)",
                     data={},
                     is_time_consuming=False,
                     is_difficult=False,
@@ -479,7 +479,7 @@ class DanganronpaGame(Game):
             if "Danganronpa S: Ultimate Summer Camp" in self.games_owned and self.include_summer_camp:
                 templates.extend([
                     GameObjectiveTemplate(
-                        label="Reach turn TURN in Development Mode as CHARACTER (Summer Camp)",
+                        label="Reach turn TURN in Development Mode as CHARACTER (Summer Camp – DRS)",
                         data={
                             "TURN": (self.all_turn_counts, 1),
                             "CHARACTER": (self.all_summer_camp_characters, 1),
@@ -489,7 +489,7 @@ class DanganronpaGame(Game):
                         weight=2,
                     ),
                     GameObjectiveTemplate(
-                        label="Clear floor FLOOR in Tower of Despair using CHARACTERS (Summer Camp)",
+                        label="Clear floor FLOOR in Tower of Despair using CHARACTERS (Summer Camp – DRS)",
                         data={
                             "FLOOR": (self.all_floors, 1),
                             "CHARACTERS": (self.all_summer_camp_characters, 4),
@@ -499,7 +499,7 @@ class DanganronpaGame(Game):
                         weight=4,
                     ),
                     GameObjectiveTemplate(
-                        label="Clear floor FLOOR in Tower of Despair with a party that includes CHARACTER (Summer Camp)",
+                        label="Clear floor FLOOR in Tower of Despair with a party that includes CHARACTER (Summer Camp – DRS)",
                         data={
                             "FLOOR": (self.all_floors, 1),
                             "CHARACTER": (self.all_summer_camp_characters, 1),
@@ -509,7 +509,7 @@ class DanganronpaGame(Game):
                         weight=3,
                     ),
                     GameObjectiveTemplate(
-                        label="Clear floor FLOOR in Tower of Despair with a party that includes CHARACTERS (Summer Camp)",
+                        label="Clear floor FLOOR in Tower of Despair with a party that includes CHARACTERS (Summer Camp – DRS)",
                         data={
                             "FLOOR": (self.all_floors, 1),
                             "CHARACTERS": (self.all_summer_camp_characters, 2),
@@ -519,48 +519,49 @@ class DanganronpaGame(Game):
                         weight=3,
                     ),
                     GameObjectiveTemplate(
-                        label="Unlock a swimsuit outfit for CHARACTER in Summer Camp mode (Summer Camp)",
+                        label="Unlock a swimsuit outfit for CHARACTER in Summer Camp mode (Summer Camp – DRS)",
                         data={"CHARACTER": (self.all_swimsuit_students, 1)},
                         is_time_consuming=True,
                         is_difficult=False,
                         weight=2,
                     ),
                     GameObjectiveTemplate(
-                        label="Collect QUANTITY Summer Camp presents (Summer Camp)",
+                        label="Collect QUANTITY Summer Camp presents (Summer Camp – DRS)",
                         data={"QUANTITY": (self.all_present_quantities, 1)},
                         is_time_consuming=True,
                         is_difficult=False,
                         weight=2,
                     ),
                     GameObjectiveTemplate(
-                        label="Defeat BOSS in Summer Camp mode (Summer Camp)",
+                        label="Defeat BOSS in Summer Camp mode (Summer Camp – DRS)",
                         data={"BOSS": (self.all_summer_camp_bosses, 1)},
                         is_time_consuming=True,
                         is_difficult=True,
                         weight=3,
-                    ),GameObjectiveTemplate(
-                        label="Acquire a rare card from the MonoMono Machine (Summer Camp)",
+                    ),
+                    GameObjectiveTemplate(
+                        label="Acquire a rare card from the MonoMono Machine (Summer Camp – DRS)",
                         data={},
                         is_time_consuming=False,
                         is_difficult=True,
                         weight=2,
                     ),
                     GameObjectiveTemplate(
-                        label="Play a single Summer Camp match (Summer Camp)",
+                        label="Play a single Summer Camp match (Summer Camp – DRS)",
                         data={},
                         is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
-                        label="Visit a Summer Camp location (Summer Camp)",
+                        label="Visit a Summer Camp location (Summer Camp – DRS)",
                         data={},
                         is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
-                        label="Interact with a facility in Summer Camp (Summer Camp)",
+                        label="Interact with a facility in Summer Camp (Summer Camp – DRS)",
                         data={},
                         is_time_consuming=False,
                         is_difficult=False,
@@ -766,7 +767,7 @@ class DanganronpaGame(Game):
     ]
 
     def all_presents(self) -> List[str]:
-        presents = []
+        presents: List[str] = []
         games_owned = self.games_owned
         # DR1
         if "Danganronpa: Trigger Happy Havoc" in games_owned:
@@ -800,9 +801,9 @@ class DanganronpaGame(Game):
     @staticmethod
     def all_extra_minigames() -> List[str]:
         return [
-            "Magical Girl Monomi",
-            "Death Road of Despair",
-            "Monokuma's Test",
+            "Magical Girl Monomi (DR2 Extra Minigame)",
+            "Death Road of Despair (V3 Extra Minigame)",
+            "Monokuma's Test (V3 Extra Minigame)",
         ]
 
     # ===== DefaultOnToggle accessors =====
@@ -813,6 +814,7 @@ class DanganronpaGame(Game):
     @property
     def enable_bonus_modes(self) -> bool:
         return self.archipelago_options.danganronpa_enable_bonus_modes.value
+
     @property
     def include_investigation(self) -> bool:
         return self.archipelago_options.danganronpa_include_investigation.value
