@@ -280,12 +280,12 @@ class BrutalOrchestraGame(Game):
     def difficulties_normal() -> List[str]:
         return [
             "Normal",
+            "Hard",
         ]
 
     @staticmethod
     def difficulties_hard() -> List[str]:
         return [
-            "Hard",
             "Hellmode",
         ]
 
