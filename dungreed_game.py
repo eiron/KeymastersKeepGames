@@ -69,12 +69,6 @@ class DungreedGame(Game):
                 },
             ),
             GameObjectiveTemplate(
-                label="Play as CHARACTER",
-                data={
-                    "CHARACTER": (self.characters, 1),
-                },
-            ),
-            GameObjectiveTemplate(
                 label="Complete an area with only dash damage",
                 data={},
             ),
@@ -124,93 +118,118 @@ class DungreedGame(Game):
     def base_objectives(self) -> List[GameObjectiveTemplate]:
         return [
             GameObjectiveTemplate(
-                label="Complete a full dungeon run",
-                data={},
+                label="Complete a full dungeon run as CHARACTER",
+                data={
+                    "CHARACTER": (self.characters, 1),
+                },
                 is_time_consuming=True,
                 is_difficult=False,
                 weight=10,
             ),
             GameObjectiveTemplate(
-                label="Defeat Niflheim",
-                data={},
+                label="Defeat Niflheim as CHARACTER",
+                data={
+                    "CHARACTER": (self.characters, 1),
+                },
                 is_time_consuming=True,
                 is_difficult=False,
                 weight=10,
             ),
             GameObjectiveTemplate(
-                label="Reach Floor 5",
-                data={},
+                label="Reach Floor 5 as CHARACTER",
+                data={
+                    "CHARACTER": (self.characters, 1),
+                },
                 is_time_consuming=True,
                 is_difficult=False,
                 weight=5,
             ),
             GameObjectiveTemplate(
-                label="Collect 10,000 gold in a single run",
-                data={},
+                label="Collect 10,000 gold in a single run as CHARACTER",
+                data={
+                    "CHARACTER": (self.characters, 1),
+                },
                 is_time_consuming=True,
                 is_difficult=False,
                 weight=5,
             ),
             GameObjectiveTemplate(
-                label="Defeat Ericha (Final Boss)",
-                data={},
+                label="Defeat Ericha (Final Boss) as CHARACTER",
+                data={
+                    "CHARACTER": (self.characters, 1),
+                },
                 is_time_consuming=True,
                 is_difficult=True,
                 weight=12,
             ),
             GameObjectiveTemplate(
-                label="Complete a Trial",
-                data={},
+                label="Complete a Trial as CHARACTER",
+                data={
+                    "CHARACTER": (self.characters, 1),
+                },
                 is_time_consuming=True,
                 is_difficult=False,
                 weight=6,
             ),
             GameObjectiveTemplate(
-                label="Complete a run with 10+ weapon upgrades",
-                data={},
+                label="Complete a run with 10+ weapon upgrades as CHARACTER",
+                data={
+                    "CHARACTER": (self.characters, 1),
+                },
                 is_time_consuming=True,
                 is_difficult=False,
                 weight=5,
             ),
             GameObjectiveTemplate(
-                label="Clear all rooms on a single floor",
-                data={},
+                label="Clear all rooms on a single floor as CHARACTER",
+                data={
+                    "CHARACTER": (self.characters, 1),
+                },
                 is_time_consuming=True,
                 is_difficult=False,
                 weight=4,
             ),
             GameObjectiveTemplate(
-                label="Rescue 3 NPCs in a single run",
-                data={},
+                label="Rescue 3 NPCs in a single run as CHARACTER",
+                data={
+                    "CHARACTER": (self.characters, 1),
+                },
                 is_time_consuming=True,
                 is_difficult=False,
                 weight=5,
             ),
             GameObjectiveTemplate(
-                label="Defeat a boss without taking damage",
-                data={},
+                label="Defeat a boss without taking damage as CHARACTER",
+                data={
+                    "CHARACTER": (self.characters, 1),
+                },
                 is_time_consuming=True,
                 is_difficult=True,
                 weight=8,
             ),
             GameObjectiveTemplate(
-                label="Complete an area without taking damage",
-                data={},
+                label="Complete an area without taking damage as CHARACTER",
+                data={
+                    "CHARACTER": (self.characters, 1),
+                },
                 is_time_consuming=True,
                 is_difficult=True,
                 weight=7,
             ),
             GameObjectiveTemplate(
-                label="Clear the Twilight Manor",
-                data={},
+                label="Clear the Twilight Manor as CHARACTER",
+                data={
+                    "CHARACTER": (self.characters, 1),
+                },
                 is_time_consuming=True,
                 is_difficult=True,
                 weight=9,
             ),
             GameObjectiveTemplate(
-                label="Collect 5 RARITY_TIER rarity items in a single run",
+                label="Collect 5 RARITY_TIER rarity items in a single run as CHARACTER",
                 data={
                     "RARITY_TIER": (self.rarity_tiers, 1),
+                    "CHARACTER": (self.characters, 1),
                 },
                 is_time_consuming=True,
                 is_difficult=False,
