@@ -437,3 +437,23 @@ class ForwardEscapeTheFoldGame(Game):
             "4",
             "5",
         ]
+
+
+class ForwardIncludeResourceChallenges(DefaultOnToggle):
+    """Include objectives focused on accumulating resources (Skulls, Gold, items, Legendary items)"""
+    display_name = "Include Resource Challenges"
+
+
+class ForwardIncludeChallengeModes(DefaultOnToggle):
+    """Include objectives for completing Challenge modes"""
+    display_name = "Include Challenge Modes"
+
+
+class ForwardIncludePlaystyleConstraints(DefaultOnToggle):
+    """Include objectives that impose specific playstyle constraints during runs"""
+    display_name = "Include Playstyle Constraints"
+
+
+class ForwardIncludeAchievementObjectives(DefaultOnToggle):
+    """Include objectives based on game achievements (status effects, damage thresholds, etc)"""
+    display_name = "Include Achievement Objectives"
