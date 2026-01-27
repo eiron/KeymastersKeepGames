@@ -24,9 +24,7 @@ class ForwardEscapeTheFoldGame(Game):
     name = "Forward: Escape the Fold"
     platform = KeymastersKeepGamePlatforms.PC
 
-    platforms_other = [
-        KeymastersKeepGamePlatforms.MAC,
-    ]
+    platforms_other = []
 
     is_adult_only_or_unrated = False
 
