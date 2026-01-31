@@ -25,6 +25,11 @@ class AnimalCrossingNewHorizonsArchipelagoOptions:
     acnh_collection_focus: ACNHCollectionFocus
     acnh_island_type: ACNHIslandType
     acnh_include_happy_home_paradise: ACNHIncludeHappyHomeParadise
+    acnh_include_kappn_hotel: ACNHIncludeKappnHotel
+    acnh_include_slumber_island: ACNHIncludeSlumberIsland
+    acnh_include_multiplayer: ACNHIncludeMultiplayer
+    acnh_include_vip_rooms: ACNHIncludeVIPRooms
+    acnh_include_classic_consoles: ACNHIncludeClassicConsoles
 
 
 class AnimalCrossingNewHorizonsGame(Game):
@@ -72,14 +77,14 @@ class AnimalCrossingNewHorizonsGame(Game):
                     },
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=3,
+                    weight=2,
                 ),
                 GameObjectiveTemplate(
                     label="Complete COUNT daily Nook Miles+ tasks",
                     data={"COUNT": (self.nook_miles_task_counts, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=3,
+                    weight=2,
                 ),
                 GameObjectiveTemplate(
                     label="Shake TREE_COUNT trees and collect COUNT TREE_ITEM",
@@ -378,7 +383,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                     data={"INFRASTRUCTURE_COUNT": (self.infrastructure_counts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=2,
+                    weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Plant and grow FLOWER_COUNT FLOWER_TYPE flowers",
@@ -388,7 +393,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                     },
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=2,
+                    weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Achieve STAR_RATING star island rating",
@@ -530,14 +535,14 @@ class AnimalCrossingNewHorizonsGame(Game):
                     },
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=2,
+                    weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Create an outdoor area with OUTDOOR_THEME theme",
                     data={"OUTDOOR_THEME": (self.outdoor_themes, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=2,
+                    weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Achieve HHA_SCORE HHA points in your home",
@@ -568,13 +573,6 @@ class AnimalCrossingNewHorizonsGame(Game):
                     weight=1,
                 ),
                 GameObjectiveTemplate(
-                    label="Visit a friend's island for the first time",
-                    data={},
-                    is_time_consuming=False,
-                    is_difficult=False,
-                    weight=1,
-                ),
-                GameObjectiveTemplate(
                     label="Unlock and use your first custom design slot",
                     data={},
                     is_time_consuming=False,
@@ -582,19 +580,23 @@ class AnimalCrossingNewHorizonsGame(Game):
                     weight=1,
                 ),
             ])
+
+            if self.include_multiplayer:
+                misc_templates.append(
+                    GameObjectiveTemplate(
+                        label="Visit a friend's island for the first time",
+                        data={},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    )
+                )
         else:  # established_island
             misc_templates.extend([
                 GameObjectiveTemplate(
                     label="Create and share a custom design on the portal",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Host a visitor and give them a tour of your island",
-                    data={},
-                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),
@@ -613,6 +615,17 @@ class AnimalCrossingNewHorizonsGame(Game):
                     weight=2,
                 ),
             ])
+
+            if self.include_multiplayer:
+                misc_templates.append(
+                    GameObjectiveTemplate(
+                        label="Host a visitor and give them a tour of your island",
+                        data={},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=2,
+                    )
+                )
         
         # Common miscellaneous activities for both island types
         misc_templates.extend([
@@ -640,6 +653,342 @@ class AnimalCrossingNewHorizonsGame(Game):
         ])
         
         game_objective_templates.extend(misc_templates)
+
+        # Kapp'n Family Hotel
+        if self.include_kappn_hotel:
+            hotel_templates = []
+
+            if self.island_type == "New":
+                hotel_templates.extend([
+                    GameObjectiveTemplate(
+                        label="Visit Kapp'n Family Hotel for the first time",
+                        data={},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Complete your first hotel room design",
+                        data={},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Meet all hotel staff in one day",
+                        data={},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Complete your first DIY request for the hotel donation box",
+                        data={},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Unlock the hotel souvenir shop",
+                        data={},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                ])
+            else:
+                hotel_templates.extend([
+                    GameObjectiveTemplate(
+                        label="Design COUNT hotel rooms, including one with HOTEL_THEME theme",
+                        data={
+                            "COUNT": (self.hotel_room_counts, 1),
+                            "HOTEL_THEME": (self.hotel_room_themes, 1),
+                        },
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Complete COUNT DIY donation box requests",
+                        data={"COUNT": (self.hotel_task_counts, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Earn COUNT hotel tickets",
+                        data={"COUNT": (self.hotel_ticket_counts, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Dress COUNT hotel mannequins in CLOTHING_TYPE outfits",
+                        data={
+                            "COUNT": (self.mannequin_counts, 1),
+                            "CLOTHING_TYPE": (self.clothing_categories, 1),
+                        },
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Purchase COUNT items from the hotel souvenir shop",
+                        data={"COUNT": (self.hotel_purchase_counts, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Host COUNT tourist villagers at the hotel",
+                        data={"COUNT": (self.tourist_counts, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Guide COUNT wandering tourists to check into the hotel",
+                        data={"COUNT": (self.tourist_guide_counts, 1)},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Have all standard hotel rooms occupied at once",
+                        data={},
+                        is_time_consuming=False,
+                        is_difficult=True,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Reach maximum hotel brand recognition",
+                        data={},
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Purchase the complete FURNITURE_SET set from the hotel shop",
+                        data={"FURNITURE_SET": (self.new_furniture_sets, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Take a second Kapp'n boat tour using hotel tickets",
+                        data={},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                ])
+
+                if self.include_classic_consoles:
+                    hotel_templates.extend([
+                        GameObjectiveTemplate(
+                            label="Unlock and purchase all classic Nintendo consoles",
+                            data={},
+                            is_time_consuming=True,
+                            is_difficult=True,
+                            weight=1,
+                        ),
+                        GameObjectiveTemplate(
+                            label="Play CLASSIC_GAME on a classic Nintendo console",
+                            data={"CLASSIC_GAME": (self.classic_console_games, 1)},
+                            is_time_consuming=False,
+                            is_difficult=False,
+                            weight=1,
+                        ),
+                    ])
+
+                if self.include_vip_rooms:
+                    hotel_templates.append(
+                        GameObjectiveTemplate(
+                            label="Design COUNT VIP hotel rooms",
+                            data={"COUNT": (self.vip_room_counts, 1)},
+                            is_time_consuming=True,
+                            is_difficult=True,
+                            weight=2,
+                        )
+                    )
+
+            game_objective_templates.extend(hotel_templates)
+
+        # Slumber Island
+        if self.include_slumber_island:
+            slumber_templates = []
+
+            if self.island_type == "New":
+                slumber_templates.append(
+                    GameObjectiveTemplate(
+                        label="Create your first Slumber Island",
+                        data={},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=1,
+                    )
+                )
+
+                if self.include_multiplayer:
+                    slumber_templates.append(
+                        GameObjectiveTemplate(
+                            label="Invite a friend to your Slumber Island for the first time",
+                            data={},
+                            is_time_consuming=False,
+                            is_difficult=False,
+                            weight=1,
+                        )
+                    )
+            else:
+                slumber_templates.extend([
+                    GameObjectiveTemplate(
+                        label="Create COUNT Slumber Islands with SIZE_TYPE size",
+                        data={
+                            "COUNT": (self.slumber_island_counts, 1),
+                            "SIZE_TYPE": (self.slumber_sizes, 1),
+                        },
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Design a SLUMBER_THEME Slumber Island",
+                        data={"SLUMBER_THEME": (self.slumber_themes, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Terraform COUNT distinct areas on a Slumber Island",
+                        data={"COUNT": (self.terraform_area_counts, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Place COUNT items on a Slumber Island",
+                        data={"COUNT": (self.slumber_item_counts, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Place COUNT pieces of infrastructure using Lloid on a Slumber Island",
+                        data={"COUNT": (self.infrastructure_counts, 1)},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Invite COUNT villagers to reside on a Slumber Island",
+                        data={"COUNT": (self.slumber_villager_counts, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Experiment with COUNT different weather or time combinations on a Slumber Island",
+                        data={"COUNT": (self.weather_time_counts, 1)},
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Create a perfectly symmetrical layout on a Slumber Island",
+                        data={},
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=2,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Design COUNT themed areas on your Slumber Island using custom designs",
+                        data={"COUNT": (self.terraform_area_counts, 1)},
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    ),
+                ])
+
+                if self.include_multiplayer:
+                    slumber_templates.append(
+                        GameObjectiveTemplate(
+                            label="Collaborate with friends on COUNT Slumber Island build sessions",
+                            data={"COUNT": (self.collaborative_counts, 1)},
+                            is_time_consuming=False,
+                            is_difficult=False,
+                            weight=2,
+                        )
+                    )
+
+            game_objective_templates.extend(slumber_templates)
+
+        # Resetti Reset Service and QoL
+        reset_templates = []
+
+        if self.island_type == "New":
+            reset_templates.append(
+                GameObjectiveTemplate(
+                    label="Use Resetti's Reset Service for the first time",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                )
+            )
+        else:
+            reset_templates.extend([
+                GameObjectiveTemplate(
+                    label="Use Reset Service to clear and redesign AREA_TYPE area",
+                    data={"AREA_TYPE": (self.reset_areas, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Clear an area using Reset Service and store all items before redesigning",
+                    data={},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Use Reset Service to clear COUNT different areas",
+                    data={"COUNT": (self.reset_usage_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Redesign your beach using Reset Service with a new theme",
+                    data={},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Use grid snap to create a perfectly straight fence or path line",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Store COUNT trees or shrubs in home storage",
+                    data={"COUNT": (self.storage_plant_counts, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Change your island tune using Isabelle's recommendation",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+            ])
+
+        game_objective_templates.extend(reset_templates)
 
         # Happy Home Paradise DLC
         if self.include_happy_home_paradise:
@@ -806,6 +1155,26 @@ class AnimalCrossingNewHorizonsGame(Game):
     @property
     def include_happy_home_paradise(self) -> bool:
         return self.archipelago_options.acnh_include_happy_home_paradise.value
+
+    @property
+    def include_kappn_hotel(self) -> bool:
+        return self.archipelago_options.acnh_include_kappn_hotel.value
+
+    @property
+    def include_slumber_island(self) -> bool:
+        return self.archipelago_options.acnh_include_slumber_island.value
+
+    @property
+    def include_multiplayer(self) -> bool:
+        return self.archipelago_options.acnh_include_multiplayer.value
+
+    @property
+    def include_vip_rooms(self) -> bool:
+        return self.archipelago_options.acnh_include_vip_rooms.value
+
+    @property
+    def include_classic_consoles(self) -> bool:
+        return self.archipelago_options.acnh_include_classic_consoles.value
 
     # Data lists
     @staticmethod
@@ -1071,13 +1440,133 @@ class AnimalCrossingNewHorizonsGame(Game):
     def timeframes() -> List[str]:
         return ["1 day", "3 days", "1 week", "2 weeks"]
 
-    @staticmethod
-    def clothing_categories() -> List[str]:
-        return ["Hat", "Dress", "Shirt", "Pants", "Shoes", "Accessories", "Full Outfit"]
+    def clothing_categories(self) -> List[str]:
+        categories = [
+            "Hat", "Dress", "Shirt", "Pants", "Shoes", "Accessories", "Full Outfit",
+            "Seasonal Outfit", "Formal Wear", "Casual Wear", "Costume", "Athletic Wear",
+            "Sleepwear"
+        ]
+
+        if self.include_happy_home_paradise:
+            categories.append("Work Uniform")
+
+        return categories
 
     @staticmethod
     def weather_types() -> List[str]:
         return ["Sunny", "Cloudy", "Rainy", "Snowy"]
+
+    @staticmethod
+    def hotel_room_themes() -> List[str]:
+        return [
+            "Luxury Suite", "Traditional Inn Room", "Seaside Retreat", "Business Class Room",
+            "Romantic Getaway", "Family Vacation Room", "Cozy Reading Nook", "Spa Wellness Room",
+            "Garden View Suite", "Ocean View Balcony", "Artist's Loft", "Chef's Kitchen Suite",
+            "Music Lover's Room", "Gamer's Paradise", "Pet-Friendly Suite"
+        ]
+
+    @staticmethod
+    def hotel_room_counts() -> range:
+        return range(3, 15, 2)
+
+    @staticmethod
+    def vip_room_counts() -> range:
+        return range(1, 8, 2)
+
+    @staticmethod
+    def hotel_task_counts() -> range:
+        return range(5, 30, 5)
+
+    @staticmethod
+    def hotel_ticket_counts() -> range:
+        return range(20, 200, 20)
+
+    @staticmethod
+    def mannequin_counts() -> range:
+        return range(3, 10, 2)
+
+    @staticmethod
+    def tourist_counts() -> range:
+        return range(5, 30, 5)
+
+    @staticmethod
+    def tourist_guide_counts() -> range:
+        return range(3, 10, 2)
+
+    @staticmethod
+    def hotel_purchase_counts() -> range:
+        return range(5, 20, 5)
+
+    @staticmethod
+    def console_game_counts() -> range:
+        return range(3, 7)
+
+    @staticmethod
+    def classic_console_games() -> List[str]:
+        return [
+            "Clu Clu Land (Famicom)",
+            "Ice Climber (NES)",
+            "Ice Hockey (Famicom Disk System)",
+            "Dr. Mario (Game Boy)",
+            "Panel de Pon (Super Famicom)",
+            "F-Zero (Super NES)",
+        ]
+
+    @staticmethod
+    def new_furniture_sets() -> List[str]:
+        return ["Zen Modern", "Kids", "Tubular", "Marble", "LEGO"]
+
+    @staticmethod
+    def slumber_themes() -> List[str]:
+        return [
+            "Zen Garden Paradise", "Bustling City District", "Enchanted Forest", "Tropical Beach Resort",
+            "Mountain Retreat", "Fairytale Kingdom", "Industrial Urban Area", "Countryside Farm",
+            "Autumn Harvest Festival", "Winter Wonderland", "Space Station", "Ancient Ruins",
+            "Underwater World", "Desert Oasis", "Rainbow Valley"
+        ]
+
+    @staticmethod
+    def slumber_island_counts() -> range:
+        return range(1, 4)
+
+    @staticmethod
+    def slumber_sizes() -> List[str]:
+        return ["Small", "Medium", "Large"]
+
+    @staticmethod
+    def terraform_area_counts() -> range:
+        return range(3, 15, 3)
+
+    @staticmethod
+    def slumber_item_counts() -> range:
+        return range(50, 200, 50)
+
+    @staticmethod
+    def slumber_villager_counts() -> range:
+        return range(1, 10, 3)
+
+    @staticmethod
+    def collaborative_counts() -> range:
+        return range(1, 5)
+
+    @staticmethod
+    def weather_time_counts() -> range:
+        return range(5, 20, 5)
+
+    @staticmethod
+    def reset_areas() -> List[str]:
+        return [
+            "Entire island", "Beach", "Villager house yards", "Shopping district",
+            "Residential area", "Plaza area", "Orchard section"
+        ]
+
+    @staticmethod
+    def reset_usage_counts() -> range:
+        return range(2, 8, 2)
+
+    @staticmethod
+    def storage_plant_counts() -> range:
+        return range(10, 50, 10)
 
     # Ranges
     @staticmethod
@@ -1138,7 +1627,7 @@ class AnimalCrossingNewHorizonsGame(Game):
 
     @staticmethod
     def craft_counts() -> range:
-        return range(5, 25, 5)
+        return range(5, 50, 5)
 
     @staticmethod
     def customization_counts() -> range:
@@ -1206,3 +1695,28 @@ class ACNHIslandType(TextChoice):
 class ACNHIncludeHappyHomeParadise(Toggle):
     """Include Happy Home Paradise DLC objectives (vacation home design, facilities)."""
     display_name = "Animal Crossing New Horizons Include Happy Home Paradise DLC"
+
+
+class ACNHIncludeKappnHotel(DefaultOnToggle):
+    """Include Kapp'n Family Hotel objectives (rooms, tickets, consoles)."""
+    display_name = "Animal Crossing New Horizons Include Kapp'n Family Hotel"
+
+
+class ACNHIncludeSlumberIsland(DefaultOnToggle):
+    """Include Slumber Island objectives (dream islands, terraforming)."""
+    display_name = "Animal Crossing New Horizons Include Slumber Island"
+
+
+class ACNHIncludeMultiplayer(Toggle):
+    """Include multiplayer-dependent objectives (visits, collaboration)."""
+    display_name = "Animal Crossing New Horizons Include Multiplayer"
+
+
+class ACNHIncludeVIPRooms(Toggle):
+    """Include VIP hotel room objectives (advanced hotel designs)."""
+    display_name = "Animal Crossing New Horizons Include VIP Hotel Rooms"
+
+
+class ACNHIncludeClassicConsoles(Toggle):
+    """Include classic Nintendo console objectives (unlocking and playing)."""
+    display_name = "Animal Crossing New Horizons Include Classic Consoles"
