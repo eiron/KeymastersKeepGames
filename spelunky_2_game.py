@@ -38,7 +38,6 @@ class Spelunky2Game(Game):
 
     options_cls = Spelunky2ArchipelagoOptions
 
-    @functools.cached_property
     def biomes(self) -> List[str]:
         return sorted(self.archipelago_options.spelunky2_allowed_biomes.value)
 
@@ -455,11 +454,11 @@ class Spelunky2Game(Game):
 
     # Logical biome sets for path pairing
     def world2_biomes(self) -> List[str]:
-        allowed = set(self.biomes)
+        allowed = set(self.biomes())
         return [b for b in ["Volcana", "Jungle"] if b in allowed]
 
     def world3_biomes(self) -> List[str]:
-        allowed = set(self.biomes)
+        allowed = set(self.biomes())
         return [b for b in ["Tide Pool", "Temple"] if b in allowed]
 
     def biome_pairs(self) -> List[str]:
@@ -487,7 +486,6 @@ class Spelunky2Game(Game):
             "Dirk Yamaoka",
         ]
 
-    @functools.cached_property
     def available_characters(self) -> List[str]:
         allowed = set(self.archipelago_options.spelunky2_allowed_characters.value)
         roster = self.characters()
