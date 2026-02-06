@@ -406,7 +406,7 @@ class PlayniteLibraryGame(Game):
         objectives.append(
             GameObjectiveTemplate(
                 label="Play a Playnite library game from the SERIES series",
-                data={"SERIES": (lambda: list(self.series()), 1)},
+                data={"SERIES": (lambda: list(self.series), 1)},
                 is_time_consuming=False,
                 is_difficult=False,
                 weight=1,
