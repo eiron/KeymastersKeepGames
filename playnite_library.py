@@ -867,6 +867,22 @@ class PlayniteLibraryHolder:
         print(f"Total Games: {len(normalized)}")
         print("=" * 55 + "\n")
 
+    def _detect_text_encoding(self, path: Path) -> str:
+        """Detect basic text encoding using BOM, defaulting to UTF-8."""
+        try:
+            with path.open("rb") as f:
+                bom = f.read(4)
+        except Exception:
+            return "utf-8"
+
+        if bom.startswith(b"\xff\xfe\x00\x00") or bom.startswith(b"\x00\x00\xfe\xff"):
+            return "utf-32"
+        if bom.startswith(b"\xff\xfe") or bom.startswith(b"\xfe\xff"):
+            return "utf-16"
+        if bom.startswith(b"\xef\xbb\xbf"):
+            return "utf-8-sig"
+        return "utf-8"
+
     def _read_and_normalize(self, json_path: str) -> List[Dict[str, Any]]:
         if not json_path:
             raise RuntimeError(
@@ -902,56 +918,94 @@ class PlayniteLibraryHolder:
                     f"Playnite Library JSON not found at '{path}'. Provide a folder containing 'games.json' or a direct file path."
                 )
 
-            print(f"Loading Playnite library from {path}...")
+            file_size_mb = path.stat().st_size / (1024 * 1024)
+            print(f"Loading Playnite library from {path} ({file_size_mb:.1f} MB)...")
+            
+            if file_size_mb > 100:
+                print(f"[Playnite] Large library detected ({file_size_mb:.1f} MB). This may take a moment...")
+            
             # Read JSON content; allow either a list of games or a dict with a games collection
             # Be permissive with encodings and formats (Playnite's games.json can be NDJSON)
             load_error: Exception | None = None
             data = None
-            # 1) Try strict UTF-8 JSON
-            try:
-                with path.open("r", encoding="utf-8") as f:
-                    data = json.load(f)
-            except Exception as e1:
-                load_error = e1
-                # 2) Try UTF-8 with BOM
+            detected_encoding = self._detect_text_encoding(path)
+            # 1) Try JSON load with detected encoding, then common UTF-8 fallbacks
+            for enc in (detected_encoding, "utf-8", "utf-8-sig"):
                 try:
-                    with path.open("r", encoding="utf-8-sig") as f:
+                    with path.open("r", encoding=enc) as f:
                         data = json.load(f)
                         load_error = None
-                except Exception as e2:
-                    load_error = e2
-            # 3) If still failing, try a tolerant text read and handle NDJSON
+                        break
+                except Exception as e1:
+                    load_error = e1
+                    # Store more detailed error info for large files
+                    if file_size_mb > 100:
+                        print(f"[Playnite] Encoding '{enc}' failed: {type(e1).__name__}: {str(e1)[:200]}")
+            # 3) If still failing, attempt NDJSON streaming, then tolerant full-text JSON
             if data is None:
+                # For very large files (>200MB), skip expensive string fallbacks
+                # as they'll likely cause memory issues
+                if file_size_mb > 200:
+                    error_detail = f"{type(load_error).__name__}: {load_error}" if load_error else "Unknown parse error"
+                    raise RuntimeError(
+                        f"Cannot parse large JSON file ({file_size_mb:.1f} MB). "
+                        f"Error: {error_detail}. "
+                        f"Ensure the file is valid JSON and not corrupted."
+                    )
+                
                 try:
-                    raw_text = path.read_text(encoding="utf-8", errors="replace")
-                    raw = raw_text.strip()
-                    # If it's a normal JSON container, try loading again
-                    if raw.startswith("{") or raw.startswith("["):
-                        try:
-                            data = json.loads(raw)
-                            load_error = None
-                        except Exception as e3:
-                            load_error = e3
-                    # If not a normal container, treat as NDJSON (one JSON object per line)
-                    if data is None:
-                        lines = [ln.strip() for ln in raw_text.splitlines() if ln.strip()]
-                        ndjson_items = []
-                        ndjson_failed = False
-                        for ln in lines:
-                            try:
-                                ndjson_items.append(json.loads(ln))
-                            except Exception:
-                                ndjson_failed = True
+                    with path.open("r", encoding=detected_encoding, errors="replace") as f:
+                        first_line = ""
+                        for line in f:
+                            stripped = line.strip()
+                            if stripped:
+                                first_line = stripped
                                 break
-                        if not ndjson_failed and ndjson_items:
-                            data = ndjson_items
-                            load_error = None
+
+                        # NDJSON typically has one full JSON object per non-empty line
+                        if first_line.startswith("{") and first_line.endswith("}"):
+                            ndjson_items: List[Dict[str, Any]] = []
+                            try:
+                                ndjson_items.append(json.loads(first_line))
+                            except Exception:
+                                ndjson_items = []
+
+                            if ndjson_items:
+                                for line in f:
+                                    stripped = line.strip()
+                                    if not stripped:
+                                        continue
+                                    try:
+                                        ndjson_items.append(json.loads(stripped))
+                                    except Exception:
+                                        ndjson_items = []
+                                        break
+
+                            if ndjson_items:
+                                data = ndjson_items
+                                load_error = None
+
+                        # Fallback to tolerant full-text JSON parse
+                        if data is None:
+                            f.seek(0)
+                            raw = f.read().strip()
+                            if raw.startswith("{") or raw.startswith("["):
+                                try:
+                                    data = json.loads(raw)
+                                    load_error = None
+                                except Exception as e3:
+                                    load_error = e3
                 except Exception as e4:
                     load_error = e4
 
             if data is None:
-                error_msg = str(load_error) if load_error else "Unknown error - file may be empty or severely malformed"
-                raise RuntimeError(f"Failed to read Playnite library JSON: {error_msg}")
+                if load_error:
+                    error_type = type(load_error).__name__
+                    error_detail = str(load_error)[:500]  # Limit error message length
+                    error_msg = f"{error_type}: {error_detail}" if error_detail else error_type
+                else:
+                    error_msg = "Unknown error - file may be empty or severely malformed"
+                raise RuntimeError(f"Failed to read Playnite library JSON ({file_size_mb:.1f} MB): {error_msg}")
 
         games_raw: List[Dict[str, Any]]
         if isinstance(data, list):
