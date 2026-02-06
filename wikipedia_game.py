@@ -458,7 +458,7 @@ class WikipediaGame(Game):
     def max_clicks_range(self) -> range:
         """Returns a range centered around the max_clicks setting"""
         base = self.max_clicks
-        return range(max(3, base - 2), min(15, base + 3))
+        return range(max(3, base - 2), base + 3)
     
     @property
     def easy_clicks_range(self, difficulty: str) -> range:
