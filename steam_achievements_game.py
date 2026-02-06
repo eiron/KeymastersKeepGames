@@ -57,7 +57,7 @@ class SteamAchievementsGame(Game):
                 },
                 is_time_consuming=True,
                 is_difficult=False,
-                weight=6,
+                weight=4,
             ),
             GameObjectiveTemplate(
                 label="Unlock at least ACHIEVEMENT_PERCENTAGE% of the achievements in STEAM_GAME_NAME",
@@ -67,7 +67,7 @@ class SteamAchievementsGame(Game):
                 },
                 is_time_consuming=True,
                 is_difficult=False,
-                weight=9,
+                weight=6,
             ),
             GameObjectiveTemplate(
                 label="Unlock all the achievements in STEAM_GAME_NAME",
