@@ -734,10 +734,13 @@ class WikipediaGame(Game):
             print(f"[Wikipedia Game] Fetching popular articles...")
             
             # Get yesterday's date for pageviews (API updates with 1-day lag)
-            yesterday = (datetime.utcnow() - timedelta(days=1)).strftime("%Y/%m/%d")
+            yesterday = datetime.utcnow() - timedelta(days=1)
+            year = yesterday.strftime("%Y")
+            month = yesterday.strftime("%m")
+            day = yesterday.strftime("%d")
             
             # Use Wikimedia Pageviews API for most viewed articles
-            url = f"https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia/all-access/{yesterday}"
+            url = f"https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/{year}/{month}/{day}"
             headers = {
                 "User-Agent": "KeymastersKeep/1.0 (Wikipedia Game objectives)"
             }
