@@ -46,6 +46,7 @@ class WikipediaGameArchipelagoOptions:
     wikipedia_game_max_clicks: WikipediaGameMaxClicks
     wikipedia_game_difficulties: WikipediaGameDifficulties
     wikipedia_game_trending_articles_limit: WikipediaGameTrendingArticlesLimit
+    wikipedia_game_popular_articles_limit: WikipediaGamePopularArticlesLimit
     wikipedia_game_generate_default_packs: WikipediaGameGenerateDefaultPacks
     wikipedia_game_update_trending_articles_pack: WikipediaGameUpdateTrendingArticlesPack
     wikipedia_game_update_featured_articles_pack: WikipediaGameUpdateFeaturedArticlesPack
@@ -200,6 +201,25 @@ class WikipediaGame(Game):
         base = self.get_effective_max_clicks("expert")
         return range(max(6, base - 1), base + 1)
 
+    # Three-article challenge click ranges (roughly double for two-hop paths)
+    def three_article_clicks_for_easy(self) -> range:
+        """Click range for three-article challenges in easy difficulty.
+        Roughly double the normal easy range to account for two hops (A→B→C)."""
+        base = self.get_effective_max_clicks("easy")
+        # Double the range: approximately 2x the easy clicks
+        min_clicks = max(12, (base - 8) * 2)
+        max_clicks = base * 2
+        return range(min_clicks, max_clicks + 1)
+    
+    def three_article_clicks_for_expert(self) -> range:
+        """Click range for three-article challenges in expert difficulty.
+        Roughly double the normal expert range to account for two hops (A→B→C)."""
+        base = self.get_effective_max_clicks("expert")
+        # Double the range: approximately 2x the expert clicks
+        min_clicks = max(12, (base - 1) * 2)
+        max_clicks = base * 2
+        return range(min_clicks, max_clicks + 1)
+
     def base_objectives(self) -> List[GameObjectiveTemplate]:
         objectives: List[GameObjectiveTemplate] = []
         
@@ -208,21 +228,21 @@ class WikipediaGame(Game):
             objectives.extend([
                 # Pair selection (easier)
                 GameObjectiveTemplate(
-                    label="Connect the following articles (in order) in EASY_CLICKS clicks or fewer: ARTICLES1",
+                    label="Connect the following articles (in order) in EASY_CLICKS clicks or fewer: ARTICLES",
                     data={
-                        "ARTICLES1": (self.master_articles, 2),
+                        "ARTICLES": (self.master_articles, 2),
                         "EASY_CLICKS": (self.easy_clicks_for_easy, 1),
                     },
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=3,
                 ),
-                # Three-article challenge with generous limit
+                # Three-article challenge with generous limit (2-hop path needs ~2x clicks)
                 GameObjectiveTemplate(
-                    label="Find a path between these 3 articles (in order) in GENEROUS_CLICKS clicks or fewer: ARTICLES3",
+                    label="Find a path between these 3 articles (in order) in GENEROUS_CLICKS clicks or fewer: ARTICLES",
                     data={
-                        "ARTICLES3": (self.master_articles, 3),
-                        "GENEROUS_CLICKS": (self.easy_clicks_for_easy, 1),
+                        "ARTICLES": (self.master_articles, 3),
+                        "GENEROUS_CLICKS": (self.three_article_clicks_for_easy, 1),
                     },
                     is_time_consuming=True,
                     is_difficult=False,
@@ -235,10 +255,9 @@ class WikipediaGame(Game):
             objectives.extend([
                 # Single article pair (standard)
                 GameObjectiveTemplate(
-                    label="Connect the following articles (in order) in STANDARD_CLICKS clicks or fewer: ARTICLE1, ARTICLE2",
+                    label="Connect the following articles (in order) in STANDARD_CLICKS clicks or fewer: ARTICLES",
                     data={
-                        "ARTICLE1": (self.master_articles, 1),
-                        "ARTICLE2": (self.master_articles, 1),
+                        "ARTICLES": (self.master_articles, 2),
                         "STANDARD_CLICKS": (self.standard_clicks_for_standard, 1),
                     },
                     is_time_consuming=True,
@@ -247,10 +266,9 @@ class WikipediaGame(Game):
                 ),
                 # Another pair (standard)
                 GameObjectiveTemplate(
-                    label="Connect the following articles (in order) in STANDARD_CLICKS clicks or fewer: ARTICLE3, ARTICLE4",
+                    label="Connect the following articles (in order) in STANDARD_CLICKS clicks or fewer: ARTICLES",
                     data={
-                        "ARTICLE3": (self.master_articles, 1),
-                        "ARTICLE4": (self.master_articles, 1),
+                        "ARTICLES": (self.master_articles, 2),
                         "STANDARD_CLICKS": (self.standard_clicks_for_standard, 1),
                     },
                     is_time_consuming=True,
@@ -264,10 +282,9 @@ class WikipediaGame(Game):
             objectives.extend([
                 # Third pair (hard)
                 GameObjectiveTemplate(
-                    label="Connect the following articles (in order) in HARD_CLICKS clicks or fewer: ARTICLE5, ARTICLE6",
+                    label="Connect the following articles (in order) in HARD_CLICKS clicks or fewer: ARTICLES",
                     data={
-                        "ARTICLE5": (self.master_articles, 1),
-                        "ARTICLE6": (self.master_articles, 1),
+                        "ARTICLES": (self.master_articles, 2),
                         "HARD_CLICKS": (self.hard_clicks_for_hard, 1),
                     },
                     is_time_consuming=True,
@@ -276,10 +293,9 @@ class WikipediaGame(Game):
                 ),
                 # Fourth pair (hard)
                 GameObjectiveTemplate(
-                    label="Connect the following articles (in order) in HARD_CLICKS clicks or fewer: ARTICLE7, ARTICLE8",
+                    label="Connect the following articles (in order) in HARD_CLICKS clicks or fewer: ARTICLES",
                     data={
-                        "ARTICLE7": (self.master_articles, 1),
-                        "ARTICLE8": (self.master_articles, 1),
+                        "ARTICLES": (self.master_articles, 2),
                         "HARD_CLICKS": (self.hard_clicks_for_hard, 1),
                     },
                     is_time_consuming=True,
@@ -288,10 +304,9 @@ class WikipediaGame(Game):
                 ),
                 # Fifth pair (harder)
                 GameObjectiveTemplate(
-                    label="Connect the following articles (in order) in HARD_CLICKS clicks or fewer: ARTICLE9, ARTICLE10",
+                    label="Connect the following articles (in order) in HARD_CLICKS clicks or fewer: ARTICLES",
                     data={
-                        "ARTICLE9": (self.master_articles, 1),
-                        "ARTICLE10": (self.master_articles, 1),
+                        "ARTICLES": (self.master_articles, 2),
                         "HARD_CLICKS": (self.hard_clicks_for_hard, 1),
                     },
                     is_time_consuming=True,
@@ -305,20 +320,21 @@ class WikipediaGame(Game):
             objectives.extend([
                 # Starter to finisher (expert, tight clicks)
                 GameObjectiveTemplate(
-                    label="Connect the following articles (in order) in EXPERT_CLICKS clicks or fewer: ARTICLES2",
+                    label="Connect the following articles (in order) in EXPERT_CLICKS clicks or fewer: ARTICLES",
                     data={
-                        "ARTICLES2": (self.master_articles, 2),
+                        "ARTICLES": (self.master_articles, 2),
                         "EXPERT_CLICKS": (self.expert_clicks_for_expert, 1),
                     },
                     is_time_consuming=True,
                     is_difficult=True,
                     weight=8,
                 ),
-                # Three-article challenge with no click limit
+                # Three-article challenge with tight limit (2-hop path needs ~2x clicks)
                 GameObjectiveTemplate(
-                    label="Find a path between these 3 articles (in order): ARTICLES4",
+                    label="Find a path between these 3 articles (in order) in EXPERT_CLICKS clicks or fewer: ARTICLES",
                     data={
-                        "ARTICLES4": (self.master_articles, 3),
+                        "ARTICLES": (self.master_articles, 3),
+                        "EXPERT_CLICKS": (self.three_article_clicks_for_expert, 1),
                     },
                     is_time_consuming=True,
                     is_difficult=True,
@@ -389,6 +405,10 @@ class WikipediaGame(Game):
     @property
     def trending_articles_limit(self) -> int:
         return self.archipelago_options.wikipedia_game_trending_articles_limit.value
+
+    @property
+    def popular_articles_limit(self) -> int:
+        return self.archipelago_options.wikipedia_game_popular_articles_limit.value
 
     @property
     def generate_default_packs(self) -> bool:
@@ -718,8 +738,7 @@ class WikipediaGame(Game):
 
             return articles
 
-    @staticmethod
-    def fetch_popular_articles(limit: Optional[int] = None) -> List[str]:
+    def fetch_popular_articles(self, limit: Optional[int] = None) -> List[str]:
         """Fetch most popular Wikipedia articles using the Wikimedia Pageviews API.
         Returns a list of article titles sorted by view count (most viewed first).
         Returns empty list if API fails.
@@ -728,45 +747,57 @@ class WikipediaGame(Game):
         from datetime import datetime, timedelta
         
         if limit is None:
-            limit = 100
+            limit = self.popular_articles_limit
         
         try:
             print(f"[Wikipedia Game] Fetching popular articles...")
             
-            # Get yesterday's date for pageviews (API updates with 1-day lag)
-            yesterday = datetime.utcnow() - timedelta(days=1)
-            year = yesterday.strftime("%Y")
-            month = yesterday.strftime("%m")
-            day = yesterday.strftime("%d")
-            
-            # Use Wikimedia Pageviews API for most viewed articles
-            url = f"https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia.org/all-access/{year}/{month}/{day}"
-            headers = {
-                "User-Agent": "KeymastersKeep/1.0 (Wikipedia Game objectives)"
-            }
-            
-            response = requests.get(url, headers=headers, timeout=10)
-            
-            if response.status_code == 200:
-                data = response.json()
-                articles_data = data.get("items", [{}])[0].get("articles", [])
+            # Get date from 2 days ago for pageviews (API updates with lag)
+            # Try up to 7 days back to find available data
+            articles = []
+            for days_back in range(2, 9):
+                target_date = datetime.utcnow() - timedelta(days=days_back)
+                year = target_date.strftime("%Y")
+                month = target_date.strftime("%m")
+                day = target_date.strftime("%d")
                 
-                # Extract unique article titles, filtering out meta pages
-                articles = []
-                for item in articles_data:
-                    title = item.get("article", "")
-                    if (title and
-                        not title.startswith(("Special:", "Wikipedia:", "User:", "User talk:", "Template:", "File:", "Main_Page")) and
-                        title != "Main Page" and
-                        title.replace("_", " ") not in ["Main Page"]):  # Handle underscore variant
-                        articles.append(title.replace("_", " "))
-                        if len(articles) >= limit:
-                            break
+                # Use Wikimedia Pageviews API for most viewed articles
+                url = f"https://wikimedia.org/api/rest_v1/metrics/pageviews/top/en.wikipedia/all-access/{year}/{month}/{day}"
+                headers = {
+                    "User-Agent": "KeymastersKeep/1.0 (Wikipedia Game objectives)"
+                }
                 
-                print(f"[Wikipedia Game] Successfully fetched {len(articles)} popular articles")
-                return articles
+                print(f"[Wikipedia Game] Trying URL (day -{days_back}): {url}")
+                response = requests.get(url, headers=headers, timeout=10)
+                
+                if response.status_code == 200:
+                    print(f"[Wikipedia Game] Successfully connected to API (day -{days_back})")
+                    break
+                else:
+                    print(f"[Wikipedia Game] API returned status code {response.status_code} for day -{days_back}")
             else:
-                print(f"[Wikipedia Game] API returned status code {response.status_code}")
+                # If we exhausted all attempts, return empty
+                print(f"[Wikipedia Game] Could not fetch popular articles after trying 7 days")
+                return []
+            
+            # Process the successful response
+            data = response.json()
+            articles_data = data.get("items", [{}])[0].get("articles", [])
+            
+            # Extract unique article titles, filtering out meta pages
+            articles = []
+            for item in articles_data:
+                title = item.get("article", "")
+                if (title and
+                    not title.startswith(("Special:", "Wikipedia:", "User:", "User talk:", "Template:", "File:", "Main_Page")) and
+                    title != "Main Page" and
+                    title.replace("_", " ") not in ["Main Page"]):  # Handle underscore variant
+                    articles.append(title.replace("_", " "))
+                    if len(articles) >= limit:
+                        break
+            
+            print(f"[Wikipedia Game] Successfully fetched {len(articles)} popular articles")
+            return articles
             
         except requests.exceptions.Timeout:
             print("[Wikipedia Game] WARNING: Pageviews API request timed out (popular articles unavailable)")
@@ -1073,7 +1104,7 @@ class WikipediaGame(Game):
     def update_popular_articles_pack_file(self) -> None:
         """Update the popular_articles.txt pack with most-viewed Wikipedia articles."""
         packs_dir = self.ensure_packs_dir()
-        popular = self.get_popular_articles_cached(limit=None)
+        popular = self.get_popular_articles_cached()
         if popular:
             file_path = os.path.join(packs_dir, "popular_articles.txt")
             self._write_pack_file(file_path, popular)
@@ -2077,6 +2108,17 @@ class WikipediaGameTrendingArticlesLimit(Range):
     Higher values give more variety but take longer to fetch.
     """
     display_name = "Wikipedia Game: Trending Articles Limit"
+    range_start = 10
+    range_end = 500
+    default = 100
+
+
+class WikipediaGamePopularArticlesLimit(Range):
+    """
+    Maximum number of popular articles to fetch from Wikipedia's pageview statistics.
+    Higher values give more variety but take longer to fetch.
+    """
+    display_name = "Wikipedia Game: Popular Articles Limit"
     range_start = 10
     range_end = 500
     default = 100
