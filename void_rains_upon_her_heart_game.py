@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle
+from Options import DefaultOnToggle, Toggle
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -17,6 +17,7 @@ class VoidRainsUponHerHeartArchipelagoOptions:
     void_rains_upon_her_heart_hearts: VoidRainsUponHerHeartHearts
     void_rains_upon_her_heart_mode: VoidRainsUponHerHeartMode
     void_rains_upon_her_heart_boss_challenges: VoidRainsUponHerHeartBossChallenges
+    void_rains_upon_her_heart_difficult_challenges: VoidRainsUponHerHeartDifficultChallenges
 
 
 class VoidRainsUponHerHeartGame(Game):
@@ -44,37 +45,29 @@ class VoidRainsUponHerHeartGame(Game):
     def include_boss_challenges(self) -> bool:
         return self.archipelago_options.void_rains_upon_her_heart_boss_challenges.value
 
+    @property
+    def include_difficult_challenges(self) -> bool:
+        return self.archipelago_options.void_rains_upon_her_heart_difficult_challenges.value
+
     def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
         templates: List[GameObjectiveTemplate] = list()
 
         templates.extend([
-            GameObjectiveTemplate(label="Defeat BOSS without taking damage", data={"BOSS": (self.named_bosses, 1)}),
-            GameObjectiveTemplate(label="Defeat BOSS using only basic shots (no panic attacks)", data={"BOSS": (self.named_bosses, 1)}),
-            GameObjectiveTemplate(label="Defeat 5 randomly selected bosses in a single run without restarting", data={}),
-            GameObjectiveTemplate(label="Collect 3 different Upgrade Gifts in a single run", data={}),
-            GameObjectiveTemplate(label="Reach wave 10 in Endless Nightmare mode", data={}),
-            GameObjectiveTemplate(label="Defeat 2 Shiny variant bosses", data={}),
-            GameObjectiveTemplate(label="Complete a full boss run using only power gifts", data={}),
-            GameObjectiveTemplate(label="Never panic attack during an entire run", data={}),
-            GameObjectiveTemplate(label="Accumulate 50 total motes of a single color type", data={}),
-            GameObjectiveTemplate(label="Defeat BOSS back-to-back in the same run", data={"BOSS": (self.named_bosses, 2)}),
-            GameObjectiveTemplate(label="Complete a Quickplay run from start to finish", data={}),
-            GameObjectiveTemplate(label="Defeat The Void and reach the true ending", data={}),
-            GameObjectiveTemplate(label="Play a complete run as HEART", data={"HEART": (self.playable_hearts, 1)}),
-            GameObjectiveTemplate(label="Defeat BOSS in sequence without healing between battles", data={"BOSS": (self.named_bosses, 3)}),
-            GameObjectiveTemplate(label="Collect every type of mote color in a single run", data={}),
-            GameObjectiveTemplate(label="Always pick the right-most boss", data={}),
-            GameObjectiveTemplate(label="Get at least 3 100% full combos", data={}),
-            GameObjectiveTemplate(label="Complete at least six challenges", data={}),
-            GameObjectiveTemplate(label="Complete 2 cycles of Endless Nightmare", data={}),
-            GameObjectiveTemplate(label="Spend all possible panic attacks before going into the final boss fight", data={}),
+            GameObjectiveTemplate(label="Play as HEART", data={"HEART": (self.playable_hearts, 1)}),
+            GameObjectiveTemplate(label="Never use a panic attack during the entire run", data={}),
+            GameObjectiveTemplate(label="Using only basic shots (no panic attacks)", data={}),
+            GameObjectiveTemplate(label="Always pick the right-most monster at selection", data={}),
+            GameObjectiveTemplate(label="Get at least 3 100% full combos in a single run", data={}),
+            GameObjectiveTemplate(label="Spend all panic attacks before the final boss fight", data={}),
             GameObjectiveTemplate(label="Get a 100% full combo while in Focus Mode for an entire fight after the first two fights", data={}),
             GameObjectiveTemplate(label="Get a 100% full combo without using any charge shots", data={}),
             GameObjectiveTemplate(label="Do not use any Active Gifts on odd-numbered fights", data={}),
             GameObjectiveTemplate(label="At least once, lose your 100% full combo in the last segment of the combo bar", data={}),
-            GameObjectiveTemplate(label="Spend at least five seconds behind a boss", data={}),
-            GameObjectiveTemplate(label="End a run with no power gifts, by giving them all away before the final boss", data={}),
-            GameObjectiveTemplate(label="Complete a run with at least 21 total battles by extending the run with events", data={}),
+            GameObjectiveTemplate(label="Spend at least five seconds behind a monster during a battle", data={}),
+            GameObjectiveTemplate(label="Collect every basic mote color type in a single run", data={}),
+            GameObjectiveTemplate(label="Score at least 2000 motes in a single battle", data={}),
+            GameObjectiveTemplate(label="Collect at least 3 power gifts in a single Story run", data={}),
+            GameObjectiveTemplate(label="Trigger at least 3 events in a single Story run", data={}),
         ])
 
         return templates
@@ -99,10 +92,38 @@ class VoidRainsUponHerHeartGame(Game):
                 weight=3,
             ),
             GameObjectiveTemplate(
-                label="Complete 3 dream challenges for BOSS",
+                label="Complete both dream challenges for BOSS",
                 data={"BOSS": (self.named_bosses, 1)},
                 is_time_consuming=True,
                 is_difficult=True,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Love at least 5 monsters in a single Story run",
+                data={},
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Love a Shiny variant monster in any mode",
+                data={},
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Complete a Story run and defeat a final boss",
+                data={},
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Complete at least 3 dreams",
+                data={},
+                is_time_consuming=True,
+                is_difficult=False,
                 weight=2,
             ),
         ])
@@ -157,6 +178,20 @@ class VoidRainsUponHerHeartGame(Game):
                     is_difficult=True,
                     weight=2,
                 ),
+                GameObjectiveTemplate(
+                    label="Earn a medal on BOSS in Quickplay",
+                    data={"BOSS": (self.named_bosses, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Love BOSS in Quickplay and earn at least a Silver Medal",
+                    data={"BOSS": (self.named_bosses, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
+                    weight=2,
+                ),
             ])
 
         # Boss challenge objectives
@@ -177,11 +212,58 @@ class VoidRainsUponHerHeartGame(Game):
                     weight=3,
                 ),
                 GameObjectiveTemplate(
-                    label="Collect all 7 mote color types",
+                    label="Collect all 6 basic tetrid color types in a single run",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Defeat BOSS without taking damage",
+                    data={"BOSS": (self.named_bosses, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Defeat BOSS using only basic shots (no panic attacks)",
+                    data={"BOSS": (self.named_bosses, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Love BOSS without using any panic attacks",
+                    data={"BOSS": (self.named_bosses, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
+                    weight=2,
+                ),
+            ])
+
+        # Very difficult challenges
+        if self.include_difficult_challenges:
+            templates.extend([
+                GameObjectiveTemplate(
+                    label="Love BOSS at level 8 or higher in Quickplay",
+                    data={"BOSS": (self.named_bosses, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="End an Altered Story run with no power gifts by sacrificing them all to Abyss",
+                    data={},
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete an Altered Story run with 21 total battles",
+                    data={},
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=1,
                 ),
             ])
 
@@ -196,37 +278,132 @@ class VoidRainsUponHerHeartGame(Game):
             "Defect",
             "Twin Heart",
             "The Devil",
-            "Her Heart Alter",
-            "Defect Alter",
-            "Twin Heart Alter",
-            "The Devil Alter",
+            "Alter Heart",
+            "Alter Defect",
+            "Alter Twin",
+            "Alter Devil",
         ]
 
     @staticmethod
     def named_bosses() -> List[str]:
         return [
+            # Shambles (Green Motes)
+            "Scrambla",
+            "Shy Scrambla",
+            "Boiler",
+            "Rage Boiler",
+            "Knot Knott",
+            "Shiny Knot Knott",
+            "Blot",
+            "Avoidant Blot",
+            "Null Blot",
+            "Amalga",
+            "Calorie",
+            "Joule",
+            "Shiny Joule",
+            "Emerald",
+            "Moss",
+            "Shamra",
+            # Guardians (Red Motes)
             "Rendy",
+            "Shiny Rendy",
+            "Snowball",
+            "Shiny Snowball",
             "Roundsaw",
+            "Alter Roundsaw",
+            "Null Roundsaw",
             "Lila",
+            "Shy Lila",
+            "Sandrome",
+            "Voladrome",
             "Shanx",
-            "Stella",
-            "Chroma",
-            "Trinity",
-            "Anomaly",
-            "Vex",
-            "Grimace",
-            "Spinal",
-            "Prism",
-            "Nexus",
+            "Alter Shanx",
+            "Ruby",
+            "Scarlet",
+            "Guardian Soul",
+            # Eyeric Glyphs (Yellow Motes)
+            "Photoxai",
+            "Dendrohai",
+            "Hematoren",
+            "Ombroah",
+            "Lavalin",
+            "Heliola",
+            "Chemory",
+            "Hadesoh",
+            "Chionotoh",
+            "Astrayo",
+            "Monovai",
+            "Philolu",
+            "Topaz",
+            "Dandy",
+            "Oudenai",
+            # Zaramechs (Blue Motes)
+            "Unit Lulu",
+            "Null Unit",
+            "Prisma",
+            "Rage Prisma",
+            "Dual Prisma",
+            "Syncron",
+            "Alter Syncron",
+            "Shiny Syncron",
+            "Flip Flap",
+            "Sentinel 4X",
+            "Sentinel 0X",
+            "Ventra",
+            "Sapphire",
+            "Indigo",
+            "Default",
+            # Glass Flora (Orange Motes)
+            "Dot",
+            "Glacia",
+            "Alter Glacia",
+            "Null Glacia",
+            "Vitrea",
+            "Avoidant Vitrea",
+            "Rage Duet",
+            "Pearl",
+            "Momo",
+            "Shy Momo",
+            "Shiny Momo",
+            "Kiwi",
+            "Citrine",
+            "Amber",
             "Echo",
-            "Cyclone",
-            "Radiant",
-            "Vesper",
-            "Torrent",
-            "Hollow",
-            "Surge",
-            "Void Guardian",
+            # Veyerals (Purple Motes)
+            "Split Veyeral",
+            "Burning Veyeral",
+            "Voltage Veyeral",
+            "Venom Veyeral",
+            "Frozen Veyeral",
+            "Vibrant Veyeral",
+            "Veyeral Quartet",
+            "Veyeral Rain",
+            "Shiny Veyerals",
+            "Storm Veyeral",
+            "Molten Veyeral",
+            "Blizzard Veyeral",
+            "Amethyst",
+            "Violet",
+            "Forma",
             "The Void",
+            "Totaria",
+            "Blue Veyeral",
+            # Special Monsters
+            "Wisp",
+            "Anomaly",
+            "Shiny Anomaly",
+            "Stella",
+            "Celestia",
+            "Unity",
+            "Chroma",
+            "Duality",
+            "Trinity",
+            "Nix Polyps",
+            "Ember Polyps",
+            "Volt Polyps",
+            "Tox Polyps",
+            "Nova",
+            "Limbo",
         ]
 
     @staticmethod
@@ -234,14 +411,14 @@ class VoidRainsUponHerHeartGame(Game):
         return [
             "Story Mode",
             "Quickplay",
-            "Endless Nightmare",
+            "Altered Story",
             "The Towers",
-            "Campaign",
+            "Endless Nightmare",
         ]
 
     @staticmethod
     def nightmare_waves() -> range:
-        return range(5, 51, 5)
+        return range(1, 5)
 
     @staticmethod
     def mote_colors() -> List[str]:
@@ -252,17 +429,16 @@ class VoidRainsUponHerHeartGame(Game):
             "Blue Motes (Zaramechs)",
             "Orange Motes (Glass Flora)",
             "Purple Motes (Veyerals)",
-            "Rainbow Motes (Special)",
+            "Radiant Motes (Special)",
         ]
 
     @staticmethod
     def difficulty_levels() -> List[str]:
         return [
-            "Easy",
-            "Normal",
-            "Hard",
-            "Nightmare",
-            "Despair",
+            "Mist Rain",
+            "Light Rain",
+            "Heavy Rain",
+            "Torrent Rain",
         ]
 
 
@@ -280,3 +456,8 @@ class VoidRainsUponHerHeartMode(DefaultOnToggle):
 class VoidRainsUponHerHeartBossChallenges(DefaultOnToggle):
     """Include objectives related to boss challenges and dream completions."""
     display_name = "Boss Challenges & Dreams"
+
+
+class VoidRainsUponHerHeartDifficultChallenges(Toggle):
+    """Include very difficult challenge objectives such as max-level Quickplay, full Altered Story runs, and Abyss sacrifice runs. Disabled by default."""
+    display_name = "Very Difficult Challenges"
