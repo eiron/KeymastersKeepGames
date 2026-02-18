@@ -125,11 +125,9 @@ class SteamAchievementsGame(Game):
             filtered_games.append(game)
         return filtered_games
 
-    @property
     def games(self) -> List[str]:
         return sorted([g["name"] for g in self._get_eligible_games_data()])
 
-    @property
     def specific_achievements_with_games(self) -> List[str]:
         """
         Picks a random eligible game and fetches its achievements via the Steam API.
@@ -160,7 +158,6 @@ class SteamAchievementsGame(Game):
     def excluded_games(self) -> Set[str]:
         return self.archipelago_options.steam_achievements_excluded_games.value
 
-    @property
     def percentages(self) -> range:
         min_pct = self.archipelago_options.steam_achievements_percentage_min.value
         max_pct = self.archipelago_options.steam_achievements_percentage_max.value
