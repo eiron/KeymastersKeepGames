@@ -18,6 +18,7 @@ class CookServeDelicious2ArchipelagoOptions:
     cook_serve_delicious_2_max_yum_level: CookServeDelicious2MaxYumLevel
     cook_serve_delicious_2_display_yum_level_requirements: CookServeDelicious2DisplayYumLevelRequirements
     cook_serve_delicious_2_include_locked_foods: CookServeDelicious2IncludeLockedFoods
+    cook_serve_delicious_2_game_types: CookServeDelicious2GameTypes
     cook_serve_delicious_2_csd_modes: CookServeDelicious2CSDModes
 
 # Main Class
@@ -35,20 +36,33 @@ class CookServeDelicious2Game(Game):
 
     options_cls = CookServeDelicious2ArchipelagoOptions
 
+    @property
+    def game_types(self) -> Set[str]:
+        return self.archipelago_options.cook_serve_delicious_2_game_types.value
+
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
-        objectives = self.csd_objectives()
-        objectives.extend([
-            GameObjectiveTemplate(
-                label="Get a Perfect Day in SHIFT",
-                data={
-                    "SHIFT": (self.shifts, 1)
-                },
-                is_time_consuming=False,
-                is_difficult=False,
-                # Set weight for 50/50 chance between Chef for Hire and CSD objectives
-                weight=sum(o.weight for o in objectives if self.archipelago_options.include_difficult_objectives or not o.is_difficult),
-            ),
-        ])
+        objectives: List[GameObjectiveTemplate] = []
+
+        include_csd = "CSD" in self.game_types
+        include_cfh = "Chef for Hire" in self.game_types
+
+        if include_csd:
+            objectives.extend(self.csd_objectives())
+
+        if include_cfh:
+            objectives.append(
+                GameObjectiveTemplate(
+                    label="Get a Perfect Day in SHIFT",
+                    data={
+                        "SHIFT": (self.shifts, 1)
+                    },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    # Set weight for 50/50 chance between Chef for Hire and CSD objectives
+                    weight=max(sum(o.weight for o in objectives if self.archipelago_options.include_difficult_objectives or not o.is_difficult), 1),
+                ),
+            )
+
         return objectives
 
     def csd_objectives(self) -> List[GameObjectiveTemplate]:
@@ -471,6 +485,23 @@ class CookServeDelicious2IncludeLockedFoods(Toggle):
     """
     display_name = "Include Locked Foods"
     default = False
+
+class CookServeDelicious2GameTypes(OptionSet):
+    """
+    Indicates which game types can appear in Cook, Serve, Delicious! 2!! objectives.
+
+    CSD: Cook, Serve, Delicious mode where you build your own menu and serve customers.
+    Chef for Hire: Work shifts at various restaurants around the city.
+    """
+    display_name = "Game Types"
+    valid_keys = {
+        "CSD",
+        "Chef for Hire",
+    }
+    default = {
+        "CSD",
+        "Chef for Hire",
+    }
 
 class CookServeDelicious2CSDModes(OptionSet):
     """
