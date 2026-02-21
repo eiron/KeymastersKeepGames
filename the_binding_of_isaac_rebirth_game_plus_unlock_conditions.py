@@ -400,7 +400,7 @@ class TheBindingOfIsaacRebirthGame(Game):
             GameObjectiveTemplate(
                 label="Clear Boss Rush and defeat BOSS as CHARACTER in a single run",
                 data={
-                    "BOSS": (self.bosses, 1),
+                    "BOSS": (self.bosses_boss_rush_compatible, 1),
                     "CHARACTER": (self.characters, 1),
                 },
                 is_time_consuming=False,
@@ -491,7 +491,7 @@ class TheBindingOfIsaacRebirthGame(Game):
                 GameObjectiveTemplate(
                     label="Defeat Hush and BOSS as CHARACTER in a single run",
                     data={
-                        "BOSS": (self.bosses_no_hush, 1),
+                        "BOSS": (self.bosses_hush_compatible, 1),
                         "CHARACTER": (self.characters, 1),
                     },
                     is_time_consuming=False,
@@ -552,7 +552,7 @@ class TheBindingOfIsaacRebirthGame(Game):
                     GameObjectiveTemplate(
                         label="Collect both Knife Pieces and defeat BOSS as CHARACTER in a single run",
                         data={
-                            "BOSS": (self.bosses_no_hush, 1),
+                            "BOSS": (self.bosses_knife_pieces_compatible, 1),
                             "CHARACTER": (self.characters, 1),
                         },
                         is_time_consuming=False,
@@ -749,6 +749,46 @@ class TheBindingOfIsaacRebirthGame(Game):
 
         if self.has_afterbirth_plus:
             bosses.extend(self.bosses_afterbirth_plus)
+        if self.has_repentance:
+            bosses.extend(self.bosses_repentance)
+
+        return bosses
+
+    def bosses_boss_rush_compatible(self) -> List[str]:
+        """Bosses reachable in the same run as Boss Rush.
+        Excludes Greed Mode bosses (Ultra Greed, Ultra Greedier)."""
+        bosses: List[str] = self.bosses_base[:]
+
+        if self.has_afterbirth:
+            bosses.append("Hush")
+        if self.has_afterbirth_plus:
+            bosses.append("Delirium")
+        if self.has_repentance:
+            bosses.extend(self.bosses_repentance)
+
+        return bosses
+
+    def bosses_hush_compatible(self) -> List[str]:
+        """Bosses reachable in the same run as Hush.
+        After Hush you can trapdoor to Sheol/Cathedral or portal to The Void.
+        Excludes Greed Mode bosses, Mother (alt-path endpoint), and
+        Dogma/The Beast (Ascent path diverges before the Hush fork)."""
+        bosses: List[str] = self.bosses_base[:]
+
+        if self.has_afterbirth_plus:
+            bosses.append("Delirium")
+
+        return bosses
+
+    def bosses_knife_pieces_compatible(self) -> List[str]:
+        """Bosses reachable in the same run as collecting both Knife Pieces.
+        Excludes Greed Mode bosses (no alt path in Greed Mode)."""
+        bosses: List[str] = self.bosses_base[:]
+
+        if self.has_afterbirth:
+            bosses.append("Hush")
+        if self.has_afterbirth_plus:
+            bosses.append("Delirium")
         if self.has_repentance:
             bosses.extend(self.bosses_repentance)
 
