@@ -24,6 +24,7 @@ class SteamAchievementsArchipelagoOptions:
     steam_achievements_percentage_max: SteamAchievementsPercentageMax
     steam_achievements_include_beat_game: SteamAchievementsIncludeBeatGame
     steam_achievements_include_all_achievements: SteamAchievementsIncludeAllAchievements
+    steam_achievements_include_percentage: SteamAchievementsIncludePercentage
     steam_achievements_include_specific_achievements: SteamAchievementsIncludeSpecificAchievements
     steam_achievements_include_hidden_achievements: SteamAchievementsIncludeHiddenAchievements
     steam_achievements_time_consuming_threshold: SteamAchievementsTimeConsumingThreshold
@@ -37,6 +38,7 @@ class SteamAchievementsGame(Game):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self._eligible_games_cache: List[Dict[str, any]] | None = None
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
         eligible_games = self._get_eligible_games_data()
@@ -87,18 +89,19 @@ class SteamAchievementsGame(Game):
                 )
             )
 
-        templates.append(
-            GameObjectiveTemplate(
-                label="Unlock at least ACHIEVEMENT_PERCENTAGE% of the achievements in STEAM_GAME_NAME",
-                data={
-                    "STEAM_GAME_NAME": (self.games, 1),
-                    "ACHIEVEMENT_PERCENTAGE": (self.percentages, 1)
-                },
-                is_time_consuming=True,
-                is_difficult=False,
-                weight=9,
+        if self.archipelago_options.steam_achievements_include_percentage.value:
+            templates.append(
+                GameObjectiveTemplate(
+                    label="Unlock at least ACHIEVEMENT_PERCENTAGE% of the achievements in STEAM_GAME_NAME",
+                    data={
+                        "STEAM_GAME_NAME": (self.games, 1),
+                        "ACHIEVEMENT_PERCENTAGE": (self.percentages, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=9,
+                )
             )
-        )
 
         if self.archipelago_options.steam_achievements_include_all_achievements.value:
             templates.append(
@@ -154,6 +157,9 @@ class SteamAchievementsGame(Game):
         return templates
 
     def _get_eligible_games_data(self) -> List[Dict[str, any]]:
+        if self._eligible_games_cache is not None:
+            return self._eligible_games_cache
+
         min_time_played = self.archipelago_options.steam_achievements_min_time_played.value
         max_time_played = self.archipelago_options.steam_achievements_max_time_played.value
         steam_id = self.archipelago_options.steam_achievements_steam_id.value
@@ -180,6 +186,8 @@ class SteamAchievementsGame(Game):
                 continue
                 
             filtered_games.append(game)
+
+        self._eligible_games_cache = filtered_games
         return filtered_games
 
     def games(self) -> List[str]:
@@ -245,9 +253,7 @@ class SteamAchievementsGame(Game):
     def percentages(self) -> range:
         min_pct = self.archipelago_options.steam_achievements_percentage_min.value
         max_pct = self.archipelago_options.steam_achievements_percentage_max.value
-        if min_pct > max_pct:
-            return range(max_pct, min_pct + 1)
-        return range(min_pct, max_pct + 1)
+        return range(min(min_pct, max_pct), max(min_pct, max_pct) + 1)
 
 # Define options specifically for this game to avoid confusion in YAML
 class SteamAchievementsMinTimePlayed(NamedRange):
@@ -327,6 +333,12 @@ class SteamAchievementsIncludeSpecificAchievements(DefaultOnToggle):
     """
     display_name = "Steam Achievements Include Specific Achievements"
 
+class SteamAchievementsIncludePercentage(DefaultOnToggle):
+    """
+    Include objectives to unlock a certain percentage of achievements in a game from your Steam library.
+    """
+    display_name = "Steam Achievements Include Percentage"
+
 class SteamAchievementsIncludeHiddenAchievements(Toggle):
     """
     Include hidden achievements when selecting specific achievements.
@@ -357,6 +369,32 @@ class SteamAchievementsDifficultyThreshold(Range):
     range_end = 100
 
 class SteamLibraryHolder:
+    def __init__(self):
+        self._schema_cache: Dict[int, List[Dict]] = {}
+
+    def _get_schema(self, app_id: int) -> List[Dict]:
+        """Fetch and cache the achievement schema for a game."""
+        if app_id in self._schema_cache:
+            return self._schema_cache[app_id]
+        key = environ.get("STEAM_API_KEY")
+        if not key:
+            self._schema_cache[app_id] = []
+            return []
+        try:
+            resp = requests.get(
+                "https://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/",
+                params={"key": key, "appid": app_id},
+                timeout=10,
+            )
+            if resp.status_code == 200:
+                result = resp.json().get("game", {}).get("availableGameStats", {}).get("achievements", [])
+            else:
+                result = []
+        except Exception:
+            result = []
+        self._schema_cache[app_id] = result
+        return result
+
     @functools.lru_cache(maxsize=None)
     def games(self, steam_id) -> List[Dict[str, any]]:
         key = environ.get("STEAM_API_KEY")
@@ -414,19 +452,9 @@ class SteamLibraryHolder:
             return []
 
         # 2. Get Schema for Display Names
-        try:
-            resp = requests.get(
-                "https://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/",
-                params={"key": key, "appid": app_id},
-                timeout=10,
-            )
-            if resp.status_code != 200:
-                return locked_apinames
-            schema = resp.json()
-        except Exception:
+        available_stats = self._get_schema(app_id)
+        if not available_stats:
             return locked_apinames
-
-        available_stats = schema.get("game", {}).get("availableGameStats", {}).get("achievements", [])
         
         name_map = {}
         for a in available_stats:
@@ -459,23 +487,14 @@ class SteamLibraryHolder:
         # This endpoint returns api names; map to display names using schema
         pct_by_api = {a["name"]: float(a["percent"]) for a in achievements}
         
-        # Try to get display names from schema
-        try:
-            schema_resp = requests.get(
-                "https://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/",
-                params={"key": key, "appid": app_id},
-                timeout=10,
-            )
-            if schema_resp.status_code == 200:
-                schema = schema_resp.json()
-                available = schema.get("game", {}).get("availableGameStats", {}).get("achievements", [])
-                result = {}
-                for a in available:
-                    display = a.get("displayName") or a.get("name")
-                    result[display] = pct_by_api.get(a["name"], 50.0)
-                return result
-        except Exception:
-            pass
+        # Try to get display names from cached schema
+        available = self._get_schema(app_id)
+        if available:
+            result = {}
+            for a in available:
+                display = a.get("displayName") or a.get("name")
+                result[display] = pct_by_api.get(a["name"], 50.0)
+            return result
         
         # Fallback: return api name mapping
         return pct_by_api
