@@ -190,8 +190,8 @@ class SteamAchievementsGame(Game):
         
         steam_id = self.archipelago_options.steam_achievements_steam_id.value
         include_hidden = self.archipelago_options.steam_achievements_include_hidden_achievements.value
-        time_threshold = self.archipelago_options.steam_achievements_time_consuming_threshold.value
-        diff_threshold = self.archipelago_options.steam_achievements_difficulty_threshold.value
+        time_threshold = float(self.archipelago_options.steam_achievements_time_consuming_threshold.value)
+        diff_threshold = float(self.archipelago_options.steam_achievements_difficulty_threshold.value)
         
         for game in shuffled:
             achievements = steam_library.get_locked_achievements(steam_id, game["appid"], include_hidden)
@@ -202,7 +202,7 @@ class SteamAchievementsGame(Game):
             
             filtered = []
             for achievement in achievements:
-                pct = global_pcts.get(achievement, 50.0)  # Default to 50% if unknown
+                pct = float(global_pcts.get(achievement, 50.0))  # Default to 50% if unknown
                 
                 if tier == "quick" and pct >= time_threshold:
                     filtered.append(f"Unlock the achievement '{achievement}' in {game['name']}")
@@ -432,7 +432,7 @@ class SteamLibraryHolder:
         achievements = data.get("achievementpercentages", {}).get("achievements", [])
         
         # This endpoint returns api names; map to display names using schema
-        pct_by_api = {a["name"]: a["percent"] for a in achievements}
+        pct_by_api = {a["name"]: float(a["percent"]) for a in achievements}
         
         # Try to get display names from schema
         try:
