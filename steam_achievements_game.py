@@ -24,6 +24,8 @@ class SteamAchievementsArchipelagoOptions:
     steam_achievements_percentage_max: SteamAchievementsPercentageMax
     steam_achievements_include_specific_achievements: SteamAchievementsIncludeSpecificAchievements
     steam_achievements_include_hidden_achievements: SteamAchievementsIncludeHiddenAchievements
+    steam_achievements_time_consuming_threshold: SteamAchievementsTimeConsumingThreshold
+    steam_achievements_difficulty_threshold: SteamAchievementsDifficultyThreshold
 
 class SteamAchievementsGame(Game):
     name = "Steam Achievements"
@@ -99,16 +101,40 @@ class SteamAchievementsGame(Game):
         ]
 
         if self.archipelago_options.steam_achievements_include_specific_achievements.value:
-            # Build a list of formatted strings with achievement and game already combined
+            # Quick achievements (global unlock % >= time consuming threshold)
             templates.append(
                 GameObjectiveTemplate(
-                    label="ACHIEVEMENT_WITH_GAME",
+                    label="QUICK_ACHIEVEMENT_WITH_GAME",
                     data={
-                        "ACHIEVEMENT_WITH_GAME": (self.specific_achievements_with_games, 1)
+                        "QUICK_ACHIEVEMENT_WITH_GAME": (self.quick_specific_achievements_with_games, 1)
+                    },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=5,
+                )
+            )
+            # Medium achievements (>= difficulty threshold but < time consuming threshold)
+            templates.append(
+                GameObjectiveTemplate(
+                    label="MEDIUM_ACHIEVEMENT_WITH_GAME",
+                    data={
+                        "MEDIUM_ACHIEVEMENT_WITH_GAME": (self.medium_specific_achievements_with_games, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=5,
+                )
+            )
+            # Hard achievements (global unlock % < difficulty threshold)
+            templates.append(
+                GameObjectiveTemplate(
+                    label="HARD_ACHIEVEMENT_WITH_GAME",
+                    data={
+                        "HARD_ACHIEVEMENT_WITH_GAME": (self.hard_specific_achievements_with_games, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=True,
-                    weight=5,
+                    weight=3,
                 )
             )
             
@@ -146,31 +172,58 @@ class SteamAchievementsGame(Game):
     def games(self) -> List[str]:
         return sorted([g["name"] for g in self._get_eligible_games_data()])
 
-    def specific_achievements_with_games(self) -> List[str]:
+    def _get_achievements_by_tier(self, tier: str) -> List[str]:
         """
         Picks a random eligible game and fetches its achievements via the Steam API.
+        Splits achievements into tiers based on global unlock percentages:
+          - "quick": unlock % >= time_consuming_threshold (not time consuming, not difficult)
+          - "medium": unlock % >= difficulty_threshold but < time_consuming_threshold (time consuming, not difficult)
+          - "hard": unlock % < difficulty_threshold (time consuming, difficult)
         Returns list of formatted strings like "Unlock the achievement 'Achievement Name' in Game Name"
-        This is called each time the template needs data, so different objectives can get different games.
         """
         eligible = self._get_eligible_games_data()
         if not eligible:
             return []
         
-        # Shuffle and try games until we find one with achievements
         shuffled = eligible[:]
         random.shuffle(shuffled)
         
         steam_id = self.archipelago_options.steam_achievements_steam_id.value
         include_hidden = self.archipelago_options.steam_achievements_include_hidden_achievements.value
+        time_threshold = self.archipelago_options.steam_achievements_time_consuming_threshold.value
+        diff_threshold = self.archipelago_options.steam_achievements_difficulty_threshold.value
         
         for game in shuffled:
             achievements = steam_library.get_locked_achievements(steam_id, game["appid"], include_hidden)
-            if achievements:
-                # Return all achievements from this one game, formatted
-                return [f"Unlock the achievement '{achievement}' in {game['name']}" 
-                        for achievement in achievements]
+            if not achievements:
+                continue
+            
+            global_pcts = steam_library.get_global_achievement_percentages(game["appid"])
+            
+            filtered = []
+            for achievement in achievements:
+                pct = global_pcts.get(achievement, 50.0)  # Default to 50% if unknown
+                
+                if tier == "quick" and pct >= time_threshold:
+                    filtered.append(f"Unlock the achievement '{achievement}' in {game['name']}")
+                elif tier == "medium" and diff_threshold <= pct < time_threshold:
+                    filtered.append(f"Unlock the achievement '{achievement}' in {game['name']}")
+                elif tier == "hard" and pct < diff_threshold:
+                    filtered.append(f"Unlock the achievement '{achievement}' in {game['name']}")
+            
+            if filtered:
+                return filtered
         
         return []
+
+    def quick_specific_achievements_with_games(self) -> List[str]:
+        return self._get_achievements_by_tier(tier="quick")
+
+    def medium_specific_achievements_with_games(self) -> List[str]:
+        return self._get_achievements_by_tier(tier="medium")
+
+    def hard_specific_achievements_with_games(self) -> List[str]:
+        return self._get_achievements_by_tier(tier="hard")
 
     @property
     def excluded_games(self) -> Set[str]:
@@ -255,6 +308,29 @@ class SteamAchievementsIncludeHiddenAchievements(Toggle):
     """
     display_name = "Steam Achievements Include Hidden Achievements"
 
+class SteamAchievementsTimeConsumingThreshold(Range):
+    """
+    Global unlock percentage threshold for time-consuming achievements.
+    Achievements unlocked by at least this percentage of players globally are considered quick (not time consuming).
+    Achievements below this but above the difficulty threshold are considered time consuming but not difficult.
+    For example, a value of 50 means achievements unlocked by 50%+ of players are quick objectives.
+    """
+    display_name = "Steam Achievements Time Consuming Threshold"
+    default = 50
+    range_start = 1
+    range_end = 100
+
+class SteamAchievementsDifficultyThreshold(Range):
+    """
+    Global unlock percentage threshold for achievement difficulty.
+    Achievements unlocked by fewer than this percentage of players globally are considered difficult.
+    For example, a value of 10 means achievements unlocked by less than 10% of players are difficult.
+    """
+    display_name = "Steam Achievements Difficulty Threshold"
+    default = 10
+    range_start = 1
+    range_end = 100
+
 class SteamLibraryHolder:
     @functools.lru_cache(maxsize=None)
     def games(self, steam_id) -> List[Dict[str, any]]:
@@ -334,6 +410,56 @@ class SteamLibraryHolder:
             name_map[a["name"]] = a.get("displayName") or a.get("name")
         
         return [name_map.get(api, api) for api in locked_apinames if include_hidden or api in name_map]
+
+    @functools.lru_cache(maxsize=None)
+    def get_global_achievement_percentages(self, app_id) -> Dict[str, float]:
+        """Returns a dict mapping achievement display name to global unlock percentage."""
+        key = environ.get("STEAM_API_KEY")
+        if not key:
+            return self._default_global_percentages()
+        try:
+            resp = requests.get(
+                "https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v2/",
+                params={"gameid": app_id},
+                timeout=10,
+            )
+            if resp.status_code != 200:
+                return {}
+            data = resp.json()
+        except Exception:
+            return {}
+
+        achievements = data.get("achievementpercentages", {}).get("achievements", [])
+        
+        # This endpoint returns api names; map to display names using schema
+        pct_by_api = {a["name"]: a["percent"] for a in achievements}
+        
+        # Try to get display names from schema
+        try:
+            schema_resp = requests.get(
+                "https://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/",
+                params={"key": key, "appid": app_id},
+                timeout=10,
+            )
+            if schema_resp.status_code == 200:
+                schema = schema_resp.json()
+                available = schema.get("game", {}).get("availableGameStats", {}).get("achievements", [])
+                result = {}
+                for a in available:
+                    display = a.get("displayName") or a.get("name")
+                    result[display] = pct_by_api.get(a["name"], 50.0)
+                return result
+        except Exception:
+            pass
+        
+        # Fallback: return api name mapping
+        return pct_by_api
+
+    def _default_global_percentages(self) -> Dict[str, float]:
+        return {
+            "Example Achievement": 75.0,
+            "Example Hidden Achievement": 5.0,
+        }
 
     def _default_games(self) -> List[Dict[str, any]]:
         # Minimal fields used by filtering and formatting: name, appid, playtime_forever, has_community_visible_stats
