@@ -22,6 +22,8 @@ class SteamAchievementsArchipelagoOptions:
     steam_achievements_excluded_games: SteamAchievementsExcludedGames
     steam_achievements_percentage_min: SteamAchievementsPercentageMin
     steam_achievements_percentage_max: SteamAchievementsPercentageMax
+    steam_achievements_include_beat_game: SteamAchievementsIncludeBeatGame
+    steam_achievements_include_all_achievements: SteamAchievementsIncludeAllAchievements
     steam_achievements_include_specific_achievements: SteamAchievementsIncludeSpecificAchievements
     steam_achievements_include_hidden_achievements: SteamAchievementsIncludeHiddenAchievements
     steam_achievements_time_consuming_threshold: SteamAchievementsTimeConsumingThreshold
@@ -70,15 +72,22 @@ class SteamAchievementsGame(Game):
                 is_difficult=False,
                 weight=3,
             ),
-            GameObjectiveTemplate(
-                label="Beat STEAM_GAME_NAME",
-                data={
-                    "STEAM_GAME_NAME": (self.games, 1)
-                },
-                is_time_consuming=True,
-                is_difficult=False,
-                weight=6,
-            ),
+        ]
+
+        if self.archipelago_options.steam_achievements_include_beat_game.value:
+            templates.append(
+                GameObjectiveTemplate(
+                    label="Beat STEAM_GAME_NAME",
+                    data={
+                        "STEAM_GAME_NAME": (self.games, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=6,
+                )
+            )
+
+        templates.append(
             GameObjectiveTemplate(
                 label="Unlock at least ACHIEVEMENT_PERCENTAGE% of the achievements in STEAM_GAME_NAME",
                 data={
@@ -88,17 +97,21 @@ class SteamAchievementsGame(Game):
                 is_time_consuming=True,
                 is_difficult=False,
                 weight=9,
-            ),
-            GameObjectiveTemplate(
-                label="Unlock all the achievements in STEAM_GAME_NAME",
-                data={
-                    "STEAM_GAME_NAME": (self.games, 1)
-                },
-                is_time_consuming=True,
-                is_difficult=True,
-                weight=1,
-            ),
-        ]
+            )
+        )
+
+        if self.archipelago_options.steam_achievements_include_all_achievements.value:
+            templates.append(
+                GameObjectiveTemplate(
+                    label="Unlock all the achievements in STEAM_GAME_NAME",
+                    data={
+                        "STEAM_GAME_NAME": (self.games, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=1,
+                )
+            )
 
         if self.archipelago_options.steam_achievements_include_specific_achievements.value:
             # Quick achievements (global unlock % >= time consuming threshold)
@@ -295,6 +308,18 @@ class SteamAchievementsPercentageMax(Range):
     default = 75
     range_start = 1
     range_end = 100
+
+class SteamAchievementsIncludeBeatGame(DefaultOnToggle):
+    """
+    Include objectives to beat a game from your Steam library.
+    """
+    display_name = "Steam Achievements Include Beat Game"
+
+class SteamAchievementsIncludeAllAchievements(DefaultOnToggle):
+    """
+    Include objectives to unlock all achievements in a game from your Steam library.
+    """
+    display_name = "Steam Achievements Include All Achievements"
 
 class SteamAchievementsIncludeSpecificAchievements(DefaultOnToggle):
     """
