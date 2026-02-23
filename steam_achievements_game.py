@@ -51,6 +51,24 @@ class SteamAchievementsGame(Game):
 
         templates = [
             GameObjectiveTemplate(
+                label="Play STEAM_GAME_NAME",
+                data={
+                    "STEAM_GAME_NAME": (self.games, 1)
+                },
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=3,
+            ),
+            GameObjectiveTemplate(
+                label="Unlock any achievement in STEAM_GAME_NAME",
+                data={
+                    "STEAM_GAME_NAME": (self.games, 1)
+                },
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=3,
+            ),
+            GameObjectiveTemplate(
                 label="Beat STEAM_GAME_NAME",
                 data={
                     "STEAM_GAME_NAME": (self.games, 1)
