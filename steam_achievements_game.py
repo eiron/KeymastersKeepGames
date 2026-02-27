@@ -22,6 +22,8 @@ class SteamAchievementsArchipelagoOptions:
     steam_achievements_excluded_games: SteamAchievementsExcludedGames
     steam_achievements_percentage_min: SteamAchievementsPercentageMin
     steam_achievements_percentage_max: SteamAchievementsPercentageMax
+    steam_achievements_include_play_game: SteamAchievementsIncludePlayGame
+    steam_achievements_include_unlock_any_achievement: SteamAchievementsIncludeUnlockAnyAchievement
     steam_achievements_include_beat_game: SteamAchievementsIncludeBeatGame
     steam_achievements_include_all_achievements: SteamAchievementsIncludeAllAchievements
     steam_achievements_include_percentage: SteamAchievementsIncludePercentage
@@ -55,26 +57,33 @@ class SteamAchievementsGame(Game):
                 )
             ]
 
-        templates = [
-            GameObjectiveTemplate(
-                label="Play STEAM_GAME_NAME",
-                data={
-                    "STEAM_GAME_NAME": (self.games, 1)
-                },
-                is_time_consuming=False,
-                is_difficult=False,
-                weight=3,
-            ),
-            GameObjectiveTemplate(
-                label="Unlock any achievement in STEAM_GAME_NAME",
-                data={
-                    "STEAM_GAME_NAME": (self.games, 1)
-                },
-                is_time_consuming=False,
-                is_difficult=False,
-                weight=3,
-            ),
-        ]
+        templates = []
+
+        if self.archipelago_options.steam_achievements_include_play_game.value:
+            templates.append(
+                GameObjectiveTemplate(
+                    label="Play STEAM_GAME_NAME",
+                    data={
+                        "STEAM_GAME_NAME": (self.games, 1)
+                    },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=3,
+                )
+            )
+
+        if self.archipelago_options.steam_achievements_include_unlock_any_achievement.value:
+            templates.append(
+                GameObjectiveTemplate(
+                    label="Unlock any achievement in STEAM_GAME_NAME",
+                    data={
+                        "STEAM_GAME_NAME": (self.games, 1)
+                    },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=3,
+                )
+            )
 
         if self.archipelago_options.steam_achievements_include_beat_game.value:
             templates.append(
@@ -314,6 +323,18 @@ class SteamAchievementsPercentageMax(Range):
     default = 75
     range_start = 1
     range_end = 100
+    
+class SteamAchievementsIncludePlayGame(DefaultOnToggle):
+    """
+    Include objectives to play a game from your Steam library.
+    """
+    display_name = "Steam Achievements Include Play Game"
+
+class SteamAchievementsIncludeUnlockAnyAchievement(DefaultOnToggle):
+    """
+    Include objectives to unlock any single achievement in a game from your Steam library.
+    """
+    display_name = "Steam Achievements Include Unlock Any Achievement"
 
 class SteamAchievementsIncludeBeatGame(DefaultOnToggle):
     """
