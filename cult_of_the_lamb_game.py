@@ -211,7 +211,7 @@ class CultOfTheLambGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Collect TAROT_COUNT tarot cards in a single crusade using Fleece of the Fates",
+                    label="Collect TAROT_COUNT tarot cards in a single crusade",
                     data={"TAROT_COUNT": (self.tarot_counts_difficult, 1)},
                     is_time_consuming=False,
                     is_difficult=True,
