@@ -211,6 +211,13 @@ class CultOfTheLambGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
+                    label="Collect TAROT_COUNT tarot cards in a single crusade using Fleece of the Fates",
+                    data={"TAROT_COUNT": (self.tarot_counts_difficult, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
                     label="Find and rescue FOLLOWER_RESCUE_COUNT followers during crusades",
                     data={"FOLLOWER_RESCUE_COUNT": (self.rescue_counts, 1)},
                     is_time_consuming=True,
@@ -612,7 +619,11 @@ class CultOfTheLambGame(Game):
 
     @staticmethod
     def tarot_counts() -> range:
-        return range(3, 10, 2)
+        return range(3, 7)
+
+    @staticmethod
+    def tarot_counts_difficult() -> range:
+        return range(8, 11)
 
     @staticmethod
     def rescue_counts() -> range:
