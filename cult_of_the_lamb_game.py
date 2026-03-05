@@ -177,6 +177,23 @@ class CultOfTheLambGame(Game):
             
             game_objective_templates.extend(management_templates)
 
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="Appoint DISCIPLE_COUNT followers as Disciples",
+                    data={"DISCIPLE_COUNT": (self.disciple_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Hatch EGG_COUNT eggs",
+                    data={"EGG_COUNT": (self.egg_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+            ])
+
         # Crusade Objectives
         if self.include_crusade_objectives:
             game_objective_templates.extend([
@@ -224,6 +241,40 @@ class CultOfTheLambGame(Game):
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
+                ),
+            ])
+
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="Complete a crusade in AREA wearing FLEECE",
+                    data={
+                        "AREA": (self.crusade_areas, 1),
+                        "FLEECE": (self.fleeces, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete a full row in the Purgatory Dungeon Gauntlet",
+                    data={},
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Catch FISH_COUNT fish at Pilgrim's Passage",
+                    data={"FISH_COUNT": (self.fish_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Win a game of Knucklebones",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
                 ),
             ])
 
@@ -330,21 +381,35 @@ class CultOfTheLambGame(Game):
                     is_difficult=False,
                     weight=1,
                 ),
+            ])
+
+            game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Complete the main story campaign",
-                    data={},
-                    is_time_consuming=True,
-                    is_difficult=True,
-                    weight=1,
-                ),
-                GameObjectiveTemplate(
-                    label="Unlock and defeat the final boss",
-                    data={},
-                    is_time_consuming=True,
+                    label="Defeat BISHOP without taking damage",
+                    data={"BISHOP": (self.no_damage_bishops, 1)},
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=1,
                 ),
             ])
+
+            if self.include_woolhaven_dlc:
+                game_objective_templates.extend([
+                    GameObjectiveTemplate(
+                        label="Defeat Marchosias",
+                        data={},
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Defeat Yngya without attacking her",
+                        data={},
+                        is_time_consuming=False,
+                        is_difficult=True,
+                        weight=1,
+                    ),
+                ])
 
         # Ritual Ceremonies
         if self.include_ritual_ceremonies:
@@ -367,11 +432,11 @@ class CultOfTheLambGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Unlock and perform all RITUAL_CATEGORY rituals",
-                    data={"RITUAL_CATEGORY": (self.ritual_categories, 1)},
+                    label="Perform RITUAL_COUNT rituals",
+                    data={"RITUAL_COUNT": (self.ritual_counts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=1,
+                    weight=2,
                 ),
             ])
 
@@ -410,26 +475,22 @@ class CultOfTheLambGame(Game):
                 ),
             ])
 
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="Have GOLD_AMOUNT gold coins at once",
+                    data={"GOLD_AMOUNT": (self.gold_amounts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+            ])
+
         # Doctrine Development
         if self.include_doctrine_development:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
                     label="Have proclaimed DOCTRINE",
                     data={"DOCTRINE": (self.doctrines, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Complete a full DOCTRINE_TREE doctrine tree",
-                    data={"DOCTRINE_TREE": (self.doctrine_trees, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=1,
-                ),
-                GameObjectiveTemplate(
-                    label="Unlock COMMANDMENT_COUNT divine commandments",
-                    data={"COMMANDMENT_COUNT": (self.commandment_counts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -480,13 +541,35 @@ class CultOfTheLambGame(Game):
         return self.archipelago_options.cotl_management_style.value
 
     # Data lists
-    @staticmethod
-    def crusade_areas() -> List[str]:
-        return ["Darkwood", "Anura", "Anchordeep", "Silk Cradle"]
+    def crusade_areas(self) -> List[str]:
+        areas = ["Darkwood", "Anura", "Anchordeep", "Silk Cradle"]
+
+        if self.include_woolhaven_dlc:
+            areas.extend(["Ewefall", "The Rot"])
+
+        return areas
 
     @staticmethod
     def bishops() -> List[str]:
         return ["Leshy", "Heket", "Kallamar", "Shamura", "The One Who Waits"]
+
+    @staticmethod
+    def no_damage_bishops() -> List[str]:
+        return ["Leshy", "Heket", "Kallamar", "Shamura"]
+
+    def fleeces(self) -> List[str]:
+        fleeces = [
+            "Fleece of the Lamb", "Golden Fleece", "Fleece of the Glass Cannon",
+            "Fleece of the Diseased Heart", "Fleece of the Fates",
+            "Fleece of Fragile Fortitude", "Fleece of a Cursed Crusade",
+            "Fleece of the Berserker", "Fleece of Fervor's Favor",
+            "Fleece of the Hobbled Heels", "Cowboy", "God of Death Fleece"
+        ]
+
+        if self.include_woolhaven_dlc:
+            fleeces.extend(["Ratau's Cloak", "Yngya's Fleece"])
+
+        return fleeces
 
     @staticmethod
     def mini_bosses() -> List[str]:
@@ -762,6 +845,26 @@ class CultOfTheLambGame(Game):
     @staticmethod
     def follower_count_requirements() -> range:
         return range(10, 25, 5)
+
+    @staticmethod
+    def gold_amounts() -> range:
+        return range(200, 800, 200)
+
+    @staticmethod
+    def disciple_counts() -> range:
+        return range(4, 13, 2)
+
+    @staticmethod
+    def egg_counts() -> range:
+        return range(3, 10, 2)
+
+    @staticmethod
+    def fish_counts() -> range:
+        return range(5, 25, 5)
+
+    @staticmethod
+    def ritual_counts() -> range:
+        return range(3, 12, 3)
 
 
 # Archipelago Options
