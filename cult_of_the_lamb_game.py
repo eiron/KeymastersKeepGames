@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, TextChoice
+from Options import DefaultOnToggle, Toggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -22,6 +22,7 @@ class CultOfTheLambArchipelagoOptions:
     cotl_include_ritual_ceremonies: COTLIncludeRitualCeremonies
     cotl_include_resource_collection: COTLIncludeResourceCollection
     cotl_include_doctrine_development: COTLIncludeDoctrineDevelopment
+    cotl_include_woolhaven_dlc: COTLIncludeWoolhavenDLC
     cotl_management_style: COTLManagementStyle
 
 
@@ -66,7 +67,7 @@ class CultOfTheLambGame(Game):
                 data={},
             ),
             GameObjectiveTemplate(
-                label="Enter all of the rooms during a single Crusade loop",
+                label="Clear every room on your chosen path during a single Crusade loop",
                 data={},
             ),
             GameObjectiveTemplate(
@@ -86,7 +87,7 @@ class CultOfTheLambGame(Game):
                 data={},
             ),
             GameObjectiveTemplate(
-                label="Skip the Pool of Hearts once if possible",
+                label="Skip a Heart room once if possible",
                 data={},
             ),
             GameObjectiveTemplate(
@@ -211,7 +212,7 @@ class CultOfTheLambGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Collect TAROT_COUNT tarot cards in a single crusade",
+                    label="Collect at least TAROT_COUNT tarot cards in a single crusade",
                     data={"TAROT_COUNT": (self.tarot_counts_difficult, 1)},
                     is_time_consuming=False,
                     is_difficult=True,
@@ -413,7 +414,7 @@ class CultOfTheLambGame(Game):
         if self.include_doctrine_development:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Unlock and implement DOCTRINE",
+                    label="Have proclaimed DOCTRINE",
                     data={"DOCTRINE": (self.doctrines, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
@@ -471,6 +472,10 @@ class CultOfTheLambGame(Game):
         return self.archipelago_options.cotl_include_doctrine_development.value
 
     @property
+    def include_woolhaven_dlc(self) -> bool:
+        return self.archipelago_options.cotl_include_woolhaven_dlc.value
+
+    @property
     def management_style(self) -> str:
         return self.archipelago_options.cotl_management_style.value
 
@@ -486,8 +491,8 @@ class CultOfTheLambGame(Game):
     @staticmethod
     def mini_bosses() -> List[str]:
         return [
-            "Amdusias", "Eligos", "Barbatos", "Zepar", "Focalor", "Vephar",
-            "Hauras", "Allocer", "Bael", "Forneus", "Gusion", "Valefar"
+            "Amdusias", "Valefar", "Barbatos", "Gusion", "Eligos", "Zepar",
+            "Saleos", "Haborym", "Baalzebub", "Focalor", "Vephar", "Hauras"
         ]
 
     @staticmethod
@@ -497,84 +502,157 @@ class CultOfTheLambGame(Game):
             "Squid", "Ancients", "Heretics", "Demons"
         ]
 
-    @staticmethod
-    def weapon_types() -> List[str]:
-        return ["Swords", "Daggers", "Axes", "Hammers", "Curses", "Ranged"]
+    def weapon_types(self) -> List[str]:
+        weapons = ["Swords", "Daggers", "Axes", "Gauntlets", "Hammers", "Blunderbusses"]
+
+        if self.include_woolhaven_dlc:
+            weapons.append("Flails")
+
+        return weapons
 
     @staticmethod
     def rituals() -> List[str]:
         return [
-            "Ritual of Resurrection", "Feast", "Fast", "Sacrifice", "Wedding",
-            "Funeral", "Enlightenment", "Brainwashing", "Holiday", "Ascend Follower",
-            "Alms for the Poor", "Ritual of Enrichment", "Blood Moon Ritual"
+            "Bonfire Ritual", "The Sacrifice of the Flesh", "Brainwashing Ritual",
+            "Feasting Ritual", "Ritual Fast", "Ritual of the Harvest",
+            "Ritual of the Ocean's Bounty", "Funeral", "Ritual of Resurrection",
+            "Ritual of Enlightenment", "The Glory of Construction",
+            "Glory Through Toil", "Holy Day", "Ascend Follower Ritual",
+            "Ritualistic Fight Pit", "Wedding", "Loyalty Enforcer", "Tax Enforcer",
+            "Alms for the Poor", "Ritual of Enrichment", "Blood Moon Ritual",
+            "Rite of Lust", "Rite of Wrath", "Sinner's Pride", "Gluttony of Cannibals"
         ]
 
-    @staticmethod
-    def ritual_categories() -> List[str]:
-        return ["Sustenance", "Afterlife", "Law & Order", "Work & Worship", "Possessions"]
+    def ritual_categories(self) -> List[str]:
+        categories = ["Sustenance", "Afterlife", "Law & Order", "Work & Worship", "Possessions", "Sins"]
+
+        if self.include_woolhaven_dlc:
+            categories.append("Winter")
+
+        return categories
 
     @staticmethod
     def sacrifice_rituals() -> List[str]:
-        return ["Sacrifice", "Ascend Follower", "Blood Moon Ritual"]
+        return ["The Sacrifice of the Flesh", "Ascend Follower Ritual", "Gluttony of Cannibals"]
 
     @staticmethod
     def punishments() -> List[str]:
-        return ["Stocks", "Re-education", "Intimidate", "Imprison", "Exile"]
+        return ["Murder", "Imprison", "Intimidate", "Ritualistic Fight Pit"]
 
-    @staticmethod
-    def building_types() -> List[str]:
-        return [
-            "Shrine", "Sleeping Bag", "Outhouse", "Farm Plot", "Lumber Yard",
-            "Stone Mine", "Kitchen", "Healing Bay", "Prison", "Decoration",
-            "Compost Bin", "Refinement", "Missionary", "Fertilizer"
+    def building_types(self) -> List[str]:
+        buildings = [
+            "Temple", "Shrine", "Sleeping Bag", "Shelter", "Outhouse",
+            "Farm Plot", "Farmer Station", "Scarecrow", "Seed Silo", "Fertiliser Silo",
+            "Cooking Fire", "Kitchen", "Lumberyard", "Stone Mine", "Refinery",
+            "Healing Bay", "Prison", "Compost Bin", "Missionary",
+            "Tabernacle", "Confession Booth", "Demonic Summoning Circle",
+            "Propaganda Speakers", "Body Pit", "Morgue", "Janitor Station",
+            "Offering Statue", "Knucklebones Table"
         ]
 
-    @staticmethod
-    def upgradeable_buildings() -> List[str]:
-        return ["Shrine", "Kitchen", "Sleeping Quarters", "Farm Plots", "Refinement"]
+        if self.include_woolhaven_dlc:
+            buildings.extend([
+                "Ranch", "Trough", "Hutch", "Butcher's Block",
+                "Work Tent", "Medic Station", "Carpentry Station",
+                "Exorcism Altar", "Weather Vane", "Baptismal Bath",
+                "Lightning Rod", "Rotburn Furnace", "Rotburn Mine", "Heater"
+            ])
+
+        return buildings
+
+    def upgradeable_buildings(self) -> List[str]:
+        buildings = [
+            "Shelter", "Outhouse", "Kitchen", "Lumberyard", "Stone Mine",
+            "Refinery", "Healing Bay", "Missionary", "Tabernacle",
+            "Demonic Summoning Circle", "Farmer Station", "Scarecrow",
+            "Morgue", "Janitor Station", "Crypt"
+        ]
+
+        if self.include_woolhaven_dlc:
+            buildings.extend([
+                "Ranch", "Exorcism Altar", "Rotburn Furnace",
+                "Rotburn Mine", "Hatchery"
+            ])
+
+        return buildings
 
     @staticmethod
     def functional_areas() -> List[str]:
         return [
             "Farming Area", "Living Quarters", "Worship Area", "Kitchen Area",
-            "Prison Area", "Mining Area", "Decoration Area", "Work Area"
+            "Prison Area", "Mining Area", "Work Area"
         ]
 
     @staticmethod
     def resources() -> List[str]:
         return [
-            "Wood", "Stone", "Gold Coins", "Grass", "Berries", "Bones",
-            "Crystal", "Spider Silk", "Relic", "Camelia", "Mushroom",
-            "Pumpkin", "Beetroot", "Cauliflower", "Fish", "Meat"
+            "Lumber", "Stone", "Gold Coins", "Grass", "Berries", "Bones",
+            "Crystal Shards", "Spider Silk", "Camellia", "Mushroom",
+            "Pumpkin", "Beetroot", "Cauliflower", "Fish", "Meat",
+            "Wooden Planks", "Stone Blocks", "Gold Bars"
         ]
 
     @staticmethod
     def producible_resources() -> List[str]:
-        return ["Wood", "Stone", "Grass", "Berries", "Camelia"]
+        return ["Lumber", "Stone", "Grass", "Berries", "Camellia"]
 
     @staticmethod
     def crops() -> List[str]:
-        return ["Berries", "Cauliflower", "Beetroot", "Pumpkin", "Camelia", "Mushroom"]
+        return ["Berries", "Cauliflower", "Beetroot", "Pumpkin", "Camellia", "Mushroom"]
 
-    @staticmethod
-    def meal_types() -> List[str]:
-        return [
-            "Basic Meals", "Good Meals", "Great Meals", "Magnificent Meals",
-            "Fish Meals", "Meat Meals", "Vegetarian Meals", "Mixed Meals"
+    def meal_types(self) -> List[str]:
+        meals = [
+            "Basic Berry Bowl", "Grassy Gruel",
+            "Paltry Pumpkin Soup", "Cheery Cauliflower Chowder",
+            "Splendid Vegetable Feast",
+            "Stringy Meat Gruel", "Hearty Meat Broth", "Mighty Meat Feast",
+            "Pungent Fish Stew", "Tasty Fish Meal", "Delicious Fish Feast",
+            "Meager Mixed Meal", "Modest Mixed Meal", "Magnificent Mixed Meal",
+            "Minced Follower Meat", "Bowl of Poop", "Deadly Dish"
         ]
+
+        if self.include_woolhaven_dlc:
+            meals.extend([
+                "Egg Meal", "Hot Chili Mash", "Spoiled Milk Curd",
+                "Cheese Fondue", "Shepherd's Pie", "Snow Fruit Sundae"
+            ])
+
+        return meals
 
     @staticmethod
     def doctrines() -> List[str]:
         return [
-            "Ritual Fast", "Ritual Feast", "Belief in Afterlife", "Belief in Sacrifice",
-            "Respect Your Elders", "Ascend Follower", "Natural Burial", "Ritual of Resurrection",
-            "Work and Worship", "Devotee Work", "Holy Day", "Ritual Holiday",
-            "Materialism", "False Idols", "Greed", "Alms for the Poor"
+            "Ritual Fast", "Feasting Ritual", "Cannibal Trait", "Grass Eater Trait",
+            "Ritual of the Harvest", "Ritual of the Ocean's Bounty",
+            "Substances Encouraged", "Belief in Prohibition",
+            "Belief in Sacrifice", "Belief in Afterlife",
+            "Ritual of Resurrection", "Funeral",
+            "Respect Your Elders", "Good Die Young",
+            "Return to the Earth", "Grieve the Fallen",
+            "Faithful", "Industrious", "Inspire", "Intimidate",
+            "The Glory of Construction", "Ritual of Enlightenment",
+            "Glory Through Toil", "Holy Day",
+            "Murder Follower", "Ascend Follower Ritual",
+            "Ritualistic Fight Pit", "Wedding",
+            "Belief in Original Sin", "Belief in Absolution",
+            "Loyalty Enforcer", "Tax Enforcer",
+            "Extort Tithes", "Bribe Follower",
+            "Belief in Materialism", "Belief in False Idols",
+            "Alms for the Poor", "Ritual of Enrichment",
+            "Sacral Architecture", "Devotee",
+            "Rite of Lust", "Rite of Wrath",
+            "Sinner's Pride", "Gluttony of Cannibals",
+            "Doctrinal Extremist", "Violent Extremist",
+            "Born of Sin", "Blind Allegiance"
         ]
 
-    @staticmethod
-    def doctrine_trees() -> List[str]:
-        return ["Sustenance", "Afterlife", "Law & Order", "Work & Worship", "Possessions"]
+    def doctrine_trees(self) -> List[str]:
+        trees = ["Sustenance", "Afterlife", "Law & Order", "Work & Worship", "Possessions", "Sins"]
+
+        if self.include_woolhaven_dlc:
+            trees.append("Winter")
+
+        return trees
 
     @staticmethod
     def doctrine_types() -> List[str]:
@@ -718,6 +796,10 @@ class COTLIncludeResourceCollection(DefaultOnToggle):
 class COTLIncludeDoctrineDevelopment(DefaultOnToggle):
     """Include doctrine and commandment objectives."""
     display_name = "Cult of the Lamb Include Doctrine Development"
+
+class COTLIncludeWoolhavenDLC(Toggle):
+    """Include content from the Woolhaven paid DLC (Flails, Winter doctrines, ranching buildings, additional meals)."""
+    display_name = "Cult of the Lamb Include Woolhaven DLC"
 
 class COTLManagementStyle(TextChoice):
     """Focus cult management on specific leadership styles."""
