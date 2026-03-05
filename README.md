@@ -7,6 +7,7 @@ Game implementations for Keymaster's Keep maintained by eiron
 - [Integration Guides](#integration-guides)
 - [Meta-Game Implementations](#meta-game-implementations)
 - [Individual Game Implementations](#individual-game-implementations)
+- [Work in Progress](#work-in-progress)
 - [Recent Updates](#recent-updates)
 
 ---
@@ -310,13 +311,6 @@ Alphabetically organized game-specific implementations. Games marked **[Details 
 
 ---
 
-### Against the Storm
-**File**: `against_the_storm_game.py`
-
-[Details Needed]
-
----
-
 ### Alina of the Arena
 **File**: `alina_of_the_arena_game.py`
 
@@ -348,11 +342,6 @@ Island life simulation focusing on development, social interaction, decoration, 
 
 ---
 
-### Antonblast
-[Details Needed]
-
----
-
 ### Apex Legends
 **File**: `apex_legends_game.py`
 
@@ -369,13 +358,6 @@ Island life simulation focusing on development, social interaction, decoration, 
 
 ### Atomicrops
 **File**: `atomicrops_game.py`
-
-[Details Needed]
-
----
-
-### Awaria
-**File**: `awaria_game.py`
 
 [Details Needed]
 
@@ -406,11 +388,6 @@ Deep RPG covering character builds, story choices, companion relationships, tact
 
 ---
 
-### Balatro
-[Details Needed]
-
----
-
 ### Beyond the Long Night
 **File**: `beyond_the_long_night_game.py`
 
@@ -432,11 +409,6 @@ Comprehensive Metroidvania covering shard collection, exploration, boss battles,
 ### Bloons TD 6
 **File**: `bloons_td_6_game.py`
 
-[Details Needed]
-
----
-
-### Blue Prince
 [Details Needed]
 
 ---
@@ -481,16 +453,6 @@ Science-fantasy roguelike capturing mutation-driven exploration, faction dynamic
 
 ---
 
-### Caveblazers
-[Details Needed]
-
----
-
-### Celeste
-[Details Needed]
-
----
-
 ### Chess.com
 **File**: `chess_com_game.py`
 
@@ -518,11 +480,8 @@ Dice-building roguelike emphasizing scenario strategy, face crafting, relic comb
 ---
 
 ### Cook, Serve, Delicious! 2!!
-[Details Needed]
+**File**: `cook_serve_delicious_2_game.py`
 
----
-
-### Crush Crush
 [Details Needed]
 
 ---
@@ -569,11 +528,6 @@ Deliberately chaotic and humorous take on Wild West epic with absurd objectives.
 
 ---
 
-### Cytus II
-[Details Needed]
-
----
-
 ### Danganronpa Decadence
 **File**: `danganronpa_decadence_game.py`
 
@@ -598,11 +552,6 @@ Whimsical dating simulation romancing household objects and abstract concepts wi
 
 ---
 
-### Dead By Daylight
-[Details Needed]
-
----
-
 ### Dead Cells
 **File**: `dead_cells_game.py`
 
@@ -621,29 +570,9 @@ Challenging metroidvania focused on combat mastery, weapon experimentation, biom
 
 ---
 
-### Deadlock
-[Details Needed]
-
----
-
 ### Death Road to Canada
 **File**: `death_road_to_canada_game.py`
 
-[Details Needed]
-
----
-
-### Deep Rock Galactic
-[Details Needed]
-
----
-
-### DemonCrawl
-[Details Needed]
-
----
-
-### Descenders
 [Details Needed]
 
 ---
@@ -655,11 +584,6 @@ Challenging metroidvania focused on combat mastery, weapon experimentation, biom
 
 ---
 
-### Destiny 2
-[Details Needed]
-
----
-
 ### Dicey Dungeons
 **File**: `dicey_dungeons_game.py`
 
@@ -667,42 +591,9 @@ Challenging metroidvania focused on combat mastery, weapon experimentation, biom
 
 ---
 
-### DJMax Respect V
-[Details Needed]
+### Dungreed
+**File**: `dungreed_game.py`
 
----
-
-### Dome Keeper
-[Details Needed]
-
----
-
-### Dominion
-[Details Needed]
-
----
-
-### Dungeon Defenders
-[Details Needed]
-
----
-
-### Embr
-[Details Needed]
-
----
-
-### Ensemble Stars!! Music
-[Details Needed]
-
----
-
-### Enter the Gungeon
-[Details Needed]
-
----
-
-### Epic Battle Fantasy 3
 [Details Needed]
 
 ---
@@ -720,42 +611,9 @@ Trucking simulation covering deliveries, exploration, business management across
 
 ---
 
-### Fall Guys
-[Details Needed]
+### Forward: Escape the Fold
+**File**: `forward_escape_the_fold_game.py`
 
----
-
-### Fortnite
-[Details Needed]
-
----
-
-### Freedom Planet 2
-[Details Needed]
-
----
-
-### FTL: Multiverse
-[Details Needed]
-
----
-
-### Garry's Mod
-[Details Needed]
-
----
-
-### GeoGuessr
-[Details Needed]
-
----
-
-### God Eater Resurrection
-[Details Needed]
-
----
-
-### Guild Wars 2
 [Details Needed]
 
 ---
@@ -784,38 +642,15 @@ Farming RPG bringing full breadth of farming, exploration, combat, relationships
 
 ---
 
-### HoloCure: Save the Fans!
-[Details Needed]
-
----
-
-### Hollow Knight
-[Details Needed]
-
----
-
-### Hotline Miami
-[Details Needed]
-
----
-
-### Hyperspace Dogfights
-[Details Needed]
-
----
-
-### I Was A Teenage Exocolonist
-[Details Needed]
-
----
-
-### Identity V
-[Details Needed]
-
----
-
 ### Inscryption
 **File**: `inscryption_game.py`
+
+[Details Needed]
+
+---
+
+### Into the Breach
+**File**: `into_the_breach_game.py`
 
 [Details Needed]
 
@@ -843,96 +678,6 @@ Comprehensive rhythm gaming covering entire Just Dance franchise 2014-2025.
 
 ---
 
-### Kirby Air Riders
-[Details Needed]
-
----
-
-### League of Legends
-[Details Needed]
-
----
-
-### Left 4 Dead 2
-[Details Needed]
-
----
-
-### Lethal Company
-[Details Needed]
-
----
-
-### Little Inferno
-[Details Needed]
-
----
-
-### LUMINES REMASTERED
-[Details Needed]
-
----
-
-### M.U.G.E.N.
-[Details Needed]
-
----
-
-### Made in Abyss: Binary Star Falling into Darkness
-[Details Needed]
-
----
-
-### Mages of Mystralia
-[Details Needed]
-
----
-
-### Magic the Gathering
-[Details Needed]
-
----
-
-### Mario Kart 8
-[Details Needed]
-
----
-
-### Mario Kart World
-[Details Needed]
-
----
-
-### Mario Party / Mario Party 2 / Mario Party 3
-[Details Needed]
-
----
-
-### Marvel Rivals
-[Details Needed]
-
----
-
-### Mega Man / Mega Man 2 / Mega Man 3 / Mega Man 4 / Mega Man 11
-[Details Needed]
-
----
-
-### Melatonin
-[Details Needed]
-
----
-
-### Melvor Idle
-[Details Needed]
-
----
-
-### Meteos
-[Details Needed]
-
----
-
 ### Minecraft
 **File**: `minecraft_game.py`
 
@@ -941,16 +686,6 @@ Expansive sandbox covering building projects, exploration, resource gathering, r
 **Categories**: Building Projects, Exploration & Adventure, Resource Gathering, Redstone Engineering, Farming & Automation, Combat Challenges
 
 **Sample**: `"Build a 50x50 Castle structure"`, `"Explore 10 different Ocean Monuments"`, `"Create an automated Crop farm"`
-
----
-
-### Minesweeper Plus
-[Details Needed]
-
----
-
-### MONSTER HUNTER RISE / Monster Hunter Wilds / Monster Hunter World
-[Details Needed]
 
 ---
 
@@ -968,74 +703,9 @@ Expansive sandbox covering building projects, exploration, resource gathering, r
 
 ---
 
-### New York Times Games
-[Details Needed]
-
----
-
-### NiGHTS into Dreams...
-[Details Needed]
-
----
-
-### Nickelodeon All-Star Brawl 2
-[Details Needed]
-
----
-
-### Nine Sols
-[Details Needed]
-
----
-
-### No More Room In Hell
-[Details Needed]
-
----
-
-### Nubby's Number Factory
-[Details Needed]
-
----
-
-### Octodad: Dadliest Catch
-[Details Needed]
-
----
-
-### OldTV
-[Details Needed]
-
----
-
-### One Deck Dungeon
-[Details Needed]
-
----
-
 ### One Step From Eden
 **File**: `one_step_from_eden_game.py`
 
-[Details Needed]
-
----
-
-### OpenRCT2
-[Details Needed]
-
----
-
-### Ori and the Will of the Wisps
-[Details Needed]
-
----
-
-### Overwatch 2
-[Details Needed]
-
----
-
-### Paperball
 [Details Needed]
 
 ---
@@ -1047,71 +717,6 @@ Expansive sandbox covering building projects, exploration, resource gathering, r
 
 ---
 
-### PAYDAY 3
-[Details Needed]
-
----
-
-### PEAK
-[Details Needed]
-
----
-
-### Peggle Deluxe
-[Details Needed]
-
----
-
-### Peglin
-[Details Needed]
-
----
-
-### Pinball FX3
-[Details Needed]
-
----
-
-### Placid Plastic Duck Simulator
-[Details Needed]
-
----
-
-### Plants vs. Zombies
-[Details Needed]
-
----
-
-### Pokemon Go
-[Details Needed]
-
----
-
-### Pokémon Unite
-[Details Needed]
-
----
-
-### Portal
-[Details Needed]
-
----
-
-### PotionCraft
-[Details Needed]
-
----
-
-### Project Sekai: Colorful Stage
-[Details Needed]
-
----
-
-### Realm of the Mad God
-[Details Needed]
-
----
-
 ### Revita
 **File**: `revita_game.py`
 
@@ -1119,57 +724,9 @@ Expansive sandbox covering building projects, exploration, resource gathering, r
 
 ---
 
-### Riichi Mahjong
-[Details Needed]
+### Rocksmith 2014
+**File**: `rocksmith_2014_game.py`
 
----
-
-### Risk of Rain 2
-[Details Needed]
-
----
-
-### Rock of Ages 2: Bigger & Boulder
-[Details Needed]
-
----
-
-### Salt and Sacrifice
-[Details Needed]
-
----
-
-### Sanctum
-[Details Needed]
-
----
-
-### Sea of Thieves
-[Details Needed]
-
----
-
-### Shiny Pokémon Hunt
-[Details Needed]
-
----
-
-### Sid Meier's Pirates
-[Details Needed]
-
----
-
-### Slay the Spire
-[Details Needed]
-
----
-
-### Smite 2
-[Details Needed]
-
----
-
-### Sonic Mania
 [Details Needed]
 
 ---
@@ -1181,17 +738,9 @@ Expansive sandbox covering building projects, exploration, resource gathering, r
 
 ---
 
-### Splitgate
-[Details Needed]
+### Spelunky 2
+**File**: `spelunky_2_game.py`
 
----
-
-### Spyro Reignited Trilogy
-[Details Needed]
-
----
-
-### Star Wars: Battlefront II (Classic)
 [Details Needed]
 
 ---
@@ -1207,54 +756,9 @@ Comprehensive farming simulation covering all aspects of Pelican Town life.
 
 ---
 
-### Stellaris
-[Details Needed]
-
----
-
-### Strawberry Jam
-[Details Needed]
-
----
-
 ### Super Dungeon Maker
 **File**: `super_dungeon_maker_game.py`
 
-[Details Needed]
-
----
-
-### Super Hexagon
-[Details Needed]
-
----
-
-### Super Mario Galaxy / Super Mario Sunshine
-[Details Needed]
-
----
-
-### Super Smash Bros. Ultimate
-[Details Needed]
-
----
-
-### Synthetik: Legion Rising
-[Details Needed]
-
----
-
-### Team Fortress 2
-[Details Needed]
-
----
-
-### Terraria
-[Details Needed]
-
----
-
-### The Bazaar
 [Details Needed]
 
 ---
@@ -1285,16 +789,6 @@ Module for original Flash game covering base game, Wrath of the Lamb expansion, 
 
 ---
 
-### The Elder Scrolls V: Skyrim - Special Edition
-[Details Needed]
-
----
-
-### The Finals
-[Details Needed]
-
----
-
 ### The Sims 4
 **File**: `the_sims_4_game.py`
 
@@ -1311,11 +805,6 @@ Comprehensive life simulation covering all aspects of Sim life across base game 
 ### The Void Rains Upon Her Heart
 **File**: `void_rains_upon_her_heart_game.py`
 
-[Details Needed]
-
----
-
-### Tower Unite
 [Details Needed]
 
 ---
@@ -1341,7 +830,28 @@ Comprehensive life simulation covering all aspects of Sim life across base game 
 
 ---
 
+## Work in Progress
+
+Games currently under development in the `WIP/` directory.
+
+---
+
+### The Ranch of Rivershine
+**Directory**: `WIP/The Ranch of Rivershine/`
+
+Cozy horse ranch simulation — care for horses, train skills, compete in events, breed foals, farm crops, and explore Rivershine.
+
+**Categories**: Horse Training, Horse Care, Competitions, Breeding, Exploration, Farming, Wild Horses, Social, Crafting, Riding Arena, Ranch Upgrades
+
+---
+
 ## Recent Updates
+
+**March 2026:**
+- README cleanup: removed deployment-only entries not present in this repo, added 5 missing game entries (Dungreed, Forward: Escape the Fold, Into the Breach, Rocksmith 2014, Spelunky 2)
+- Added file reference for Cook, Serve, Delicious! 2!!
+- Removed broken file references (Against the Storm, Awaria — files not in this repo)
+- Added Work in Progress section (The Ranch of Rivershine)
 
 **January 2026:**
 - README reorganized with table of contents, alphabetized game lists, clearer sections
