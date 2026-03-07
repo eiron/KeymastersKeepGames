@@ -7,6 +7,7 @@ Game implementations for Keymaster's Keep maintained by eiron
 - [Integration Guides](#integration-guides)
 - [Meta-Game Implementations](#meta-game-implementations)
 - [Individual Game Implementations](#individual-game-implementations)
+- [Work in Progress](#work-in-progress)
 - [Recent Updates](#recent-updates)
 
 ---
@@ -306,21 +307,20 @@ Films and TV shows from your watchlist.
 
 ## Individual Game Implementations
 
-Alphabetically organized game-specific implementations. Games marked **[Details Needed]** have implementations but incomplete documentation.
-
----
-
-### Against the Storm
-**File**: `against_the_storm_game.py`
-
-[Details Needed]
+Alphabetically organized game-specific implementations.
 
 ---
 
 ### Alina of the Arena
 **File**: `alina_of_the_arena_game.py`
 
-[Details Needed]
+Roguelike deck-building combat game with branching arenas, multiple classes, and difficulty-based progression.
+
+**Categories**: Class Runs, Challenge Objectives, Hardcore Difficulty
+
+**Sample**: `"Win a run"`, `"Deal 300+ damage in a single attack"`
+
+**Features**: 8 playable classes (Slave, Warrior, Mercenary, Bandit, Hunter, Pyromancer, Samurai, Deprived), hardcore mode toggle, configurable objective groups
 
 ---
 
@@ -348,50 +348,68 @@ Island life simulation focusing on development, social interaction, decoration, 
 
 ---
 
-### Antonblast
-[Details Needed]
-
----
-
 ### Apex Legends
 **File**: `apex_legends_game.py`
 
-[Details Needed]
+Battle royale team-based shooter with character abilities, weapon loadout management, and legend-specific challenges.
+
+**Categories**: Match Wins, Legend Challenges, Weapon Restrictions
+
+**Sample**: `"Win a Battle Royale match"`, `"Deal 1000 Damage in a single match"`
+
+**Features**: 25+ playable legends, 5 legend classes (Assault, Skirmisher, Recon, Support, Controller), weapon type restrictions, finisher challenges
 
 ---
 
 ### Astronarch
 **File**: `astronarch_game.py`
 
-[Details Needed]
+Tactical roguelike party-based dungeon crawler with ascension difficulty levels and hero recruitment.
+
+**Categories**: Run Completion, Ascension Levels, Hero Composition
+
+**Sample**: `"Win a run"`, `"Defeat the final boss"`
+
+**Features**: Ascension scaling (5+, 10+, 20), 4 hero classes (Warrior, Rogue, Mage, Support), 16+ unique heroes, shop interaction modifiers
 
 ---
 
 ### Atomicrops
 **File**: `atomicrops_game.py`
 
-[Details Needed]
+Agricultural roguelike with seasonal progression, character-specific runs, and boss encounters.
 
----
+**Categories**: Character Runs, Year Progression, Boss Encounters
 
-### Awaria
-**File**: `awaria_game.py`
+**Sample**: `"Win a run as Lavender"`, `"Defeat the Corpse-a-Copia (Nuclear Winter Boss)"`
 
-[Details Needed]
+**Features**: 6 playable characters (Lavender, Rye, Robusta, Thyme, Dandelion, Crow), year difficulty scaling, biome tiers, marriage system
 
 ---
 
 ### Baba Is You
 **File**: `baba_is_you_game.py`
 
-[Details Needed]
+Rule-manipulating puzzle game where objects defining level rules can be physically rearranged.
+
+**Categories**: Level Completion, World Progression, Transformations, Custom Levels
+
+**Sample**: `"Complete 3 levels"`, `"Complete a level by reaching the FLAG"`
+
+**Features**: 12 worlds (Lake, Island, Temple, Forest, Cavern, etc.), 6 playable characters with transformations, 20+ custom level codes, undo/restart restrictions
 
 ---
 
 ### Backpack Hero
 **File**: `backpack_hero_game.py`
 
-[Details Needed]
+Inventory management roguelike where backpack organization and item synergy determines combat effectiveness.
+
+**Categories**: Character Runs, Challenge Objectives
+
+**Sample**: `"Win a run (Defeat the Grandmaster) as Purse"`, `"Defeat a Boss without taking damage"`
+
+**Features**: 5 characters (Purse, Satchel, Tote, CR-8, Pochette), Hard Mode, inventory manipulation constraints
 
 ---
 
@@ -406,15 +424,16 @@ Deep RPG covering character builds, story choices, companion relationships, tact
 
 ---
 
-### Balatro
-[Details Needed]
-
----
-
 ### Beyond the Long Night
 **File**: `beyond_the_long_night_game.py`
 
-[Details Needed]
+Survival roguelike with NPC rescue quests and vertical storm layer exploration.
+
+**Categories**: Run Completion, NPC Rescue, Challenges, Upgrades, Hats
+
+**Sample**: `"Win a run (Reach the surface)"`, `"Reach Layer 3 of the Storm"`
+
+**Features**: NPC rescue system with quest chains, meta upgrades, hat equipment objectives, storm modifier constraints, speedrun challenges
 
 ---
 
@@ -432,19 +451,26 @@ Comprehensive Metroidvania covering shard collection, exploration, boss battles,
 ### Bloons TD 6
 **File**: `bloons_td_6_game.py`
 
-[Details Needed]
+Tower defense strategy with monkey tower types, upgrade paths, and extensive constraint-based challenges.
 
----
+**Categories**: Beginner/Intermediate/Advanced/Expert Levels, Difficulty Modes, Tower Restrictions
 
-### Blue Prince
-[Details Needed]
+**Sample**: `"Complete a level on Normal Mode without using PRIMARY, MILITARY, MAGIC, SUPPORT"`, `"Beat a level on Hard Mode using only one monkey type"`
+
+**Features**: Tower type restrictions, hero disabling, tier 5 upgrade restrictions, Monkey Knowledge disabling, single-tower-type runs
 
 ---
 
 ### BPM: BULLETS PER MINUTE
 **File**: `bpm_bullets_per_minute_game.py`
 
-[Details Needed]
+Rhythm-based roguelike where combat actions must be synced to the music beat.
+
+**Categories**: Difficulty Runs, Character Runs, Boss Encounters, Dungeon Levels
+
+**Sample**: `"Complete a run on Hard as a character"`, `"Complete multiple rooms without taking damage"`
+
+**Features**: Rhythm timing mechanics, multiple difficulty tiers (Easy/Medium/Hard/Hellish), boss encounter variations, equipment restrictions, shop constraints
 
 ---
 
@@ -464,7 +490,13 @@ Arena wave-based roguelite focused on weapon builds, character diversity, scalin
 ### Brutal Orchestra
 **File**: `brutal_orchestra_game.py`
 
-[Details Needed]
+Tactical turn-based combat game with procedural party composition and difficulty modifiers.
+
+**Categories**: Boss Defeats, Party Challenges, Battle Challenges, Zone Completion, Difficulty Runs
+
+**Sample**: `"Defeat a boss"`, `"Complete a run with a specific party member"`
+
+**Features**: Difficulty modes (Normal, Hard, Hellmode), party size variations, combat restrictions (no items, no healing), boss-specific win conditions
 
 ---
 
@@ -478,16 +510,6 @@ Science-fantasy roguelike capturing mutation-driven exploration, faction dynamic
 **Sample**: `"Acquire 4 new mutations without visiting a Grit Gate vendor"`, `"Reach reputation Trusted with the Mechanimists"`
 
 **Features**: Mutation depth, faction systems, biome exploration, artifact mastery, survival challenges, legendary hunts
-
----
-
-### Caveblazers
-[Details Needed]
-
----
-
-### Celeste
-[Details Needed]
 
 ---
 
@@ -518,12 +540,15 @@ Dice-building roguelike emphasizing scenario strategy, face crafting, relic comb
 ---
 
 ### Cook, Serve, Delicious! 2!!
-[Details Needed]
+**File**: `cook_serve_delicious_2_game.py`
 
----
+Time management cooking game with two distinct gameplay modes and progressive difficulty.
 
-### Crush Crush
-[Details Needed]
+**Categories**: CSD Mode, Chef for Hire Mode
+
+**Sample**: `"Get a Perfect Day in a shift"`, `"Get a Perfect Day in Cook Serve Delicious in Stress mode"`
+
+**Features**: Yum level progression (0-100), Stress vs Normal modes, 33+ restaurants with shift progression, configurable entree/side/drink counts
 
 ---
 
@@ -554,7 +579,13 @@ Unique cult management and action covering cult building, follower management, c
 ### Cuphead
 **File**: `cuphead_game.py`
 
-[Details Needed]
+2D bullet-hell boss rush platformer with weapon customization and charm power-ups.
+
+**Categories**: Base Game Bosses, DLC Bosses
+
+**Sample**: `"Beat a boss with specific weapons, charm, and super"`, `"Beat a DLC boss with a charm equipped"`
+
+**Features**: DLC support (The Delicious Last Course with 5 additional bosses), 9 weapon types, 8 charm power-ups, air/ground boss variants, Expert Mode constraints
 
 ---
 
@@ -569,21 +600,16 @@ Deliberately chaotic and humorous take on Wild West epic with absurd objectives.
 
 ---
 
-### Cytus II
-[Details Needed]
-
----
-
 ### Danganronpa Decadence
 **File**: `danganronpa_decadence_game.py`
 
-Visual novel murder mystery collection. Supports all four games in Decadence collection.
+Visual novel murder mystery collection. Supports all four games in Decadence collection with per-game separation.
 
-**Supported Games**: Trigger Happy Havoc (+ School Mode), Goodbye Despair (+ Island Mode), V3: Killing Harmony (+ UTDP), Ultimate Summer Camp
+**Supported Games**: Trigger Happy Havoc (+ School Mode), Goodbye Despair (+ Island Mode, Magical Girl Monomi), V3: Killing Harmony (+ Death Road of Despair, Love Across the Universe, Casino), Ultimate Summer Camp (Development Mode, Tower of Despair)
 
-**Categories**: Story mode (investigations, trials, free time), bonus modes, extra minigames, collectibles
+**Categories**: Investigations, class trials, free time, report cards, skills, presents, collectibles (Hidden Monokumas), bonus modes
 
-**Sample**: `"Achieve S rank in the chapter 3 class trial"`, `"Max out friendship with Kyoko Kirigiri"`
+**Sample**: `"Achieve S rank in the Chapter 3 Class Trial (DR1)"`, `"Max out friendship with Kyoko Kirigiri (DR1)"`, `"Clear floor 100 in Tower of Despair (DRS)"`
 
 ---
 
@@ -595,11 +621,6 @@ Whimsical dating simulation romancing household objects and abstract concepts wi
 **Categories**: Structural Objects, Furniture & Decor, Kitchen Appliances, Bathroom Items, Laundry Items, Office & Bedroom, Miscellaneous, Special Concepts, DLC
 
 **Sample**: `"Achieve LOVE with Rebel (Rubber Duck)"`, `"Get 5 structural elements to FRIENDS status"`
-
----
-
-### Dead By Daylight
-[Details Needed]
 
 ---
 
@@ -617,93 +638,65 @@ Challenging metroidvania focused on combat mastery, weapon experimentation, biom
 ### Dead Estate
 **File**: `dead_estate_game.py`
 
-[Details Needed]
+Roguelike survival horror with character selection and multiple ending paths.
 
----
+**Categories**: Character Runs, Ending Objectives, Challenge Objectives
 
-### Deadlock
-[Details Needed]
+**Sample**: `"Complete the normal ending (Exit Realm) as a character"`, `"Obtain the true ending (defeat Diavola)"`
+
+**Features**: Character selection toggle, challenge objectives toggle
 
 ---
 
 ### Death Road to Canada
 **File**: `death_road_to_canada_game.py`
 
-[Details Needed]
+Zombie survival road trip with party mechanics, character selection methods, and difficulty modes.
 
----
+**Categories**: Survival Runs, Party Composition, Difficulty Modes
 
-### Deep Rock Galactic
-[Details Needed]
+**Sample**: `"Reach Canada in Standard Mode with your choice of character"`, `"Reach Canada solo"`
 
----
-
-### DemonCrawl
-[Details Needed]
-
----
-
-### Descenders
-[Details Needed]
+**Features**: Party size range configuration, multiple character selection methods (player choice/random/KMK assigned), difficulty modes
 
 ---
 
 ### Despot's Game
 **File**: `despots_game.py`
 
-[Details Needed]
+Entity management roguelike with Campaign, Endless, and King of the Hill game modes.
 
----
+**Categories**: Campaign, Endless, King of the Hill, Challenge Modifiers
 
-### Destiny 2
-[Details Needed]
+**Sample**: `"Beat the campaign with a build theme focus"`, `"Win an Endless run with a preset active"`
+
+**Features**: Campaign/Endless/King of the Hill mode toggles, challenge modifiers toggle
 
 ---
 
 ### Dicey Dungeons
 **File**: `dicey_dungeons_game.py`
 
-[Details Needed]
+Tactical deck-building dungeon crawler with six playable characters and chapter progression.
+
+**Categories**: Character Runs, Chapter Progression, Special Events
+
+**Sample**: `"Complete a chapter as a character"`, `"Win a run as a character"`
+
+**Features**: Six characters with multiple chapters each, Tennis mod support toggle, Halloween event
 
 ---
 
-### DJMax Respect V
-[Details Needed]
+### Dungreed
+**File**: `dungreed_game.py`
 
----
+Roguelike dungeon crawler with weapon diversity, boss encounters, and trial-based challenges.
 
-### Dome Keeper
-[Details Needed]
+**Categories**: Difficulty Objectives, Weapon Objectives, Boss Objectives, Character Objectives, Trial Objectives
 
----
+**Sample**: `"Complete a full dungeon run as a character"`, `"Defeat Ericha (Final Boss)"`
 
-### Dominion
-[Details Needed]
-
----
-
-### Dungeon Defenders
-[Details Needed]
-
----
-
-### Embr
-[Details Needed]
-
----
-
-### Ensemble Stars!! Music
-[Details Needed]
-
----
-
-### Enter the Gungeon
-[Details Needed]
-
----
-
-### Epic Battle Fantasy 3
-[Details Needed]
+**Features**: Configurable objective group toggles (difficulty, weapon, boss, character, trial)
 
 ---
 
@@ -720,43 +713,16 @@ Trucking simulation covering deliveries, exploration, business management across
 
 ---
 
-### Fall Guys
-[Details Needed]
+### Forward: Escape the Fold
+**File**: `forward_escape_the_fold_game.py`
 
----
+Roguelike action game with Classic, Expert, and Journey difficulty modes.
 
-### Fortnite
-[Details Needed]
+**Categories**: Resource Challenges, Challenge Modes, Playstyle Constraints, Achievement Objectives
 
----
+**Sample**: `"Complete a full run in Classic mode as a character"`, `"Complete a full run in Expert mode"`
 
-### Freedom Planet 2
-[Details Needed]
-
----
-
-### FTL: Multiverse
-[Details Needed]
-
----
-
-### Garry's Mod
-[Details Needed]
-
----
-
-### GeoGuessr
-[Details Needed]
-
----
-
-### God Eater Resurrection
-[Details Needed]
-
----
-
-### Guild Wars 2
-[Details Needed]
+**Features**: Resource challenges/challenge modes/playstyle constraints/achievement objective toggles
 
 ---
 
@@ -784,40 +750,29 @@ Farming RPG bringing full breadth of farming, exploration, combat, relationships
 
 ---
 
-### HoloCure: Save the Fans!
-[Details Needed]
-
----
-
-### Hollow Knight
-[Details Needed]
-
----
-
-### Hotline Miami
-[Details Needed]
-
----
-
-### Hyperspace Dogfights
-[Details Needed]
-
----
-
-### I Was A Teenage Exocolonist
-[Details Needed]
-
----
-
-### Identity V
-[Details Needed]
-
----
-
 ### Inscryption
 **File**: `inscryption_game.py`
 
-[Details Needed]
+Deck-building card game with campaign acts, card collection objectives, and Kaycee's Mod roguelike mode.
+
+**Categories**: Campaign Acts, Card Objectives, Kaycee's Mod
+
+**Sample**: `"Complete Act I: Defeat Leshy in his cabin"`, `"Complete Act III: Defeat P03 and all Uberbots in the factory"`
+
+**Features**: Campaign mode toggle, card objectives toggle, Kaycee's Mod with ascension levels and challenge modifiers
+
+---
+
+### Into the Breach
+**File**: `into_the_breach_game.py`
+
+Turn-based tactical mech game with squad-based combat, pilots, and island liberation.
+
+**Categories**: Squad Runs, Pilot Objectives, Island Objectives, Achievement Objectives, Difficulty Objectives
+
+**Sample**: `"Win a run with a squad"`, `"Liberate an island"`
+
+**Features**: Squad/pilot/island/achievement/difficulty toggles, Advanced Edition support toggle, difficulty preference setting
 
 ---
 
@@ -839,97 +794,13 @@ Comprehensive rhythm gaming covering entire Just Dance franchise 2014-2025.
 ### Just King
 **File**: `just_king_game.py`
 
-[Details Needed]
+Tactical unit-based battler with army synergy systems and ranked challenge progression.
 
----
+**Categories**: Campaign, Army Objectives, Challenge Objectives
 
-### Kirby Air Riders
-[Details Needed]
+**Sample**: `"Complete a zone"`, `"Complete a level"`
 
----
-
-### League of Legends
-[Details Needed]
-
----
-
-### Left 4 Dead 2
-[Details Needed]
-
----
-
-### Lethal Company
-[Details Needed]
-
----
-
-### Little Inferno
-[Details Needed]
-
----
-
-### LUMINES REMASTERED
-[Details Needed]
-
----
-
-### M.U.G.E.N.
-[Details Needed]
-
----
-
-### Made in Abyss: Binary Star Falling into Darkness
-[Details Needed]
-
----
-
-### Mages of Mystralia
-[Details Needed]
-
----
-
-### Magic the Gathering
-[Details Needed]
-
----
-
-### Mario Kart 8
-[Details Needed]
-
----
-
-### Mario Kart World
-[Details Needed]
-
----
-
-### Mario Party / Mario Party 2 / Mario Party 3
-[Details Needed]
-
----
-
-### Marvel Rivals
-[Details Needed]
-
----
-
-### Mega Man / Mega Man 2 / Mega Man 3 / Mega Man 4 / Mega Man 11
-[Details Needed]
-
----
-
-### Melatonin
-[Details Needed]
-
----
-
-### Melvor Idle
-[Details Needed]
-
----
-
-### Meteos
-[Details Needed]
+**Features**: Campaign/army/challenge objective toggles, unit unlock and upgrade tracking, ranked progression
 
 ---
 
@@ -944,255 +815,107 @@ Expansive sandbox covering building projects, exploration, resource gathering, r
 
 ---
 
-### Minesweeper Plus
-[Details Needed]
-
----
-
-### MONSTER HUNTER RISE / Monster Hunter Wilds / Monster Hunter World
-[Details Needed]
-
----
-
 ### Monster Roadtrip
 **File**: `monster_roadtrip_game.py`
 
-[Details Needed]
+Road trip adventure with resource management, character recruitment, and multiple destination endings.
+
+**Categories**: Endings, Resource Goals, Challenge Runs
+
+**Sample**: `"Win a run reaching a destination"`, `"Win a run on a higher difficulty reaching a destination"`
+
+**Features**: Endings/resource goals/challenge run toggles, multiple difficulty presets, secret hitchhiker recruitment
 
 ---
 
 ### Neophyte
 **File**: `neophyte_game.py`
 
-[Details Needed]
+Action roguelike dungeon crawler with spell loadouts and escalating challenge levels.
 
----
+**Categories**: Difficulty Objectives, Loadout Objectives, Challenge Levels
 
-### New York Times Games
-[Details Needed]
+**Sample**: `"Complete a full run"`, `"Defeat the final boss"`
 
----
-
-### NiGHTS into Dreams...
-[Details Needed]
-
----
-
-### Nickelodeon All-Star Brawl 2
-[Details Needed]
-
----
-
-### Nine Sols
-[Details Needed]
-
----
-
-### No More Room In Hell
-[Details Needed]
-
----
-
-### Nubby's Number Factory
-[Details Needed]
-
----
-
-### Octodad: Dadliest Catch
-[Details Needed]
-
----
-
-### OldTV
-[Details Needed]
-
----
-
-### One Deck Dungeon
-[Details Needed]
+**Features**: Difficulty/loadout toggles, 5 challenge levels, spell rarity system, run condition modifiers
 
 ---
 
 ### One Step From Eden
 **File**: `one_step_from_eden_game.py`
 
-[Details Needed]
+Roguelike deck-building action game with spell combos and multiple routes to Eden.
 
----
+**Categories**: Character Runs, Routes, Deck Builds, Boss Objectives
 
-### OpenRCT2
-[Details Needed]
+**Sample**: `"Reach Eden on a route with a character"`, `"Win a run using a specific deck as a character"`
 
----
-
-### Ori and the Will of the Wisps
-[Details Needed]
-
----
-
-### Overwatch 2
-[Details Needed]
-
----
-
-### Paperball
-[Details Needed]
+**Features**: Boss/pacifist/flawless objective toggles, character selection set
 
 ---
 
 ### Pawnbarian
 **File**: `pawnbarian_game.py`
 
-[Details Needed]
+Chess-themed deck-building roguelike with dungeon progression and escalating chain challenges.
 
----
+**Categories**: Character Runs, Dungeon Clears, Chain Levels, Floor Counts
 
-### PAYDAY 3
-[Details Needed]
+**Sample**: `"Win a dungeon with a character"`, `"Reach a target number of floors cleared"`
 
----
-
-### PEAK
-[Details Needed]
-
----
-
-### Peggle Deluxe
-[Details Needed]
-
----
-
-### Peglin
-[Details Needed]
-
----
-
-### Pinball FX3
-[Details Needed]
-
----
-
-### Placid Plastic Duck Simulator
-[Details Needed]
-
----
-
-### Plants vs. Zombies
-[Details Needed]
-
----
-
-### Pokemon Go
-[Details Needed]
-
----
-
-### Pokémon Unite
-[Details Needed]
-
----
-
-### Portal
-[Details Needed]
-
----
-
-### PotionCraft
-[Details Needed]
-
----
-
-### Project Sekai: Colorful Stage
-[Details Needed]
-
----
-
-### Realm of the Mad God
-[Details Needed]
+**Features**: Character runs toggle, chain challenges toggle
 
 ---
 
 ### Revita
 **File**: `revita_game.py`
 
-[Details Needed]
+Roguelike action platformer with area progression, relics, curses, and shard difficulty modifiers.
+
+**Categories**: Area Progress, Boss Clears, Variants, Shard Difficulty, Relics, Curses
+
+**Sample**: `"Reach an area"`, `"Defeat a boss"`
+
+**Features**: Area progress/boss clears/shard difficulty toggles, 40+ shard difficulty combinations
 
 ---
 
-### Riichi Mahjong
-[Details Needed]
+### Rocksmith 2014
+**File**: `rocksmith_2014_game.py`
 
----
+Music learning game for guitar with song playback, DLC packs, and multiple game modes.
 
-### Risk of Rain 2
-[Details Needed]
+**Categories**: Songs, Arrangements, Techniques, Lessons, Game Modes, Mastery Levels
 
----
+**Sample**: `"Play a song on an arrangement"`, `"Reach a mastery percentage on a song"`
 
-### Rock of Ages 2: Bigger & Boulder
-[Details Needed]
-
----
-
-### Salt and Sacrifice
-[Details Needed]
-
----
-
-### Sanctum
-[Details Needed]
-
----
-
-### Sea of Thieves
-[Details Needed]
-
----
-
-### Shiny Pokémon Hunt
-[Details Needed]
-
----
-
-### Sid Meier's Pirates
-[Details Needed]
-
----
-
-### Slay the Spire
-[Details Needed]
-
----
-
-### Smite 2
-[Details Needed]
-
----
-
-### Sonic Mania
-[Details Needed]
+**Features**: DLC pack selection, custom song overrides, RS1 import songs, Score Attack/Lessons/Session Mode/Guitarcade/Missions toggles, CDLC support
 
 ---
 
 ### Spelunky
 **File**: `spelunky_game.py`
 
-[Details Needed]
+Roguelike platformer with biome progression, optional hell route, and eggplant run challenges.
+
+**Categories**: Biome Runs, Character Runs, Hell Route, Eggplant Runs, No Gold Runs
+
+**Sample**: `"Complete successful runs by defeating Olmec"`, `"Defeat Olmec while playing as a specific character"`
+
+**Features**: Hell/eggplant/no-gold objective toggles, biome and character selection, configurable run count
 
 ---
 
-### Splitgate
-[Details Needed]
+### Spelunky 2
+**File**: `spelunky_2_game.py`
 
----
+Roguelike platformer sequel with expanded content including Sunken City, Cosmic Ocean, and challenge routes.
 
-### Spyro Reignited Trilogy
-[Details Needed]
+**Categories**: Biome Runs, Character Runs, Sunken City, Cosmic Ocean, Eggplant Runs, No Gold Runs
 
----
+**Sample**: `"Complete successful runs by defeating Tiamat"`, `"Reach the Sunken City and defeat Hundun"`
 
-### Star Wars: Battlefront II (Classic)
-[Details Needed]
+**Features**: Sunken City/Cosmic Ocean/eggplant/no-gold toggles, biome and character selection, configurable run count
 
 ---
 
@@ -1207,55 +930,16 @@ Comprehensive farming simulation covering all aspects of Pelican Town life.
 
 ---
 
-### Stellaris
-[Details Needed]
-
----
-
-### Strawberry Jam
-[Details Needed]
-
----
-
 ### Super Dungeon Maker
 **File**: `super_dungeon_maker_game.py`
 
-[Details Needed]
+Dungeon creation and completion game with themed levels, boss fights, and community challenges.
 
----
+**Categories**: Themed Dungeons, Boss Fights, Golden/Silver Eggs, Puzzles, Combat, Community Content
 
-### Super Hexagon
-[Details Needed]
+**Sample**: `"Collect the golden egg from a themed dungeon"`, `"Defeat a boss in a themed dungeon"`
 
----
-
-### Super Mario Galaxy / Super Mario Sunshine
-[Details Needed]
-
----
-
-### Super Smash Bros. Ultimate
-[Details Needed]
-
----
-
-### Synthetik: Legion Rising
-[Details Needed]
-
----
-
-### Team Fortress 2
-[Details Needed]
-
----
-
-### Terraria
-[Details Needed]
-
----
-
-### The Bazaar
-[Details Needed]
+**Features**: Theme and boss selection, difficulty preference, 15+ community dungeon challenges
 
 ---
 
@@ -1285,16 +969,6 @@ Module for original Flash game covering base game, Wrath of the Lamb expansion, 
 
 ---
 
-### The Elder Scrolls V: Skyrim - Special Edition
-[Details Needed]
-
----
-
-### The Finals
-[Details Needed]
-
----
-
 ### The Sims 4
 **File**: `the_sims_4_game.py`
 
@@ -1311,37 +985,77 @@ Comprehensive life simulation covering all aspects of Sim life across base game 
 ### The Void Rains Upon Her Heart
 **File**: `void_rains_upon_her_heart_game.py`
 
-[Details Needed]
+Bullet-heaven roguelike with multiple heart characters, game modes, and boss encounters.
 
----
+**Categories**: Heart Runs, Boss Challenges, Game Modes, Difficulty Levels, Motes, Medals
 
-### Tower Unite
-[Details Needed]
+**Sample**: `"Defeat a set of bosses"`, `"Win a Story run on a difficulty as a heart character"`
+
+**Features**: Hearts/modes/boss challenges/difficult challenges toggles, Story/Quickplay/Endless Nightmare modes
 
 ---
 
 ### Wario Ware: Get It Together!
 **File**: `wario_ware_get_it_together_game.py`
 
-[Details Needed]
+Microgame party game with story campaign, variety pack co-op/versus modes, and Wario Cup competition.
+
+**Categories**: Story Stages, Microgames, Characters/Crews, Variety Pack, Wario Cup
+
+**Sample**: `"Play a story stage with specific characters and earn a target score"`, `"Win consecutive microgames in a variety mode"`
+
+**Features**: Story progress/variety pack/Wario Cup toggles
 
 ---
 
 ### Wikipedia Game
 **File**: `wikipedia_game.py`
 
-[Details Needed]
+Web-based article-hopping challenge with difficulty tiers and click limit progression.
+
+**Categories**: Article Paths, Difficulty Tiers, Click Limits, Random Challenges
+
+**Sample**: `"Connect articles in order within a click limit"`, `"Find a path between 3 articles in a generous number of clicks"`
+
+**Features**: Difficulty selection (Easy/Standard/Hard/Expert), trending/featured/popular article pack toggles, random path toggle, configurable click thresholds
 
 ---
 
 ### Wipeout HD Fury
 **File**: `wipeout_hd_fury_game.py`
 
-[Details Needed]
+Futuristic anti-gravity racing with speed classes, team ships, and multiple competitive modes.
+
+**Categories**: Tracks, Speed Classes, Teams, Race Modes, Zone Challenges, Time Trials
+
+**Sample**: `"Win races on a track"`, `"Reach a target zone number on a track"`
+
+**Features**: Team and speed class selection, zone/eliminator/weapon challenge toggles, multiple constraint toggles (weapons, shields, autopilot, assists)
+
+---
+
+## Work in Progress
+
+Games currently under development in the `WIP/` directory.
+
+---
+
+### The Ranch of Rivershine
+**Directory**: `WIP/The Ranch of Rivershine/`
+
+Cozy horse ranch simulation — care for horses, train skills, compete in events, breed foals, farm crops, and explore Rivershine.
+
+**Categories**: Horse Training, Horse Care, Competitions, Breeding, Exploration, Farming, Wild Horses, Social, Crafting, Riding Arena, Ranch Upgrades
 
 ---
 
 ## Recent Updates
+
+**March 2026:**
+- README cleanup: removed deployment-only entries not present in this repo, added 5 missing game entries (Dungreed, Forward: Escape the Fold, Into the Breach, Rocksmith 2014, Spelunky 2)
+- Added file reference for Cook, Serve, Delicious! 2!!
+- Removed broken file references (Against the Storm, Awaria — files not in this repo)
+- Added Work in Progress section (The Ranch of Rivershine)
 
 **January 2026:**
 - README reorganized with table of contents, alphabetized game lists, clearer sections

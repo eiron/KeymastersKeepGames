@@ -104,7 +104,7 @@ class Rocksmith2014Game(Game):
                 },
                 is_time_consuming=False,
                 is_difficult=False,
-                weight=4,
+                weight=6,
             ),
             GameObjectiveTemplate(
                 label="Reach MASTERY% mastery on SONG (ARRANGEMENT)",
@@ -125,7 +125,7 @@ class Rocksmith2014Game(Game):
                 },
                 is_time_consuming=False,
                 is_difficult=False,
-                weight=2,
+                weight=1,
             ),
             GameObjectiveTemplate(
                 label="Complete a Riff Repeater section at TEMPO% with ACCURACY% accuracy",
@@ -135,7 +135,7 @@ class Rocksmith2014Game(Game):
                 },
                 is_time_consuming=False,
                 is_difficult=True,
-                weight=2,
+                weight=1,
             ),
         ]
 
@@ -163,7 +163,7 @@ class Rocksmith2014Game(Game):
                     },
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=2,
+                    weight=1,
                 ),
             )
 
@@ -177,7 +177,7 @@ class Rocksmith2014Game(Game):
                     },
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=2,
+                    weight=1,
                 ),
             )
 
@@ -190,7 +190,7 @@ class Rocksmith2014Game(Game):
                     },
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=2,
+                    weight=1,
                 ),
             )
 

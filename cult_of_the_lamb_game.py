@@ -4,7 +4,7 @@ from typing import List
 
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, TextChoice
+from Options import DefaultOnToggle, Toggle, TextChoice
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -22,6 +22,7 @@ class CultOfTheLambArchipelagoOptions:
     cotl_include_ritual_ceremonies: COTLIncludeRitualCeremonies
     cotl_include_resource_collection: COTLIncludeResourceCollection
     cotl_include_doctrine_development: COTLIncludeDoctrineDevelopment
+    cotl_include_woolhaven_dlc: COTLIncludeWoolhavenDLC
     cotl_management_style: COTLManagementStyle
 
 
@@ -66,7 +67,7 @@ class CultOfTheLambGame(Game):
                 data={},
             ),
             GameObjectiveTemplate(
-                label="Enter all of the rooms during a single Crusade loop",
+                label="Clear every room on your chosen path during a single Crusade loop",
                 data={},
             ),
             GameObjectiveTemplate(
@@ -86,7 +87,7 @@ class CultOfTheLambGame(Game):
                 data={},
             ),
             GameObjectiveTemplate(
-                label="Skip the Pool of Hearts once if possible",
+                label="Skip a Heart room once if possible",
                 data={},
             ),
             GameObjectiveTemplate(
@@ -176,6 +177,23 @@ class CultOfTheLambGame(Game):
             
             game_objective_templates.extend(management_templates)
 
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="Appoint DISCIPLE_COUNT followers as Disciples",
+                    data={"DISCIPLE_COUNT": (self.disciple_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Hatch EGG_COUNT eggs",
+                    data={"EGG_COUNT": (self.egg_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+            ])
+
         # Crusade Objectives
         if self.include_crusade_objectives:
             game_objective_templates.extend([
@@ -211,11 +229,52 @@ class CultOfTheLambGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
+                    label="Collect at least TAROT_COUNT tarot cards in a single crusade",
+                    data={"TAROT_COUNT": (self.tarot_counts_difficult, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
                     label="Find and rescue FOLLOWER_RESCUE_COUNT followers during crusades",
                     data={"FOLLOWER_RESCUE_COUNT": (self.rescue_counts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
+                ),
+            ])
+
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="Complete a crusade in AREA wearing FLEECE",
+                    data={
+                        "AREA": (self.crusade_areas, 1),
+                        "FLEECE": (self.fleeces, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete a full row in the Purgatory Dungeon Gauntlet",
+                    data={},
+                    is_time_consuming=True,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Catch FISH_COUNT fish at Pilgrim's Passage",
+                    data={"FISH_COUNT": (self.fish_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Win a game of Knucklebones",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
                 ),
             ])
 
@@ -322,21 +381,35 @@ class CultOfTheLambGame(Game):
                     is_difficult=False,
                     weight=1,
                 ),
+            ])
+
+            game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Complete the main story campaign",
-                    data={},
-                    is_time_consuming=True,
-                    is_difficult=True,
-                    weight=1,
-                ),
-                GameObjectiveTemplate(
-                    label="Unlock and defeat the final boss",
-                    data={},
-                    is_time_consuming=True,
+                    label="Defeat BISHOP without taking damage",
+                    data={"BISHOP": (self.no_damage_bishops, 1)},
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=1,
                 ),
             ])
+
+            if self.include_woolhaven_dlc:
+                game_objective_templates.extend([
+                    GameObjectiveTemplate(
+                        label="Defeat Marchosias",
+                        data={},
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label="Defeat Yngya without attacking her",
+                        data={},
+                        is_time_consuming=False,
+                        is_difficult=True,
+                        weight=1,
+                    ),
+                ])
 
         # Ritual Ceremonies
         if self.include_ritual_ceremonies:
@@ -359,11 +432,11 @@ class CultOfTheLambGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Unlock and perform all RITUAL_CATEGORY rituals",
-                    data={"RITUAL_CATEGORY": (self.ritual_categories, 1)},
+                    label="Perform RITUAL_COUNT rituals",
+                    data={"RITUAL_COUNT": (self.ritual_counts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=1,
+                    weight=2,
                 ),
             ])
 
@@ -402,26 +475,22 @@ class CultOfTheLambGame(Game):
                 ),
             ])
 
-        # Doctrine Development
-        if self.include_doctrine_development:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Unlock and implement DOCTRINE",
-                    data={"DOCTRINE": (self.doctrines, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Complete a full DOCTRINE_TREE doctrine tree",
-                    data={"DOCTRINE_TREE": (self.doctrine_trees, 1)},
+                    label="Have GOLD_AMOUNT gold coins at once",
+                    data={"GOLD_AMOUNT": (self.gold_amounts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
                 ),
+            ])
+
+        # Doctrine Development
+        if self.include_doctrine_development:
+            game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Unlock COMMANDMENT_COUNT divine commandments",
-                    data={"COMMANDMENT_COUNT": (self.commandment_counts, 1)},
+                    label="Have proclaimed DOCTRINE",
+                    data={"DOCTRINE": (self.doctrines, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -464,23 +533,49 @@ class CultOfTheLambGame(Game):
         return self.archipelago_options.cotl_include_doctrine_development.value
 
     @property
+    def include_woolhaven_dlc(self) -> bool:
+        return self.archipelago_options.cotl_include_woolhaven_dlc.value
+
+    @property
     def management_style(self) -> str:
         return self.archipelago_options.cotl_management_style.value
 
     # Data lists
-    @staticmethod
-    def crusade_areas() -> List[str]:
-        return ["Darkwood", "Anura", "Anchordeep", "Silk Cradle"]
+    def crusade_areas(self) -> List[str]:
+        areas = ["Darkwood", "Anura", "Anchordeep", "Silk Cradle"]
+
+        if self.include_woolhaven_dlc:
+            areas.extend(["Ewefall", "The Rot"])
+
+        return areas
 
     @staticmethod
     def bishops() -> List[str]:
         return ["Leshy", "Heket", "Kallamar", "Shamura", "The One Who Waits"]
 
     @staticmethod
+    def no_damage_bishops() -> List[str]:
+        return ["Leshy", "Heket", "Kallamar", "Shamura"]
+
+    def fleeces(self) -> List[str]:
+        fleeces = [
+            "Fleece of the Lamb", "Golden Fleece", "Fleece of the Glass Cannon",
+            "Fleece of the Diseased Heart", "Fleece of the Fates",
+            "Fleece of Fragile Fortitude", "Fleece of a Cursed Crusade",
+            "Fleece of the Berserker", "Fleece of Fervor's Favor",
+            "Fleece of the Hobbled Heels", "Cowboy", "God of Death Fleece"
+        ]
+
+        if self.include_woolhaven_dlc:
+            fleeces.extend(["Ratau's Cloak", "Yngya's Fleece"])
+
+        return fleeces
+
+    @staticmethod
     def mini_bosses() -> List[str]:
         return [
-            "Amdusias", "Eligos", "Barbatos", "Zepar", "Focalor", "Vephar",
-            "Hauras", "Allocer", "Bael", "Forneus", "Gusion", "Valefar"
+            "Amdusias", "Valefar", "Barbatos", "Gusion", "Eligos", "Zepar",
+            "Saleos", "Haborym", "Baalzebub", "Focalor", "Vephar", "Hauras"
         ]
 
     @staticmethod
@@ -490,84 +585,157 @@ class CultOfTheLambGame(Game):
             "Squid", "Ancients", "Heretics", "Demons"
         ]
 
-    @staticmethod
-    def weapon_types() -> List[str]:
-        return ["Swords", "Daggers", "Axes", "Hammers", "Curses", "Ranged"]
+    def weapon_types(self) -> List[str]:
+        weapons = ["Swords", "Daggers", "Axes", "Gauntlets", "Hammers", "Blunderbusses"]
+
+        if self.include_woolhaven_dlc:
+            weapons.append("Flails")
+
+        return weapons
 
     @staticmethod
     def rituals() -> List[str]:
         return [
-            "Ritual of Resurrection", "Feast", "Fast", "Sacrifice", "Wedding",
-            "Funeral", "Enlightenment", "Brainwashing", "Holiday", "Ascend Follower",
-            "Alms for the Poor", "Ritual of Enrichment", "Blood Moon Ritual"
+            "Bonfire Ritual", "The Sacrifice of the Flesh", "Brainwashing Ritual",
+            "Feasting Ritual", "Ritual Fast", "Ritual of the Harvest",
+            "Ritual of the Ocean's Bounty", "Funeral", "Ritual of Resurrection",
+            "Ritual of Enlightenment", "The Glory of Construction",
+            "Glory Through Toil", "Holy Day", "Ascend Follower Ritual",
+            "Ritualistic Fight Pit", "Wedding", "Loyalty Enforcer", "Tax Enforcer",
+            "Alms for the Poor", "Ritual of Enrichment", "Blood Moon Ritual",
+            "Rite of Lust", "Rite of Wrath", "Sinner's Pride", "Gluttony of Cannibals"
         ]
 
-    @staticmethod
-    def ritual_categories() -> List[str]:
-        return ["Sustenance", "Afterlife", "Law & Order", "Work & Worship", "Possessions"]
+    def ritual_categories(self) -> List[str]:
+        categories = ["Sustenance", "Afterlife", "Law & Order", "Work & Worship", "Possessions", "Sins"]
+
+        if self.include_woolhaven_dlc:
+            categories.append("Winter")
+
+        return categories
 
     @staticmethod
     def sacrifice_rituals() -> List[str]:
-        return ["Sacrifice", "Ascend Follower", "Blood Moon Ritual"]
+        return ["The Sacrifice of the Flesh", "Ascend Follower Ritual", "Gluttony of Cannibals"]
 
     @staticmethod
     def punishments() -> List[str]:
-        return ["Stocks", "Re-education", "Intimidate", "Imprison", "Exile"]
+        return ["Murder", "Imprison", "Intimidate", "Ritualistic Fight Pit"]
 
-    @staticmethod
-    def building_types() -> List[str]:
-        return [
-            "Shrine", "Sleeping Bag", "Outhouse", "Farm Plot", "Lumber Yard",
-            "Stone Mine", "Kitchen", "Healing Bay", "Prison", "Decoration",
-            "Compost Bin", "Refinement", "Missionary", "Fertilizer"
+    def building_types(self) -> List[str]:
+        buildings = [
+            "Temple", "Shrine", "Sleeping Bag", "Shelter", "Outhouse",
+            "Farm Plot", "Farmer Station", "Scarecrow", "Seed Silo", "Fertiliser Silo",
+            "Cooking Fire", "Kitchen", "Lumberyard", "Stone Mine", "Refinery",
+            "Healing Bay", "Prison", "Compost Bin", "Missionary",
+            "Tabernacle", "Confession Booth", "Demonic Summoning Circle",
+            "Propaganda Speakers", "Body Pit", "Morgue", "Janitor Station",
+            "Offering Statue", "Knucklebones Table"
         ]
 
-    @staticmethod
-    def upgradeable_buildings() -> List[str]:
-        return ["Shrine", "Kitchen", "Sleeping Quarters", "Farm Plots", "Refinement"]
+        if self.include_woolhaven_dlc:
+            buildings.extend([
+                "Ranch", "Trough", "Hutch", "Butcher's Block",
+                "Work Tent", "Medic Station", "Carpentry Station",
+                "Exorcism Altar", "Weather Vane", "Baptismal Bath",
+                "Lightning Rod", "Rotburn Furnace", "Rotburn Mine", "Heater"
+            ])
+
+        return buildings
+
+    def upgradeable_buildings(self) -> List[str]:
+        buildings = [
+            "Shelter", "Outhouse", "Kitchen", "Lumberyard", "Stone Mine",
+            "Refinery", "Healing Bay", "Missionary", "Tabernacle",
+            "Demonic Summoning Circle", "Farmer Station", "Scarecrow",
+            "Morgue", "Janitor Station", "Crypt"
+        ]
+
+        if self.include_woolhaven_dlc:
+            buildings.extend([
+                "Ranch", "Exorcism Altar", "Rotburn Furnace",
+                "Rotburn Mine", "Hatchery"
+            ])
+
+        return buildings
 
     @staticmethod
     def functional_areas() -> List[str]:
         return [
             "Farming Area", "Living Quarters", "Worship Area", "Kitchen Area",
-            "Prison Area", "Mining Area", "Decoration Area", "Work Area"
+            "Prison Area", "Mining Area", "Work Area"
         ]
 
     @staticmethod
     def resources() -> List[str]:
         return [
-            "Wood", "Stone", "Gold Coins", "Grass", "Berries", "Bones",
-            "Crystal", "Spider Silk", "Relic", "Camelia", "Mushroom",
-            "Pumpkin", "Beetroot", "Cauliflower", "Fish", "Meat"
+            "Lumber", "Stone", "Gold Coins", "Grass", "Berries", "Bones",
+            "Crystal Shards", "Spider Silk", "Camellia", "Mushroom",
+            "Pumpkin", "Beetroot", "Cauliflower", "Fish", "Meat",
+            "Wooden Planks", "Stone Blocks", "Gold Bars"
         ]
 
     @staticmethod
     def producible_resources() -> List[str]:
-        return ["Wood", "Stone", "Grass", "Berries", "Camelia"]
+        return ["Lumber", "Stone", "Grass", "Berries", "Camellia"]
 
     @staticmethod
     def crops() -> List[str]:
-        return ["Berries", "Cauliflower", "Beetroot", "Pumpkin", "Camelia", "Mushroom"]
+        return ["Berries", "Cauliflower", "Beetroot", "Pumpkin", "Camellia", "Mushroom"]
 
-    @staticmethod
-    def meal_types() -> List[str]:
-        return [
-            "Basic Meals", "Good Meals", "Great Meals", "Magnificent Meals",
-            "Fish Meals", "Meat Meals", "Vegetarian Meals", "Mixed Meals"
+    def meal_types(self) -> List[str]:
+        meals = [
+            "Basic Berry Bowl", "Grassy Gruel",
+            "Paltry Pumpkin Soup", "Cheery Cauliflower Chowder",
+            "Splendid Vegetable Feast",
+            "Stringy Meat Gruel", "Hearty Meat Broth", "Mighty Meat Feast",
+            "Pungent Fish Stew", "Tasty Fish Meal", "Delicious Fish Feast",
+            "Meager Mixed Meal", "Modest Mixed Meal", "Magnificent Mixed Meal",
+            "Minced Follower Meat", "Bowl of Poop", "Deadly Dish"
         ]
+
+        if self.include_woolhaven_dlc:
+            meals.extend([
+                "Egg Meal", "Hot Chili Mash", "Spoiled Milk Curd",
+                "Cheese Fondue", "Shepherd's Pie", "Snow Fruit Sundae"
+            ])
+
+        return meals
 
     @staticmethod
     def doctrines() -> List[str]:
         return [
-            "Ritual Fast", "Ritual Feast", "Belief in Afterlife", "Belief in Sacrifice",
-            "Respect Your Elders", "Ascend Follower", "Natural Burial", "Ritual of Resurrection",
-            "Work and Worship", "Devotee Work", "Holy Day", "Ritual Holiday",
-            "Materialism", "False Idols", "Greed", "Alms for the Poor"
+            "Ritual Fast", "Feasting Ritual", "Cannibal Trait", "Grass Eater Trait",
+            "Ritual of the Harvest", "Ritual of the Ocean's Bounty",
+            "Substances Encouraged", "Belief in Prohibition",
+            "Belief in Sacrifice", "Belief in Afterlife",
+            "Ritual of Resurrection", "Funeral",
+            "Respect Your Elders", "Good Die Young",
+            "Return to the Earth", "Grieve the Fallen",
+            "Faithful", "Industrious", "Inspire", "Intimidate",
+            "The Glory of Construction", "Ritual of Enlightenment",
+            "Glory Through Toil", "Holy Day",
+            "Murder Follower", "Ascend Follower Ritual",
+            "Ritualistic Fight Pit", "Wedding",
+            "Belief in Original Sin", "Belief in Absolution",
+            "Loyalty Enforcer", "Tax Enforcer",
+            "Extort Tithes", "Bribe Follower",
+            "Belief in Materialism", "Belief in False Idols",
+            "Alms for the Poor", "Ritual of Enrichment",
+            "Sacral Architecture", "Devotee",
+            "Rite of Lust", "Rite of Wrath",
+            "Sinner's Pride", "Gluttony of Cannibals",
+            "Doctrinal Extremist", "Violent Extremist",
+            "Born of Sin", "Blind Allegiance"
         ]
 
-    @staticmethod
-    def doctrine_trees() -> List[str]:
-        return ["Sustenance", "Afterlife", "Law & Order", "Work & Worship", "Possessions"]
+    def doctrine_trees(self) -> List[str]:
+        trees = ["Sustenance", "Afterlife", "Law & Order", "Work & Worship", "Possessions", "Sins"]
+
+        if self.include_woolhaven_dlc:
+            trees.append("Winter")
+
+        return trees
 
     @staticmethod
     def doctrine_types() -> List[str]:
@@ -612,7 +780,11 @@ class CultOfTheLambGame(Game):
 
     @staticmethod
     def tarot_counts() -> range:
-        return range(3, 10, 2)
+        return range(3, 7)
+
+    @staticmethod
+    def tarot_counts_difficult() -> range:
+        return range(8, 11)
 
     @staticmethod
     def rescue_counts() -> range:
@@ -674,6 +846,26 @@ class CultOfTheLambGame(Game):
     def follower_count_requirements() -> range:
         return range(10, 25, 5)
 
+    @staticmethod
+    def gold_amounts() -> range:
+        return range(200, 800, 200)
+
+    @staticmethod
+    def disciple_counts() -> range:
+        return range(4, 13, 2)
+
+    @staticmethod
+    def egg_counts() -> range:
+        return range(3, 10, 2)
+
+    @staticmethod
+    def fish_counts() -> range:
+        return range(5, 25, 5)
+
+    @staticmethod
+    def ritual_counts() -> range:
+        return range(3, 12, 3)
+
 
 # Archipelago Options
 class COTLIncludeCultManagement(DefaultOnToggle):
@@ -707,6 +899,10 @@ class COTLIncludeResourceCollection(DefaultOnToggle):
 class COTLIncludeDoctrineDevelopment(DefaultOnToggle):
     """Include doctrine and commandment objectives."""
     display_name = "Cult of the Lamb Include Doctrine Development"
+
+class COTLIncludeWoolhavenDLC(Toggle):
+    """Include content from the Woolhaven paid DLC (Flails, Winter doctrines, ranching buildings, additional meals)."""
+    display_name = "Cult of the Lamb Include Woolhaven DLC"
 
 class COTLManagementStyle(TextChoice):
     """Focus cult management on specific leadership styles."""

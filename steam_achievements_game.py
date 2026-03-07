@@ -99,18 +99,19 @@ class SteamAchievementsGame(Game):
             )
 
         if self.archipelago_options.steam_achievements_include_percentage.value:
-            templates.append(
-                GameObjectiveTemplate(
-                    label="Unlock at least ACHIEVEMENT_PERCENTAGE% of the achievements in STEAM_GAME_NAME",
-                    data={
-                        "STEAM_GAME_NAME": (self.games, 1),
-                        "ACHIEVEMENT_PERCENTAGE": (self.percentages, 1)
-                    },
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=9,
+            pct_objectives = self.percentage_objectives()
+            if pct_objectives:
+                templates.append(
+                    GameObjectiveTemplate(
+                        label="PERCENTAGE_OBJECTIVE",
+                        data={
+                            "PERCENTAGE_OBJECTIVE": (self.percentage_objectives, 1)
+                        },
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=9,
+                    )
                 )
-            )
 
         if self.archipelago_options.steam_achievements_include_all_achievements.value:
             templates.append(
@@ -263,6 +264,37 @@ class SteamAchievementsGame(Game):
         min_pct = self.archipelago_options.steam_achievements_percentage_min.value
         max_pct = self.archipelago_options.steam_achievements_percentage_max.value
         return range(min(min_pct, max_pct), max(min_pct, max_pct) + 1)
+
+    def percentage_objectives(self) -> List[str]:
+        """Pick a random game, check its progress with one API call, return valid percentages above current."""
+        eligible = self._get_eligible_games_data()
+        if not eligible:
+            return []
+
+        min_pct = self.archipelago_options.steam_achievements_percentage_min.value
+        max_pct = self.archipelago_options.steam_achievements_percentage_max.value
+        steam_id = self.archipelago_options.steam_achievements_steam_id.value
+
+        shuffled = eligible[:]
+        random.shuffle(shuffled)
+
+        for game in shuffled:
+            counts = steam_library.get_achievement_counts(steam_id, game["appid"])
+            if counts is None:
+                continue
+            unlocked, total = counts
+            if total == 0:
+                continue
+            current_pct = (unlocked / total) * 100
+            effective_min = max(min_pct, int(current_pct) + 1)
+            if effective_min > max_pct:
+                continue
+            return [
+                f"Unlock at least {pct}% of the achievements in {game['name']}"
+                for pct in range(effective_min, max_pct + 1)
+            ]
+
+        return []
 
 # Define options specifically for this game to avoid confusion in YAML
 class SteamAchievementsMinTimePlayed(NamedRange):
@@ -525,6 +557,32 @@ class SteamLibraryHolder:
             "Example Achievement": 75.0,
             "Example Hidden Achievement": 5.0,
         }
+
+    @functools.lru_cache(maxsize=None)
+    def get_achievement_counts(self, steam_id, app_id):
+        """Returns (unlocked_count, total_count) for a player's achievements in a game, or None on failure."""
+        key = environ.get("STEAM_API_KEY")
+        if not key:
+            return (0, 2)
+        try:
+            resp = requests.get(
+                "https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1/",
+                params={"key": key, "steamid": steam_id, "appid": app_id},
+                timeout=10,
+            )
+            if resp.status_code != 200:
+                return None
+            data = resp.json()
+        except Exception:
+            return None
+
+        if not data.get("playerstats", {}).get("success"):
+            return None
+
+        achievements = data["playerstats"].get("achievements", [])
+        total = len(achievements)
+        unlocked = sum(1 for a in achievements if a["achieved"] == 1)
+        return (unlocked, total)
 
     def _default_games(self) -> List[Dict[str, any]]:
         # Minimal fields used by filtering and formatting: name, appid, playtime_forever, has_community_visible_stats
