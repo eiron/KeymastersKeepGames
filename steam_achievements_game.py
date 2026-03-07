@@ -31,6 +31,7 @@ class SteamAchievementsArchipelagoOptions:
     steam_achievements_include_hidden_achievements: SteamAchievementsIncludeHiddenAchievements
     steam_achievements_time_consuming_threshold: SteamAchievementsTimeConsumingThreshold
     steam_achievements_difficulty_threshold: SteamAchievementsDifficultyThreshold
+    steam_achievements_include_redo_achievements: SteamAchievementsIncludeRedoAchievements
 
 class SteamAchievementsGame(Game):
     name = "Steam Achievements"
@@ -57,6 +58,9 @@ class SteamAchievementsGame(Game):
                 )
             ]
 
+        played_count = sum(1 for g in eligible_games if g.get("playtime_forever", 0) > 0)
+        print(f"  Steam Achievements: {len(eligible_games)} eligible games ({played_count} played)")
+
         templates = []
 
         if self.archipelago_options.steam_achievements_include_play_game.value:
@@ -68,7 +72,7 @@ class SteamAchievementsGame(Game):
                     },
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=3,
+                    weight=9,
                 )
             )
 
@@ -81,7 +85,7 @@ class SteamAchievementsGame(Game):
                     },
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=3,
+                    weight=12,
                 )
             )
 
@@ -94,11 +98,12 @@ class SteamAchievementsGame(Game):
                     },
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=6,
+                    weight=9,
                 )
             )
 
         if self.archipelago_options.steam_achievements_include_percentage.value:
+            print("  Steam Achievements: [Percentage] Checking...")
             pct_objectives = self.percentage_objectives()
             if pct_objectives:
                 templates.append(
@@ -109,7 +114,7 @@ class SteamAchievementsGame(Game):
                         },
                         is_time_consuming=True,
                         is_difficult=False,
-                        weight=9,
+                        weight=18,
                     )
                 )
 
@@ -122,9 +127,53 @@ class SteamAchievementsGame(Game):
                     },
                     is_time_consuming=True,
                     is_difficult=True,
-                    weight=1,
+                    weight=3,
                 )
             )
+
+        if self.archipelago_options.steam_achievements_include_redo_achievements.value:
+            print("  Steam Achievements: [Redo] Checking quick...")
+            quick_redo = self.quick_redo_achievements_with_games()
+            if quick_redo:
+                templates.append(
+                    GameObjectiveTemplate(
+                        label="QUICK_REDO_ACHIEVEMENT_WITH_GAME",
+                        data={
+                            "QUICK_REDO_ACHIEVEMENT_WITH_GAME": (self.quick_redo_achievements_with_games, 1)
+                        },
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=3,
+                    )
+                )
+            print("  Steam Achievements: [Redo] Checking medium...")
+            medium_redo = self.medium_redo_achievements_with_games()
+            if medium_redo:
+                templates.append(
+                    GameObjectiveTemplate(
+                        label="MEDIUM_REDO_ACHIEVEMENT_WITH_GAME",
+                        data={
+                            "MEDIUM_REDO_ACHIEVEMENT_WITH_GAME": (self.medium_redo_achievements_with_games, 1)
+                        },
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=2,
+                    )
+                )
+            print("  Steam Achievements: [Redo] Checking hard...")
+            hard_redo = self.hard_redo_achievements_with_games()
+            if hard_redo:
+                templates.append(
+                    GameObjectiveTemplate(
+                        label="HARD_REDO_ACHIEVEMENT_WITH_GAME",
+                        data={
+                            "HARD_REDO_ACHIEVEMENT_WITH_GAME": (self.hard_redo_achievements_with_games, 1)
+                        },
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=1,
+                    )
+                )
 
         if self.archipelago_options.steam_achievements_include_specific_achievements.value:
             # Quick achievements (global unlock % >= time consuming threshold)
@@ -136,7 +185,7 @@ class SteamAchievementsGame(Game):
                     },
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=5,
+                    weight=15,
                 )
             )
             # Medium achievements (>= difficulty threshold but < time consuming threshold)
@@ -148,7 +197,7 @@ class SteamAchievementsGame(Game):
                     },
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=5,
+                    weight=12,
                 )
             )
             # Hard achievements (global unlock % < difficulty threshold)
@@ -160,7 +209,7 @@ class SteamAchievementsGame(Game):
                     },
                     is_time_consuming=True,
                     is_difficult=True,
-                    weight=3,
+                    weight=9,
                 )
             )
             
@@ -224,7 +273,7 @@ class SteamAchievementsGame(Game):
         time_threshold = float(self.archipelago_options.steam_achievements_time_consuming_threshold.value)
         diff_threshold = float(self.archipelago_options.steam_achievements_difficulty_threshold.value)
         
-        for game in shuffled:
+        for i, game in enumerate(shuffled, 1):
             achievements = steam_library.get_locked_achievements(steam_id, game["appid"], include_hidden)
             if not achievements:
                 continue
@@ -243,8 +292,10 @@ class SteamAchievementsGame(Game):
                     filtered.append(f"Unlock the achievement '{achievement}' in {game['name']}")
             
             if filtered:
+                print(f"    [{tier}] Found match after checking {i} game(s)")
                 return filtered
         
+        print(f"    [{tier}] No match found after checking {len(shuffled)} games")
         return []
 
     def quick_specific_achievements_with_games(self) -> List[str]:
@@ -255,6 +306,58 @@ class SteamAchievementsGame(Game):
 
     def hard_specific_achievements_with_games(self) -> List[str]:
         return self._get_achievements_by_tier(tier="hard")
+
+    def _get_redo_achievements_by_tier(self, tier: str) -> List[str]:
+        """Like _get_achievements_by_tier but for already-unlocked achievements."""
+        eligible = self._get_eligible_games_data()
+        if not eligible:
+            return []
+
+        played = [g for g in eligible if g.get("playtime_forever", 0) > 0]
+        if not played:
+            return []
+
+        shuffled = played[:]
+        random.shuffle(shuffled)
+
+        steam_id = self.archipelago_options.steam_achievements_steam_id.value
+        include_hidden = self.archipelago_options.steam_achievements_include_hidden_achievements.value
+        time_threshold = float(self.archipelago_options.steam_achievements_time_consuming_threshold.value)
+        diff_threshold = float(self.archipelago_options.steam_achievements_difficulty_threshold.value)
+
+        for i, game in enumerate(shuffled, 1):
+            achievements = steam_library.get_unlocked_achievements(steam_id, game["appid"], include_hidden)
+            if not achievements:
+                continue
+
+            global_pcts = steam_library.get_global_achievement_percentages(game["appid"])
+
+            filtered = []
+            for achievement in achievements:
+                pct = float(global_pcts.get(achievement, 50.0))
+
+                if tier == "quick" and pct >= time_threshold:
+                    filtered.append(f"Re-do the achievement '{achievement}' in {game['name']}")
+                elif tier == "medium" and diff_threshold <= pct < time_threshold:
+                    filtered.append(f"Re-do the achievement '{achievement}' in {game['name']}")
+                elif tier == "hard" and pct < diff_threshold:
+                    filtered.append(f"Re-do the achievement '{achievement}' in {game['name']}")
+
+            if filtered:
+                print(f"    [{tier} redo] Found match after checking {i} game(s)")
+                return filtered
+
+        print(f"    [{tier} redo] No match found after checking {len(shuffled)} games")
+        return []
+
+    def quick_redo_achievements_with_games(self) -> List[str]:
+        return self._get_redo_achievements_by_tier(tier="quick")
+
+    def medium_redo_achievements_with_games(self) -> List[str]:
+        return self._get_redo_achievements_by_tier(tier="medium")
+
+    def hard_redo_achievements_with_games(self) -> List[str]:
+        return self._get_redo_achievements_by_tier(tier="hard")
 
     @property
     def excluded_games(self) -> Set[str]:
@@ -275,10 +378,14 @@ class SteamAchievementsGame(Game):
         max_pct = self.archipelago_options.steam_achievements_percentage_max.value
         steam_id = self.archipelago_options.steam_achievements_steam_id.value
 
-        shuffled = eligible[:]
+        played = [g for g in eligible if g.get("playtime_forever", 0) > 0]
+        if not played:
+            return []
+
+        shuffled = played[:]
         random.shuffle(shuffled)
 
-        for game in shuffled:
+        for i, game in enumerate(shuffled, 1):
             counts = steam_library.get_achievement_counts(steam_id, game["appid"])
             if counts is None:
                 continue
@@ -289,11 +396,13 @@ class SteamAchievementsGame(Game):
             effective_min = max(min_pct, int(current_pct) + 1)
             if effective_min > max_pct:
                 continue
+            print(f"    [percentage] Found match after checking {i} game(s)")
             return [
                 f"Unlock at least {pct}% of the achievements in {game['name']}"
                 for pct in range(effective_min, max_pct + 1)
             ]
 
+        print(f"    [percentage] No match found after checking {len(shuffled)} games")
         return []
 
 # Define options specifically for this game to avoid confusion in YAML
@@ -397,6 +506,12 @@ class SteamAchievementsIncludeHiddenAchievements(Toggle):
     Include hidden achievements when selecting specific achievements.
     """
     display_name = "Steam Achievements Include Hidden Achievements"
+
+class SteamAchievementsIncludeRedoAchievements(Toggle):
+    """
+    Include low-priority objectives to re-do achievements the player has already unlocked.
+    """
+    display_name = "Steam Achievements Include Redo Achievements"
 
 class SteamAchievementsTimeConsumingThreshold(Range):
     """
@@ -516,6 +631,44 @@ class SteamLibraryHolder:
             name_map[a["name"]] = a.get("displayName") or a.get("name")
         
         return [name_map.get(api, api) for api in locked_apinames if include_hidden or api in name_map]
+
+    def get_unlocked_achievements(self, steam_id, app_id, include_hidden=True) -> List[str]:
+        key = environ.get("STEAM_API_KEY")
+        if not key:
+            return self._default_achievements(include_hidden=include_hidden)
+
+        try:
+            resp = requests.get(
+                "https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1/",
+                params={"key": key, "steamid": steam_id, "appid": app_id},
+                timeout=10,
+            )
+            if resp.status_code != 200:
+                return []
+            data = resp.json()
+        except Exception:
+            return []
+
+        if not data.get("playerstats", {}).get("success"):
+            return []
+
+        achievements = data["playerstats"].get("achievements", [])
+        unlocked_apinames = [a["apiname"] for a in achievements if a["achieved"] == 1]
+
+        if not unlocked_apinames:
+            return []
+
+        available_stats = self._get_schema(app_id)
+        if not available_stats:
+            return unlocked_apinames
+
+        name_map = {}
+        for a in available_stats:
+            if not include_hidden and a.get("hidden", 0) == 1:
+                continue
+            name_map[a["name"]] = a.get("displayName") or a.get("name")
+
+        return [name_map.get(api, api) for api in unlocked_apinames if include_hidden or api in name_map]
 
     @functools.lru_cache(maxsize=None)
     def get_global_achievement_percentages(self, app_id) -> Dict[str, float]:
