@@ -603,13 +603,13 @@ Deliberately chaotic and humorous take on Wild West epic with absurd objectives.
 ### Danganronpa Decadence
 **File**: `danganronpa_decadence_game.py`
 
-Visual novel murder mystery collection. Supports all four games in Decadence collection.
+Visual novel murder mystery collection. Supports all four games in Decadence collection with per-game separation.
 
-**Supported Games**: Trigger Happy Havoc (+ School Mode), Goodbye Despair (+ Island Mode), V3: Killing Harmony (+ UTDP), Ultimate Summer Camp
+**Supported Games**: Trigger Happy Havoc (+ School Mode), Goodbye Despair (+ Island Mode, Magical Girl Monomi), V3: Killing Harmony (+ Death Road of Despair, Love Across the Universe, Casino), Ultimate Summer Camp (Development Mode, Tower of Despair)
 
-**Categories**: Story mode (investigations, trials, free time), bonus modes, extra minigames, collectibles
+**Categories**: Investigations, class trials, free time, report cards, skills, presents, collectibles (Hidden Monokumas), bonus modes
 
-**Sample**: `"Achieve S rank in the chapter 3 class trial"`, `"Max out friendship with Kyoko Kirigiri"`
+**Sample**: `"Achieve S rank in the Chapter 3 Class Trial (DR1)"`, `"Max out friendship with Kyoko Kirigiri (DR1)"`, `"Clear floor 100 in Tower of Despair (DRS)"`
 
 ---
 
