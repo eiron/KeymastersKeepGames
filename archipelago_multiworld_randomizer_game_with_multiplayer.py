@@ -44,7 +44,7 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGame(Game):
                     },
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=2,
+                    weight=3,
                 ),
             )
 
@@ -59,7 +59,7 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGame(Game):
                     },
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=3,
+                    weight=4,
                 ),
                 GameObjectiveTemplate(
                     label="[Hints: HINT_COST%  Release: RELEASE] Complete a multiworld randomizer with GAMES",
@@ -70,22 +70,68 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGame(Game):
                     },
                     is_time_consuming=True,
                     is_difficult=False,
+                    weight=5,
+                ),
+            ])
+
+        if self.include_medium_multiworld_randomizer_objectives:
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="[Hints: HINT_COST%  Release: RELEASE] Complete a multiworld randomizer with GAMES",
+                    data={
+                        "HINT_COST": (self.hint_costs, 1),
+                        "RELEASE": (self.release, 1),
+                        "GAMES": (self.games, 4)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
                     weight=4,
                 ),
             ])
 
+        if self.include_large_multiworld_randomizer_objectives:
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="[Hints: HINT_COST%  Release: RELEASE] Complete a multiworld randomizer with GAMES",
+                    data={
+                        "HINT_COST": (self.hint_costs, 1),
+                        "RELEASE": (self.release, 1),
+                        "GAMES": (self.games, 5)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="[Hints: HINT_COST%  Release: RELEASE] Complete a multiworld randomizer with GAMES",
+                    data={
+                        "HINT_COST": (self.hint_costs, 1),
+                        "RELEASE": (self.release, 1),
+                        "GAMES": (self.games, 6)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+            ])
+
         if self.include_small_multiworld_randomizer_with_apbingo_objectives:
-            objective_label: str = (
+            bingo_label: str = (
                 "[Hints: HINT_COST%  Release: RELEASE] Get COUNT bingo(s) on a SIZExSIZE APBingo board in a multiworld "
+                "randomizer with GAMES"
+            )
+            blackout_label: str = (
+                "[Hints: HINT_COST%  Release: RELEASE] Blackout a SIZExSIZE APBingo board in a multiworld "
                 "randomizer with GAMES"
             )
 
             if self.apbingo_release_always_off:
-                objective_label = objective_label.replace("Release: RELEASE", "Release: Off")
+                bingo_label = bingo_label.replace("Release: RELEASE", "Release: Off")
+                blackout_label = blackout_label.replace("Release: RELEASE", "Release: Off")
 
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label=objective_label,
+                    label=bingo_label,
                     data={
                         "HINT_COST": (self.hint_costs, 1),
                         "RELEASE": (self.release, 1),
@@ -98,7 +144,7 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label=objective_label,
+                    label=bingo_label,
                     data={
                         "HINT_COST": (self.hint_costs, 1),
                         "RELEASE": (self.release, 1),
@@ -112,21 +158,102 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGame(Game):
                 ),
             ])
 
-        if self.include_apbingo_blackout_objectives:
-            objective_label: str = (
+            if self.include_apbingo_blackout_objectives:
+                game_objective_templates.extend([
+                    GameObjectiveTemplate(
+                        label=blackout_label,
+                        data={
+                            "HINT_COST": (self.hint_costs, 1),
+                            "RELEASE": (self.release, 1),
+                            "GAMES": (self.games, 2),
+                            "SIZE": (self.bingo_board_sizes, 1)
+                        },
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                    GameObjectiveTemplate(
+                        label=blackout_label,
+                        data={
+                            "HINT_COST": (self.hint_costs, 1),
+                            "RELEASE": (self.release, 1),
+                            "GAMES": (self.games, 3),
+                            "SIZE": (self.bingo_board_sizes, 1)
+                        },
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                ])
+
+        if self.include_medium_multiworld_randomizer_with_apbingo_objectives:
+            bingo_label = (
+                "[Hints: HINT_COST%  Release: RELEASE] Get COUNT bingo(s) on a SIZExSIZE APBingo board in a multiworld "
+                "randomizer with GAMES"
+            )
+            blackout_label = (
                 "[Hints: HINT_COST%  Release: RELEASE] Blackout a SIZExSIZE APBingo board in a multiworld "
                 "randomizer with GAMES"
             )
 
             if self.apbingo_release_always_off:
-                objective_label = objective_label.replace("Release: RELEASE", "Release: Off")
+                bingo_label = bingo_label.replace("Release: RELEASE", "Release: Off")
+                blackout_label = blackout_label.replace("Release: RELEASE", "Release: Off")
+
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label=objective_label,
+                    label=bingo_label,
                     data={
                         "HINT_COST": (self.hint_costs, 1),
                         "RELEASE": (self.release, 1),
-                        "GAMES": (self.games, 2),
+                        "GAMES": (self.games, 4),
+                        "COUNT": (self.bingo_counts, 1),
+                        "SIZE": (self.bingo_board_sizes, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+            ])
+
+            if self.include_apbingo_blackout_objectives:
+                game_objective_templates.extend([
+                    GameObjectiveTemplate(
+                        label=blackout_label,
+                        data={
+                            "HINT_COST": (self.hint_costs, 1),
+                            "RELEASE": (self.release, 1),
+                            "GAMES": (self.games, 4),
+                            "SIZE": (self.bingo_board_sizes, 1)
+                        },
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                ])
+
+        if self.include_large_multiworld_randomizer_with_apbingo_objectives:
+            bingo_label = (
+                "[Hints: HINT_COST%  Release: RELEASE] Get COUNT bingo(s) on a SIZExSIZE APBingo board in a multiworld "
+                "randomizer with GAMES"
+            )
+            blackout_label = (
+                "[Hints: HINT_COST%  Release: RELEASE] Blackout a SIZExSIZE APBingo board in a multiworld "
+                "randomizer with GAMES"
+            )
+
+            if self.apbingo_release_always_off:
+                bingo_label = bingo_label.replace("Release: RELEASE", "Release: Off")
+                blackout_label = blackout_label.replace("Release: RELEASE", "Release: Off")
+
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label=bingo_label,
+                    data={
+                        "HINT_COST": (self.hint_costs, 1),
+                        "RELEASE": (self.release, 1),
+                        "GAMES": (self.games, 5),
+                        "COUNT": (self.bingo_counts, 1),
                         "SIZE": (self.bingo_board_sizes, 1)
                     },
                     is_time_consuming=True,
@@ -134,12 +261,96 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGame(Game):
                     weight=1,
                 ),
                 GameObjectiveTemplate(
-                    label=objective_label,
+                    label=bingo_label,
                     data={
                         "HINT_COST": (self.hint_costs, 1),
                         "RELEASE": (self.release, 1),
-                        "GAMES": (self.games, 3),
+                        "GAMES": (self.games, 6),
+                        "COUNT": (self.bingo_counts, 1),
                         "SIZE": (self.bingo_board_sizes, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+            ])
+
+            if self.include_apbingo_blackout_objectives:
+                game_objective_templates.extend([
+                    GameObjectiveTemplate(
+                        label=blackout_label,
+                        data={
+                            "HINT_COST": (self.hint_costs, 1),
+                            "RELEASE": (self.release, 1),
+                            "GAMES": (self.games, 5),
+                            "SIZE": (self.bingo_board_sizes, 1)
+                        },
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=1,
+                    ),
+                ])
+
+        if self.include_small_multiworld_randomizer_with_slotlock_objectives:
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="[Hints: HINT_COST%  Release: RELEASE] Complete a multiworld randomizer with GAMES using Slotlock",
+                    data={
+                        "HINT_COST": (self.hint_costs, 1),
+                        "RELEASE": (self.release, 1),
+                        "GAMES": (self.games, 2)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=3,
+                ),
+                GameObjectiveTemplate(
+                    label="[Hints: HINT_COST%  Release: RELEASE] Complete a multiworld randomizer with GAMES using Slotlock",
+                    data={
+                        "HINT_COST": (self.hint_costs, 1),
+                        "RELEASE": (self.release, 1),
+                        "GAMES": (self.games, 3)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=4,
+                ),
+            ])
+        
+        if self.include_medium_multiworld_randomizer_with_slotlock_objectives:
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="[Hints: HINT_COST%  Release: RELEASE] Complete a multiworld randomizer with GAMES using Slotlock",
+                    data={
+                        "HINT_COST": (self.hint_costs, 1),
+                        "RELEASE": (self.release, 1),
+                        "GAMES": (self.games, 4)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=3,
+                ),
+            ])
+
+        if self.include_large_multiworld_randomizer_with_slotlock_objectives:
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="[Hints: HINT_COST%  Release: RELEASE] Complete a multiworld randomizer with GAMES using Slotlock",
+                    data={
+                        "HINT_COST": (self.hint_costs, 1),
+                        "RELEASE": (self.release, 1),
+                        "GAMES": (self.games, 5)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="[Hints: HINT_COST%  Release: RELEASE] Complete a multiworld randomizer with GAMES using Slotlock",
+                    data={
+                        "HINT_COST": (self.hint_costs, 1),
+                        "RELEASE": (self.release, 1),
+                        "GAMES": (self.games, 6)
                     },
                     is_time_consuming=True,
                     is_difficult=False,
@@ -158,7 +369,7 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGame(Game):
                     },
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=2,
+                    weight=3,
                 ),
                 GameObjectiveTemplate(
                     label="[Hints: HINT_COST%  Release: RELEASE] Complete a multiplayer multiworld randomizer with GAMES",
@@ -169,7 +380,7 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGame(Game):
                     },
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=4,
+                    weight=6,
                 ),
                 GameObjectiveTemplate(
                     label="[Hints: HINT_COST%  Release: RELEASE] Complete a multiplayer multiworld randomizer with GAMES",
@@ -180,7 +391,7 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGame(Game):
                     },
                     is_time_consuming=True,
                     is_difficult=False,
-                    weight=3,
+                    weight=4,
                 ),
             ])
 
@@ -199,20 +410,48 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGame(Game):
         return "Small Multiworld Randomizer" in self.objective_types
 
     @property
+    def include_medium_multiworld_randomizer_objectives(self) -> bool:
+        return "Medium Multiworld Randomizer" in self.objective_types
+
+    @property
+    def include_large_multiworld_randomizer_objectives(self) -> bool:
+        return "Large Multiworld Randomizer" in self.objective_types
+
+    @property
     def include_small_multiworld_randomizer_with_apbingo_objectives(self) -> bool:
         return "Small Multiworld Randomizer with APBingo" in self.objective_types
 
     @property
+    def include_medium_multiworld_randomizer_with_apbingo_objectives(self) -> bool:
+        return "Medium Multiworld Randomizer with APBingo" in self.objective_types
+
+    @property
+    def include_large_multiworld_randomizer_with_apbingo_objectives(self) -> bool:
+        return "Large Multiworld Randomizer with APBingo" in self.objective_types
+
+    @property
     def include_apbingo_blackout_objectives(self) -> bool:
         return "APBingo Blackout" in self.objective_types
+
+    @property
+    def include_small_multiworld_randomizer_with_slotlock_objectives(self) -> bool:
+        return "Small Multiworld Randomizer with Slotlock" in self.objective_types
+
+    @property
+    def include_medium_multiworld_randomizer_with_slotlock_objectives(self) -> bool:
+        return "Medium Multiworld Randomizer with Slotlock" in self.objective_types
+
+    @property
+    def include_large_multiworld_randomizer_with_slotlock_objectives(self) -> bool:
+        return "Large Multiworld Randomizer with Slotlock" in self.objective_types
+
+    @property
+    def include_multiplayer_multiworld_objectives(self) -> bool:
+        return "Multiplayer Multiworld Randomizer" in self.objective_types
     
     @property
     def apbingo_release_always_off(self) -> bool:
         return self.archipelago_options.archipelago_multiworld_randomizer_multiplayer_bingo_release_always_off.value
-    
-    @property
-    def include_multiplayer_multiworld_objectives(self) -> bool:
-        return "Multiplayer Multiworld Randomizer" in self.objective_types
 
     @staticmethod
     def hint_costs() -> List[int]:
@@ -244,7 +483,7 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGameSelection(OptionList):
     """
     Defines which APWorlds to select from.
 
-    You can customize this list to your liking. Defaults to all supported games in 0.6.1
+    You can customize this list to your liking. Defaults to all currently supported core games.
 
     You are allowed to add the same game multiple times here. This will act as a weighted pool.
     """
@@ -255,15 +494,17 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGameSelection(OptionList):
         "A Hat in Time",
         "A Short Hike",
         "Adventure",
+        "APQuest",
         "Aquaria",
         "Blasphemous",
         "Bomb Rush Cyberfunk",
         "Bumper Stickers",
-        "Castlevania",
+        "Castlevania 64",
         "Castlevania: Circle of the Moon",
         "Celeste 64",
+        "Celeste (Open World)",
         "ChecksFinder",
-        "Clique",
+        "Choo-Choo Charles",
         "Dark Souls III",
         "DLC Quest",
         "Donkey Kong Country 3: Dixie Kong's Double Trouble!",
@@ -277,6 +518,7 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGameSelection(OptionList):
         "Hollow Knight",
         "Hylics 2",
         "Inscryption",
+        "Jak and Daxter: The Precursor Legacy",
         "KINGDOM HEARTS FINAL MIX",
         "KINGDOM HEARTS II FINAL MIX",
         "Kirby's Dream Land 3",
@@ -287,27 +529,28 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGameSelection(OptionList):
         "Mega Man 2",
         "Mega Man Battle Network 3 Blue",
         "Meritous",
-        "Minecraft",
         "Muse Dash",
         "Noita",
         "Old School Runescape",
         "Overcooked! 2",
+        "Paint",
         "Pokémon Emerald",
         "Pokémon Red and Blue",
         "Raft",
         "Risk of Rain 2",
-        "Rogue Legacy",
         "Saving Princess",
         "Secret of Evermore",
+        "shapez",
         "Shivers",
         "Sid Meier's Civilization VI",
-        "Slay the Spire",
         "SMZ3",
         "Sonic Adventure 2: Battle",
         "StarCraft II",
         "Stardew Valley",
         "Subnautica",
+        "Sudoku",
         "Super Mario 64",
+        "Super Mario Land 2",
         "Super Mario World",
         "Super Mario World 2: Yoshi's Island",
         "Super Metroid",
@@ -327,7 +570,6 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerGameSelection(OptionList):
         "Yacht Dice",
         "Yu-Gi-Oh! Ultimate Masters: WCT 2006",
         "Zillion",
-        "Zork: Grand Inquisitor",
     ]
 
 
@@ -341,8 +583,15 @@ class ArchipelagoMultiworldRandomizerWithMultiplayerObjectiveTypes(OptionSet):
     valid_keys = [
         "Solo Randomizer",
         "Small Multiworld Randomizer",
+        "Medium Multiworld Randomizer",
+        "Large Multiworld Randomizer",
         "Small Multiworld Randomizer with APBingo",
+        "Medium Multiworld Randomizer with APBingo",
+        "Large Multiworld Randomizer with APBingo",
         "APBingo Blackout",
+        "Small Multiworld Randomizer with Slotlock",
+        "Medium Multiworld Randomizer with Slotlock",
+        "Large Multiworld Randomizer with Slotlock",
         "Multiplayer Multiworld Randomizer",
     ]
 
