@@ -91,7 +91,7 @@ class WarioWareGetItTogetherGame(Game):
                     label="Play STORY_STAGE in Story with CHARACTER. Earn a score of SCORE_TARGET or higher",
                     data={
                         "STORY_STAGE": (self.story_stages, 1),
-                        "CHARACTERS": (self.characters, 1),
+                        "CHARACTER": (self.characters, 1),
                         "SCORE_TARGET": (self.story_score_targets, 1),
                     },
                     is_time_consuming=False,
