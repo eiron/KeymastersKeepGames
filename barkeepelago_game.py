@@ -95,6 +95,10 @@ class BarkeepelagoArchipelagoOptions:
     barkeepelago_max_alcohol_percent: BarkeepelagoMaxAlcoholPercent
     barkeepelago_max_caffeine: BarkeepelagoMaxCaffeine
     barkeepelago_drink_count: BarkeepelagoDrinkCount
+    barkeepelago_prefer_cocktaildb: BarkeepelagoPreferCocktailDb
+    barkeepelago_use_random_sort: BarkeepelagoUseRandomSort
+    barkeepelago_hard_fail_on_api_errors: BarkeepelagoHardFailOnApiErrors
+    barkeepelago_use_cocktaildb_fallback: BarkeepelagoUseCocktailDbFallback
     barkeepelago_ignore_cache: BarkeepelagoIgnoreCache
 
 
@@ -133,6 +137,10 @@ class BarkeepelagoGame(Game):
                 max_alcohol_percent=self.max_alcohol_percent,
                 max_caffeine=self.max_caffeine,
                 drink_count=self.drink_count,
+                prefer_cocktaildb=self.prefer_cocktaildb,
+                use_random_sort=self.use_random_sort,
+                hard_fail_on_api_errors=self.hard_fail_on_api_errors,
+                use_cocktaildb_fallback=self.use_cocktaildb_fallback,
                 ignore_cache=self.ignore_cache,
             )
             drinks_dict = holder.get_drinks()
@@ -204,6 +212,22 @@ class BarkeepelagoGame(Game):
     @property
     def drink_count(self) -> int:
         return self.archipelago_options.barkeepelago_drink_count.value
+
+    @property
+    def prefer_cocktaildb(self) -> bool:
+        return bool(self.archipelago_options.barkeepelago_prefer_cocktaildb.value)
+
+    @property
+    def use_random_sort(self) -> bool:
+        return bool(self.archipelago_options.barkeepelago_use_random_sort.value)
+
+    @property
+    def hard_fail_on_api_errors(self) -> bool:
+        return bool(self.archipelago_options.barkeepelago_hard_fail_on_api_errors.value)
+
+    @property
+    def use_cocktaildb_fallback(self) -> bool:
+        return bool(self.archipelago_options.barkeepelago_use_cocktaildb_fallback.value)
 
     @property
     def ignore_cache(self) -> bool:
@@ -321,6 +345,47 @@ class BarkeepelagoDrinkCount(NamedRange):
     range_end = 50
 
 
+class BarkeepelagoPreferCocktailDb(Toggle):
+    """
+    If enabled, use TheCocktailDB as the primary source.
+    If CocktailDB returns no drinks or errors, API League can still be used as fallback.
+    """
+
+    display_name = "Barkeep-elago Prefer CocktailDB"
+    default = False
+
+
+class BarkeepelagoUseRandomSort(Toggle):
+    """
+    If enabled, use API sort=random and repeatedly sample to build a varied pool.
+    If disabled, use deterministic pagination to minimize API token usage.
+    """
+
+    display_name = "Barkeep-elago Use Random API Sort"
+    default = False
+
+
+class BarkeepelagoHardFailOnApiErrors(Toggle):
+    """
+    If enabled, auth/quota errors from API League (missing key, 401, 402)
+    raise an error. If disabled, the module soft-falls back.
+    """
+
+    display_name = "Barkeep-elago Hard Fail On API Errors"
+    default = False
+
+
+class BarkeepelagoUseCocktailDbFallback(Toggle):
+    """
+    If enabled, auth/quota errors from API League (or missing API key) will
+    attempt TheCocktailDB fallback. If disabled, soft mode returns no drinks
+    and the game uses the generic objective.
+    """
+
+    display_name = "Barkeep-elago Use CocktailDB Fallback"
+    default = True
+
+
 class BarkeepelagoIgnoreCache(Toggle):
     """
     If enabled, always fetch fresh drink results instead of using cached data.
@@ -345,6 +410,10 @@ class BarkeepelagoDrinkHolder:
         max_alcohol_percent: str,
         max_caffeine: str,
         drink_count: int,
+        prefer_cocktaildb: bool,
+        use_random_sort: bool,
+        hard_fail_on_api_errors: bool,
+        use_cocktaildb_fallback: bool,
         ignore_cache: bool,
     ):
         self.api_key = api_key
@@ -357,6 +426,10 @@ class BarkeepelagoDrinkHolder:
         self.max_alcohol_percent = max_alcohol_percent
         self.max_caffeine = max_caffeine
         self.drink_count = drink_count
+        self.prefer_cocktaildb = prefer_cocktaildb
+        self.use_random_sort = use_random_sort
+        self.hard_fail_on_api_errors = hard_fail_on_api_errors
+        self.use_cocktaildb_fallback = use_cocktaildb_fallback
         self.ignore_cache = ignore_cache
 
     def get_drinks(self) -> Dict[int, str]:
@@ -377,14 +450,40 @@ class BarkeepelagoDrinkHolder:
             normalized_max_alcohol_percent,
             normalized_max_caffeine,
             self.drink_count,
+            self.prefer_cocktaildb,
+            self.use_random_sort,
+            self.hard_fail_on_api_errors,
+            self.use_cocktaildb_fallback,
         )
 
         if not self.ignore_cache and cache_key in BarkeepelagoDrinkHolder._drink_cache:
             print("[Barkeep-elago] Using cached drinks...")
             return BarkeepelagoDrinkHolder._drink_cache[cache_key]
 
+        if self.prefer_cocktaildb:
+            try:
+                drinks_dict = self._get_drinks_from_cocktaildb()
+            except Exception as exc:
+                print(f"[Barkeep-elago] CocktailDB primary source failed: {exc}")
+                drinks_dict = {}
+
+            if drinks_dict:
+                BarkeepelagoDrinkHolder._drink_cache[cache_key] = drinks_dict
+                return drinks_dict
+
+            print("[Barkeep-elago] CocktailDB returned no drinks, trying API League.")
+
         if not self.api_key:
-            raise RuntimeError("[Barkeep-elago] API key is required. Get one at https://apileague.com/apis/search-drinks-api/")
+            if self.use_cocktaildb_fallback:
+                print("[Barkeep-elago] No API key provided, using TheCocktailDB fallback.")
+                drinks_dict = self._get_drinks_from_cocktaildb()
+                BarkeepelagoDrinkHolder._drink_cache[cache_key] = drinks_dict
+                return drinks_dict
+            if self.hard_fail_on_api_errors:
+                raise RuntimeError("[Barkeep-elago] API key is required. Get one at https://apileague.com/apis/search-drinks-api/")
+            print("[Barkeep-elago] No API key provided and fallback is disabled. Returning no drinks.")
+            BarkeepelagoDrinkHolder._drink_cache[cache_key] = {}
+            return {}
 
         drinks_dict = self._get_drinks_from_apileague(
             normalized_flavors=normalized_flavors,
@@ -427,61 +526,145 @@ class BarkeepelagoDrinkHolder:
             params["max-alcohol-percent"] = normalized_max_alcohol_percent
         if normalized_max_caffeine:
             params["max-caffeine"] = normalized_max_caffeine
-        params["sort"] = "random"
-        params["number"] = 10  # API maximum per request
-        params["offset"] = 0   # Offset is irrelevant with sort=random; always fetch from position 0
         params["api-key"] = self.api_key
 
         target_count = max(1, min(self.drink_count, 50))
         drinks_by_id: Dict[int, str] = {}
         total_available: int | None = None
-        low_yield_streak = 0
-        min_new_per_batch = 3  # Fewer than this new drinks in a batch is considered low yield
+        if self.use_random_sort:
+            random_params = dict(params)
+            random_params["sort"] = "random"
+            random_params["number"] = 10  # API maximum per request
+            random_params["offset"] = 0   # Offset is not meaningful with random sort
 
-        for _ in range(10):  # Up to 10 attempts to fill the pool
-            if len(drinks_by_id) >= target_count:
-                break
-            if total_available is not None and len(drinks_by_id) >= total_available:
-                break
-            if low_yield_streak >= 2:
-                break
+            low_yield_streak = 0
+            min_new_per_batch = 3  # Fewer than this new drinks in a batch is considered low yield
 
-            response = requests.get(
-                "https://api.apileague.com/search-drinks",
-                params=params,
-                timeout=30,
-            )
-            if response.status_code != 200:
-                raise RuntimeError(f"[Barkeep-elago] API League returned {response.status_code}")
-
-            payload = response.json()
-
-            if total_available is None:
-                total_available = int(payload.get("total_results", 0) or 0)
-                if total_available == 0:
-                    break
-
-            drinks = payload.get("drinks", [])
-            if not drinks:
-                break
-
-            added_this_batch = 0
-            for drink in drinks:
-                drink_id = int(drink.get("id", 0) or 0)
-                if drink_id <= 0 or drink_id in drinks_by_id:
-                    continue
-                drinks_by_id[drink_id] = (
-                    f"{drink.get('title', 'Unknown Drink')}"
-                    f" | {drink.get('credits', {}).get('source_url', 'https://apileague.com/apis/search-drinks-api/')}"
-                )
-                added_this_batch += 1
+            for _ in range(10):  # Up to 10 attempts to fill the pool
                 if len(drinks_by_id) >= target_count:
                     break
+                if total_available is not None and len(drinks_by_id) >= total_available:
+                    break
+                if low_yield_streak >= 2:
+                    break
 
-            if added_this_batch < min_new_per_batch:
-                low_yield_streak += 1
-            else:
-                low_yield_streak = 0
+                response = requests.get(
+                    "https://api.apileague.com/search-drinks",
+                    params=random_params,
+                    timeout=30,
+                )
+                if response.status_code != 200:
+                    if response.status_code in (401, 402):
+                        if drinks_by_id:
+                            print(
+                                f"[Barkeep-elago] API auth/quota error ({response.status_code}). "
+                                f"Using {len(drinks_by_id)} drinks collected so far."
+                            )
+                            break
+                        if self.use_cocktaildb_fallback:
+                            print(
+                                f"[Barkeep-elago] API auth/quota error ({response.status_code}) before any drinks "
+                                "were returned. Trying TheCocktailDB fallback."
+                            )
+                            return self._get_drinks_from_cocktaildb()
+                        if self.hard_fail_on_api_errors:
+                            raise RuntimeError(f"[Barkeep-elago] API League returned {response.status_code}")
+                        print(
+                            f"[Barkeep-elago] API auth/quota error ({response.status_code}) before any drinks were returned. "
+                            "Falling back to a generic objective."
+                        )
+                        return {}
+                    raise RuntimeError(f"[Barkeep-elago] API League returned {response.status_code}")
+
+                payload = response.json()
+
+                if total_available is None:
+                    total_available = int(payload.get("total_results", 0) or 0)
+                    if total_available == 0:
+                        break
+
+                drinks = payload.get("drinks", [])
+                if not drinks:
+                    break
+
+                added_this_batch = 0
+                for drink in drinks:
+                    drink_id = int(drink.get("id", 0) or 0)
+                    if drink_id <= 0 or drink_id in drinks_by_id:
+                        continue
+                    drinks_by_id[drink_id] = (
+                        f"{drink.get('title', 'Unknown Drink')}"
+                        f" | {drink.get('credits', {}).get('source_url', 'https://apileague.com/apis/search-drinks-api/')}"
+                    )
+                    added_this_batch += 1
+                    if len(drinks_by_id) >= target_count:
+                        break
+
+                if added_this_batch < min_new_per_batch:
+                    low_yield_streak += 1
+                else:
+                    low_yield_streak = 0
+        else:
+            current_offset = 0
+            while len(drinks_by_id) < target_count:
+                if total_available is not None and current_offset >= total_available:
+                    break
+
+                page_params = dict(params)
+                page_params["number"] = min(10, target_count - len(drinks_by_id))
+                page_params["offset"] = current_offset
+
+                response = requests.get(
+                    "https://api.apileague.com/search-drinks",
+                    params=page_params,
+                    timeout=30,
+                )
+                if response.status_code != 200:
+                    if response.status_code in (401, 402):
+                        if drinks_by_id:
+                            print(
+                                f"[Barkeep-elago] API auth/quota error ({response.status_code}). "
+                                f"Using {len(drinks_by_id)} drinks collected so far."
+                            )
+                            break
+                        if self.use_cocktaildb_fallback:
+                            print(
+                                f"[Barkeep-elago] API auth/quota error ({response.status_code}) before any drinks "
+                                "were returned. Trying TheCocktailDB fallback."
+                            )
+                            return self._get_drinks_from_cocktaildb()
+                        if self.hard_fail_on_api_errors:
+                            raise RuntimeError(f"[Barkeep-elago] API League returned {response.status_code}")
+                        print(
+                            f"[Barkeep-elago] API auth/quota error ({response.status_code}) before any drinks were returned. "
+                            "Falling back to a generic objective."
+                        )
+                        return {}
+                    raise RuntimeError(f"[Barkeep-elago] API League returned {response.status_code}")
+
+                payload = response.json()
+
+                if total_available is None:
+                    total_available = int(payload.get("total_results", 0) or 0)
+                    if total_available == 0:
+                        break
+
+                drinks = payload.get("drinks", [])
+                if not drinks:
+                    break
+
+                for drink in drinks:
+                    drink_id = int(drink.get("id", 0) or 0)
+                    if drink_id <= 0 or drink_id in drinks_by_id:
+                        continue
+                    drinks_by_id[drink_id] = (
+                        f"{drink.get('title', 'Unknown Drink')}"
+                        f" | {drink.get('credits', {}).get('source_url', 'https://apileague.com/apis/search-drinks-api/')}"
+                    )
+                    if len(drinks_by_id) >= target_count:
+                        break
+
+                current_offset += 10
 
         if len(drinks_by_id) < target_count:
             available_str = str(total_available) if total_available is not None else "unknown"
@@ -491,6 +674,51 @@ class BarkeepelagoDrinkHolder:
             )
         print(f"[Barkeep-elago] Received {len(drinks_by_id)} drinks from API League.")
         return drinks_by_id
+
+    def _get_drinks_from_cocktaildb(self) -> Dict[int, str]:
+        print("[Barkeep-elago] Fetching drinks from TheCocktailDB...")
+        drinks: List[Dict[str, str]] = []
+
+        if self.query.strip():
+            response = requests.get(
+                "https://www.thecocktaildb.com/api/json/v1/1/search.php",
+                params={"s": self.query.strip()},
+                timeout=30,
+            )
+            if response.status_code != 200:
+                raise RuntimeError(f"[Barkeep-elago] TheCocktailDB returned {response.status_code}")
+            drinks = (response.json().get("drinks") or [])[: max(1, min(self.drink_count, 50))]
+        else:
+            seen_ids = set()
+            target_count = max(1, min(self.drink_count, 50))
+            for _ in range(target_count * 3):
+                if len(drinks) >= target_count:
+                    break
+                response = requests.get(
+                    "https://www.thecocktaildb.com/api/json/v1/1/random.php",
+                    timeout=30,
+                )
+                if response.status_code != 200:
+                    raise RuntimeError(f"[Barkeep-elago] TheCocktailDB returned {response.status_code}")
+                random_drinks = response.json().get("drinks") or []
+                if not random_drinks:
+                    continue
+                drink = random_drinks[0]
+                drink_id = drink.get("idDrink")
+                if drink_id and drink_id in seen_ids:
+                    continue
+                if drink_id:
+                    seen_ids.add(drink_id)
+                drinks.append(drink)
+
+        print(f"[Barkeep-elago] Received {len(drinks)} drinks from TheCocktailDB.")
+        return {
+            int(drink.get("idDrink") or index): (
+                f"{drink.get('strDrink', 'Unknown Drink')}"
+                f" | https://www.thecocktaildb.com/drink/{drink.get('idDrink', '')}"
+            )
+            for index, drink in enumerate(drinks)
+        }
 
     @staticmethod
     def _normalize_flavors(flavors: List[str]) -> List[str]:
