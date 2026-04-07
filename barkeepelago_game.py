@@ -110,7 +110,26 @@ class BarkeepelagoGame(Game):
 
     options_cls = BarkeepelagoArchipelagoOptions
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._barkeepelago_skip_api_precheck = True
+
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
+        # During pre-filter checks, return a cheap template so no API is hit.
+        # The generator may call this method for many games before selecting any.
+        if getattr(self, "_barkeepelago_skip_api_precheck", False):
+            self._barkeepelago_skip_api_precheck = False
+            return [
+                GameObjectiveTemplate(
+                    label="Mix DRINK",
+                    data={
+                        "DRINK": (["a drink of your choice"], 1),
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                ),
+            ]
+
         game_objective_templates: List[GameObjectiveTemplate] = list()
 
         print("[Barkeep-elago] Initializing...")
