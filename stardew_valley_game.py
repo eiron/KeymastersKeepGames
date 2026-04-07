@@ -121,6 +121,13 @@ class StardewValleyGame(Game):
                     is_difficult=False,
                     weight=2,
                 ),
+                GameObjectiveTemplate(
+                    label="Reach Farming level SKILL_LEVEL",
+                    data={"SKILL_LEVEL": (self.skill_levels, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
             ])
 
         # Mining objectives
@@ -174,6 +181,13 @@ class StardewValleyGame(Game):
                     is_difficult=False,
                     weight=2,
                 ),
+                GameObjectiveTemplate(
+                    label="Reach Mining level SKILL_LEVEL",
+                    data={"SKILL_LEVEL": (self.skill_levels, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
             ])
 
         # Fishing objectives
@@ -224,6 +238,13 @@ class StardewValleyGame(Game):
                     is_difficult=False,
                     weight=1,
                 ),
+                GameObjectiveTemplate(
+                    label="Reach Fishing level SKILL_LEVEL",
+                    data={"SKILL_LEVEL": (self.skill_levels, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
             ])
 
         # Foraging objectives
@@ -259,6 +280,13 @@ class StardewValleyGame(Game):
                 GameObjectiveTemplate(
                     label="Chop TREE_CHOP_COUNT trees within DAYS days",
                     data={"TREE_CHOP_COUNT": (self.tree_chop_counts, 1), "DAYS": (self.day_windows_short, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Reach Foraging level SKILL_LEVEL",
+                    data={"SKILL_LEVEL": (self.skill_levels, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -305,6 +333,13 @@ class StardewValleyGame(Game):
                     is_difficult=False,
                     weight=2,
                 ),
+                GameObjectiveTemplate(
+                    label="Reach 2 hearts with VILLAGER_COUNT different villagers",
+                    data={"VILLAGER_COUNT": (self.villager_diff_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
             ])
 
         # Community Center objectives
@@ -339,6 +374,27 @@ class StardewValleyGame(Game):
                 GameObjectiveTemplate(
                     label="Find ARTIFACT_COUNT artifacts for the museum",
                     data={"ARTIFACT_COUNT": (self.artifact_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Donate DONATION_COUNT items to the museum",
+                    data={"DONATION_COUNT": (self.museum_donation_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Catch FISH_TYPE_COUNT different fish",
+                    data={"FISH_TYPE_COUNT": (self.fish_type_counts, 1)},
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Ship CROP_TYPE_COUNT different crops",
+                    data={"CROP_TYPE_COUNT": (self.crop_type_counts, 1)},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
@@ -429,6 +485,48 @@ class StardewValleyGame(Game):
                 label="Craft CRAFT_ITEM",
                 data={"CRAFT_ITEM": (self.craft_items, 1)},
                 is_time_consuming=False,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Upgrade any tool to TOOL_TIER",
+                data={"TOOL_TIER": (self.tool_tiers, 1)},
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Build BUILDING_TYPE on your farm",
+                data={"BUILDING_TYPE": (self.building_types, 1)},
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Complete QUEST_COUNT Help Wanted quests",
+                data={"QUEST_COUNT": (self.quest_counts, 1)},
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Ship SHIPPING_COUNT items in one day",
+                data={"SHIPPING_COUNT": (self.shipping_counts_one_day, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Process ARTISAN_COUNT artisan goods",
+                data={"ARTISAN_COUNT": (self.artisan_goods_counts, 1)},
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=2,
+            ),
+            GameObjectiveTemplate(
+                label="Craft CRAFT_TYPE_COUNT different items",
+                data={"CRAFT_TYPE_COUNT": (self.craft_type_counts, 1)},
+                is_time_consuming=True,
                 is_difficult=False,
                 weight=2,
             ),
@@ -588,6 +686,14 @@ class StardewValleyGame(Game):
         return ["Spring", "Summer", "Fall", "Winter"]
 
     @staticmethod
+    def tool_tiers() -> List[str]:
+        return ["Copper", "Steel", "Gold", "Iridium"]
+
+    @staticmethod
+    def building_types() -> List[str]:
+        return ["Silo", "Coop", "Barn", "Well", "Stable"]
+
+    @staticmethod
     def monsters() -> List[str]:
         return [
             "Green Slime", "Frost Jelly", "Dust Spirit", "Bat", "Stone Golem", "Grub",
@@ -664,6 +770,10 @@ class StardewValleyGame(Game):
     def year_limits() -> range:
         return range(1, 4)
 
+    @staticmethod
+    def skill_levels() -> range:
+        return range(3, 9)
+
     # New providers for time-window and counts
     @staticmethod
     def day_windows() -> range:
@@ -684,6 +794,10 @@ class StardewValleyGame(Game):
 
     @staticmethod
     def villager_diff_counts() -> range:
+        return range(3, 12, 3)
+
+    @staticmethod
+    def quest_counts() -> range:
         return range(3, 12, 3)
 
     @staticmethod
@@ -709,6 +823,30 @@ class StardewValleyGame(Game):
     @staticmethod
     def unique_sell_counts() -> range:
         return range(5, 20, 5)
+
+    @staticmethod
+    def museum_donation_counts() -> range:
+        return range(10, 61, 10)
+
+    @staticmethod
+    def fish_type_counts() -> range:
+        return range(5, 21, 5)
+
+    @staticmethod
+    def crop_type_counts() -> range:
+        return range(4, 17, 4)
+
+    @staticmethod
+    def shipping_counts_one_day() -> range:
+        return range(10, 55, 5)
+
+    @staticmethod
+    def artisan_goods_counts() -> range:
+        return range(5, 35, 5)
+
+    @staticmethod
+    def craft_type_counts() -> range:
+        return range(3, 13, 3)
 
     @staticmethod
     def craft_items() -> List[str]:
