@@ -177,42 +177,64 @@ class SteamAchievementsGame(Game):
 
         if self.archipelago_options.steam_achievements_include_specific_achievements.value:
             # Quick achievements (global unlock % >= time consuming threshold)
+            print("  Steam Achievements: [Specific] Checking quick...")
+            quick_specific = self.quick_specific_achievements_with_games()
+            if quick_specific:
+                templates.append(
+                    GameObjectiveTemplate(
+                        label="QUICK_ACHIEVEMENT_WITH_GAME",
+                        data={
+                            "QUICK_ACHIEVEMENT_WITH_GAME": (self.quick_specific_achievements_with_games, 1)
+                        },
+                        is_time_consuming=False,
+                        is_difficult=False,
+                        weight=15,
+                    )
+                )
+            # Medium achievements (>= difficulty threshold but < time consuming threshold)
+            print("  Steam Achievements: [Specific] Checking medium...")
+            medium_specific = self.medium_specific_achievements_with_games()
+            if medium_specific:
+                templates.append(
+                    GameObjectiveTemplate(
+                        label="MEDIUM_ACHIEVEMENT_WITH_GAME",
+                        data={
+                            "MEDIUM_ACHIEVEMENT_WITH_GAME": (self.medium_specific_achievements_with_games, 1)
+                        },
+                        is_time_consuming=True,
+                        is_difficult=False,
+                        weight=12,
+                    )
+                )
+            # Hard achievements (global unlock % < difficulty threshold)
+            print("  Steam Achievements: [Specific] Checking hard...")
+            hard_specific = self.hard_specific_achievements_with_games()
+            if hard_specific:
+                templates.append(
+                    GameObjectiveTemplate(
+                        label="HARD_ACHIEVEMENT_WITH_GAME",
+                        data={
+                            "HARD_ACHIEVEMENT_WITH_GAME": (self.hard_specific_achievements_with_games, 1)
+                        },
+                        is_time_consuming=True,
+                        is_difficult=True,
+                        weight=9,
+                    )
+                )
+
+        if not templates:
             templates.append(
                 GameObjectiveTemplate(
-                    label="QUICK_ACHIEVEMENT_WITH_GAME",
+                    label="Play STEAM_GAME_NAME",
                     data={
-                        "QUICK_ACHIEVEMENT_WITH_GAME": (self.quick_specific_achievements_with_games, 1)
+                        "STEAM_GAME_NAME": (self.games, 1)
                     },
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=15,
+                    weight=1,
                 )
             )
-            # Medium achievements (>= difficulty threshold but < time consuming threshold)
-            templates.append(
-                GameObjectiveTemplate(
-                    label="MEDIUM_ACHIEVEMENT_WITH_GAME",
-                    data={
-                        "MEDIUM_ACHIEVEMENT_WITH_GAME": (self.medium_specific_achievements_with_games, 1)
-                    },
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=12,
-                )
-            )
-            # Hard achievements (global unlock % < difficulty threshold)
-            templates.append(
-                GameObjectiveTemplate(
-                    label="HARD_ACHIEVEMENT_WITH_GAME",
-                    data={
-                        "HARD_ACHIEVEMENT_WITH_GAME": (self.hard_specific_achievements_with_games, 1)
-                    },
-                    is_time_consuming=True,
-                    is_difficult=True,
-                    weight=9,
-                )
-            )
-            
+
         return templates
 
     def _get_eligible_games_data(self) -> List[Dict[str, any]]:
