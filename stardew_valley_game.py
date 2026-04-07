@@ -58,7 +58,7 @@ class StardewValleyGame(Game):
         if self.difficulty_level == "Expert":
             constraints.append(
                 GameObjectiveTemplate(
-                    label="Complete this objective without using any purchased items",
+                    label="Complete this objective without passing out at 2:00 AM",
                     data={},
                 )
             )
@@ -92,7 +92,7 @@ class StardewValleyGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Complete the ANIMAL_TYPE barn/coop with QUANTITY animals",
+                    label="Own QUANTITY ANIMAL_TYPE animals",
                     data={
                         "ANIMAL_TYPE": (self.animal_types, 1),
                         "QUANTITY": (self.animal_quantities, 1)
@@ -134,7 +134,7 @@ class StardewValleyGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Collect QUANTITY ORE_TYPE ore",
+                    label="Collect QUANTITY ORE_TYPE from mining",
                     data={
                         "QUANTITY": (self.ore_quantities, 1),
                         "ORE_TYPE": (self.ore_types, 1)
@@ -190,8 +190,8 @@ class StardewValleyGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Catch a legendary fish: LEGENDARY_FISH",
-                    data={"LEGENDARY_FISH": (self.legendary_fish, 1)},
+                    label="Catch a difficult fish: DIFFICULT_FISH",
+                    data={"DIFFICULT_FISH": (self.difficult_fish, 1)},
                     is_time_consuming=True,
                     is_difficult=True,
                     weight=1,
@@ -218,7 +218,7 @@ class StardewValleyGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Catch a Catfish within DAYS days",
+                    label="Catch a Carp within DAYS days",
                     data={"DAYS": (self.day_windows, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
@@ -349,17 +349,16 @@ class StardewValleyGame(Game):
         if self.include_cooking:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Cook DISH_COUNT different DISH recipes",
+                    label="Cook DISH_COUNT different recipes",
                     data={
-                        "DISH_COUNT": (self.dish_counts, 1),
-                        "DISH": (self.dish_categories, 1)
+                        "DISH_COUNT": (self.dish_counts, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Learn the recipe for RECIPE",
+                    label="Cook RECIPE",
                     data={"RECIPE": (self.recipes, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
@@ -371,11 +370,8 @@ class StardewValleyGame(Game):
         if self.include_seasonal_goals:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Complete FESTIVAL during SEASON",
-                    data={
-                        "FESTIVAL": (self.festivals, 1),
-                        "SEASON": (self.seasons, 1)
-                    },
+                    label="Complete FESTIVAL_SEASON",
+                    data={"FESTIVAL_SEASON": (self.festival_season_pairs, 1)},
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
@@ -423,7 +419,7 @@ class StardewValleyGame(Game):
                 weight=2,
             ),
             GameObjectiveTemplate(
-                label="Buy the first backpack upgrade within DAYS days",
+                label="Have at least 24 inventory slots within DAYS days",
                 data={"DAYS": (self.day_windows_short, 1)},
                 is_time_consuming=False,
                 is_difficult=False,
@@ -512,6 +508,10 @@ class StardewValleyGame(Game):
         return ["Legend", "Crimsonfish", "Angler", "Glacierfish", "Mutant Carp"]
 
     @staticmethod
+    def difficult_fish() -> List[str]:
+        return ["Octopus", "Lava Eel", "Ice Pip", "Stonefish", "Super Cucumber", "Catfish"]
+
+    @staticmethod
     def forage_items() -> List[str]:
         return [
             "Wild Horseradish", "Daffodil", "Leek", "Dandelion", "Salmonberry", "Spring Onion",
@@ -568,6 +568,19 @@ class StardewValleyGame(Game):
         return [
             "Egg Festival", "Flower Dance", "Luau", "Dance of the Moonlight Jellies",
             "Stardew Valley Fair", "Spirit's Eve", "Festival of Ice", "Feast of the Winter Star"
+        ]
+
+    @staticmethod
+    def festival_season_pairs() -> List[str]:
+        return [
+            "Egg Festival (Spring)",
+            "Flower Dance (Spring)",
+            "Luau (Summer)",
+            "Dance of the Moonlight Jellies (Summer)",
+            "Stardew Valley Fair (Fall)",
+            "Spirit's Eve (Fall)",
+            "Festival of Ice (Winter)",
+            "Feast of the Winter Star (Winter)",
         ]
 
     @staticmethod
