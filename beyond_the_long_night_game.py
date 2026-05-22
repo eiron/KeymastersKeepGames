@@ -36,30 +36,44 @@ class BeyondTheLongNightGame(Game):
             GameObjectiveTemplate(
                 label="Play with increased Storm speed (enable any fast-storm modifier)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Never heal at Campfires",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Do not purchase map revealing upgrades",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Rescue villagers before entering any Storm layer",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="No companion pets",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Don't give Bobbins a single torch (he doesn't deserve it)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Be in the starting room of the storm when the storm starts",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ]
 
