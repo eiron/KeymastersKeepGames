@@ -50,18 +50,26 @@ class DeadCellsGame(Game):
             GameObjectiveTemplate(
                 label="Complete this objective without using any healing items",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective using only WEAPON_TYPE weapons",
                 data={"WEAPON_TYPE": (self.weapon_types, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without taking more than DAMAGE_COUNT hits",
                 data={"DAMAGE_COUNT": (self.damage_limits, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective in under TIME_LIMIT minutes",
                 data={"TIME_LIMIT": (self.time_limits, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ])
         

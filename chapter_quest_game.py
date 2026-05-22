@@ -149,71 +149,67 @@ class ChapterQuestGame(Game):
             )
             objectives.append(completion_objective)
 
-        # Add genre-based challenges (if enabled)
+        # Add genre-based challenges (if enabled) - only for genres with multiple books
         if self.archipelago_options.chapter_quest_include_genre_challenges:
             for genre in self.genres:
                 genre_books = [book for book, info in self.book_collection.items() if info["genre"] == genre]
+                if len(genre_books) < 2:
+                    continue
                 # Maximum number should be the count of books in the collection for that genre
-                max_books = min(3, len(genre_books)) # Cap at 3 books max to avoid overly long challenges
-                # For single book, use 1; for multiple books, pick a random number up to max_books
-                if max_books == 1:
-                    num_books = 1
-                else:
-                    num_books = self.random.randint(1, max_books)
-                    
-                    if num_books == 1:
-                        # For single book challenges, specify a random number of chapters (1-3)
-                        num_chapters = self.random.randint(1, 3)
-                        chapter_text = "chapter" if num_chapters == 1 else "chapters"
-                        genre_objective = GameObjectiveTemplate(
-                            label=f"Genre Challenge: Read {num_chapters} {chapter_text} from a {genre} book",
-                            data={},
-                            is_difficult=False,
-                            is_time_consuming=False,  # Reading one chapter is not time-consuming
-                            weight=60
-                        )
-                    else:
-                        genre_objective = GameObjectiveTemplate(
-                            label=f"Genre Challenge: Read chapters from {num_books} different {genre} books",
-                            data={},
-                            is_difficult=False,
-                            is_time_consuming=True,  # Reading from multiple books is time-consuming
-                            weight=40
-                        )
-                    objectives.append(genre_objective)
+                max_books = min(3, len(genre_books))  # Cap at 3 books max to avoid overly long challenges
+                num_books = self.random.randint(1, max_books)
 
-        # Add author-based challenges (if enabled)
+                if num_books == 1:
+                    # For single book challenges, specify a random number of chapters (1-3)
+                    num_chapters = self.random.randint(1, 3)
+                    chapter_text = "chapter" if num_chapters == 1 else "chapters"
+                    genre_objective = GameObjectiveTemplate(
+                        label=f"Genre Challenge: Read {num_chapters} {chapter_text} from a {genre} book",
+                        data={},
+                        is_difficult=False,
+                        is_time_consuming=False,
+                        weight=60
+                    )
+                else:
+                    genre_objective = GameObjectiveTemplate(
+                        label=f"Genre Challenge: Read chapters from {num_books} different {genre} books",
+                        data={},
+                        is_difficult=False,
+                        is_time_consuming=True,
+                        weight=40
+                    )
+                objectives.append(genre_objective)
+
+        # Add author-based challenges (if enabled) - only for authors with multiple books
         if self.archipelago_options.chapter_quest_include_author_challenges:
             for author in self.authors:
                 author_books = [book for book, info in self.book_collection.items() if info["author"] == author]
+                if len(author_books) < 2:
+                    continue
                 # Maximum number should be the count of books in the collection for that author
-                max_books = min(3,len(author_books)) # Cap at 3 books max to avoid overly long challenges
-                # For single book, use 1; for multiple books, pick a random number up to max_books
-                if max_books == 1:
-                    num_books = 1
+                max_books = min(3, len(author_books))  # Cap at 3 books max to avoid overly long challenges
+                num_books = self.random.randint(1, max_books)
+
+                if num_books == 1:
+                    # For single book challenges, specify a random number of chapters (1-3)
+                    num_chapters = self.random.randint(1, 3)
+                    chapter_text = "chapter" if num_chapters == 1 else "chapters"
+                    author_objective = GameObjectiveTemplate(
+                        label=f"Author Challenge: Read {num_chapters} {chapter_text} from a book by {author}",
+                        data={},
+                        is_difficult=False,
+                        is_time_consuming=False,
+                        weight=40
+                    )
                 else:
-                    num_books = self.random.randint(1, max_books)
-                    
-                    if num_books == 1:
-                        # For single book challenges, specify a random number of chapters (1-3)
-                        num_chapters = self.random.randint(1, 3)
-                        chapter_text = "chapter" if num_chapters == 1 else "chapters"
-                        author_objective = GameObjectiveTemplate(
-                            label=f"Author Challenge: Read {num_chapters} {chapter_text} from a book by {author}",
-                            data={},
-                            is_difficult=False,
-                            is_time_consuming=False,  # Reading one chapter is not time-consuming
-                            weight=40
-                        )
-                    else:
-                        author_objective = GameObjectiveTemplate(
-                            label=f"Author Challenge: Read chapters from {num_books} different books by {author}",
-                            data={},
-                            is_difficult=False,
-                            is_time_consuming=True,  # Reading from multiple books is time-consuming
-                            weight=25
-                        )
-                    objectives.append(author_objective)
+                    author_objective = GameObjectiveTemplate(
+                        label=f"Author Challenge: Read chapters from {num_books} different books by {author}",
+                        data={},
+                        is_difficult=False,
+                        is_time_consuming=True,
+                        weight=25
+                    )
+                objectives.append(author_objective)
 
         return objectives
 

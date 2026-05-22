@@ -113,18 +113,26 @@ class WikipediaGame(Game):
             GameObjectiveTemplate(
                 label="No using the search function",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="No using 'Ctrl+F' to find links on page",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="No clicking on disambiguation or list pages",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Must stay on English Wikipedia (no language switching)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ]
 

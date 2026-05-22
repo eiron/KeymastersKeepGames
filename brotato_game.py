@@ -44,66 +44,98 @@ class BrotatoGame(Game):
             GameObjectiveTemplate(
                 label="No rerolling the shop",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="No combining items",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Cannot lock items in the shop",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Cannot sell items",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Only pick up one item per wave",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Keep at least one item locked at the end of each shop wave",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Reroll at least once inbetween each wave",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Go the first three waves without spending any materials",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Never take the rightmost level-up reward",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Take every Weird Ghost you see",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Enable Manual Aim in the settings",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Have at least 3 negative stats at the end of the run",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Do not buy any passive items",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Take every item reducing your max HP and ignore every item increasing your max HP",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Recycle all of your current weapons at every shop",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Finish the run with a screwdriver in hand",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ]
 

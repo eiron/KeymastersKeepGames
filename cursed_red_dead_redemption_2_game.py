@@ -46,26 +46,38 @@ class CursedRedDeadRedemption2Game(Game):
             GameObjectiveTemplate(
                 label="Complete this objective while maintaining minimum honor",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective while wearing only OUTFIT_STYLE",
                 data={"OUTFIT_STYLE": (self.cursed_outfits, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without using fast travel",
                 data={},
+                is_time_consuming=True,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective while constantly drunk",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective using only WEAPON_TYPE",
                 data={"WEAPON_TYPE": (self.terrible_weapons, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective while being chased by BOUNTY_AMOUNT bounty hunters",
                 data={"BOUNTY_AMOUNT": (self.bounty_levels, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ])
         

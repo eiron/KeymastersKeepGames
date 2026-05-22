@@ -30,82 +30,120 @@ class CavesOfQudGame(Game):
             GameObjectiveTemplate(
                 label="No using the wish system",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Cannot use ranged weapons",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="No mutations allowed (True Kin only)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Cannot wear any armor",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Must remain neutral reputation with all factions",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             # Persistent run-modifying constraints (no one-off events)
             GameObjectiveTemplate(
                 label="Keep a difference of at least six between your highest and lowest stat at all times",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Take the Night Vision cybernetic and keep it turned on at all times",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             # Additional mutation / cybernetics themed constraints
             GameObjectiveTemplate(
                 label="Must choose Unstable Genome morphotype if Mutant",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Must not take a starting cybernetic (gain +1 Toughness instead)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Must never use the Precognition mutation",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Must install only arcology-specific cybernetics (No general implants)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Accept the first offered mutation every time (simulate Irritable Genome)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="May not unequip installed cybernetics (no uninstalling)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Dismember and eat one of your own limbs before leaving the starting area",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Take the Evil Twin defect during character creation and kill them",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Take the Nerve Poppy defect during character creation",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Take the Space-Time Vortex mutation and enter it before leaving your starting village",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="While in your starting village, use the wish console to infect yourself with glowcrust",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Manifest morphotype MORPHOTYPE at character creation",
                 data={
                     "MORPHOTYPE": (self.morphotypes, 1),
                 },
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Start with DEFECT and survive to level SURVIVOR_LEVEL",
@@ -113,6 +151,8 @@ class CavesOfQudGame(Game):
                     "DEFECT": (self.defects, 1),
                     "SURVIVOR_LEVEL": (self.mutation_survival_levels, 1),
                 },
+                is_time_consuming=True,
+                is_difficult=True,
             ),
         ]
 

@@ -55,10 +55,14 @@ class DanganronpaGame(Game):
                 GameObjectiveTemplate(
                     label="Complete this objective within DAYS in-game days",
                     data={"DAYS": (self.all_day_counts, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
                 ),
                 GameObjectiveTemplate(
                     label="Complete this objective without any incorrect statements",
                     data={},
+                    is_time_consuming=False,
+                    is_difficult=True,
                 ),
             ])
 
@@ -67,17 +71,31 @@ class DanganronpaGame(Game):
                 GameObjectiveTemplate(
                     label="Complete this objective with at least HEALTH percent Influence remaining",
                     data={"HEALTH": (self.all_health_thresholds, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
                 ),
                 GameObjectiveTemplate(
                     label="Complete this objective without using Focus Gauge",
                     data={},
+                    is_time_consuming=False,
+                    is_difficult=True,
                 ),
             ])
 
         if self.logic_difficulty == "cruel" or self.action_difficulty == "cruel":
             constraints.extend([
-                GameObjectiveTemplate(label="Complete this objective without retrying", data={}),
-                GameObjectiveTemplate(label="Complete this objective without equipping skills", data={}),
+                GameObjectiveTemplate(
+                    label="Complete this objective without retrying",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=True,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete this objective without equipping skills",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=True,
+                ),
             ])
 
         return constraints

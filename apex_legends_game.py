@@ -41,52 +41,76 @@ class ApexLegendsGame(Game):
                 data={
                     "LEGEND": (self.legends, 1),
                 },
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Play as a CLASS Legend",
                 data={
                     "CLASS": (self.classes, 1),
                 },
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="No Energy Weapons",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="No Heavy Weapons",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="No Light Weapons",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
              GameObjectiveTemplate(
                 label="Must carry a Mozambique",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Only use pistols",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Once you have over 120 total ammo in your inventory, never let your total ammo count drop below 120",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Use your ultimate as soon as it gets fully charged, every time it gets charged",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Don't pick up any armour, helmet, or backpack unless your teammate(s) have one of equal or better quality",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Keep the first weapon you pick up for the rest of the game (or, in an Arena, the first weapon you bought in every other round)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Only kill downed enemies with a finisher",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ]
 

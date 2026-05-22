@@ -53,21 +53,21 @@ class VoidRainsUponHerHeartGame(Game):
         templates: List[GameObjectiveTemplate] = list()
 
         templates.extend([
-            GameObjectiveTemplate(label="Play as HEART", data={"HEART": (self.playable_hearts, 1)}),
-            GameObjectiveTemplate(label="Never use a panic attack during the entire run", data={}),
-            GameObjectiveTemplate(label="Using only basic shots (no panic attacks)", data={}),
-            GameObjectiveTemplate(label="Always pick the right-most monster at selection", data={}),
-            GameObjectiveTemplate(label="Get at least 3 100% full combos in a single run", data={}),
-            GameObjectiveTemplate(label="Spend all panic attacks before the final boss fight", data={}),
-            GameObjectiveTemplate(label="Get a 100% full combo while in Focus Mode for an entire fight after the first two fights", data={}),
-            GameObjectiveTemplate(label="Get a 100% full combo without using any charge shots", data={}),
-            GameObjectiveTemplate(label="Do not use any Active Gifts on odd-numbered fights", data={}),
-            GameObjectiveTemplate(label="At least once, lose your 100% full combo in the last segment of the combo bar", data={}),
-            GameObjectiveTemplate(label="Spend at least five seconds behind a monster during a battle", data={}),
-            GameObjectiveTemplate(label="Collect every basic mote color type in a single run", data={}),
-            GameObjectiveTemplate(label="Score at least 2000 motes in a single battle", data={}),
-            GameObjectiveTemplate(label="Collect at least 3 power gifts in a single Story run", data={}),
-            GameObjectiveTemplate(label="Trigger at least 3 events in a single Story run", data={}),
+            GameObjectiveTemplate(label="Play as HEART", data={"HEART": (self.playable_hearts, 1)}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Never use a panic attack during the entire run", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Using only basic shots (no panic attacks)", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Always pick the right-most monster at selection", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Get at least 3 100% full combos in a single run", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Spend all panic attacks before the final boss fight", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Get a 100% full combo while in Focus Mode for an entire fight after the first two fights", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Get a 100% full combo without using any charge shots", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Do not use any Active Gifts on odd-numbered fights", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="At least once, lose your 100% full combo in the last segment of the combo bar", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Spend at least five seconds behind a monster during a battle", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Collect every basic mote color type in a single run", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Score at least 2000 motes in a single battle", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Collect at least 3 power gifts in a single Story run", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Trigger at least 3 events in a single Story run", data={}, is_time_consuming=False, is_difficult=False),
         ])
 
         return templates

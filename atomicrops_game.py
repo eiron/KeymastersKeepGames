@@ -39,46 +39,68 @@ class AtomicropsGame(Game):
             GameObjectiveTemplate(
                 label="Play on Year 10",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Play on Year 5+",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Don't buy any guns (Stick with the Peashooter)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Only buy new guns if you can afford both",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Don't get married",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Don't use any Tractors",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Purchase a new Tractor after each Season",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="If you can afford it, gamble at least once after every season",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Take Scarecrows whenever they are offered at camps",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Don't harvest any plants until dawn of Day 1",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Have no Trees on your farm at the end of the run",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ]
 

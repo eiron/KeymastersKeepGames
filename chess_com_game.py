@@ -34,54 +34,80 @@ class ChessComGame(Game):
             GameObjectiveTemplate(
                 label="Disable premoves (no premoving)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Do not use the opening explorer or book",  # persistent self-imposed rule
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Do not run engine or post-game analysis until objectives complete",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Never castle (keep king uncastled all game)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Always play a flank pawn (a or h) on your first move as White",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Avoid queen promotions (attempt underpromotion when legal)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="No piece retreats (pieces may not move to a square closer to starting rank/file)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="No captures before move 10 (first capture must be at move 10 or later)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Play only one time control for the entire session",  # player chooses outside system
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Win without moving your queen (queen must stay on starting square)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Sacrifice a rook before move 15 in every game (if possible)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="First move must be a4 if White or a5 if Black in every game",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Follow only chat-suggested moves while playing on stream",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ]
 

@@ -41,26 +41,38 @@ class ReallyBoringChallengesGame(Game):
             GameObjectiveTemplate(
                 label="Complete this objective without any distractions (no music, videos, etc.)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective while maintaining FOCUS_LEVEL concentration",
                 data={"FOCUS_LEVEL": (self.focus_levels, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective in ENVIRONMENT_TYPE environment",
                 data={"ENVIRONMENT_TYPE": (self.boring_environments, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective using only INTERACTION_VERB_METHOD",
                 data={"INTERACTION_VERB_METHOD": (self.tedious_methods, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective while documenting every DOCUMENTATION_INTERVAL",
                 data={"DOCUMENTATION_INTERVAL": (self.documentation_frequencies, 1)},
+                is_time_consuming=True,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective at SPEED_LEVEL speed",
                 data={"SPEED_LEVEL": (self.painfully_slow_speeds, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ])
 

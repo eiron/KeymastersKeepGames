@@ -33,50 +33,74 @@ class BPMBulletsPerMinuteGame(Game):
             GameObjectiveTemplate(
                 label="No ultimate ability usage",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="No health pickups allowed",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Cannot use any special weapons (only starter weapon)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Cannot purchase any items from shops",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Must maintain perfect rhythm (no missed beats)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Leave one item slot empty",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Skip all Altars on a floor",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Skip a Treasure Room",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Never buy items from the two rightmost pedestals at Huggin's Shop",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Never buy consumables from the front pedestal at Muninn's Armory",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Never buy weapons from the leftmost pedestal at Muninn's Armory",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Turn on Strict Rhythm Timing",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ]
 

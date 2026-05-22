@@ -39,34 +39,50 @@ class BackpackHeroGame(Game):
             GameObjectiveTemplate(
                 label="Don't use any Consumables",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Don't rearrange your inventory during combat",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Don't visit the Healer",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Only take three keys on the entire run",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="If offered a bow in an event, you must take it. Replace your primary objective 'item' to hold with a bow instead",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Fully expand your backpack to the far left before you expand up or down",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Skip a non-combat room at least 3 times",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Never have a Legendary item in your backpack",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ]
 

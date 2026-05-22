@@ -41,34 +41,50 @@ class EuroTruckSimulator2Game(Game):
             GameObjectiveTemplate(
                 label="Complete this objective with FUEL_EFFICIENCY fuel efficiency rating",
                 data={"FUEL_EFFICIENCY": (self.fuel_efficiency_levels, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective TIME_PRESSURE faster than standard time",
                 data={"TIME_PRESSURE": (self.time_pressure_levels, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without any cargo or truck damage",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective using only TRUCK_BRAND trucks",
                 data={"TRUCK_BRAND": (self.truck_brands, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective during DRIVING_TIME hours",
                 data={"DRIVING_TIME": (self.driving_times, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective in WEATHER conditions",
                 data={"WEATHER": (self.weather_conditions, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective taking economical routes (avoid toll roads)",
                 data={},
+                is_time_consuming=True,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Cross national borders unnecessarily during this objective",
                 data={},
+                is_time_consuming=True,
+                is_difficult=False,
             ),
         ])
         

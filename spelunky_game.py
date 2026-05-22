@@ -61,59 +61,86 @@ class SpelunkyGame(Game):
             GameObjectiveTemplate(
                 label="Do not rob shops (no stealing, no aggroing shopkeepers)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Pacifist: Do not directly kill any enemies (indirect kills allowed)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="No bombs (cannot place bombs)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="No ropes (cannot use ropes)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="No items purchased from shops",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete a level without taking any damage",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Speedrun: Finish a full run under 20 minutes",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="No damsels harmed (do not deal damage to pets)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="No gold collected in an entire run",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Do not pick up a shotgun on the run",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Do not use a jetpack",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Kill every single possible shopkeeper",
                 data={},
+                is_time_consuming=False,
                 is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Spend at least 4 minutes on one floor",
                 data={},
+                is_time_consuming=True,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="On 1-1, use no bombs or ropes and take the first totem you see",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ]
 

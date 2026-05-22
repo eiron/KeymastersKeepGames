@@ -41,42 +41,62 @@ class AmericanTruckSimulatorGame(Game):
             GameObjectiveTemplate(
                 label="Complete this objective with perfect DOT compliance (no violations)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective with FUEL_ECONOMY average fuel economy",
                 data={"FUEL_ECONOMY": (self.fuel_economy_levels, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without any truck or cargo damage",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective using only TRUCK_BRAND trucks",
                 data={"TRUCK_BRAND": (self.truck_brands, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective during DRIVING_TIME local time",
                 data={"DRIVING_TIME": (self.driving_times, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective in WEATHER conditions",
                 data={"WEATHER": (self.weather_conditions, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective using scenic routes (25% longer travel time)",
                 data={},
+                is_time_consuming=True,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective using manual transmission only",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective with perfect parking scores only",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Cross state lines unnecessarily during this objective",
                 data={},
+                is_time_consuming=True,
+                is_difficult=False,
             ),
         ])
         

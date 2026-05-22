@@ -56,21 +56,96 @@ class DespotsGame(Game):
     # Constraints
     def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
         return [
-            GameObjectiveTemplate(label="No shop rerolls", data={}),
-            GameObjectiveTemplate(label="No food purchases", data={}),
-            GameObjectiveTemplate(label="Use only melee classes", data={}),
-            GameObjectiveTemplate(label="Use only ranged classes", data={}),
-            GameObjectiveTemplate(label="No mutations purchased", data={}),
-            GameObjectiveTemplate(label="Limit team to TEAM_SIZE humans", data={"TEAM_SIZE": (self.team_size_caps, 1)}),
-            GameObjectiveTemplate(label="Keep food above FOOD_MIN for the whole run", data={"FOOD_MIN": (self.food_minimums, 1)}),
-            GameObjectiveTemplate(label="No healers in the run", data={}),
-            GameObjectiveTemplate(label="Sacrifice at least 20 humans", data={}),
-            GameObjectiveTemplate(label="Have at least 20 humans active at once", data={}),
-            GameObjectiveTemplate(label="Take the first Tank you find and always keep a Tank alive", data={}),
-            GameObjectiveTemplate(label="Maintain at least 3 different complete alliance bonuses", data={}),
-            GameObjectiveTemplate(label="Save 150 gold at once", data={}),
-            GameObjectiveTemplate(label="After winning, beat 5 King of the Hill opponents", data={}),
-            GameObjectiveTemplate(label="Sacrifice one of your starting units to the pit", data={}),
+            GameObjectiveTemplate(
+                label="No shop rerolls",
+                data={},
+                is_time_consuming=False,
+                is_difficult=True,
+            ),
+            GameObjectiveTemplate(
+                label="No food purchases",
+                data={},
+                is_time_consuming=False,
+                is_difficult=True,
+            ),
+            GameObjectiveTemplate(
+                label="Use only melee classes",
+                data={},
+                is_time_consuming=False,
+                is_difficult=True,
+            ),
+            GameObjectiveTemplate(
+                label="Use only ranged classes",
+                data={},
+                is_time_consuming=False,
+                is_difficult=True,
+            ),
+            GameObjectiveTemplate(
+                label="No mutations purchased",
+                data={},
+                is_time_consuming=False,
+                is_difficult=True,
+            ),
+            GameObjectiveTemplate(
+                label="Limit team to TEAM_SIZE humans",
+                data={"TEAM_SIZE": (self.team_size_caps, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
+            ),
+            GameObjectiveTemplate(
+                label="Keep food above FOOD_MIN for the whole run",
+                data={"FOOD_MIN": (self.food_minimums, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
+            ),
+            GameObjectiveTemplate(
+                label="No healers in the run",
+                data={},
+                is_time_consuming=False,
+                is_difficult=True,
+            ),
+            GameObjectiveTemplate(
+                label="Sacrifice at least 20 humans",
+                data={},
+                is_time_consuming=False,
+                is_difficult=False,
+            ),
+            GameObjectiveTemplate(
+                label="Have at least 20 humans active at once",
+                data={},
+                is_time_consuming=False,
+                is_difficult=False,
+            ),
+            GameObjectiveTemplate(
+                label="Take the first Tank you find and always keep a Tank alive",
+                data={},
+                is_time_consuming=False,
+                is_difficult=False,
+            ),
+            GameObjectiveTemplate(
+                label="Maintain at least 3 different complete alliance bonuses",
+                data={},
+                is_time_consuming=False,
+                is_difficult=False,
+            ),
+            GameObjectiveTemplate(
+                label="Save 150 gold at once",
+                data={},
+                is_time_consuming=False,
+                is_difficult=False,
+            ),
+            GameObjectiveTemplate(
+                label="After winning, beat 5 King of the Hill opponents",
+                data={},
+                is_time_consuming=True,
+                is_difficult=True,
+            ),
+            GameObjectiveTemplate(
+                label="Sacrifice one of your starting units to the pit",
+                data={},
+                is_time_consuming=False,
+                is_difficult=False,
+            ),
         ]
 
     # Objectives

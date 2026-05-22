@@ -40,50 +40,74 @@ class DiceyDungeonsGame(Game):
             GameObjectiveTemplate(
                 label="End a run with at least 10 coins",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Leave at least 3 apples on the floor",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Buy at least 1 item from each shop",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Play on hard mode",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Don't open any chests on the second floor",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Choose a random rule at least twice",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Do not play anything on your first round of your first fight on the first floor",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Do not use any healing equipment",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Defeat all optional encounters",
                 data=dict(),
+                is_time_consuming=True,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Use only purchased equipment, no found equipment",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Use status effects on enemies at least 10 times",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Defeat an opponent without taking any damage",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ]
 

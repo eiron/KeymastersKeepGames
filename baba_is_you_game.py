@@ -38,10 +38,14 @@ class BabaIsYouGame(Game):
             GameObjectiveTemplate(
                 label="Don't use the 'Undo' button",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Don't use the 'Restart' button (Exit to map to retry)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ]
 

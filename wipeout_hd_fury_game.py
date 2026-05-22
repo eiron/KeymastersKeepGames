@@ -66,18 +66,26 @@ class WipeoutHDFuryGame(Game):
             GameObjectiveTemplate(
                 label="Complete this objective in Venom class only",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective in Flash class or higher",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective in Rapier class",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective in Phantom class",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ])
         
@@ -86,10 +94,14 @@ class WipeoutHDFuryGame(Game):
             GameObjectiveTemplate(
                 label="Complete this objective using only TEAM ships",
                 data={"TEAM": (self.selected_teams, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without using TEAM ships",
                 data={"TEAM": (self.selected_teams, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ])
         
@@ -98,38 +110,56 @@ class WipeoutHDFuryGame(Game):
             GameObjectiveTemplate(
                 label="Complete this objective without using Shield power-ups",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without using Turbo power-ups",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without using Autopilot",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without absorbing any weapons",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective with Pilot Assist disabled",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective while maintaining a perfect lap (no wall collisions)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without using any weapons",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without doing any barrel rolls",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without failing a single barrel roll",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ])
         

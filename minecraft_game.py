@@ -51,22 +51,32 @@ class MinecraftGame(Game):
             GameObjectiveTemplate(
                 label="Complete this objective in GAME_MODE mode",
                 data={"GAME_MODE": (self.game_modes, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without using RESTRICTED_MATERIAL",
                 data={"RESTRICTED_MATERIAL": (self.restriction_materials, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective in a BIOME_TYPE biome only",
                 data={"BIOME_TYPE": (self.biome_restrictions, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective using only TOOL_TYPE tools",
                 data={"TOOL_TYPE": (self.tool_types, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective within DAY_LIMIT in-game days",
                 data={"DAY_LIMIT": (self.day_limits, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ])
         

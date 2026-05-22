@@ -255,6 +255,8 @@ class SteamAchievementsGame(Game):
         excluded = self.excluded_games
         
         for game in all_games:
+            if not game.get("name") or not game.get("appid"):
+                continue
             if game.get("playtime_forever", 0) < min_time_played:
                 continue
             if max_time_played != -1 and game.get("playtime_forever", 0) > max_time_played:

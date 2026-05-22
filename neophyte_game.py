@@ -33,46 +33,66 @@ class NeophyteGame(Game):
             GameObjectiveTemplate(
                 label="Complete a run without upgrading weapons",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete a run without using any special abilities",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete a run taking minimal damage (less than 25% health lost)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete a run on maximum difficulty",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete a run using only melee weapons",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete a run using only ranged weapons",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Collect all upgrades in a single run",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete a run without visiting any shops",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete a run with LOADOUT only",
                 data={
                     "LOADOUT": (self.loadouts, 1),
                 },
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Defeat BOSS_NAME without taking any damage",
                 data={
                     "BOSS_NAME": (self.bosses, 1),
                 },
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ]
 

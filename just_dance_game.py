@@ -49,18 +49,24 @@ class JustDanceGame(Game):
                 data={
                     "DECADE": (self.decades, 1),
                 },
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Only dance to songs by ARTIST",
                 data={
                     "ARTIST": (self.artists, 1),
                 },
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Only dance to GENRE songs",
                 data={
                     "GENRE": (self.genres, 1),
                 },
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ]
 

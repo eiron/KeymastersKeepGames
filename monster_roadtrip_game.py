@@ -46,21 +46,21 @@ class MonsterRoadtripGame(Game):
     # Optional constraints
     def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
         return [
-            GameObjectiveTemplate(label="Do not visit the same location twice", data={}),
-            GameObjectiveTemplate(label="No roadside attractions (skip bonus visits)", data={}),
-            GameObjectiveTemplate(label="Always pick the chaos option when available", data={}),
-            GameObjectiveTemplate(label="Never reroll an event choice", data={}),
-            GameObjectiveTemplate(label="Keep all resources above LOW_BOUND for the whole run", data={"LOW_BOUND": (self.resource_low_bounds, 1)}),
-            GameObjectiveTemplate(label="No car upgrades purchased", data={}),
-            GameObjectiveTemplate(label="Start with random drivers and keep them alive", data={}),
-            GameObjectiveTemplate(label="Never talk with Scott and Polly", data={}),
-            GameObjectiveTemplate(label="Never visit the Info Board", data={}),
-            GameObjectiveTemplate(label="Never wait at the Bus Stop", data={}),
-            GameObjectiveTemplate(label="Never enter the car", data={}),
-            GameObjectiveTemplate(label="Never trade with Noodles", data={}),
-            GameObjectiveTemplate(label="Play in Prank Master Mode and always choose and fulfil the dare giving the most Prank Dollarz", data={}),
-            GameObjectiveTemplate(label="When possible, always select a Quantity-type event", data={}),
-            GameObjectiveTemplate(label="Never have a Hitchhiker Stat Boost active", data={}),
+            GameObjectiveTemplate(label="Do not visit the same location twice", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="No roadside attractions (skip bonus visits)", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Always pick the chaos option when available", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Never reroll an event choice", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Keep all resources above LOW_BOUND for the whole run", data={"LOW_BOUND": (self.resource_low_bounds, 1)}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="No car upgrades purchased", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Start with random drivers and keep them alive", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Never talk with Scott and Polly", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Never visit the Info Board", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Never wait at the Bus Stop", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Never enter the car", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Never trade with Noodles", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Play in Prank Master Mode and always choose and fulfil the dare giving the most Prank Dollarz", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="When possible, always select a Quantity-type event", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Never have a Hitchhiker Stat Boost active", data={}, is_time_consuming=False, is_difficult=False),
         ]
 
     # Objectives

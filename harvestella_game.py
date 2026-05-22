@@ -135,10 +135,14 @@ class HarvestellaGame(Game):
                 GameObjectiveTemplate(
                     label="Complete this objective within DAYS days",
                     data={"DAYS": (self.nightmare_day_limits, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
                 ),
                 GameObjectiveTemplate(
                     label="Complete this objective without using revival items",
                     data={},
+                    is_time_consuming=False,
+                    is_difficult=True,
                 ),
             ])
         
@@ -147,10 +151,14 @@ class HarvestellaGame(Game):
                 GameObjectiveTemplate(
                     label="Complete this objective using only JOBCLASS job abilities",
                     data={"JOBCLASS": (self.jobs, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
                 ),
                 GameObjectiveTemplate(
                     label="Complete this objective without purchasing any items from shops",
                     data={},
+                    is_time_consuming=False,
+                    is_difficult=True,
                 ),
             ])
         

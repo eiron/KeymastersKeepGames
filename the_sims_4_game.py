@@ -86,18 +86,26 @@ class TheSims4Game(Game):
             GameObjectiveTemplate(
                 label="Complete this objective with a Sim who has the TRAIT trait",
                 data={"TRAIT": (self.personality_traits, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective while your Sim is EMOTION",
                 data={"EMOTION": (self.emotions, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without using SKILL skill",
                 data={"SKILL": (self.skills, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective before your Sim becomes AGE_STAGE",
                 data={"AGE_STAGE": (self.age_stages, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ])
         
@@ -106,10 +114,14 @@ class TheSims4Game(Game):
                 GameObjectiveTemplate(
                     label="Complete this objective without spending more than BUDGET simoleons",
                     data={"BUDGET": (self.budget_limits, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
                 ),
                 GameObjectiveTemplate(
                     label="Complete this objective within SIM_DAYS days",
                     data={"SIM_DAYS": (self.time_limits, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
                 ),
             ])
         

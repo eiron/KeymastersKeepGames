@@ -73,26 +73,28 @@ class IntoTheBreachGame(Game):
     # Optional constraints
     def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
         constraints = [
-            GameObjectiveTemplate(label="Do not reset/restart any missions", data={}),
-            GameObjectiveTemplate(label="Do not repair mechs between missions", data={}),
-            GameObjectiveTemplate(label="Do not use any Grid Defense upgrades", data={}),
-            GameObjectiveTemplate(label="Do not collect Time Pods", data={}),
-            GameObjectiveTemplate(label="Destroy every Time Pod", data={}),
-            GameObjectiveTemplate(label="Never allow a building to be set on fire", data={}),
-            GameObjectiveTemplate(label="Do not block Vek spawns using mechs", data={}),
-            GameObjectiveTemplate(label="Complete each mission without using the Repair action", data={}),
-            GameObjectiveTemplate(label="Do not use pilots with bonus abilities (use default pilots only)", data={}),
+            GameObjectiveTemplate(label="Do not reset/restart any missions", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Do not repair mechs between missions", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Do not use any Grid Defense upgrades", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Do not collect Time Pods", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Destroy every Time Pod", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Never allow a building to be set on fire", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Do not block Vek spawns using mechs", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Complete each mission without using the Repair action", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Do not use pilots with bonus abilities (use default pilots only)", data={}, is_time_consuming=False, is_difficult=True),
             GameObjectiveTemplate(
                 label="On a successful run, finish exactly CORPORATE_COUNT corporate islands",
                 data={"CORPORATE_COUNT": (self.corporate_island_counts, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ]
 
         if self.difficulty_preference in ["hard", "unfair"]:
             constraints.extend([
-                GameObjectiveTemplate(label="Complete this objective with no Grid damage taken", data={}),
-                GameObjectiveTemplate(label="Complete this objective without losing any mech", data={}),
-                GameObjectiveTemplate(label="Complete this objective without using any reactor cores", data={}),
+                GameObjectiveTemplate(label="Complete this objective with no Grid damage taken", data={}, is_time_consuming=False, is_difficult=True),
+                GameObjectiveTemplate(label="Complete this objective without losing any mech", data={}, is_time_consuming=False, is_difficult=True),
+                GameObjectiveTemplate(label="Complete this objective without using any reactor cores", data={}, is_time_consuming=False, is_difficult=True),
             ])
 
         return constraints

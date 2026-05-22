@@ -49,14 +49,20 @@ class DateEverythingGame(Game):
             GameObjectiveTemplate(
                 label="Complete this objective while exploring only HOUSE_AREA",
                 data={"HOUSE_AREA": (self.house_areas, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective during TIME_OF_DAY",
                 data={"TIME_OF_DAY": (self.time_periods, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective while maintaining EXISTING_RELATIONSHIP with other characters",
                 data={"EXISTING_RELATIONSHIP": (self.relationship_outcomes, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 # S.P.E.C.S. are stat requirements for dialogue progression with specific characters
@@ -67,6 +73,8 @@ class DateEverythingGame(Game):
                     "SPECS_TARGET": (self.specs_targets, 1),
                     "SPECS_CATEGORY": (self.specs_categories, 1)
                 },
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ])
 

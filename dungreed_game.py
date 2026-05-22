@@ -39,58 +39,84 @@ class DungreedGame(Game):
             GameObjectiveTemplate(
                 label="Play on Hard Mode",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Use only WEAPON_TYPE weapons",
                 data={
                     "WEAPON_TYPE": (self.weapon_types, 1),
                 },
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Don't use any food items",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Don't upgrade any stats at the village",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete a run without using any dash skills",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete a run without buying from shops",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Use only RARITY_TIER rarity items",
                 data={
                     "RARITY_TIER": (self.rarity_tiers, 1),
                 },
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete an area with only dash damage",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Only have 1 legendary accessory equipped at any time",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Don't enhance anything at a Magic Forge",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Only buy the cheapest food item at restaurants",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Sell or discard a weapon from your inventory every area (including boss areas)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Sacrifice an accessory to the Altar before the first boss",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ]
 

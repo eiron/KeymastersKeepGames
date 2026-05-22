@@ -44,22 +44,32 @@ class ScavengerHuntGame(Game):
             GameObjectiveTemplate(
                 label="Complete this objective within LOCATION_TYPE areas only",
                 data={"LOCATION_TYPE": (self.location_restrictions, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective using TRANSPORTATION_METHOD",
                 data={"TRANSPORTATION_METHOD": (self.transportation_methods, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective within TIME_LIMIT",
                 data={"TIME_LIMIT": (self.time_constraints, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective with COMPANION_TYPE",
                 data={"COMPANION_TYPE": (self.companion_types, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective during WEATHER_CONDITION",
                 data={"WEATHER_CONDITION": (self.weather_conditions, 1)},
+                is_time_consuming=True,
+                is_difficult=False,
             ),
         ])
         

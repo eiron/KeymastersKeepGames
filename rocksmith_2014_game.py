@@ -87,11 +87,11 @@ class Rocksmith2014Game(Game):
 
     def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
         return [
-            GameObjectiveTemplate(label="No Riff Repeater usage", data={}),
-            GameObjectiveTemplate(label="No pausing during a song", data={}),
-            GameObjectiveTemplate(label="No visual note highway (audio only) for one song", data={}),
-            GameObjectiveTemplate(label="Use a clean tone only", data={}),
-            GameObjectiveTemplate(label="Play standing up", data={}),
+            GameObjectiveTemplate(label="No Riff Repeater usage", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="No pausing during a song", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="No visual note highway (audio only) for one song", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Use a clean tone only", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Play standing up", data={}, is_time_consuming=False, is_difficult=False),
         ]
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:

@@ -35,35 +35,51 @@ class TheBindingOfIsaacWrathOfTheLambGame(Game):
             GameObjectiveTemplate(
                 label="Cannot take any Pills",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Cannot use any Cards",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             # Additional challenge/constraint options
             GameObjectiveTemplate(
                 label="Change your active item every time you're given one",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Never buy the right-hand Devil Deal",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Always take a Devil Deal unless it would kill you",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Enter at least 3 Curse Rooms in a run",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete a Boss Challenge Room",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Pick up and eat at least 4 different pills",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ]
 

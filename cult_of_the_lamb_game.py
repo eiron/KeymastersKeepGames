@@ -49,54 +49,80 @@ class CultOfTheLambGame(Game):
             GameObjectiveTemplate(
                 label="Complete this objective while maintaining FAITH_LEVEL faith",
                 data={"FAITH_LEVEL": (self.faith_levels, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without losing any followers",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective using only DOCTRINE_TYPE doctrine",
                 data={"DOCTRINE_TYPE": (self.doctrine_types, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective with FOLLOWER_COUNT or more followers",
                 data={"FOLLOWER_COUNT": (self.follower_count_requirements, 1)},
+                is_time_consuming=True,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Skip at least 2 Tarot Readings during a Crusade",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Clear every room on your chosen path during a single Crusade loop",
                 data={},
+                is_time_consuming=True,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Only change your starting weapon once",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Only change your starting curse once",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Do not use a roll for a single Crusade loop",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Recruit all possible followers during a single Crusade loop",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Skip a Heart room once if possible",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Enter a Random room at least once if possible",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Only use a curse once per room (does not apply to Boss fights)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ])
         

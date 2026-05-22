@@ -37,26 +37,38 @@ class CupheadGame(Game):
             GameObjectiveTemplate(
                 label="Use only one of the two allowed Weapons",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Beat bosses in Expert Mode",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Never let your super hit full",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Get at least an A rank",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="End a fight with 3HP",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Play on Black and White mode for your first life",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ]
 

@@ -40,28 +40,40 @@ class AlinaOfTheArenaGame(Game):
             GameObjectiveTemplate(
                 label="Play on Hardcore Mode",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Play on Veteran difficulty",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Play as the CLASS class",
                 data={
                     "CLASS": (self.classes, 1),
                 },
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Don't visit a shop until the Royal Arena (Mystery Shop is allowed)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Skip the mystery shop",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Always choose the immoral choice in Events (stealing, hurting feelings, binding to cursed weapons)",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ]
 

@@ -33,30 +33,44 @@ class DeadEstateGame(Game):
             GameObjectiveTemplate(
                 label="Complete a run without using any healing items",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete a run using only melee weapons",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete a run without firing a gun more than 10 times",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Reach floor 5 without picking up any ammo",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete a run without opening any chests",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Leave behind every golden pot you find",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Do not buy anything on the first floor",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ]
 

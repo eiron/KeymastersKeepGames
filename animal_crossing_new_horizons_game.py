@@ -49,14 +49,20 @@ class AnimalCrossingNewHorizonsGame(Game):
             GameObjectiveTemplate(
                 label="Complete this objective within TIMEFRAME",
                 data={"TIMEFRAME": (self.timeframes, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective while wearing CLOTHING_TYPE",
                 data={"CLOTHING_TYPE": (self.clothing_categories, 1)},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective during WEATHER weather",
                 data={"WEATHER": (self.weather_types, 1)},
+                is_time_consuming=True,
+                is_difficult=False,
             ),
         ])
         

@@ -50,22 +50,32 @@ class BloodstainedRitualOfTheNightGame(Game):
             GameObjectiveTemplate(
                 label="Complete this objective without using SHARD_TYPE shards",
                 data={"SHARD_TYPE": (self.shard_types, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective using only WEAPON_CATEGORY weapons",
                 data={"WEAPON_CATEGORY": (self.weapon_categories, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective without taking damage",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective at DIFFICULTY_LEVEL or higher",
                 data={"DIFFICULTY_LEVEL": (self.difficulty_levels, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete this objective with MAP_COMPLETION% map completion or less",
                 data={"MAP_COMPLETION": (self.map_completion_limits, 1)},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ])
         
@@ -75,10 +85,14 @@ class BloodstainedRitualOfTheNightGame(Game):
                 GameObjectiveTemplate(
                     label="Complete this objective while Crystal Curse is at CURSE_STAGE",
                     data={"CURSE_STAGE": (self.crystal_curse_stages, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
                 ),
                 GameObjectiveTemplate(
                     label="Complete this objective in Limbo within LIMBO_TIME",
                     data={"LIMBO_TIME": (self.limbo_survival_times, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
                 ),
             ])
         

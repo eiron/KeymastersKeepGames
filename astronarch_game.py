@@ -33,32 +33,46 @@ class AstronarchGame(Game):
             GameObjectiveTemplate(
                 label="Play on Ascension 20",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Don't buy any items from shops",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Don't heal at Rest Sites",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Only recruit heroes of the CLASS class",
                 data={
                     "CLASS": (self.hero_classes, 1),
                 },
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Have at least 1 Potion Slot empty at all times",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Visit as many Shops as possible",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Restock every shop you visit",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ]
 

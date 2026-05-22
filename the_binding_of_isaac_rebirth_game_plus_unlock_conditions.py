@@ -44,103 +44,151 @@ class TheBindingOfIsaacRebirthGame(Game):
             GameObjectiveTemplate(
                 label="Play on Hard Mode (or Greedier, if applicable)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Use the following Seed: SEED",
                 data={
                     "SEED": (self.seeds, 1),
                 },
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Cannot take any Pills",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Cannot use any Cards",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Cannot use any Runes",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             # Additional player-specified challenge constraints
             GameObjectiveTemplate(
                 label="No Devil Deals; only Angel Deals allowed",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="No Angel Deals; only Devil Deals allowed",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Skip two Item Room items (leave them uncollected)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Skip one Boss Room item",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Use every bomb you own before descending each floor (except Golden Bombs)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Only use 1 pill/card/rune per floor (no Blank Card / Placebo / Clear Rune)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Using the debug console, spawn in Bob's Brain and skip your first Item Room",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Using the debug console, spawn in ITEM and skip your first Item Room",
                 data={
                     "ITEM": (self.items, 1),
                 },
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Bomb yourself with the first bomb you receive",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Enter every Cursed Room",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Find at least two Secret Rooms",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Get at least one Angel Deal",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Only take Angel Deals; if you enter an Angel Room you must bomb the Angel Statue (do not enter without a way to blow it up)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Spend every coin, bomb, and key you have at a beggar when you see them",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Change your trinket every time you find a new one (if you can afford one in a shop, you must buy it)",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Change your active item every time you find a new one",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Skip an item room and enter the first cursed room you see if it will not kill you immediately to do so",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Spend as much money as you can on each floor",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Install and use the Blood Shoots Upward mod",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ]
 
@@ -150,26 +198,38 @@ class TheBindingOfIsaacRebirthGame(Game):
                 GameObjectiveTemplate(
                     label="Open at least 7 Secret, Super Secret, or Ultra Secret rooms",
                     data=dict(),
+                    is_time_consuming=False,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Visit every room in the Mirror Dimension",
                     data=dict(),
+                    is_time_consuming=True,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Get both Angel key pieces (Mega Satan)",
                     data=dict(),
+                    is_time_consuming=False,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Always take the '?' item in Alt Path Treasure Rooms; take at least two in the run",
                     data=dict(),
+                    is_time_consuming=False,
+                    is_difficult=True,
                 ),
                 GameObjectiveTemplate(
                     label="Collect both Knife Pieces (Alt Path)",
                     data=dict(),
+                    is_time_consuming=False,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Take every unknown pill at least once (ignoring repeats of the '???' pill)",
                     data=dict(),
+                    is_time_consuming=False,
+                    is_difficult=True,
                 ),
             ])
 

@@ -30,54 +30,80 @@ class BrutalOrchestraGame(Game):
             GameObjectiveTemplate(
                 label="No using items during combat",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Cannot skip enemy encounters",
                 data=dict(),
+                is_time_consuming=True,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="No healing between fights",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Cannot use support abilities",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Must keep first party member alive throughout the run",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Do not let any of your party members die in the first two acts",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Kill a boss with a 'Slap'",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Buy out an entire item shop then discard at least three of the items",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Get Nowak's Refresh ability to trigger at least once",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Get a non-Nowak party member down to 1HP and then heal them to full HP in the same fight",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Win a fight without personally dealing any direct damage to any enemies",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Kill Nowak at least 10 times during a run",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Every time you take direct damage from an enemy for the first time in combat, you must call somebody and tell them you love them. You cannot elaborate further until you have finished the run",
                 data=dict(),
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ]
 

@@ -52,6 +52,8 @@ class StardewValleyGame(Game):
                 GameObjectiveTemplate(
                     label="Complete this objective before the end of Year YEAR",
                     data={"YEAR": (self.year_limits, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
                 )
             )
         
@@ -60,6 +62,8 @@ class StardewValleyGame(Game):
                 GameObjectiveTemplate(
                     label="Complete this objective without passing out at 2:00 AM",
                     data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
                 )
             )
         

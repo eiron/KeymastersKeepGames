@@ -47,46 +47,68 @@ class PawnbarianGame(Game):
             GameObjectiveTemplate(
                 label="No shop purchases during the run",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Do not buy extra hearts",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Finish a run without taking damage on a floor",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Go down to one health, then heal back to full",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Buy exactly one thing in each shop",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Survive three floors of the Gauntlet after winning",
                 data={},
+                is_time_consuming=True,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Beat a floor without activating a cantrip effect",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Don't lose any health from Blight",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Beat a floor after moving to all four corners of the board",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Don't buy any health from the shop",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Intentionally take damage once per floor",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ]
 

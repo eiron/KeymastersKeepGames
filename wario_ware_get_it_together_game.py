@@ -42,22 +42,22 @@ class WarioWareGetItTogetherGame(Game):
 
     def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
         return [
-            GameObjectiveTemplate(label="Use a random crew member for the entire run", data={}),
-            GameObjectiveTemplate(label="No jumping in applicable microgames", data={}),
-            GameObjectiveTemplate(label="Controller rumble off for the session", data={}),
-            GameObjectiveTemplate(label="Time-attack: finish a stage under 3 minutes", data={}),
-            GameObjectiveTemplate(label="Perfect a boss microgame (no fails)", data={}),
-            GameObjectiveTemplate(label="Only projectile characters for the session", data={}),
-            GameObjectiveTemplate(label="Only mobility-specialist characters for the session", data={}),
+            GameObjectiveTemplate(label="Use a random crew member for the entire run", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="No jumping in applicable microgames", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Controller rumble off for the session", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Time-attack: finish a stage under 3 minutes", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Perfect a boss microgame (no fails)", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Only projectile characters for the session", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Only mobility-specialist characters for the session", data={}, is_time_consuming=False, is_difficult=True),
             # Additional constraints/challenges
-            GameObjectiveTemplate(label="Beat two consecutive microgames without pressing the A button", data={}),
-            GameObjectiveTemplate(label="Get 5 points more than your goal", data={}),
-            GameObjectiveTemplate(label="Get 10 points more than your goal", data={}),
-            GameObjectiveTemplate(label="Get at least 130 coins in a Bonus stage", data={}),
-            GameObjectiveTemplate(label="Get at least 150 coins in a Bonus stage", data={}),
-            GameObjectiveTemplate(label="Play using only one hand", data={}),
-            GameObjectiveTemplate(label="Intentionally fail your first boss microgame", data={}),
-            GameObjectiveTemplate(label="Play using a single joycon", data={}),
+            GameObjectiveTemplate(label="Beat two consecutive microgames without pressing the A button", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Get 5 points more than your goal", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Get 10 points more than your goal", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Get at least 130 coins in a Bonus stage", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Get at least 150 coins in a Bonus stage", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Play using only one hand", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Intentionally fail your first boss microgame", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Play using a single joycon", data={}, is_time_consuming=False, is_difficult=False),
         ]
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:

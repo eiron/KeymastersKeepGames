@@ -51,14 +51,20 @@ class ForwardEscapeTheFoldGame(Game):
             GameObjectiveTemplate(
                 label="Complete a run without using your Power",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Always buy something from every shop encountered",
                 data={},
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Reach the end with exactly 1 HP remaining",
                 data={},
+                is_time_consuming=False,
+                is_difficult=True,
             ),
         ]
 
