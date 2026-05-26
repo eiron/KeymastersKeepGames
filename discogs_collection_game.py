@@ -102,14 +102,37 @@ class _DiscogsCollectionHolder:
                         if name:
                             format_names.append(name)
 
+                    # Collect format descriptions for disambiguation
+                    format_descriptions: List[str] = []
+                    for fmt in formats_raw:
+                        name = fmt.get("name", "")
+                        desc_parts = fmt.get("descriptions", [])
+                        if name and desc_parts:
+                            format_descriptions.append(f"{name} ({', '.join(desc_parts)})")
+                        elif name:
+                            format_descriptions.append(name)
+
+                    # Collect catalog numbers for disambiguation
+                    labels_with_catno = []
+                    for l in basic_info.get("labels", []):
+                        label_name = l.get("name", "")
+                        catno = l.get("catno", "")
+                        if label_name:
+                            labels_with_catno.append({
+                                "name": label_name,
+                                "catno": catno,
+                            })
+
                     releases.append({
                         "title": basic_info.get("title", "Unknown"),
                         "artists": artists,
                         "genres": basic_info.get("genres", []),
                         "styles": basic_info.get("styles", []),
-                        "labels": [l.get("name", "") for l in basic_info.get("labels", []) if l.get("name")],
+                        "labels": [l["name"] for l in labels_with_catno],
+                        "labels_with_catno": labels_with_catno,
                         "year": basic_info.get("year", 0),
                         "formats": format_names,
+                        "format_descriptions": format_descriptions,
                     })
 
                 pagination = data.get("pagination", {})
@@ -206,12 +229,45 @@ class DiscogsCollectionGame(Game):
 
     # === Attribute extraction ===
     def albums(self) -> List[str]:
-        """Returns 'Artist - Title' strings for all releases."""
+        """Returns 'Artist - Title' strings for all releases.
+
+        Disambiguation info (year, format, label/catno) is always appended
+        so the player knows which specific physical edition to look for.
+        """
         collection = self._filtered_collection()
-        albums = []
+
+        # Build base keys and detect duplicates
+        base_key_counts: Dict[str, int] = {}
+        entries: List[Tuple[str, Dict[str, Any]]] = []
         for r in collection:
             artist_str = ", ".join(r["artists"]) if r["artists"] else "Various Artists"
-            albums.append(f"{artist_str} - {r['title']}")
+            base_key = f"{artist_str} - {r['title']}"
+            base_key_counts[base_key] = base_key_counts.get(base_key, 0) + 1
+            entries.append((base_key, r))
+
+        albums = []
+        for base_key, r in entries:
+            # Always include disambiguation info (year, format, label/catno)
+            parts = []
+            year = r.get("year", 0)
+            if year and year > 0:
+                parts.append(str(year))
+            if r.get("format_descriptions"):
+                parts.append(r["format_descriptions"][0])
+            elif r.get("formats"):
+                parts.append(r["formats"][0])
+            labels_catno = r.get("labels_with_catno", [])
+            if labels_catno:
+                lc = labels_catno[0]
+                if lc.get("catno") and lc["catno"].lower() not in ("none", ""):
+                    parts.append(f"{lc['name']} {lc['catno']}")
+                elif lc.get("name"):
+                    parts.append(lc["name"])
+            if parts:
+                albums.append(f"{base_key} [{', '.join(parts)}]")
+            else:
+                albums.append(base_key)
+
         return sorted(set(albums))
 
     def artists(self) -> List[str]:
