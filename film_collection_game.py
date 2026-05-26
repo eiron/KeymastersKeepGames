@@ -513,7 +513,7 @@ class FilmCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Watch a film from your collection",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 )
@@ -526,7 +526,7 @@ class FilmCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Watch FILM",
                     data={"FILM": (self.films, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=5,
                 )
@@ -538,7 +538,7 @@ class FilmCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Watch a film directed by DIRECTOR",
                     data={"DIRECTOR": (self.directors, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=3,
                 )
@@ -550,7 +550,7 @@ class FilmCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Watch a GENRE film from your collection",
                     data={"GENRE": (self.genres, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=3,
                 )
@@ -562,7 +562,7 @@ class FilmCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Watch a film from the DECADE from your collection",
                     data={"DECADE": (self.decades, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )
@@ -574,7 +574,7 @@ class FilmCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Watch a RUNTIME film from your collection",
                     data={"RUNTIME": (self.runtime_categories, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )
@@ -586,7 +586,7 @@ class FilmCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Watch a RATING film from your collection",
                     data={"RATING": (self.rating_categories, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )
@@ -598,7 +598,7 @@ class FilmCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Watch a GENRE_DECADE in your collection",
                     data={"GENRE_DECADE": (self.genre_decade_combos, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 )
@@ -610,7 +610,7 @@ class FilmCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Watch a DIRECTOR_DECADE",
                     data={"DIRECTOR_DECADE": (self.director_decade_combos, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 )
@@ -623,7 +623,7 @@ class FilmCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Watch a TYPE from your collection",
                     data={"TYPE": (self.title_types, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 )

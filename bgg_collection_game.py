@@ -413,7 +413,7 @@ class BGGCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Play a board game from your BGG collection",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 )
@@ -426,7 +426,7 @@ class BGGCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Play GAME",
                     data={"GAME": (self.games, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=5,
                 )
@@ -438,7 +438,7 @@ class BGGCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Play a game with PLAYER_COUNT from your collection",
                     data={"PLAYER_COUNT": (self.player_counts, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=3,
                 )
@@ -450,7 +450,7 @@ class BGGCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Play a PLAYTIME game from your collection",
                     data={"PLAYTIME": (self.playtime_categories, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )
@@ -462,7 +462,7 @@ class BGGCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Play a WEIGHT complexity game from your collection",
                     data={"WEIGHT": (self.weight_categories, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )
@@ -474,7 +474,7 @@ class BGGCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Play GAME solo",
                     data={"GAME": (self.solo_games, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )
@@ -486,7 +486,7 @@ class BGGCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Play a game from the DECADE from your collection",
                     data={"DECADE": (self.decades, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 )
@@ -498,7 +498,7 @@ class BGGCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Play GAME from your shelf of shame (never played!)",
                     data={"GAME": (self.unplayed_games, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=4,
                 )
@@ -510,7 +510,7 @@ class BGGCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Play GAME (rated 7.5+ on BGG)",
                     data={"GAME": (self.highly_rated_games, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )
@@ -522,7 +522,7 @@ class BGGCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Play GAME_PLAYER_COUNT",
                     data={"GAME_PLAYER_COUNT": (self.player_count_game_combos, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )

@@ -331,7 +331,7 @@ class DiscogsCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Listen to ALBUM",
                     data={"ALBUM": (self.albums, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=5,
                 )
@@ -343,7 +343,7 @@ class DiscogsCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Listen to an album from the GENRE genre in your collection",
                     data={"GENRE": (self.genres, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )
@@ -355,7 +355,7 @@ class DiscogsCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Listen to a STYLE release from your collection",
                     data={"STYLE": (self.styles, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )
@@ -367,7 +367,7 @@ class DiscogsCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Listen to something from the DECADE from your collection",
                     data={"DECADE": (self.decades, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )
@@ -379,7 +379,7 @@ class DiscogsCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Explore a release on the LABEL label from your collection",
                     data={"LABEL": (self.labels, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 )
@@ -391,7 +391,7 @@ class DiscogsCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Listen to a FORMAT release from your collection",
                     data={"FORMAT": (self.formats, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 )
@@ -415,7 +415,7 @@ class DiscogsCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Listen to a GENRE_DECADE in your collection",
                     data={"GENRE_DECADE": (self.genre_decade_combos, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 )
