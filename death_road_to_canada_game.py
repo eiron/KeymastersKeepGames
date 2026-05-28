@@ -224,7 +224,7 @@ class DeathRoadToCanadaGame(Game):
                 ))
             
             # Random character (no specific character assigned)
-            if "random" in selection_methods:
+            if "randomized" in selection_methods:
                 objectives.append(GameObjectiveTemplate(
                     label=f"Reach Canada in {mode_name} with a random character",
                     data=dict(),
@@ -255,7 +255,7 @@ class DeathRoadToCanadaGame(Game):
                         is_difficult=True,
                         weight=3,
                     ))
-                if "random" in selection_methods:
+                if "randomized" in selection_methods:
                     objectives.append(GameObjectiveTemplate(
                         label=f"Reach Canada solo with a random character",
                         data=dict(),
@@ -281,7 +281,7 @@ class DeathRoadToCanadaGame(Game):
                         is_difficult=True if size == 4 else False,
                         weight=max(1, 4 - size),
                     ))
-                if "random" in selection_methods:
+                if "randomized" in selection_methods:
                     objectives.append(GameObjectiveTemplate(
                         label=f"Reach Canada with exactly {size} random characters",
                         data=dict(),
@@ -491,8 +491,8 @@ class DeathRoadToCanadaModesOption(OptionSet):
 class DeathRoadToCanadaCharacterSelectionMethodsOption(OptionSet):
     """Select which character selection methods can be used for objectives. Multiple can be enabled."""
     display_name = "Enabled Character Selection Methods"
-    valid_keys = {"player_choice", "random", "kmk_assigned"}
-    default = {"player_choice", "random", "kmk_assigned"}
+    valid_keys = {"player_choice", "randomized", "kmk_assigned"}
+    default = {"player_choice", "randomized", "kmk_assigned"}
 
 
 class DeathRoadToCanadaMinPartySizeOption(Range):
