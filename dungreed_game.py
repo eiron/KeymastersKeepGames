@@ -574,25 +574,6 @@ class DungreedGame(Game):
         ]
     
     @staticmethod
-    def unlockable_characters() -> List[str]:
-        return [
-            "Armored Warrior",
-            "Sunset Gunman",
-            "Alice",
-            "Lotus",
-            "Ikina Bear",
-            "Rider H",
-            "Criminal Silhouette",
-            "King of Pickaxes",
-            "Fatso",
-            "Devil Swordsman",
-            "Human Lasley",
-            "Master Chef",
-            "Pandora",
-            "Livna",
-        ]
-    
-    @staticmethod
     def trials() -> List[str]:
         return [
             "1st Trial (Platforming with Dash)",

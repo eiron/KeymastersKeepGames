@@ -122,10 +122,10 @@ class ScavengerHuntGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Document COLOR_COUNT different examples of COLOR objects",
+                    label="Document COLOR_COUNT different examples of COLOR_TYPE objects",
                     data={
                         "COLOR_COUNT": (self.color_counts, 1),
-                        "COLOR": (self.colors, 1)
+                        "COLOR_TYPE": (self.colors, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=False,
@@ -451,10 +451,10 @@ class ScavengerHuntGame(Game):
             else:
                 seasonal_templates.extend([
                     GameObjectiveTemplate(
-                        label="Participate in SEASONAL_ACTIVITY during SEASON",
+                        label="Participate in SEASONAL_ACTIVITY during SEASON_NAME",
                         data={
                             "SEASONAL_ACTIVITY": (self.seasonal_activities, 1),
-                            "SEASON": (self.seasons, 1)
+                            "SEASON_NAME": (self.seasons, 1)
                         },
                         is_time_consuming=True,
                         is_difficult=False,
@@ -502,10 +502,10 @@ class ScavengerHuntGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Join or attend COMMUNITY_GROUP_COUNT COMMUNITY_GROUP meetings",
+                    label="Join or attend COMMUNITY_GROUP_COUNT COMMUNITY_GROUP_NAME meetings",
                     data={
                         "COMMUNITY_GROUP_COUNT": (self.community_group_counts, 1),
-                        "COMMUNITY_GROUP": (self.community_groups, 1)
+                        "COMMUNITY_GROUP_NAME": (self.community_groups, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=False,

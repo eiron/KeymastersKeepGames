@@ -275,10 +275,10 @@ class IntoTheBreachGame(Game):
                     weight=3,
                 ),
                 GameObjectiveTemplate(
-                    label="Reach PILOT_LEVEL with PILOT in a single run",
+                    label="Reach PILOT_LEVEL with PILOT_NAME in a single run",
                     data={
                         "PILOT_LEVEL": (self.pilot_levels, 1),
-                        "PILOT": (self.pilots, 1),
+                        "PILOT_NAME": (self.pilots, 1),
                     },
                     is_time_consuming=True,
                     is_difficult=False,

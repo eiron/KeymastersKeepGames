@@ -150,7 +150,7 @@ class HarvestellaGame(Game):
             constraints.extend([
                 GameObjectiveTemplate(
                     label="Complete this objective using only JOBCLASS job abilities",
-                    data={"JOBCLASS": (self.jobs, 1)},
+                    data={"JOBCLASS": (self.all_jobs, 1)},
                     is_time_consuming=False,
                     is_difficult=True,
                 ),

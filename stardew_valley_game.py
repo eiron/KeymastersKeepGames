@@ -155,10 +155,10 @@ class StardewValleyGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Defeat MONSTER_COUNT MONSTER in the mines",
+                    label="Defeat MONSTER_COUNT MONSTER_TYPE in the mines",
                     data={
                         "MONSTER_COUNT": (self.monster_counts, 1),
-                        "MONSTER": (self.monsters, 1)
+                        "MONSTER_TYPE": (self.monsters, 1)
                     },
                     is_time_consuming=False,
                     is_difficult=False,
@@ -198,10 +198,10 @@ class StardewValleyGame(Game):
         if self.include_fishing:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Catch FISH_COUNT FISH",
+                    label="Catch FISH_COUNT FISH_TYPE",
                     data={
                         "FISH_COUNT": (self.fish_counts, 1),
-                        "FISH": (self.fish, 1)
+                        "FISH_TYPE": (self.fish, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=False,
@@ -437,10 +437,10 @@ class StardewValleyGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Earn SEASONAL_PROFIT gold during SEASON",
+                    label="Earn SEASONAL_PROFIT gold during SEASON_NAME",
                     data={
                         "SEASONAL_PROFIT": (self.seasonal_profits, 1),
-                        "SEASON": (self.seasons, 1)
+                        "SEASON_NAME": (self.seasons, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=False,

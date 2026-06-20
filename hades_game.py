@@ -201,10 +201,10 @@ class HadesGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Give GIFT_COUNT GIFT to CHARACTER",
+                    label="Give GIFT_COUNT GIFT_TYPE to CHARACTER",
                     data={
                         "GIFT_COUNT": (self.gift_counts, 1),
-                        "GIFT": (self.gifts, 1),
+                        "GIFT_TYPE": (self.gifts, 1),
                         "CHARACTER": (self.characters, 1)
                     },
                     is_time_consuming=False,
@@ -324,10 +324,10 @@ class HadesGame(Game):
         if self.include_collection_goals:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Collect RESOURCE_COUNT RESOURCE",
+                    label="Collect RESOURCE_COUNT RESOURCE_TYPE",
                     data={
                         "RESOURCE_COUNT": (self.resource_counts, 1),
-                        "RESOURCE": (self.resources, 1)
+                        "RESOURCE_TYPE": (self.resources, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=False,

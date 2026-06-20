@@ -470,10 +470,10 @@ class CultOfTheLambGame(Game):
         if self.include_resource_collection:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Collect RESOURCE_AMOUNT RESOURCE",
+                    label="Collect RESOURCE_AMOUNT RESOURCE_TYPE",
                     data={
                         "RESOURCE_AMOUNT": (self.resource_amounts, 1),
-                        "RESOURCE": (self.resources, 1)
+                        "RESOURCE_TYPE": (self.resources, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=False,
@@ -490,10 +490,10 @@ class CultOfTheLambGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Farm and harvest CROP_COUNT CROP",
+                    label="Farm and harvest CROP_COUNT CROP_TYPE",
                     data={
                         "CROP_COUNT": (self.crop_counts, 1),
-                        "CROP": (self.crops, 1)
+                        "CROP_TYPE": (self.crops, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=False,

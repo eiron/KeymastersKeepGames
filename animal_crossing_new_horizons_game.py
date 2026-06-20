@@ -75,11 +75,11 @@ class AnimalCrossingNewHorizonsGame(Game):
         if self.include_daily_activities:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Collect DAILY_COUNT DAILY_ITEM for COUNT consecutive days",
+                    label="Collect DAILY_COUNT DAILY_ITEM for DAY_COUNT consecutive days",
                     data={
                         "DAILY_COUNT": (self.daily_counts, 1),
                         "DAILY_ITEM": (self.daily_items, 1),
-                        "COUNT": (self.consecutive_days, 1)
+                        "DAY_COUNT": (self.consecutive_days, 1)
                     },
                     is_time_consuming=True,
                     is_difficult=False,
@@ -93,10 +93,10 @@ class AnimalCrossingNewHorizonsGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Shake TREE_COUNT trees and collect COUNT TREE_ITEM",
+                    label="Shake TREE_COUNT trees and collect ITEM_COUNT TREE_ITEM",
                     data={
                         "TREE_COUNT": (self.tree_shake_counts, 1),
-                        "COUNT": (self.tree_item_counts, 1),
+                        "ITEM_COUNT": (self.tree_item_counts, 1),
                         "TREE_ITEM": (self.tree_items, 1)
                     },
                     is_time_consuming=False,

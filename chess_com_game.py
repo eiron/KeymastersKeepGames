@@ -376,7 +376,7 @@ class ChessComGame(Game):
                 weight=1,
             ),
             GameObjectiveTemplate(
-                label="Win as Black opening with the Bongcloud (play Ke7 on first move)",
+                label="Win as Black opening with the Bongcloud Defense (1...e5, 2...Ke7)",
                 data=dict(),
                 is_time_consuming=False,
                 is_difficult=True,

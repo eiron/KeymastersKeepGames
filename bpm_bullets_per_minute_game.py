@@ -173,10 +173,10 @@ class BPMBulletsPerMinuteGame(Game):
                 weight=1,
             ),
             GameObjectiveTemplate(
-                label="Defeat ENEMY_COUNT ENEMY enemies in a single run",
+                label="Defeat ENEMY_COUNT ENEMY_TYPE enemies in a single run",
                 data={
                     "ENEMY_COUNT": (self.enemy_counts, 1),
-                    "ENEMY": (self.common_enemies, 1),
+                    "ENEMY_TYPE": (self.common_enemies, 1),
                 },
                 is_time_consuming=False,
                 is_difficult=False,

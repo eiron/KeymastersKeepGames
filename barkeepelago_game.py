@@ -170,7 +170,7 @@ class BarkeepelagoGame(Game):
             print("[Barkeep-elago] No drinks returned, generating fallback objective")
             game_objective_templates = [
                 GameObjectiveTemplate(
-                    label="Mix a custom drink with ingredients you already have.",
+                    label="Mix a custom drink with ingredients you already have",
                     data={},
                     is_time_consuming=True,
                     is_difficult=False,
