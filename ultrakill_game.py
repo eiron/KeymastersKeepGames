@@ -448,8 +448,16 @@ class UltrakillGame(Game):
 
 
 class UltrakillIncludeActIIIObjectives(DefaultOnToggle):
+    """
+    Indicates whether to include objectives from Act III.
+    """
+
     display_name = "Ultrakill Include Act III Objectives"
 
 
 class UltrakillIncludeCybergrindObjectives(DefaultOnToggle):
+    """
+    Indicates whether to include objectives related to the Cybergrind.
+    """
+
     display_name = "Ultrakill Include Cybergrind Objectives"

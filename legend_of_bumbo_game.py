@@ -248,9 +248,17 @@ class LegendOfBumboGame(Game):
 
 
 class LegendOfBumboIncludeJackpotObjectives(DefaultOnToggle):
+    """
+    Indicates whether to include objectives that require achieving jackpots.
+    """
+
     display_name = "Legend of Bumbo Include Jackpot Objectives"
 
 
 class LegendOfBumboIncludeDifficultCharacterObjectives(DefaultOnToggle):
+    """
+    Indicates whether to include objectives that involve difficult characters.
+    """
+
     display_name = "Legend of Bumbo Include Difficult Character Objectives"
 
