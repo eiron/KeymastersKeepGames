@@ -22,7 +22,7 @@ class HextractionGame(Game):
 
     platforms_other = []
 
-    is_adult_only_or_unrated = True
+    is_adult_only_or_unrated = False
 
     options_cls = HextractionArchipelagoOptions
 
