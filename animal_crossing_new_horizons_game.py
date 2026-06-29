@@ -643,7 +643,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                 weight=2,
             ),
             GameObjectiveTemplate(
-                label="Complete COUNT Nook Miles achievements",
+                label="Complete COUNT Nook Miles+ daily tasks",
                 data={"COUNT": (self.daily_creature_counts, 1)},
                 is_time_consuming=True,
                 is_difficult=False,

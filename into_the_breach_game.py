@@ -486,8 +486,8 @@ class IntoTheBreachIncludeIslandObjectives(DefaultOnToggle):
 
 
 class IntoTheBreachIncludeAchievementObjectives(DefaultOnToggle):
-    """Include achievement-style objectives."""
-    display_name = "Into the Breach Include Achievement Objectives"
+    """Include challenge objectives based on specific mission feats."""
+    display_name = "Into the Breach Include Challenge Objectives"
 
 
 class IntoTheBreachIncludeDifficultyObjectives(Toggle):

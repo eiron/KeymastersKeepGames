@@ -461,5 +461,5 @@ class ForwardIncludePlaystyleConstraints(DefaultOnToggle):
 
 
 class ForwardIncludeAchievementObjectives(DefaultOnToggle):
-    """Include objectives based on game achievements (status effects, damage thresholds, etc)"""
-    display_name = "Include Achievement Objectives"
+    """Include challenge objectives based on status effects, damage thresholds, and similar feats."""
+    display_name = "Include Challenge Objectives"

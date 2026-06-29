@@ -271,18 +271,9 @@ class MonsterPromGame(Game):
                     weight=4,
                 ),
                 GameObjectiveTemplate(
-                    label="Visit LOCATION on every turn of a Short Game (earn its achievement)",
+                    label="Visit LOCATION on every turn of a Short Game",
                     data={
                         "LOCATION": (self.locations, 1),
-                    },
-                    is_time_consuming=False,
-                    is_difficult=False,
-                    weight=4,
-                ),
-                GameObjectiveTemplate(
-                    label="Earn the ACHIEVEMENT achievement",
-                    data={
-                        "ACHIEVEMENT": (self.location_achievements, 1),
                     },
                     is_time_consuming=False,
                     is_difficult=False,
@@ -413,17 +404,6 @@ class MonsterPromGame(Game):
         ]
 
     @staticmethod
-    def location_achievements() -> List[str]:
-        return [
-            "Nerd!",
-            "Small Bladder",
-            "Monster Prom: The Musical",
-            "Dodgeball God",
-            "Bookworm",
-            "Party 24/7",
-        ]
-
-    @staticmethod
     def stats() -> List[str]:
         return [
             "Smarts",
@@ -486,7 +466,7 @@ class MonsterPromIncludeSecretEndings(DefaultOnToggle):
 
 
 class MonsterPromIncludeStatChallenges(DefaultOnToggle):
-    """Include stat-focused objectives such as hitting stat thresholds and location achievements."""
+    """Include stat-focused objectives such as hitting stat thresholds and location visit challenges."""
     display_name = "Monster Prom Include Stat Challenge Objectives"
 
 

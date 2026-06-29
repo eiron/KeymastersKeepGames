@@ -117,7 +117,7 @@ class WarioWareGetItTogetherGame(Game):
                     weight=6,
                 ),
                 GameObjectiveTemplate(
-                    label="Beat MICROGAME on first try",
+                    label="Beat MICROGAME",
                     data={"MICROGAME": (self.microgames, 1)},
                     is_time_consuming=False,
                     is_difficult=False,

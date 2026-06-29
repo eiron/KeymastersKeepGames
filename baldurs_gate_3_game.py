@@ -334,7 +334,7 @@ class BaldursGate3Game(Game):
                 ),
             ])
 
-        # Achievement Hunting
+        # Challenge Objectives
         if self.include_achievement_hunting:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
@@ -692,8 +692,8 @@ class BG3IncludeCollectibles(DefaultOnToggle):
     display_name = "Baldurs Gate 3 Include Collectibles"
 
 class BG3IncludeAchievementHunting(DefaultOnToggle):
-    """Include achievement and completion challenge objectives."""
-    display_name = "Baldurs Gate 3 Include Achievement Hunting"
+    """Include completion and challenge-run objectives."""
+    display_name = "Baldurs Gate 3 Include Challenge Objectives"
 
 class BG3DifficultyPreference(TextChoice):
     """Prefer certain difficulty levels for objectives."""
