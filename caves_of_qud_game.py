@@ -219,7 +219,7 @@ class CavesOfQudGame(Game):
                     "ARTIFACT": (self.artifacts, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -267,7 +267,7 @@ class CavesOfQudGame(Game):
             GameObjectiveTemplate(
                 label="Create and name a recipe",
                 data=dict(),
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=1,
             ),
@@ -277,7 +277,7 @@ class CavesOfQudGame(Game):
                     "CYBERNETIC": (self.cybernetics, 1),
                 },
                 is_time_consuming=True,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -305,7 +305,7 @@ class CavesOfQudGame(Game):
                 label="Discover and visit a sultan shrine other than the one in Joppa",
                 data=dict(),
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -318,14 +318,14 @@ class CavesOfQudGame(Game):
             GameObjectiveTemplate(
                 label="Learn Trash Divining and gain a secret from rifling through trash",
                 data=dict(),
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
                 label="Reach the Six Day Stilt and donate a book to the library",
                 data=dict(),
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=1,
             ),
@@ -336,7 +336,7 @@ class CavesOfQudGame(Game):
                     "MUTATION": (self.all_tracked_mutations, 1),
                 },
                 is_time_consuming=True,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -345,7 +345,7 @@ class CavesOfQudGame(Game):
                     "MUTATION": (self.physical_mutations, 1),
                 },
                 is_time_consuming=True,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -361,7 +361,7 @@ class CavesOfQudGame(Game):
                     "ENEMY": (self.beguile_targets, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -370,7 +370,7 @@ class CavesOfQudGame(Game):
                     "GLIMMER": (self.glimmer_levels, 1),
                 },
                 is_time_consuming=True,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -379,7 +379,7 @@ class CavesOfQudGame(Game):
                     "LICENSE_TIER": (self.license_tiers, 1),
                 },
                 is_time_consuming=True,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -395,7 +395,7 @@ class CavesOfQudGame(Game):
                 label="Cook a meal with a nectar-based effect",
                 data=dict(),
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(

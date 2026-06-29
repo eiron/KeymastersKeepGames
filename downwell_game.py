@@ -124,7 +124,7 @@ class DownwellGame(Game):
             GameObjectiveTemplate(
                 label="Meet the Smiling Jelly as STYLE",
                 data={"STYLE": (self.styles, 1)},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=4,
             ),
@@ -168,25 +168,25 @@ class DownwellGame(Game):
             GameObjectiveTemplate(
                 label="Survive the Aquifer without your breath reaching zero",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Collect N gems in a single run",
                 data={"N": (self.gem_collection_targets, 1)},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete a Tomato Run (reach the boss without entering any safe zone)",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Beat the game using only the WEAPON",
                 data={"WEAPON": (self.weapons, 1)},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
             ),
         ]
@@ -196,7 +196,7 @@ class DownwellGame(Game):
                 GameObjectiveTemplate(
                     label="Beat the game and meet the Smiling Jelly as STYLE in separate runs",
                     data={"STYLE": (self.styles, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=3,
                 ),
@@ -207,20 +207,20 @@ class DownwellGame(Game):
                 GameObjectiveTemplate(
                     label="Beat 2-1 on Hard Mode as STYLE",
                     data={"STYLE": (self.styles, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
                     label="Beat WORLD on Hard Mode",
                     data={"WORLD": (self.worlds, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                 ),
                 GameObjectiveTemplate(
                     label="Beat the game on Hard Mode as STYLE",
                     data={"STYLE": (self.styles, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                 ),
             ])

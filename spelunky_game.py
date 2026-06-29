@@ -163,28 +163,28 @@ class SpelunkyGame(Game):
                 data={
                     "CHARACTER": (self.available_characters, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=6,
             ),
             GameObjectiveTemplate(
                 label="Complete a run reaching the Temple (4-4) and defeat Olmec",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=6,
             ),
             GameObjectiveTemplate(
                 label="Complete a run without using the Ankh (no death through sacrifice)",
                 data={},
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=4,
             ),
             GameObjectiveTemplate(
                 label="Defeat Olmec while still holding the Ankh",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=3,
             ),
@@ -196,14 +196,14 @@ class SpelunkyGame(Game):
                 GameObjectiveTemplate(
                     label="Reach Hell and defeat Yama",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
                     label="Reach Hell without using the shortcut to 4-1",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=3,
                 ),
@@ -215,7 +215,7 @@ class SpelunkyGame(Game):
                 GameObjectiveTemplate(
                     label="Complete an Eggplant run (deliver Eggplant to Yama)",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=2,
                 )
@@ -227,7 +227,7 @@ class SpelunkyGame(Game):
                 GameObjectiveTemplate(
                     label="Complete a No-Gold run",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=3,
                 )
@@ -258,7 +258,7 @@ class SpelunkyGame(Game):
                 data={
                     "COUNT": (self.idol_counts, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=4,
             ),
@@ -288,7 +288,7 @@ class SpelunkyGame(Game):
                     "COUNT": (self.kali_health_rewards, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=3,
             ),
             GameObjectiveTemplate(
@@ -305,8 +305,8 @@ class SpelunkyGame(Game):
                 data={
                     "GOLD": (self.score_targets, 1),
                 },
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=3,
             ),
             GameObjectiveTemplate(
@@ -335,7 +335,7 @@ class SpelunkyGame(Game):
             GameObjectiveTemplate(
                 label="Kill every shopkeeper you can encounter on the run",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=2,
             ),
@@ -367,21 +367,21 @@ class SpelunkyGame(Game):
             GameObjectiveTemplate(
                 label="Visit the Black Market",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=3,
             ),
             GameObjectiveTemplate(
                 label="Beat the Worm level",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=3,
             ),
             GameObjectiveTemplate(
                 label="Beat the Mothership level",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=3,
             ),

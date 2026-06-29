@@ -149,7 +149,7 @@ class RevitaGame(Game):
                     label="Clear AREA_NAME",
                     data={"AREA_NAME": (self.area_names, 1)},
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=9,
                 ),
                 GameObjectiveTemplate(
@@ -159,7 +159,7 @@ class RevitaGame(Game):
                         "AREA_NAME": (self.area_names, 1),
                     },
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=8,
                 ),
                 GameObjectiveTemplate(
@@ -187,7 +187,7 @@ class RevitaGame(Game):
                     label="Defeat BOSS_NAME",
                     data={"BOSS_NAME": (self.boss_names, 1)},
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=10,
                 ),
                 GameObjectiveTemplate(
@@ -197,7 +197,7 @@ class RevitaGame(Game):
                         "RELIC_COUNT": (self.relic_count_targets, 1),
                     },
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=6,
                 ),
                 GameObjectiveTemplate(
@@ -238,15 +238,15 @@ class RevitaGame(Game):
             GameObjectiveTemplate(
                 label="Complete the Strange Key and Open the Bedroom Chest",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=8,
             ),
             GameObjectiveTemplate(
                 label="Loop at least one time",
                 data={},
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=9,
             ),
             GameObjectiveTemplate(
@@ -281,7 +281,7 @@ class RevitaGame(Game):
                 label="Complete a run with at least 10 curses collected",
                 data={},
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=7,
             ),
             GameObjectiveTemplate(
@@ -294,8 +294,8 @@ class RevitaGame(Game):
             GameObjectiveTemplate(
                 label="Give the Crown to the Frog King in The Caldarium and finish the run at Acceptance",
                 data={},
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=9,
             ),
         ])

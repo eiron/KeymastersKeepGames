@@ -101,32 +101,32 @@ class HextractionGame(Game):
             GameObjectiveTemplate(
                 label="Win a game of Hextraction",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Win a game of Monkey Fight",
                 data={},
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Win a game of Monkey Heaven",
                 data={},
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Win a game of Puzzle Mode",
                 data={},
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Win a game of Hextraction without triggering any effect tiles",
                 data={},
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Trigger Break the Loop at least once during a game",
@@ -155,8 +155,8 @@ class HextractionGame(Game):
             GameObjectiveTemplate(
                 label="Win a game of Hextraction while Overdrive is active (every slot on the board is filled)",
                 data={},
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
             ),
         ]
 
@@ -165,32 +165,32 @@ class HextractionGame(Game):
                 GameObjectiveTemplate(
                     label="Complete Puzzle Mode in Hard Mode (10 tiles, 5 turns, no hand reload)",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                 ),
                 GameObjectiveTemplate(
                     label="Complete Puzzle Mode in Brutal Mode (reach the finish line on your final turn exactly)",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                 ),
                 GameObjectiveTemplate(
                     label="Complete Puzzle Mode without any tiles being destroyed",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                 ),
                 GameObjectiveTemplate(
                     label="Win a game of Monkey Fight on your very first turn",
                     data={},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Win a game of Monkey Heaven in Extra Hard Mode (you also lose if your ball falls off the side of the board)",
                     data={},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                 ),
             ])
 
@@ -235,7 +235,7 @@ class HextractionGame(Game):
                 GameObjectiveTemplate(
                     label="Win a game where the Shrink Ray Tile was activated at least once",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                 ),
             ])

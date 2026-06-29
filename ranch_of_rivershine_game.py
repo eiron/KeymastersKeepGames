@@ -62,14 +62,14 @@ class RanchOfRivershineGame(Game):
                 GameObjectiveTemplate(
                     label="Train a horse's Speed skill to 75%",
                     data={},
-                    is_difficult=True,
+                    is_difficult=False,
                     is_time_consuming=True,
                     weight=30
                 ),
                 GameObjectiveTemplate(
                     label="Train a horse's Speed skill to 100%",
                     data={},
-                    is_difficult=True,
+                    is_difficult=False,
                     is_time_consuming=True,
                     weight=15
                 ),
@@ -91,14 +91,14 @@ class RanchOfRivershineGame(Game):
                 GameObjectiveTemplate(
                     label="Train a horse's Endurance skill to 75%",
                     data={},
-                    is_difficult=True,
+                    is_difficult=False,
                     is_time_consuming=True,
                     weight=30
                 ),
                 GameObjectiveTemplate(
                     label="Train a horse's Endurance skill to 100%",
                     data={},
-                    is_difficult=True,
+                    is_difficult=False,
                     is_time_consuming=True,
                     weight=15
                 ),
@@ -120,14 +120,14 @@ class RanchOfRivershineGame(Game):
                 GameObjectiveTemplate(
                     label="Train a horse's Jump skill to Expert level (75%)",
                     data={},
-                    is_difficult=True,
+                    is_difficult=False,
                     is_time_consuming=True,
                     weight=30
                 ),
                 GameObjectiveTemplate(
                     label="Train a horse's Jump skill to 100%",
                     data={},
-                    is_difficult=True,
+                    is_difficult=False,
                     is_time_consuming=True,
                     weight=15
                 ),
@@ -149,14 +149,14 @@ class RanchOfRivershineGame(Game):
                 GameObjectiveTemplate(
                     label="Train a horse's Flexibility skill to 75%",
                     data={},
-                    is_difficult=True,
+                    is_difficult=False,
                     is_time_consuming=True,
                     weight=30
                 ),
                 GameObjectiveTemplate(
                     label="Train a horse's Flexibility skill to 100%",
                     data={},
-                    is_difficult=True,
+                    is_difficult=False,
                     is_time_consuming=True,
                     weight=15
                 ),
@@ -229,7 +229,7 @@ class RanchOfRivershineGame(Game):
                 GameObjectiveTemplate(
                     label="Fully train a horse in all four skills to 100%",
                     data={},
-                    is_difficult=True,
+                    is_difficult=False,
                     is_time_consuming=True,
                     weight=10
                 ),
@@ -257,7 +257,7 @@ class RanchOfRivershineGame(Game):
                     label="Keep a horse's affection above 75%",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=False,
+                    is_time_consuming=True,
                     weight=60
                 ),
                 GameObjectiveTemplate(
@@ -326,28 +326,28 @@ class RanchOfRivershineGame(Game):
                     label="Enter a horse into an Advanced level competition",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=40
                 ),
                 GameObjectiveTemplate(
                     label="Win an Advanced level competition",
                     data={},
-                    is_difficult=True,
-                    is_time_consuming=True,
+                    is_difficult=False,
+                    is_time_consuming=False,
                     weight=30
                 ),
                 GameObjectiveTemplate(
                     label="Enter a horse into an Expert level competition",
                     data={},
-                    is_difficult=True,
-                    is_time_consuming=True,
+                    is_difficult=False,
+                    is_time_consuming=False,
                     weight=25
                 ),
                 GameObjectiveTemplate(
                     label="Win an Expert level competition",
                     data={},
-                    is_difficult=True,
-                    is_time_consuming=True,
+                    is_difficult=False,
+                    is_time_consuming=False,
                     weight=15
                 ),
                 GameObjectiveTemplate(
@@ -375,7 +375,7 @@ class RanchOfRivershineGame(Game):
                     label="Win a Trail Racing event",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=40
                 ),
             ]
@@ -388,14 +388,14 @@ class RanchOfRivershineGame(Game):
                     label="Breed two horses together",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=55
                 ),
                 GameObjectiveTemplate(
                     label="Raise a foal from birth",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=50
                 ),
                 GameObjectiveTemplate(
@@ -409,13 +409,13 @@ class RanchOfRivershineGame(Game):
                     label="Breed a horse with a specific coat pattern",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=35
                 ),
                 GameObjectiveTemplate(
                     label="Breed three generations of horses in one bloodline",
                     data={},
-                    is_difficult=True,
+                    is_difficult=False,
                     is_time_consuming=True,
                     weight=25
                 ),
@@ -437,7 +437,7 @@ class RanchOfRivershineGame(Game):
                     label="Purchase a Legendary horse from the auction house",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=30
                 ),
             ]
@@ -492,7 +492,7 @@ class RanchOfRivershineGame(Game):
                     label="Visit all exploration locations in one day",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=35
                 ),
                 GameObjectiveTemplate(
@@ -506,7 +506,7 @@ class RanchOfRivershineGame(Game):
                     label="Open 5 chests",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=40
                 ),
                 GameObjectiveTemplate(
@@ -520,7 +520,7 @@ class RanchOfRivershineGame(Game):
                     label="Find all Horse Statues in one location",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=40
                 ),
             ]
@@ -683,20 +683,20 @@ class RanchOfRivershineGame(Game):
                     label="Tame a Wild Horse",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=50
                 ),
                 GameObjectiveTemplate(
                     label="Add a Wild Horse to your ranch",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=45
                 ),
                 GameObjectiveTemplate(
                     label="Train a Wild Horse to competition level",
                     data={},
-                    is_difficult=True,
+                    is_difficult=False,
                     is_time_consuming=True,
                     weight=30
                 ),
@@ -780,7 +780,7 @@ class RanchOfRivershineGame(Game):
                     label="Meet all NPCs in Rivershine Town",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=40
                 ),
             ]
@@ -822,7 +822,7 @@ class RanchOfRivershineGame(Game):
                     label="Craft 5 different medicine types",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=35
                 ),
                 # Dye Crafting
@@ -858,7 +858,7 @@ class RanchOfRivershineGame(Game):
                     label="Craft 3 different dye colors",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=40
                 ),
                 # Fertilizer Crafting
@@ -937,7 +937,7 @@ class RanchOfRivershineGame(Game):
                 GameObjectiveTemplate(
                     label="Complete an Advanced Cavaletti Course",
                     data={},
-                    is_difficult=True,
+                    is_difficult=False,
                     is_time_consuming=False,
                     weight=35
                 ),
@@ -959,7 +959,7 @@ class RanchOfRivershineGame(Game):
                 GameObjectiveTemplate(
                     label="Complete an Advanced Flower Fence Course",
                     data={},
-                    is_difficult=True,
+                    is_difficult=False,
                     is_time_consuming=False,
                     weight=35
                 ),
@@ -981,7 +981,7 @@ class RanchOfRivershineGame(Game):
                 GameObjectiveTemplate(
                     label="Complete an Advanced Country Barrel Course",
                     data={},
-                    is_difficult=True,
+                    is_difficult=False,
                     is_time_consuming=False,
                     weight=35
                 ),
@@ -997,7 +997,7 @@ class RanchOfRivershineGame(Game):
                     label="Complete all 3 course types at Beginner level",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=40
                 ),
             ]
@@ -1017,7 +1017,7 @@ class RanchOfRivershineGame(Game):
                     label="Expand your ranch's capacity",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=45
                 ),
                 GameObjectiveTemplate(
@@ -1066,7 +1066,7 @@ class RanchOfRivershineGame(Game):
                     label="Harvest from a fruit tree",
                     data={},
                     is_difficult=False,
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     weight=40
                 ),
             ]

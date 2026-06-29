@@ -248,8 +248,8 @@ class BloodstainedRitualOfTheNightGame(Game):
                 GameObjectiveTemplate(
                     label="Defeat BOSS",
                     data={"BOSS": (self.all_bosses, 1)},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -547,28 +547,28 @@ class BloodstainedRitualOfTheNightGame(Game):
                     label="Unlock and complete 1986 Mode",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Complete Zangetsu Mode",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Complete Bloodless Mode",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Complete Aurora Mode",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -589,7 +589,7 @@ class BloodstainedRitualOfTheNightGame(Game):
                     label="Win VERSUS_MATCH_COUNT matches in Versus Mode",
                     data={"VERSUS_MATCH_COUNT": (self.versus_match_counts, 1)},
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -710,7 +710,7 @@ class BloodstainedRitualOfTheNightGame(Game):
                     label="Complete Dominique's Curse DLC story",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -731,7 +731,7 @@ class BloodstainedRitualOfTheNightGame(Game):
                     label="Defeat HUNTER_COUNT Hunters",
                     data={"HUNTER_COUNT": (self.hunter_defeat_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -745,7 +745,7 @@ class BloodstainedRitualOfTheNightGame(Game):
                     label="Defeat CURSE_BOSS",
                     data={"CURSE_BOSS": (self.dominiques_curse_bosses, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -759,7 +759,7 @@ class BloodstainedRitualOfTheNightGame(Game):
                     label="Achieve CURSE_ENDING",
                     data={"CURSE_ENDING": (self.dominiques_curse_endings, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(

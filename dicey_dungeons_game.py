@@ -138,7 +138,7 @@ class DiceyDungeonsGame(Game):
                     "CHARACTER": (self.halloween_characters, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -147,7 +147,7 @@ class DiceyDungeonsGame(Game):
                     "CHARACTER": (self.characters, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -155,7 +155,7 @@ class DiceyDungeonsGame(Game):
                 data={
                     "ENEMY_TYPE": (self.enemies, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=1,
             ),

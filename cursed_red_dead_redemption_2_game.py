@@ -107,14 +107,14 @@ class CursedRedDeadRedemption2Game(Game):
                         "MURDER_METHOD": (self.cursed_kill_methods, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
                     label="Feed FEED_COUNT predators to alligators by leading them into swamps",
                     data={"FEED_COUNT": (self.sacrifice_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -143,7 +143,7 @@ class CursedRedDeadRedemption2Game(Game):
                         "FIGHT_TIME": (self.fight_timeframes, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -157,14 +157,14 @@ class CursedRedDeadRedemption2Game(Game):
                     label="Ruin WEDDING_COUNT weddings by causing chaos during the ceremony",
                     data={"WEDDING_COUNT": (self.wedding_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Follow random NPCs for STALKING_HOURS hours without them noticing",
                     data={"STALKING_HOURS": (self.stalking_durations, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -193,7 +193,7 @@ class CursedRedDeadRedemption2Game(Game):
                         "OBSTACLE": (self.crash_targets, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -210,7 +210,7 @@ class CursedRedDeadRedemption2Game(Game):
                         "DESTINATION": (self.locations, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -220,7 +220,7 @@ class CursedRedDeadRedemption2Game(Game):
                         "LAUNCH_METHOD": (self.launch_methods, 1)
                     },
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -295,7 +295,7 @@ class CursedRedDeadRedemption2Game(Game):
                         "ROLEPLAY_DURATION": (self.roleplay_durations, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -305,7 +305,7 @@ class CursedRedDeadRedemption2Game(Game):
                         "COMMUNICATION_DURATION": (self.communication_durations, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -315,7 +315,7 @@ class CursedRedDeadRedemption2Game(Game):
                         "CONVINCING_COUNT": (self.convincing_counts, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
             ])
@@ -365,7 +365,7 @@ class CursedRedDeadRedemption2Game(Game):
                         "RIDICULOUS_WEAPON": (self.ridiculous_weapons, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -375,7 +375,7 @@ class CursedRedDeadRedemption2Game(Game):
                         "CREATIVE_METHOD": (self.creative_kill_methods, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -385,7 +385,7 @@ class CursedRedDeadRedemption2Game(Game):
                         "ABSURD_STRATEGY": (self.absurd_strategies, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(

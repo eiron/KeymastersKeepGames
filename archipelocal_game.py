@@ -296,7 +296,7 @@ class ArchipelocalGame(Game):
                         "CATEGORY": (lambda: self.allowed_categories_friendly(), 1),
                         "NTH": (lambda: self.nth_choices(), 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=nth_w,
                 )
@@ -306,7 +306,7 @@ class ArchipelocalGame(Game):
                     GameObjectiveTemplate(
                         label="Visit a random CATEGORY near your home (within your max distance)",
                         data={"CATEGORY": (lambda: self.allowed_categories_friendly(), 1)},
-                        is_time_consuming=True,
+                        is_time_consuming=False,
                         is_difficult=False,
                         weight=rand_w,
                     )
@@ -323,7 +323,7 @@ class ArchipelocalGame(Game):
                     GameObjectiveTemplate(
                         label="Visit PLACE",
                         data={"PLACE": (lambda: self._place_name_choices(), 1)},
-                        is_time_consuming=True,
+                        is_time_consuming=False,
                         is_difficult=False,
                         weight=3,
                     )
@@ -338,7 +338,7 @@ class ArchipelocalGame(Game):
                 GameObjectiveTemplate(
                     label="Visit PLACE",
                     data={"PLACE": (lambda: self._place_name_choices(), 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=place_weight,
                 )

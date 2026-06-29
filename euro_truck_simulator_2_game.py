@@ -143,35 +143,35 @@ class EuroTruckSimulator2Game(Game):
                     label="Complete the challenging 1800km route from London to Rome",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
                     label="Complete the challenging 2500km route from Stockholm to Madrid",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
                     label="Complete the challenging 1900km route from Berlin to Moscow",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
                     label="Complete the challenging 1400km route from Paris to Warsaw",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
                     label="Complete the challenging 1300km route from Amsterdam to Budapest",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=3,
                 ),
             ])
@@ -187,7 +187,7 @@ class EuroTruckSimulator2Game(Game):
                         "DESTINATION": (self.cities, 1)
                     },
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=4,
                 ),
             ])
@@ -267,7 +267,7 @@ class EuroTruckSimulator2Game(Game):
                 label="Complete COUNT deliveries without any traffic violations across Europe",
                 data={"COUNT": (self.violation_free_counts, 1)},
                 is_time_consuming=True,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
         ])

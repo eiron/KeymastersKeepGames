@@ -147,7 +147,7 @@ class TheSims4Game(Game):
                     label="Max out SKILL_COUNT different skills to level 10",
                     data={"SKILL_COUNT": (self.max_skill_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -186,7 +186,7 @@ class TheSims4Game(Game):
                     label="Complete the CAREER career and reach the top of both branches",
                     data={"CAREER": (self.branching_careers, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -219,14 +219,14 @@ class TheSims4Game(Game):
                     label="Complete the ASPIRATION aspiration",
                     data={"ASPIRATION": (self.aspirations, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Complete ASPIRATION_COUNT different aspirations",
                     data={"ASPIRATION_COUNT": (self.aspiration_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -296,14 +296,14 @@ class TheSims4Game(Game):
                         "FRIEND_COUNT": (self.concurrent_friend_counts, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Successfully seduce and marry SIM_COUNT different Sims in sequence",
                     data={"SIM_COUNT": (self.sequential_marriage_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
             ])
@@ -315,7 +315,7 @@ class TheSims4Game(Game):
                     label="Complete the COLLECTION collection",
                     data={"COLLECTION": (self.collections, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -332,7 +332,7 @@ class TheSims4Game(Game):
                     label="Discover all RARITY_LEVEL rarity items in any collection",
                     data={"RARITY_LEVEL": (self.rarity_levels, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -395,7 +395,7 @@ class TheSims4Game(Game):
                     label="Create a Cowplant and keep it alive for COWPLANT_DAYS days",
                     data={"COWPLANT_DAYS": (self.cowplant_survival_days, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -448,7 +448,7 @@ class TheSims4Game(Game):
                     label="Complete GHOST_OBJECTIVE as a ghost Sim",
                     data={"GHOST_OBJECTIVE": (self.ghost_objectives, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -458,14 +458,14 @@ class TheSims4Game(Game):
                         "SPECIFIC_EMOTION": (self.emotions, 1)
                     },
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Have a Sim die from DEATH_CAUSE and become a ghost",
                     data={"DEATH_CAUSE": (self.death_causes, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -486,7 +486,7 @@ class TheSims4Game(Game):
                     label="Complete NEEDS_CHALLENGE with unconventional restrictions",
                     data={"NEEDS_CHALLENGE": (self.needs_challenges, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
             ])
@@ -505,14 +505,14 @@ class TheSims4Game(Game):
                     label="Complete GENERATION_COUNT generations of a family legacy",
                     data={"GENERATION_COUNT": (self.generation_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Have a Sim master every skill and complete every aspiration",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -686,7 +686,7 @@ class TheSims4Game(Game):
                     label="Reach FAME_LEVEL star fame level",
                     data={"FAME_LEVEL": (self.fame_levels, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -771,7 +771,7 @@ class TheSims4Game(Game):
                     label="Improve your neighborhood's eco footprint to Green",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
             ])
@@ -901,7 +901,7 @@ class TheSims4Game(Game):
                     label="Win COMPETITION_COUNT horse competitions",
                     data={"COMPETITION_COUNT": (self.competition_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
             ])
@@ -1083,7 +1083,7 @@ class TheSims4Game(Game):
                     label="Raise a child with all positive character values",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -1097,7 +1097,7 @@ class TheSims4Game(Game):
                     label="Guide CHILD_COUNT children from toddler to young adult",
                     data={"CHILD_COUNT": (self.child_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
             ])
@@ -1223,7 +1223,7 @@ class TheSims4Game(Game):
                     label="Live on exactly §BUDGET_AMOUNT for 30 days",
                     data={"BUDGET_AMOUNT": (self.budget_amounts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -1237,7 +1237,7 @@ class TheSims4Game(Game):
                     label="Survive by ECONOMIC_ACTIVITY only",
                     data={"ECONOMIC_ACTIVITY": (self.economic_activities, 1)},
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -1277,7 +1277,7 @@ class TheSims4Game(Game):
                     label="Never use the same interaction twice in one day",
                     data={},
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
             ])
@@ -1310,7 +1310,7 @@ class TheSims4Game(Game):
                     label="Get kicked out of every community lot you visit",
                     data={},
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
             ])
@@ -1329,7 +1329,7 @@ class TheSims4Game(Game):
                     label="Live with the restriction of UNUSUAL_RESTRICTION",
                     data={"UNUSUAL_RESTRICTION": (self.unusual_restrictions, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -1343,7 +1343,7 @@ class TheSims4Game(Game):
                     label="Move houses every 7 days for a month",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
             ])
@@ -1369,14 +1369,14 @@ class TheSims4Game(Game):
                     label="Set UNPREDICTABLE_GOAL as your main life goal",
                     data={"UNPREDICTABLE_GOAL": (self.unpredictable_goals, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
                     label="Never do the same activity two days in a row",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
             ])
@@ -1388,7 +1388,7 @@ class TheSims4Game(Game):
                     label="Survive and recover from DISASTER_TYPE",
                     data={"DISASTER_TYPE": (self.disaster_types, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(

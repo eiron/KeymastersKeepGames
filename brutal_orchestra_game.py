@@ -142,7 +142,7 @@ class BrutalOrchestraGame(Game):
                     "PARTY_SIZE": (self.party_sizes, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -151,7 +151,7 @@ class BrutalOrchestraGame(Game):
                     "BATTLE_COUNT": (self.battle_counts, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -160,7 +160,7 @@ class BrutalOrchestraGame(Game):
                     "CONDITION": (self.win_conditions, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -178,7 +178,7 @@ class BrutalOrchestraGame(Game):
                     "PARTY_MEMBER": (self.unlockable_members, 1),
                 },
                 is_time_consuming=True,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -222,8 +222,8 @@ class BrutalOrchestraGame(Game):
             GameObjectiveTemplate(
                 label="Beat the final boss with Mung in your party",
                 data=dict(),
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=1,
             ),
         ]

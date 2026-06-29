@@ -166,7 +166,7 @@ class CryptOfTheNecrodancerGame(Game):
                 data={
                     "CHARACTER": (self.characters, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=3,
             ),
@@ -175,8 +175,8 @@ class CryptOfTheNecrodancerGame(Game):
                 data={
                     "CHARACTER": (self.characters_hard, 1),
                 },
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=2,
             ),
             GameObjectiveTemplate(
@@ -222,7 +222,7 @@ class CryptOfTheNecrodancerGame(Game):
                 data={
                     "CHARACTER": (self.unlockable_characters, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=2,
             ),
@@ -231,7 +231,7 @@ class CryptOfTheNecrodancerGame(Game):
                 data={
                     "WEAPON_TYPE": (self.weapon_types, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=1,
             ),
@@ -304,7 +304,7 @@ class CryptOfTheNecrodancerGame(Game):
                 data={
                     "MODE": (self.game_modes, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=2,
             ),
@@ -327,14 +327,14 @@ class CryptOfTheNecrodancerGame(Game):
             GameObjectiveTemplate(
                 label="Kill a shopkeeper by the end of the run",
                 data={},
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
                 label="End the run at full HP",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=1,
             ),
@@ -376,14 +376,14 @@ class CryptOfTheNecrodancerGame(Game):
             GameObjectiveTemplate(
                 label="Finish the run while holding a healing item",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
                 label="Beat the game in under 30 minutes",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=2,
             ),
@@ -431,7 +431,7 @@ class CryptOfTheNecrodancerGame(Game):
                 GameObjectiveTemplate(
                     label="Complete a full run with SYNCHRONY_CHARACTER",
                     data={"SYNCHRONY_CHARACTER": (self.characters_synchrony_dlc, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )
@@ -472,7 +472,7 @@ class CryptOfTheNecrodancerGame(Game):
                 GameObjectiveTemplate(
                     label="Complete a full run as Hatsune Miku",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )
@@ -501,7 +501,7 @@ class CryptOfTheNecrodancerGame(Game):
                 GameObjectiveTemplate(
                     label="Complete a full run as Shovel Knight",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )

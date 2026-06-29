@@ -108,14 +108,14 @@ class LegendOfBumboGame(Game):
             GameObjectiveTemplate(
                 label="Beat the game as CHARACTER",
                 data={"CHARACTER": (self.standard_characters, 1)},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=5,
             ),
             GameObjectiveTemplate(
                 label="Beat CHAPTER without taking any damage",
                 data={"CHAPTER": (self.chapters, 1)},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
             ),
             GameObjectiveTemplate(
@@ -127,25 +127,25 @@ class LegendOfBumboGame(Game):
             GameObjectiveTemplate(
                 label="Beat the game without spending coins at any Wooden Nickel shop",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Beat the game while holding at least COIN_TARGET coins",
                 data={"COIN_TARGET": (self.coin_targets, 1)},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Beat the game without picking up any spells from Treasure Rooms",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Complete a run without casting any Defense or Puzzle spells",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
             ),
         ]
@@ -155,14 +155,14 @@ class LegendOfBumboGame(Game):
                 GameObjectiveTemplate(
                     label="Win the Jackpot Ending",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                 ),
                 GameObjectiveTemplate(
                     label="Win the Jackpot Ending COUNT times",
                     data={"COUNT": (self.jackpot_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                 ),
             ]
 
@@ -171,25 +171,25 @@ class LegendOfBumboGame(Game):
                 GameObjectiveTemplate(
                     label="Beat the game as Bum-Bo the Dead",
                     data={},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Beat the game as Bum-Bo the Lost",
                     data={},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Beat the game as Bum-Bo the Empty",
                     data={},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Beat the game as CHARACTER while holding at least 45 coins",
                     data={"CHARACTER": (self.characters, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                 ),
             ]

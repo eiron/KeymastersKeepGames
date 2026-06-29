@@ -175,15 +175,15 @@ class MonsterPromGame(Game):
                 data={
                     "CHARACTER": (self.second_term_romance_options, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=3,
             ),
             GameObjectiveTemplate(
                 label="Get a secret ending in a Short Game",
                 data={},
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=2,
             ),
             # Added objectives
@@ -193,7 +193,7 @@ class MonsterPromGame(Game):
                     "CHARACTER": (self.romance_options, 1),
                     "PLAYABLE": (self.playable_characters, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=5,
             ),
@@ -203,8 +203,8 @@ class MonsterPromGame(Game):
                     "CHARACTER": (self.romance_options, 1),
                     "LOCATION": (self.locations, 1),
                 },
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=4,
             ),
             GameObjectiveTemplate(
@@ -219,7 +219,7 @@ class MonsterPromGame(Game):
             GameObjectiveTemplate(
                 label="Go to prom alone on purpose: end a Short Game with no successful date",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=2,
             ),
@@ -232,8 +232,8 @@ class MonsterPromGame(Game):
                     data={
                         "CHARACTER": (self.romance_options, 1),
                     },
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=6,
                 ),
                 GameObjectiveTemplate(
@@ -241,8 +241,8 @@ class MonsterPromGame(Game):
                     data={
                         "CHARACTER": (self.romance_options, 1),
                     },
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=3,
                 ),
             ])
@@ -255,7 +255,7 @@ class MonsterPromGame(Game):
                         "STAT_NAME": (self.stats, 1),
                         "STAT_VALUE": (self.stat_targets_short, 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=5,
                 ),
@@ -266,8 +266,8 @@ class MonsterPromGame(Game):
                         "STAT_B": (self.stats, 1),
                         "STAT_VALUE": (self.stat_targets_short, 1),
                     },
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
@@ -275,7 +275,7 @@ class MonsterPromGame(Game):
                     data={
                         "LOCATION": (self.locations, 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=4,
                 ),
@@ -284,7 +284,7 @@ class MonsterPromGame(Game):
                     data={
                         "ACHIEVEMENT": (self.location_achievements, 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=4,
                 ),
@@ -294,7 +294,7 @@ class MonsterPromGame(Game):
                         "LOCATION": (self.locations, 1),
                         "STAT_NAME": (self.stats, 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=2,
                 ),
@@ -307,8 +307,8 @@ class MonsterPromGame(Game):
                     data={
                         "SECRET_ENDING": (self.secret_endings, 1),
                     },
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
@@ -316,8 +316,8 @@ class MonsterPromGame(Game):
                     data={
                         "ITEM": (self.shop_items, 1),
                     },
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
@@ -326,7 +326,7 @@ class MonsterPromGame(Game):
                         "SECRET_COUNT": (self.secret_ending_counts, 1),
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
             ])
@@ -338,8 +338,8 @@ class MonsterPromGame(Game):
                     data={
                         "CHARACTER": (self.romance_options, 1),
                     },
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
@@ -347,15 +347,15 @@ class MonsterPromGame(Game):
                     data={
                         "PLAYER_COUNT": (self.multiplayer_player_counts, 1),
                     },
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
                     label="Steal a love interest another player was actively pursuing and win",
                     data={},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=2,
                 ),
             ])

@@ -141,7 +141,7 @@ class StardewValleyGame(Game):
                     label="Reach floor FLOOR in the mines",
                     data={"FLOOR": (self.mine_floors, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -211,7 +211,7 @@ class StardewValleyGame(Game):
                     label="Catch a difficult fish: DIFFICULT_FISH",
                     data={"DIFFICULT_FISH": (self.difficult_fish, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -372,7 +372,7 @@ class StardewValleyGame(Game):
                     label="Complete the COLLECTION collection",
                     data={"COLLECTION": (self.collections, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(

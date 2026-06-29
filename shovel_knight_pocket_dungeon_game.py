@@ -117,15 +117,15 @@ class ShovelKnightPocketDungeonGame(Game):
             GameObjectiveTemplate(
                 label="Beat the game as CHARACTER",
                 data={"CHARACTER": (self.characters, 1)},
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=6,
             ),
             GameObjectiveTemplate(
                 label="Complete the True Ending run as CHARACTER",
                 data={"CHARACTER": (self.characters, 1)},
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Achieve a chain of N enemies in a single action",
@@ -142,43 +142,43 @@ class ShovelKnightPocketDungeonGame(Game):
             GameObjectiveTemplate(
                 label="Collect N Gems in a single run",
                 data={"N": (self.gem_counts, 1)},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Have N Relics at once in a single run",
                 data={"N": (self.relic_counts, 1)},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Beat Puzzle Knight without equipping any Relics",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Score at least 150 points in Mona's minigame",
                 data={},
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Clear all 4 Shrine portals in a single run",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
             ),
             GameObjectiveTemplate(
                 label="Reach DUNGEON in a single run",
                 data={"DUNGEON": (self.later_dungeons, 1)},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Reach wave N in Marathon mode",
                 data={"N": (self.marathon_wave_counts, 1)},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
             ),
         ]
@@ -188,7 +188,7 @@ class ShovelKnightPocketDungeonGame(Game):
                 GameObjectiveTemplate(
                     label="Destroy 20 enemies using Shovel Knight's extra chain damage in a single run",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                 ),
                 GameObjectiveTemplate(
@@ -218,19 +218,19 @@ class ShovelKnightPocketDungeonGame(Game):
                 GameObjectiveTemplate(
                     label="Hoard 50,000 Gems in a single run as Treasure Knight",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                 ),
                 GameObjectiveTemplate(
                     label="Construct your mech 10 times in a single stage as Tinker Knight",
                     data={},
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Avoid damage 10 times using Mole Knight's burrow in a single run",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                 ),
                 GameObjectiveTemplate(
@@ -270,26 +270,26 @@ class ShovelKnightPocketDungeonGame(Game):
                 GameObjectiveTemplate(
                     label="Beat the game as DLC_CHARACTER",
                     data={"DLC_CHARACTER": (self.dlc_characters, 1)},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Complete a Quandary run as CHARACTER",
                     data={"CHARACTER": (self.quandary_characters, 1)},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Complete all four Quandaries as CHARACTER",
                     data={"CHARACTER": (self.quandary_characters, 1)},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Complete a Weekly Run",
                     data={},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Win a VS Mode match",

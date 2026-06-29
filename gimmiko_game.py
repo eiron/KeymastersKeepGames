@@ -101,19 +101,19 @@ class GimmikoGame(Game):
             GameObjectiveTemplate(
                 label="Complete one run in Gimmiko",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Complete one run in Gimmiko as CHARACTER",
                 data={"CHARACTER": (self.playable_characters, 1)},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
             ),
             GameObjectiveTemplate(
                 label="Reach Wave 13 in a run",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
             ),
             GameObjectiveTemplate(
@@ -201,8 +201,8 @@ class GimmikoGame(Game):
                 GameObjectiveTemplate(
                     label="Defeat BOSS on Wave 13",
                     data={"BOSS": (self.wave_13_bosses, 1)},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Defeat BOSS in the Catacombs",

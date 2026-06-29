@@ -361,7 +361,7 @@ class DiscogsCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Listen to a random album from your collection",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 )
@@ -374,7 +374,7 @@ class DiscogsCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Listen to a random album from your Discogs collection",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 )
@@ -459,7 +459,7 @@ class DiscogsCollectionGame(Game):
                 GameObjectiveTemplate(
                     label="Deep dive into ARTIST's releases in your collection",
                     data={"ARTIST": (self.artists, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 )

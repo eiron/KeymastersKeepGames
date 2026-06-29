@@ -103,14 +103,14 @@ class DateEverythingGame(Game):
                         "RELATIONSHIP_OUTCOME": (self.preferred_relationship_outcomes, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=8,
                 ),
                 GameObjectiveTemplate(
                     label="Get all STRUCTURE_COUNT structural elements to LOVE status",
                     data={"STRUCTURE_COUNT": (self.structure_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=4,
                 ),
             ])
@@ -199,7 +199,7 @@ class DateEverythingGame(Game):
                     label="Get all KITCHEN_COUNT kitchen appliances to a positive relationship status",
                     data={"KITCHEN_COUNT": (self.appliance_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
@@ -228,7 +228,7 @@ class DateEverythingGame(Game):
                     label="Achieve RELATIONSHIP_OUTCOME with both bathroom fixtures (Jean-Loo and Johnny Splash)",
                     data={"RELATIONSHIP_OUTCOME": (self.preferred_relationship_outcomes, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=5,
                 ),
                 GameObjectiveTemplate(
@@ -245,7 +245,7 @@ class DateEverythingGame(Game):
                     label="Achieve any relationship outcome with all bathroom characters",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=3,
                 ),
             ])
@@ -267,7 +267,7 @@ class DateEverythingGame(Game):
                     label="Achieve a positive relationship with both Washford (Washer) and Drysdale (Dryer)",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=5,
                 ),
                 GameObjectiveTemplate(
@@ -303,7 +303,7 @@ class DateEverythingGame(Game):
                     label="Achieve RELATIONSHIP_OUTCOME with Diana (Diary)",
                     data={"RELATIONSHIP_OUTCOME": (self.preferred_relationship_outcomes, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
@@ -342,7 +342,7 @@ class DateEverythingGame(Game):
                     label="Achieve positive relationship outcomes with Sophia (Safe) and Keith (Key)",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
@@ -367,7 +367,7 @@ class DateEverythingGame(Game):
                         "CONCEPT_CHARACTER": (self.concept_characters, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=10,
                 ),
                 GameObjectiveTemplate(
@@ -377,21 +377,21 @@ class DateEverythingGame(Game):
                         "SPECS_CATEGORY": (self.specs_categories, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=6,
                 ),
                 GameObjectiveTemplate(
                     label="Confront Doug (Existential Dread) and achieve a relationship outcome",
                     data={},
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
                     label="Survive NIGHTMARE_COUNT encounters with Nightmare",
                     data={"NIGHTMARE_COUNT": (self.nightmare_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=3,
                 ),
             ])
@@ -406,7 +406,7 @@ class DateEverythingGame(Game):
                         "DLC_CHARACTER": (self.dlc_characters, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=10,
                 ),
                 GameObjectiveTemplate(

@@ -52,7 +52,7 @@ class BaldursGate3Game(Game):
                         "LEVEL_THRESHOLD": (self.level_thresholds, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=8,
                 ),
                 GameObjectiveTemplate(
@@ -97,7 +97,7 @@ class BaldursGate3Game(Game):
                         "LEVEL_THRESHOLD": (self.level_thresholds, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=8,
                 ),
             ])
@@ -137,7 +137,7 @@ class BaldursGate3Game(Game):
                     label="TIEFLING_OUTCOME the tiefling refugees throughout the game",
                     data={"TIEFLING_OUTCOME": (self.tiefling_outcomes, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=6,
                 ),
             ])
@@ -268,8 +268,8 @@ class BaldursGate3Game(Game):
                 GameObjectiveTemplate(
                     label="Earn BUSKING_GOLD gold from playing music",
                     data={"BUSKING_GOLD": (self.busking_gold_amounts, 1)},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=6,
                 ),
                 GameObjectiveTemplate(
@@ -286,7 +286,7 @@ class BaldursGate3Game(Game):
                     label="Rescue Sazza from SAZZA_RESCUE_COUNT different locations",
                     data={"SAZZA_RESCUE_COUNT": (self.sazza_rescue_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=4,
                 ),
             ])
@@ -297,7 +297,7 @@ class BaldursGate3Game(Game):
                 GameObjectiveTemplate(
                     label="Obtain LEGENDARY_ITEM legendary item",
                     data={"LEGENDARY_ITEM": (self.legendary_items, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=8,
                 ),

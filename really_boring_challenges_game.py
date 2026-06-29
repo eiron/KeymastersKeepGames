@@ -210,14 +210,14 @@ class ReallyBoringChallengesGame(Game):
                         "OBSERVATION_DURATION": (self.mind_melting_durations, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
                     label="Sit as still as possible for STILLNESS_DURATION minutes (minimal movement only)",
                     data={"STILLNESS_DURATION": (self.torture_durations, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -237,7 +237,7 @@ class ReallyBoringChallengesGame(Game):
                         "STARE_DURATION": (self.eye_strain_durations, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
             ])
@@ -263,7 +263,7 @@ class ReallyBoringChallengesGame(Game):
                         "ARRANGEMENT_PATTERN": (self.complex_patterns, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -305,7 +305,7 @@ class ReallyBoringChallengesGame(Game):
                         "GRIND_DURATION": (self.soul_crushing_durations, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -324,7 +324,7 @@ class ReallyBoringChallengesGame(Game):
                     label="Complete MIND_NUMBING_TASK with perfect precision",
                     data={"MIND_NUMBING_TASK": (self.precision_tasks, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -344,7 +344,7 @@ class ReallyBoringChallengesGame(Game):
                         "MEDITATION_DURATION": (self.meditation_durations, 1)
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
             ])

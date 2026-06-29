@@ -243,7 +243,7 @@ class CultOfTheLambGame(Game):
                 GameObjectiveTemplate(
                     label="Complete a crusade using only WEAPON_TYPE weapons",
                     data={"WEAPON_TYPE": (self.weapon_types, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),
@@ -277,14 +277,14 @@ class CultOfTheLambGame(Game):
                         "AREA": (self.crusade_areas, 1),
                         "FLEECE": (self.fleeces, 1)
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
                     label="Complete a full row in the Purgatory Dungeon Gauntlet",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=1,
                 ),
@@ -389,8 +389,8 @@ class CultOfTheLambGame(Game):
                 GameObjectiveTemplate(
                     label="Defeat BISHOP",
                     data={"BISHOP": (self.bishops, 1)},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -424,8 +424,8 @@ class CultOfTheLambGame(Game):
                     GameObjectiveTemplate(
                         label="Defeat Marchosias",
                         data={},
-                        is_time_consuming=True,
-                        is_difficult=True,
+                        is_time_consuming=False,
+                        is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(

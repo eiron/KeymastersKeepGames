@@ -114,7 +114,7 @@ class Rocksmith2014Game(Game):
                     "ARRANGEMENT": (self.arrangements, 1),
                 },
                 is_time_consuming=True,
-                is_difficult=True,
+                is_difficult=False,
                 weight=2,
             ),
             GameObjectiveTemplate(
@@ -201,7 +201,7 @@ class Rocksmith2014Game(Game):
                     data={
                         "MISSION": (self.missions, 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 ),

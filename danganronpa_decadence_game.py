@@ -205,7 +205,7 @@ class DanganronpaGame(Game):
                         label="Complete Report Cards for QUANTITY different students (DR1)",
                         data={"QUANTITY": (self.all_report_card_counts, 1)},
                         is_time_consuming=True,
-                        is_difficult=True,
+                        is_difficult=False,
                         weight=3,
                     ),
                 ])
@@ -382,7 +382,7 @@ class DanganronpaGame(Game):
                         label="Complete Report Cards for QUANTITY different students (DR2)",
                         data={"QUANTITY": (self.all_report_card_counts, 1)},
                         is_time_consuming=True,
-                        is_difficult=True,
+                        is_difficult=False,
                         weight=3,
                     ),
                 ])
@@ -465,7 +465,7 @@ class DanganronpaGame(Game):
                     label="Earn all Hope Fragments for STUDENT in Island Mode (DR2)",
                     data={"STUDENT": (self.dr2_students, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
@@ -490,8 +490,8 @@ class DanganronpaGame(Game):
                 GameObjectiveTemplate(
                     label="Clear Chapter CHAPTER of Magical Girl Monomi (DR2)",
                     data={"CHAPTER": (self.all_monomi_chapters, 1)},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
@@ -613,7 +613,7 @@ class DanganronpaGame(Game):
                         label="Complete Report Cards for QUANTITY different students (V3)",
                         data={"QUANTITY": (self.all_report_card_counts, 1)},
                         is_time_consuming=True,
-                        is_difficult=True,
+                        is_difficult=False,
                         weight=3,
                     ),
                 ])
@@ -732,7 +732,7 @@ class DanganronpaGame(Game):
                     label="Develop a character to level LEVEL in Development Mode (DRS)",
                     data={"LEVEL": (self.all_development_levels, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
@@ -787,13 +787,13 @@ class DanganronpaGame(Game):
                     label="Acquire a rare card from the MonoMono Machine (DRS)",
                     data={},
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
                     label="Trigger a character event between CHARACTERS during Development Mode (DRS)",
                     data={"CHARACTERS": (self.all_summer_camp_characters, 2)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),

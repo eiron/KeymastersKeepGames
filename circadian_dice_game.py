@@ -177,7 +177,7 @@ class CircadianDiceGame(Game):
                 data={
                     "CHARACTER": (self.characters, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=3,
             ),
@@ -186,7 +186,7 @@ class CircadianDiceGame(Game):
                 data={
                     "DIFFICULTY": (self.difficulties_normal, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=3,
             ),
@@ -196,7 +196,7 @@ class CircadianDiceGame(Game):
                     "CHARACTER": (self.characters, 1),
                     "DIFFICULTY": (self.difficulties_normal, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=2,
             ),
@@ -205,7 +205,7 @@ class CircadianDiceGame(Game):
                 data={
                     "DIFFICULTY": (self.difficulties_hard, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=2,
             ),
@@ -215,7 +215,7 @@ class CircadianDiceGame(Game):
                     "CHARACTER": (self.characters, 1),
                     "DIFFICULTY": (self.difficulties_hard, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=2,
             ),
@@ -233,7 +233,7 @@ class CircadianDiceGame(Game):
                 data={
                     "DICE_TYPE": (self.dice_types, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=1,
             ),
@@ -278,7 +278,7 @@ class CircadianDiceGame(Game):
                 data={
                     "ENEMY_COUNT": (self.enemy_counts, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=2,
             ),
@@ -287,7 +287,7 @@ class CircadianDiceGame(Game):
                 data={
                     "STATUS": (self.status_types, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=1,
             ),
@@ -314,8 +314,8 @@ class CircadianDiceGame(Game):
                 data={
                     "DICE_TOTAL": (self.final_dice_counts, 1),
                 },
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(

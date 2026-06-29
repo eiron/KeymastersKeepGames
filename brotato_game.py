@@ -177,7 +177,7 @@ class BrotatoGame(Game):
                     "WEAPON_TYPE": (self.weapon_types, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -204,7 +204,7 @@ class BrotatoGame(Game):
                     "STAT_FOCUS": (self.stat_focuses, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -212,8 +212,8 @@ class BrotatoGame(Game):
                 data={
                     "CHARACTER": (self.characters, 1),
                 },
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=1,
             ),
         ]

@@ -312,7 +312,7 @@ class SuperDungeonMakerGame(Game):
                     "BOSS": (self.bosses, 3),
                 },
                 is_time_consuming=True,
-                is_difficult=True,
+                is_difficult=False,
                 weight=3,
             ),
             # Collectible objectives
@@ -331,7 +331,7 @@ class SuperDungeonMakerGame(Game):
                 data={
                     "THEME": (self.themes, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=2,
             ),
@@ -342,7 +342,7 @@ class SuperDungeonMakerGame(Game):
                     "THEME": (self.themes, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=2,
             ),
             # Tool-based objectives
@@ -388,7 +388,7 @@ class SuperDungeonMakerGame(Game):
                 data={
                     "THEME": (self.themes, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=2,
             ),
@@ -428,7 +428,7 @@ class SuperDungeonMakerGame(Game):
                     "DIFFICULTY": (self.difficulty_modifiers, 1),
                     "THEME": (self.themes, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=2,
             ),
@@ -445,7 +445,7 @@ class SuperDungeonMakerGame(Game):
                 data={
                     "THEME": (self.themes, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=2,
             ),

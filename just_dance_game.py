@@ -96,7 +96,7 @@ class JustDanceGame(Game):
                     "SONG": (self.songs, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=2,
             ),
             GameObjectiveTemplate(

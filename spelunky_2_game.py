@@ -186,21 +186,21 @@ class Spelunky2Game(Game):
                 data={
                     "CHARACTER": (self.available_characters, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=6,
             ),
             GameObjectiveTemplate(
                 label="Reach Olmec's Lair and defeat Olmec",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=6,
             ),
             GameObjectiveTemplate(
                 label="Defeat Tiamat while still holding the Ankh",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=3,
             ),
@@ -212,14 +212,14 @@ class Spelunky2Game(Game):
                 GameObjectiveTemplate(
                     label="Reach the Sunken City and defeat Hundun",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
                     label="Reach the Sunken City without using the Temple/Tide Pool shortcut",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=3,
                 ),
@@ -231,7 +231,7 @@ class Spelunky2Game(Game):
                 GameObjectiveTemplate(
                     label="Complete an Eggplant run (deliver the Eggplant Child to Hundun)",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=2,
                 )
@@ -243,7 +243,7 @@ class Spelunky2Game(Game):
                 GameObjectiveTemplate(
                     label="Complete a No-Gold run",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=3,
                 )
@@ -255,7 +255,7 @@ class Spelunky2Game(Game):
                 GameObjectiveTemplate(
                     label="Reach the Cosmic Ocean and clear at least 10 levels",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=2,
                 )
@@ -269,8 +269,8 @@ class Spelunky2Game(Game):
                     "CHARACTER": (self.available_characters, 1),
                     "BIOME_COMBO": (self.biome_pairs, 1),
                 },
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=6,
             )
         )
@@ -300,7 +300,7 @@ class Spelunky2Game(Game):
                 data={
                     "COUNT": (self.idol_counts, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=4,
             ),
@@ -323,7 +323,7 @@ class Spelunky2Game(Game):
                     "COUNT": (self.kali_health_rewards, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=3,
             ),
             GameObjectiveTemplate(
@@ -340,8 +340,8 @@ class Spelunky2Game(Game):
                 data={
                     "GOLD": (self.score_targets, 1),
                 },
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=3,
             ),
             GameObjectiveTemplate(
@@ -374,21 +374,21 @@ class Spelunky2Game(Game):
             GameObjectiveTemplate(
                 label="Find the Black Market",
                 data={},
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=3,
             ),
             GameObjectiveTemplate(
                 label="Complete a Moon Challenge",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=2,
             ),
             GameObjectiveTemplate(
                 label="Visit Vlad's Castle and obtain the Crown",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=2,
             ),
@@ -402,7 +402,7 @@ class Spelunky2Game(Game):
             GameObjectiveTemplate(
                 label="Steal an idol from 3 different areas in one run",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=3,
             ),
@@ -413,8 +413,8 @@ class Spelunky2Game(Game):
             GameObjectiveTemplate(
                 label="Finish a run with at least 500,000 gold",
                 data={},
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=2,
             ),
             GameObjectiveTemplate(

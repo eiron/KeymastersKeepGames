@@ -115,7 +115,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                         GameObjectiveTemplate(
                             label="Catch BUG and donate it to the museum",
                             data={"BUG": (self.bugs, 1)},
-                            is_time_consuming=True,
+                            is_time_consuming=False,
                             is_difficult=False,
                             weight=2,
                         )
@@ -125,7 +125,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                         GameObjectiveTemplate(
                             label="Catch BUG and sell it",
                             data={"BUG": (self.bugs, 1)},
-                            is_time_consuming=True,
+                            is_time_consuming=False,
                             is_difficult=False,
                             weight=2,
                         ),
@@ -136,7 +136,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                                 "BUG_OPTION_2": (self.seasonal_bugs, 1),
                                 "BUG_OPTION_3": (self.seasonal_bugs, 1)
                             },
-                            is_time_consuming=True,
+                            is_time_consuming=False,
                             is_difficult=False,
                             weight=2,
                         )
@@ -148,7 +148,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                         GameObjectiveTemplate(
                             label="Catch FISH and donate it to the museum",
                             data={"FISH": (self.fish, 1)},
-                            is_time_consuming=True,
+                            is_time_consuming=False,
                             is_difficult=False,
                             weight=2,
                         )
@@ -158,7 +158,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                         GameObjectiveTemplate(
                             label="Catch FISH and sell it",
                             data={"FISH": (self.fish, 1)},
-                            is_time_consuming=True,
+                            is_time_consuming=False,
                             is_difficult=False,
                             weight=2,
                         ),
@@ -169,7 +169,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                                 "FISH_OPTION_2": (self.seasonal_fish, 1),
                                 "FISH_OPTION_3": (self.seasonal_fish, 1)
                             },
-                            is_time_consuming=True,
+                            is_time_consuming=False,
                             is_difficult=False,
                             weight=2,
                         )
@@ -181,7 +181,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                         GameObjectiveTemplate(
                             label="Dive for SEA_CREATURE and donate it to the museum",
                             data={"SEA_CREATURE": (self.sea_creatures, 1)},
-                            is_time_consuming=True,
+                            is_time_consuming=False,
                             is_difficult=False,
                             weight=2,
                         )
@@ -191,7 +191,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                         GameObjectiveTemplate(
                             label="Dive for SEA_CREATURE and sell it",
                             data={"SEA_CREATURE": (self.sea_creatures, 1)},
-                            is_time_consuming=True,
+                            is_time_consuming=False,
                             is_difficult=False,
                             weight=2,
                         ),
@@ -202,7 +202,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                                 "SEA_OPTION_2": (self.seasonal_sea_creatures, 1),
                                 "SEA_OPTION_3": (self.seasonal_sea_creatures, 1)
                             },
-                            is_time_consuming=True,
+                            is_time_consuming=False,
                             is_difficult=False,
                             weight=2,
                         )
@@ -282,7 +282,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                             label="Complete the sea creature section of the museum",
                             data={},
                             is_time_consuming=True,
-                            is_difficult=True,
+                            is_difficult=False,
                             weight=1,
                         ),
                         GameObjectiveTemplate(
@@ -308,7 +308,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                     label="Complete the COLLECTION_TYPE section of the museum",
                     data={"COLLECTION_TYPE": (self.collection_types, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -331,21 +331,21 @@ class AnimalCrossingNewHorizonsGame(Game):
                     GameObjectiveTemplate(
                         label="Build and place BUILDING on your island",
                         data={"BUILDING": (self.new_island_buildings, 1)},
-                        is_time_consuming=True,
+                        is_time_consuming=False,
                         is_difficult=False,
                         weight=2,
                     ),
                     GameObjectiveTemplate(
                         label="Unlock SHOP for the first time",
                         data={"SHOP": (self.unlockable_shops, 1)},
-                        is_time_consuming=True,
+                        is_time_consuming=False,
                         is_difficult=False,
                         weight=2,
                     ),
                     GameObjectiveTemplate(
                         label="Invite your first VILLAGER_COUNT villagers to your island",
                         data={"VILLAGER_COUNT": (self.initial_villager_counts, 1)},
-                        is_time_consuming=True,
+                        is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
@@ -369,7 +369,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                     GameObjectiveTemplate(
                         label="Create a themed area: THEMED_AREA",
                         data={"THEMED_AREA": (self.themed_areas, 1)},
-                        is_time_consuming=True,
+                        is_time_consuming=False,
                         is_difficult=False,
                         weight=2,
                     ),
@@ -405,7 +405,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                     label="Achieve STAR_RATING star island rating",
                     data={"STAR_RATING": (self.star_ratings, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
             ])
@@ -493,7 +493,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                 GameObjectiveTemplate(
                     label="Craft CRAFT_ITEM using materials you collected yourself",
                     data={"CRAFT_ITEM": (self.craftable_items, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),
@@ -602,7 +602,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                 GameObjectiveTemplate(
                     label="Create and share a custom design on the portal",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),
@@ -676,7 +676,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                     GameObjectiveTemplate(
                         label="Complete your first hotel room design",
                         data={},
-                        is_time_consuming=True,
+                        is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
@@ -690,7 +690,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                     GameObjectiveTemplate(
                         label="Complete your first DIY request for the hotel donation box",
                         data={},
-                        is_time_consuming=True,
+                        is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
@@ -763,14 +763,14 @@ class AnimalCrossingNewHorizonsGame(Game):
                         label="Have all standard hotel rooms occupied at once",
                         data={},
                         is_time_consuming=False,
-                        is_difficult=True,
+                        is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
                         label="Reach maximum hotel brand recognition",
                         data={},
                         is_time_consuming=True,
-                        is_difficult=True,
+                        is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
@@ -795,7 +795,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                             label="Unlock and purchase all classic Nintendo consoles",
                             data={},
                             is_time_consuming=True,
-                            is_difficult=True,
+                            is_difficult=False,
                             weight=1,
                         ),
                         GameObjectiveTemplate(
@@ -813,7 +813,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                             label="Design COUNT VIP hotel rooms",
                             data={"COUNT": (self.vip_room_counts, 1)},
                             is_time_consuming=True,
-                            is_difficult=True,
+                            is_difficult=False,
                             weight=2,
                         )
                     )
@@ -829,7 +829,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                     GameObjectiveTemplate(
                         label="Create your first Slumber Island",
                         data={},
-                        is_time_consuming=True,
+                        is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     )
@@ -903,7 +903,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                         label="Create a perfectly symmetrical layout on a Slumber Island",
                         data={},
                         is_time_consuming=True,
-                        is_difficult=True,
+                        is_difficult=False,
                         weight=2,
                     ),
                     GameObjectiveTemplate(
@@ -1005,7 +1005,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                 GameObjectiveTemplate(
                     label="Design a vacation home with THEME theme",
                     data={"THEME": (self.vacation_home_themes, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),
@@ -1019,7 +1019,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                 GameObjectiveTemplate(
                     label="Build and design a FACILITY_TYPE facility",
                     data={"FACILITY_TYPE": (self.facility_types, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 ),
@@ -1037,7 +1037,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                     GameObjectiveTemplate(
                         label="Complete your first vacation home design",
                         data={},
-                        is_time_consuming=True,
+                        is_time_consuming=False,
                         is_difficult=False,
                         weight=1,
                     ),
@@ -1076,7 +1076,7 @@ class AnimalCrossingNewHorizonsGame(Game):
                         label="Complete all facility types on the archipelago",
                         data={},
                         is_time_consuming=True,
-                        is_difficult=True,
+                        is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(

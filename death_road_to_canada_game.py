@@ -303,7 +303,7 @@ class DeathRoadToCanadaGame(Game):
             GameObjectiveTemplate(
                 label="Reach Canada on DIFFICULTY difficulty",
                 data={"DIFFICULTY": (self.difficulties, 1)},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=2,
             ),

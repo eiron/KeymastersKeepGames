@@ -117,8 +117,8 @@ class HadesGame(Game):
                 GameObjectiveTemplate(
                     label="Complete a successful escape using WEAPON",
                     data={"WEAPON": (self.weapons, 1)},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
@@ -131,7 +131,7 @@ class HadesGame(Game):
                 GameObjectiveTemplate(
                     label="Reach LOCATION in a single run",
                     data={"LOCATION": (self.locations, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),
@@ -139,13 +139,13 @@ class HadesGame(Game):
                     label="Complete RUN_COUNT successful escapes",
                     data={"RUN_COUNT": (self.escape_counts, 1)},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
                     label="Complete an escape with HEAT heat or higher",
                     data={"HEAT": (self.heat_levels, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=1,
                 ),
@@ -160,7 +160,7 @@ class HadesGame(Game):
                         "ASPECT": (self.weapon_aspects, 1),
                         "WEAPON": (self.weapons, 1)
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),
@@ -184,7 +184,7 @@ class HadesGame(Game):
                 GameObjectiveTemplate(
                     label="Achieve a personal best time with WEAPON",
                     data={"WEAPON": (self.weapons, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),
@@ -217,7 +217,7 @@ class HadesGame(Game):
                         "KEEPSAKE": (self.keepsakes, 1),
                         "CHARACTER": (self.characters, 1)
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),
@@ -251,7 +251,7 @@ class HadesGame(Game):
                     label="Complete the main story ending",
                     data={},
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=1,
                 ),
             ])
@@ -329,7 +329,7 @@ class HadesGame(Game):
                         "RESOURCE_COUNT": (self.resource_counts, 1),
                         "RESOURCE_TYPE": (self.resources, 1)
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),

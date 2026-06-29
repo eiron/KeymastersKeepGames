@@ -114,7 +114,7 @@ class WordleGame(Game):
                 data={
                     "GUESS_LIMIT": (self.guess_limits, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=5,
             ),
@@ -142,7 +142,7 @@ class WordleGame(Game):
                     "VARIANT": (self.wordle_variants, 1),
                     "GUESS_LIMIT": (self.guess_limits, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=3,
             ),
@@ -150,7 +150,7 @@ class WordleGame(Game):
             GameObjectiveTemplate(
                 label="Solve today's Wordle and share the emoji grid",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=3,
             ),
@@ -159,7 +159,7 @@ class WordleGame(Game):
                 data={
                     "GUESS_LIMIT": (self.guess_limits, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=3,
             ),
@@ -172,7 +172,7 @@ class WordleGame(Game):
                     data={
                         "VARIANT": (self.wordle_variants, 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=5,
                 ),
@@ -182,8 +182,8 @@ class WordleGame(Game):
                         "VARIANT": (self.wordle_variants, 1),
                         "OTHER_VARIANT": (self.wordle_variants, 1),
                     },
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
@@ -191,7 +191,7 @@ class WordleGame(Game):
                     data={
                         "THEMED_VARIANT": (self.themed_variants, 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=3,
                 ),
@@ -200,7 +200,7 @@ class WordleGame(Game):
                     data={
                         "NON_WORD_VARIANT": (self.non_word_variants, 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=3,
                 ),
@@ -213,7 +213,7 @@ class WordleGame(Game):
                     data={
                         "MULTI_GRID_VARIANT": (self.multi_grid_variants, 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=4,
                 ),
@@ -222,7 +222,7 @@ class WordleGame(Game):
                     data={
                         "MULTI_GRID_VARIANT": (self.multi_grid_variants, 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=2,
                 ),
@@ -235,21 +235,21 @@ class WordleGame(Game):
                     data={
                         "OPENER": (self.opening_words, 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
                     label="Solve a puzzle using a no-vowel opening word",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
                     label="Solve a puzzle blind: enter all guesses without reading color feedback",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=2,
                 ),
@@ -258,7 +258,7 @@ class WordleGame(Game):
                     data={
                         "TIME_LIMIT": (self.time_limits, 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=3,
                 ),

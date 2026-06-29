@@ -119,7 +119,7 @@ class ChessComGame(Game):
                     "RATING": (self.ratings_normal, 1),
                     "MODE": (self.modes, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=3,
             ),
@@ -150,7 +150,7 @@ class ChessComGame(Game):
                     "VARIANT": (self.variants, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -160,7 +160,7 @@ class ChessComGame(Game):
                     "VARIANT": (self.variants, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=2,
             ),
             GameObjectiveTemplate(
@@ -214,8 +214,8 @@ class ChessComGame(Game):
                 data={
                     "SCORE": (self.puzzle_rush_scores, 1),
                 },
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -223,7 +223,7 @@ class ChessComGame(Game):
                 data={
                     "STREAK": (self.puzzle_streaks, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=1,
             ),
@@ -330,8 +330,8 @@ class ChessComGame(Game):
                     "BOT": (self.bots, 1),  # any bots, player chooses mix
                     "STREAK": (self.streak_lengths, 1),
                 },
-                is_time_consuming=True,
-                is_difficult=True,
+                is_time_consuming=False,
+                is_difficult=False,
                 weight=2,
             ),
             GameObjectiveTemplate(
@@ -379,14 +379,14 @@ class ChessComGame(Game):
                 label="Win as Black opening with the Bongcloud Defense (1...e5, 2...Ke7)",
                 data=dict(),
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
                 label="Win as White opening with c6 then d5 (inverted Caro structure)",
                 data=dict(),
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
             GameObjectiveTemplate(
@@ -421,7 +421,7 @@ class ChessComGame(Game):
                 label="Win a game after a successful deflection tactic gaining material",
                 data=dict(),
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
                 weight=1,
             ),
         ]

@@ -88,7 +88,7 @@ class ScavengerHuntGame(Game):
                         label="Photograph RARE_SUBJECT in natural lighting without flash",
                         data={"RARE_SUBJECT": (self.rare_photo_subjects, 1)},
                         is_time_consuming=True,
-                        is_difficult=True,
+                        is_difficult=False,
                         weight=1,
                     ),
                     GameObjectiveTemplate(
@@ -98,7 +98,7 @@ class ScavengerHuntGame(Game):
                             "SPECIFIC_TIME": (self.specific_times, 1)
                         },
                         is_time_consuming=True,
-                        is_difficult=True,
+                        is_difficult=False,
                         weight=1,
                     ),
                 ])

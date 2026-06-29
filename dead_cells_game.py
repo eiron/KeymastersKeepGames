@@ -84,22 +84,22 @@ class DeadCellsGame(Game):
                 GameObjectiveTemplate(
                     label="Complete a full run to BOSS",
                     data={"BOSS": (self.final_bosses, 1)},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
                     label="Reach BIOME without dying",
                     data={"BIOME": (self.biomes, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
                     label="Complete RUN_COUNT successful runs",
                     data={"RUN_COUNT": (self.run_counts, 1)},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -120,7 +120,7 @@ class DeadCellsGame(Game):
                     GameObjectiveTemplate(
                         label="Complete a run using BRUTALITY_WEAPON",
                         data={"BRUTALITY_WEAPON": (self.brutality_weapons, 1)},
-                        is_time_consuming=True,
+                        is_time_consuming=False,
                         is_difficult=False,
                         weight=2,
                     ),
@@ -138,7 +138,7 @@ class DeadCellsGame(Game):
                     GameObjectiveTemplate(
                         label="Complete a run using TACTICS_WEAPON",
                         data={"TACTICS_WEAPON": (self.tactics_weapons, 1)},
-                        is_time_consuming=True,
+                        is_time_consuming=False,
                         is_difficult=False,
                         weight=2,
                     ),
@@ -156,7 +156,7 @@ class DeadCellsGame(Game):
                     GameObjectiveTemplate(
                         label="Complete a run using SURVIVAL_WEAPON",
                         data={"SURVIVAL_WEAPON": (self.survival_weapons, 1)},
-                        is_time_consuming=True,
+                        is_time_consuming=False,
                         is_difficult=False,
                         weight=2,
                     ),
@@ -200,15 +200,15 @@ class DeadCellsGame(Game):
                         "BOSS": (self.bosses, 1),
                         "WEAPON_TYPE": (self.weapon_types, 1)
                     },
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Defeat all bosses in BIOME",
                     data={"BIOME": (self.boss_biomes, 1)},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=2,
                 ),
             ])
@@ -226,8 +226,8 @@ class DeadCellsGame(Game):
                 GameObjectiveTemplate(
                     label="Complete all challenge rooms in BIOME",
                     data={"BIOME": (self.biomes, 1)},
-                    is_time_consuming=True,
-                    is_difficult=True,
+                    is_time_consuming=False,
+                    is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
@@ -274,7 +274,7 @@ class DeadCellsGame(Game):
                 GameObjectiveTemplate(
                     label="Complete a run using MUTATION build",
                     data={"MUTATION": (self.mutation_builds, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=2,
                 ),
@@ -300,21 +300,21 @@ class DeadCellsGame(Game):
                 GameObjectiveTemplate(
                     label="Complete a run on BC_LEVEL Boss Cell difficulty",
                     data={"BC_LEVEL": (self.boss_cell_levels, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Unlock BC_LEVEL Boss Cell",
                     data={"BC_LEVEL": (self.boss_cell_unlocks, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
                     label="Survive MALAISE_LEVEL malaise infection",
                     data={"MALAISE_LEVEL": (self.malaise_levels, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=2,
                 ),
@@ -329,7 +329,7 @@ class DeadCellsGame(Game):
                         "BOSS": (self.final_bosses, 1),
                         "TIME_GOAL": (self.speed_goals, 1)
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=True,
                     weight=1,
                 ),
