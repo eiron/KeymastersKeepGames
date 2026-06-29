@@ -206,6 +206,8 @@ class HarvestellaGame(Game):
                 GameObjectiveTemplate(
                     label="Raise a Cluffowl",
                     data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
                 ),
                 GameObjectiveTemplate(
                     label="Achieve maximum bond level with Cluffowl",

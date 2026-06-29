@@ -90,6 +90,14 @@ class CustomCategoriesGame(Game):
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
         objectives = []
+        objectives.append(
+            GameObjectiveTemplate(
+                label='Complete one task from a custom category',
+                data={},
+                is_time_consuming=False,
+                is_difficult=False,
+            ),
+        )
 
         # Ensure categories collection is parsed
         if not self.categories_collection:

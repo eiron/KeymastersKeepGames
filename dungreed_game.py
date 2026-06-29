@@ -166,7 +166,7 @@ class DungreedGame(Game):
                 data={
                     "CHARACTER": (self.characters, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=5,
             ),

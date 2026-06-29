@@ -117,7 +117,7 @@ class DownwellGame(Game):
             GameObjectiveTemplate(
                 label="Beat the game as STYLE",
                 data={"STYLE": (self.styles, 1)},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=6,
             ),

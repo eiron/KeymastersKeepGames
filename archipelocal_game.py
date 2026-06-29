@@ -284,7 +284,7 @@ class ArchipelocalGame(Game):
                 GameObjectiveTemplate(
                     label="Visit a CATEGORY near your home (within your max distance)",
                     data={"CATEGORY": (lambda: self.allowed_categories_friendly(), 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=cat_w,
                 )

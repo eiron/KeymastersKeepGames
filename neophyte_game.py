@@ -113,7 +113,7 @@ class NeophyteGame(Game):
             GameObjectiveTemplate(
                 label="Complete a full run",
                 data={},
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=10,
             ),

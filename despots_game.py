@@ -171,7 +171,7 @@ class DespotsGame(Game):
                 GameObjectiveTemplate(
                     label="Reach floor FLOOR_TARGET in the campaign",
                     data={"FLOOR_TARGET": (self.campaign_floor_targets, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=6,
                 ),

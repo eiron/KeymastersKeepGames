@@ -74,7 +74,7 @@ class InscryptionGame(Game):
                 GameObjectiveTemplate(
                     label="Complete Act I: Defeat Leshy in his cabin",
                     data={},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=8,
                 ),

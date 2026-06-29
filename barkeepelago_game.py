@@ -125,7 +125,7 @@ class BarkeepelagoGame(Game):
                     data={
                         "DRINK": (["a drink of your choice"], 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                 ),
             ]

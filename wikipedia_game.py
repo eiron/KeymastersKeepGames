@@ -241,7 +241,7 @@ class WikipediaGame(Game):
                         "ARTICLES": (self.master_articles, 2),
                         "EASY_CLICKS": (self.easy_clicks_for_easy, 1),
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=3,
                 ),

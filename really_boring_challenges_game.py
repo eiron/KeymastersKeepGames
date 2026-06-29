@@ -80,6 +80,14 @@ class ReallyBoringChallengesGame(Game):
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
         game_objective_templates: List[GameObjectiveTemplate] = list()
+        game_objective_templates.append(
+            GameObjectiveTemplate(
+                label='Count to 100 out loud without losing track',
+                data={},
+                is_time_consuming=False,
+                is_difficult=False,
+            ),
+        )
 
         # Repetitive Counting
         if self.include_repetitive_counting:

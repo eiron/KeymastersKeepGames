@@ -166,7 +166,7 @@ class MonsterPromGame(Game):
                 data={
                     "CHARACTER": (self.base_romance_options, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=6,
             ),

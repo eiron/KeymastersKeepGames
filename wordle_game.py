@@ -132,7 +132,7 @@ class WordleGame(Game):
                 data={
                     "WORDLE_COUNT": (self.wordle_counts, 1),
                 },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=3,
             ),

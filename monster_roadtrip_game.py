@@ -72,7 +72,7 @@ class MonsterRoadtripGame(Game):
                 GameObjectiveTemplate(
                     label="Win a run reaching DESTINATION",
                     data={"DESTINATION": (self.destinations, 1)},
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=8,
                 ),
