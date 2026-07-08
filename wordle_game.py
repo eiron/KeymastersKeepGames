@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import List
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, OptionSet, Toggle
+from Options import DefaultOnToggle, OptionSet, Range
 
 from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
@@ -12,10 +12,17 @@ from ..enums import KeymastersKeepGamePlatforms
 
 @dataclass
 class WordleArchipelagoOptions:
+    wordle_include_wordle: WordleIncludeWordle
     wordle_variants: WordleVariants
+    wordle_themed_variants: WordleThemedVariants
+    wordle_non_word_variants: WordleNonWordVariants
+    wordle_multi_grid_variants: WordleMultiGridVariants
     wordle_include_variants: WordleIncludeVariants
     wordle_include_multi_grid: WordleIncludeMultiGrid
     wordle_include_challenge_runs: WordleIncludeChallengeRuns
+    wordle_daily_puzzles: WordleDailyPuzzles
+    wordle_minimum_daily_puzzle_count: WordleMinimumDailyPuzzleCount
+    wordle_maximum_daily_puzzle_count: WordleMaximumDailyPuzzleCount
 
 
 class WordleGame(Game):
@@ -29,6 +36,10 @@ class WordleGame(Game):
     options_cls = WordleArchipelagoOptions
 
     # Properties
+    @property
+    def include_wordle(self) -> bool:
+        return bool(self.archipelago_options.wordle_include_wordle.value)
+
     @property
     def include_variants(self) -> bool:
         return bool(self.archipelago_options.wordle_include_variants.value)
@@ -46,50 +57,19 @@ class WordleGame(Game):
 
         constraints += [
             GameObjectiveTemplate(
-                label="Solve a puzzle in VARIANT",
-                data={
-                    "VARIANT": (self.wordle_variants, 1),
-                },
-                is_time_consuming=False,
-                is_difficult=True,
-            ),
-            GameObjectiveTemplate(
-                label="Solve VARIANT within ATTEMPT_LIMIT attempts",
-                data={
-                    "VARIANT": (self.wordle_variants, 1),
-                    "ATTEMPT_LIMIT": (self.attempt_limits, 1),
-                },
-                is_time_consuming=False,
-                is_difficult=True,
-            ),
-            GameObjectiveTemplate(
                 label="Solve a puzzle without using hints or helper tools",
                 data={},
-                is_time_consuming=False,
-                is_difficult=True,
-            ),
-            GameObjectiveTemplate(
-                label="Solve a puzzle with Hard Mode enabled",
-                data={},
-                is_time_consuming=False,
-                is_difficult=True,
-            ),
-            GameObjectiveTemplate(
-                label="Open with the word OPENER",
-                data={
-                    "OPENER": (self.opening_words, 1),
-                },
                 is_time_consuming=False,
                 is_difficult=False,
             ),
             GameObjectiveTemplate(
-                label="Open with a word containing no vowels (e.g. CRYPT, GLYPH, NYMPH)",
+                label="Play with Hard Mode enabled where the puzzle supports it",
                 data={},
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
             ),
             GameObjectiveTemplate(
-                label="Solve without ever reusing a letter you already know is not in the word (Ultra Hard Mode)",
+                label="Never reuse a letter you already know is not in the word (Ultra Hard Mode), where applicable",
                 data={},
                 is_time_consuming=False,
                 is_difficult=True,
@@ -100,72 +80,61 @@ class WordleGame(Game):
                     "TIME_LIMIT": (self.time_limits, 1),
                 },
                 is_time_consuming=False,
-                is_difficult=True,
+                is_difficult=False,
             ),
         ]
 
         return constraints
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
-        templates: List[GameObjectiveTemplate] = [
-            # Original objectives (preserved)
-            GameObjectiveTemplate(
-                label="Solve Wordle in GUESS_LIMIT guesses or less",
-                data={
-                    "GUESS_LIMIT": (self.guess_limits, 1),
-                },
-                is_time_consuming=False,
-                is_difficult=True,
-                weight=5,
-            ),
-            GameObjectiveTemplate(
-                label="Solve STREAK_COUNT Wordle puzzle(s) in a row",
-                data={
-                    "STREAK_COUNT": (self.streak_counts, 1),
-                },
-                is_time_consuming=True,
-                is_difficult=True,
-                weight=4,
-            ),
-            GameObjectiveTemplate(
-                label="Solve WORDLE_COUNT puzzle(s) today across Wordle-style variants",
-                data={
-                    "WORDLE_COUNT": (self.wordle_counts, 1),
-                },
-                is_time_consuming=False,
-                is_difficult=False,
-                weight=3,
-            ),
-            GameObjectiveTemplate(
-                label="Solve a puzzle in VARIANT within GUESS_LIMIT guesses",
-                data={
-                    "VARIANT": (self.wordle_variants, 1),
-                    "GUESS_LIMIT": (self.guess_limits, 1),
-                },
-                is_time_consuming=False,
-                is_difficult=True,
-                weight=3,
-            ),
-            # Added objectives
-            GameObjectiveTemplate(
-                label="Solve today's Wordle and share the emoji grid",
-                data={},
-                is_time_consuming=False,
-                is_difficult=False,
-                weight=3,
-            ),
-            GameObjectiveTemplate(
-                label="Solve Wordle in Hard Mode in GUESS_LIMIT guesses or less",
-                data={
-                    "GUESS_LIMIT": (self.guess_limits, 1),
-                },
-                is_time_consuming=False,
-                is_difficult=True,
-                weight=3,
-            ),
-        ]
+        templates: List[GameObjectiveTemplate] = []
 
-        if self.include_variants:
+        if self.include_wordle:
+            templates.extend([
+                GameObjectiveTemplate(
+                    label="Solve today's Wordle",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=5,
+                ),
+                GameObjectiveTemplate(
+                    label="Solve Wordle in GUESS_LIMIT guesses or less",
+                    data={
+                        "GUESS_LIMIT": (self.guess_limits, 1),
+                    },
+                    is_time_consuming=False,
+                    is_difficult=True,
+                    weight=5,
+                ),
+                GameObjectiveTemplate(
+                    label="Solve STREAK_COUNT Wordle puzzle(s) in a row",
+                    data={
+                        "STREAK_COUNT": (self.streak_counts, 1),
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=4,
+                ),
+                GameObjectiveTemplate(
+                    label="Solve a Wordle puzzle in Hard Mode",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=3,
+                ),
+                GameObjectiveTemplate(
+                    label="Solve Wordle in Hard Mode in GUESS_LIMIT guesses or less",
+                    data={
+                        "GUESS_LIMIT": (self.guess_limits, 1),
+                    },
+                    is_time_consuming=False,
+                    is_difficult=True,
+                    weight=3,
+                ),
+            ])
+
+        if self.include_variants and self.wordle_variants():
             templates.extend([
                 GameObjectiveTemplate(
                     label="Solve a puzzle in VARIANT",
@@ -177,15 +146,28 @@ class WordleGame(Game):
                     weight=5,
                 ),
                 GameObjectiveTemplate(
-                    label="Solve a puzzle in each of VARIANT and OTHER_VARIANT in the same day",
+                    label="Solve a puzzle in VARIANT within GUESS_LIMIT guesses",
                     data={
                         "VARIANT": (self.wordle_variants, 1),
-                        "OTHER_VARIANT": (self.wordle_variants, 1),
+                        "GUESS_LIMIT": (self.guess_limits, 1),
+                    },
+                    is_time_consuming=False,
+                    is_difficult=True,
+                    weight=3,
+                ),
+                GameObjectiveTemplate(
+                    label="Solve WORDLE_COUNT puzzle(s) today across Wordle-style variants",
+                    data={
+                        "WORDLE_COUNT": (self.wordle_counts, 1),
                     },
                     is_time_consuming=False,
                     is_difficult=False,
                     weight=3,
                 ),
+            ])
+
+        if self.include_variants and self.themed_variants():
+            templates.append(
                 GameObjectiveTemplate(
                     label="Solve the THEMED_VARIANT themed puzzle",
                     data={
@@ -195,6 +177,10 @@ class WordleGame(Game):
                     is_difficult=False,
                     weight=3,
                 ),
+            )
+
+        if self.include_variants and self.non_word_variants():
+            templates.append(
                 GameObjectiveTemplate(
                     label="Solve the NON_WORD_VARIANT puzzle (a non-word Wordle-style game)",
                     data={
@@ -204,9 +190,9 @@ class WordleGame(Game):
                     is_difficult=False,
                     weight=3,
                 ),
-            ])
+            )
 
-        if self.include_multi_grid:
+        if self.include_multi_grid and self.multi_grid_variants():
             templates.extend([
                 GameObjectiveTemplate(
                     label="Solve a game of MULTI_GRID_VARIANT (multiple boards at once)",
@@ -214,7 +200,7 @@ class WordleGame(Game):
                         "MULTI_GRID_VARIANT": (self.multi_grid_variants, 1),
                     },
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=4,
                 ),
                 GameObjectiveTemplate(
@@ -231,7 +217,7 @@ class WordleGame(Game):
         if self.include_challenge_runs:
             templates.extend([
                 GameObjectiveTemplate(
-                    label="Solve a puzzle always opening with the word OPENER",
+                    label="Open with the word OPENER",
                     data={
                         "OPENER": (self.opening_words, 1),
                     },
@@ -240,17 +226,10 @@ class WordleGame(Game):
                     weight=3,
                 ),
                 GameObjectiveTemplate(
-                    label="Solve a puzzle using a no-vowel opening word",
+                    label="Open with a word containing no vowels (e.g. CRYPT, GLYPH, NYMPH)",
                     data={},
                     is_time_consuming=False,
-                    is_difficult=True,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Solve a puzzle blind: enter all guesses without reading color feedback",
-                    data={},
-                    is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
                 GameObjectiveTemplate(
@@ -259,7 +238,7 @@ class WordleGame(Game):
                         "TIME_LIMIT": (self.time_limits, 1),
                     },
                     is_time_consuming=False,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=3,
                 ),
                 GameObjectiveTemplate(
@@ -268,20 +247,57 @@ class WordleGame(Game):
                         "STREAK_COUNT": (self.streak_counts, 1),
                     },
                     is_time_consuming=True,
-                    is_difficult=True,
+                    is_difficult=False,
                     weight=2,
                 ),
             ])
 
+        if self.daily_puzzles():
+            templates.extend([
+                GameObjectiveTemplate(
+                    label="Solve the daily DAILY_PUZZLE puzzle",
+                    data={
+                        "DAILY_PUZZLE": (self.daily_puzzles, 1),
+                    },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=5,
+                ),
+                GameObjectiveTemplate(
+                    label="Solve the daily DAILY_PUZZLE puzzle STREAK_COUNT days in a row",
+                    data={
+                        "DAILY_PUZZLE": (self.daily_puzzles, 1),
+                        "STREAK_COUNT": (self.streak_counts, 1),
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=2,
+                ),
+            ])
+
+        min_puzzles: int = self.archipelago_options.wordle_minimum_daily_puzzle_count.value
+        max_puzzles: int = self.archipelago_options.wordle_maximum_daily_puzzle_count.value
+
+        for puzzle_count in range(min_puzzles, max_puzzles + 1):
+            if puzzle_count > len(self.eligible_daily_puzzles()):
+                break
+
+            templates.append(
+                GameObjectiveTemplate(
+                    label="Solve each of the following daily puzzles in the same day: PUZZLES",
+                    data={
+                        "PUZZLES": (self.eligible_daily_puzzles, puzzle_count),
+                    },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
+            )
+
         return templates
 
     def wordle_variants(self) -> List[str]:
-        selected: List[str] = sorted(self.archipelago_options.wordle_variants.value)
-
-        if not selected:
-            return self.default_wordle_variants()
-
-        return selected
+        return sorted(self.archipelago_options.wordle_variants.value)
 
     @staticmethod
     def default_wordle_variants() -> List[str]:
@@ -299,10 +315,19 @@ class WordleGame(Game):
             "Nerdle",
             "Crosswordle",
             "Semantle",
+            "Waffle",
+            "Antiwordle",
+            "Phrazle",
+            "Diffle",
+            "Squareword",
+            "Xordle",
         ]
 
+    def multi_grid_variants(self) -> List[str]:
+        return sorted(self.archipelago_options.wordle_multi_grid_variants.value)
+
     @staticmethod
-    def multi_grid_variants() -> List[str]:
+    def default_multi_grid_variants() -> List[str]:
         return [
             "Dordle",
             "Quordle",
@@ -311,8 +336,11 @@ class WordleGame(Game):
             "Duotrigordle",
         ]
 
+    def themed_variants(self) -> List[str]:
+        return sorted(self.archipelago_options.wordle_themed_variants.value)
+
     @staticmethod
-    def themed_variants() -> List[str]:
+    def default_themed_variants() -> List[str]:
         return [
             "Lewdle",
             "Sweardle",
@@ -321,18 +349,58 @@ class WordleGame(Game):
             "Weddle",
         ]
 
+    def non_word_variants(self) -> List[str]:
+        return sorted(self.archipelago_options.wordle_non_word_variants.value)
+
     @staticmethod
-    def non_word_variants() -> List[str]:
+    def default_non_word_variants() -> List[str]:
         return [
             "Nerdle",
             "Worldle",
             "Globle",
-            "Heardle",
             "Framed",
             "Semantle",
             "Redactle",
             "Tradle",
             "Poeltl",
+            "Contexto",
+            "Moviedle",
+            "Actorle",
+            "Bandle",
+            "Chessle",
+            "Spotle",
+            "Countryle",
+        ]
+
+    def daily_puzzles(self) -> List[str]:
+        return sorted(self.archipelago_options.wordle_daily_puzzles.value)
+
+    def eligible_daily_puzzles(self) -> List[str]:
+        puzzles: List[str] = list(self.daily_puzzles())
+
+        if self.include_wordle:
+            puzzles.append("Wordle")
+
+        if self.include_variants:
+            puzzles += self.wordle_variants()
+            puzzles += self.themed_variants()
+            puzzles += self.non_word_variants()
+
+        if self.include_multi_grid:
+            puzzles += self.multi_grid_variants()
+
+        return sorted(set(puzzles))
+
+    @staticmethod
+    def default_daily_puzzles() -> List[str]:
+        return [
+            "Connections",
+            "Strands",
+            "Spelling Bee",
+            "The Mini Crossword",
+            "Letter Boxed",
+            "Murdle",
+            "TimeGuessr",
         ]
 
     @staticmethod
@@ -350,15 +418,11 @@ class WordleGame(Game):
 
     @staticmethod
     def time_limits() -> List[str]:
-        return ["3 minutes", "2 minutes", "1 minute"]
+        return ["5 minutes", "4 minutes", "3 minutes"]
 
     @staticmethod
     def guess_limits() -> List[str]:
-        return ["6", "5", "4", "3"]
-
-    @staticmethod
-    def attempt_limits() -> List[str]:
-        return ["10", "8", "6"]
+        return ["4", "3"]
 
     @staticmethod
     def streak_counts() -> List[str]:
@@ -370,13 +434,49 @@ class WordleGame(Game):
 
 
 # Archipelago Options
+class WordleIncludeWordle(DefaultOnToggle):
+    """Include objectives for the original daily Wordle itself."""
+    display_name = "Wordle Include Wordle Objectives"
+
+
 class WordleVariants(OptionSet):
     """Which Wordle-style variants can be targeted by variant objectives and constraints.
 
-    Defaults to the full built-in list; players may edit this to remove variants or add their own.
+    Freely add any other variants you want to play; remove any you do not.
+    Emptying the list disables these objectives entirely.
     """
     display_name = "Wordle Variants"
     default = WordleGame.default_wordle_variants()
+
+
+class WordleThemedVariants(OptionSet):
+    """Which themed Wordle variants can be targeted by themed variant objectives.
+
+    Freely add any other themed variants you want to play; remove any you do not.
+    Emptying the list disables these objectives entirely.
+    """
+    display_name = "Wordle Themed Variants"
+    default = WordleGame.default_themed_variants()
+
+
+class WordleNonWordVariants(OptionSet):
+    """Which non-word Wordle-style games can be targeted by non-word variant objectives.
+
+    Freely add any other non-word games you want to play; remove any you do not.
+    Emptying the list disables these objectives entirely.
+    """
+    display_name = "Wordle Non-Word Variants"
+    default = WordleGame.default_non_word_variants()
+
+
+class WordleMultiGridVariants(OptionSet):
+    """Which multi-grid Wordle variants can be targeted by multi-grid objectives.
+
+    Freely add any other multi-grid variants you want to play; remove any you do not.
+    Emptying the list disables these objectives entirely.
+    """
+    display_name = "Wordle Multi-Grid Variants"
+    default = WordleGame.default_multi_grid_variants()
 
 
 class WordleIncludeVariants(DefaultOnToggle):
@@ -390,8 +490,40 @@ class WordleIncludeMultiGrid(DefaultOnToggle):
 
 
 class WordleIncludeChallengeRuns(DefaultOnToggle):
-    """Include self-imposed challenge objectives such as fixed openers, blind solves and timed solves."""
+    """Include self-imposed challenge objectives such as fixed openers and timed solves."""
     display_name = "Wordle Include Challenge Run Objectives"
+
+
+class WordleDailyPuzzles(OptionSet):
+    """Which non-Wordle daily puzzles can be targeted by daily puzzle objectives.
+
+    Freely add any other daily puzzles you want to play; remove any you do not.
+    Emptying the list disables these objectives entirely.
+    """
+    display_name = "Wordle Daily Puzzles"
+    default = WordleGame.default_daily_puzzles()
+
+
+class WordleMinimumDailyPuzzleCount(Range):
+    """The minimum number of puzzles to include in same-day multi-puzzle objectives.
+
+    These draw from all enabled puzzles: Wordle, Wordle-likes and other daily puzzles.
+    """
+    display_name = "Wordle Minimum Daily Puzzle Count"
+    default = 2
+    range_start = 2
+    range_end = 5
+
+
+class WordleMaximumDailyPuzzleCount(Range):
+    """The maximum number of puzzles to include in same-day multi-puzzle objectives.
+
+    These draw from all enabled puzzles: Wordle, Wordle-likes and other daily puzzles.
+    """
+    display_name = "Wordle Maximum Daily Puzzle Count"
+    default = 3
+    range_start = 2
+    range_end = 5
 
 
 
