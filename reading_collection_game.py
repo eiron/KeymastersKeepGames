@@ -506,17 +506,18 @@ class ReadingCollectionGame(Game):
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
         objectives: List[GameObjectiveTemplate] = []
-        objectives.append(
-            GameObjectiveTemplate(
-                label='Read one chapter from your reading collection',
-                data={},
-                is_time_consuming=False,
-                is_difficult=False,
-            ),
-        )
 
-        # If no books found, provide a fallback
+        # If no books found, provide fallbacks (including one non-time-consuming option)
         if not self._filtered_books():
+            objectives.append(
+                GameObjectiveTemplate(
+                    label='Read one chapter from your reading collection',
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                )
+            )
             objectives.append(
                 GameObjectiveTemplate(
                     label="Read a book from your reading collection",
