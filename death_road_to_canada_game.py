@@ -315,8 +315,11 @@ class DeathRoadToCanadaGame(Game):
                 weight=2,
             ),
             GameObjectiveTemplate(
-                label="Collect SURVIVOR_TYPE survivors",
-                data={"SURVIVOR_TYPE": (self.survivor_roles, 1)},
+                label="Collect PARTY_SIZE SURVIVOR_TYPE survivors",
+                data={
+                    "PARTY_SIZE": (self.party_sizes,1),
+                    "SURVIVOR_TYPE": (self.survivor_roles, 1)
+                    },
                 is_time_consuming=False,
                 is_difficult=False,
                 weight=1,

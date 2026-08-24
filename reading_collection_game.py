@@ -540,6 +540,17 @@ class ReadingCollectionGame(Game):
                 )
             )
 
+            # Non-time-consuming variant so books still appear when long objectives are disabled
+            objectives.append(
+                GameObjectiveTemplate(
+                    label="Read a chapter of BOOK",
+                    data={"BOOK": (self.books, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=4,
+                )
+            )
+
         # Author-based challenge
         if self.authors():
             objectives.append(
@@ -549,6 +560,16 @@ class ReadingCollectionGame(Game):
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=3,
+                )
+            )
+
+            objectives.append(
+                GameObjectiveTemplate(
+                    label="Read a chapter of a book by AUTHOR",
+                    data={"AUTHOR": (self.authors, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
                 )
             )
 

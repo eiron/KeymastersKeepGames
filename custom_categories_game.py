@@ -90,18 +90,25 @@ class CustomCategoriesGame(Game):
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
         objectives = []
-        objectives.append(
-            GameObjectiveTemplate(
-                label='Complete one task from a custom category',
-                data={},
-                is_time_consuming=False,
-                is_difficult=False,
-            ),
-        )
 
         # Ensure categories collection is parsed
         if not self.categories_collection:
             _ = self.optional_game_constraint_templates()
+
+        # The generic fallback is only valid when there are no actual custom tasks to generate.
+        if not self.categories_collection or not any(
+            category_info.get("tasks", [])
+            for category_info in self.categories_collection.values()
+        ):
+            objectives.append(
+                GameObjectiveTemplate(
+                    label='Complete one task from a custom category',
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                )
+            )
+            return objectives
 
         # Generate objectives for each category
         for category_name, category_info in self.categories_collection.items():
