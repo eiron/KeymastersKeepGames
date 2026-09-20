@@ -14,12 +14,26 @@ from ..game import Game
 from ..game_objective_template import GameObjectiveTemplate
 from ..enums import KeymastersKeepGamePlatforms
 
+# Keyword match against achievement name/description text (see SteamAchievementsExcludeMultiplayerAchievements)
+_MULTIPLAYER_KEYWORDS = [
+    "multiplayer", "multi-player", "online mode", "online match", "online play",
+    "co-op", "coop", "versus mode", "pvp", "matchmaking", "ranked match",
+    "another player", "with a friend", "with friends",
+]
+
+def _is_multiplayer_achievement(name: str, description: str) -> bool:
+    text = f"{name} {description}".lower()
+    return any(keyword in text for keyword in _MULTIPLAYER_KEYWORDS)
+
 @dataclass
 class SteamAchievementsArchipelagoOptions:
     steam_achievements_min_time_played: SteamAchievementsMinTimePlayed
     steam_achievements_max_time_played: SteamAchievementsMaxTimePlayed
     steam_achievements_steam_id: SteamAchievementsSteamID
     steam_achievements_excluded_games: SteamAchievementsExcludedGames
+    steam_achievements_excluded_achievements: SteamAchievementsExcludedAchievements
+    steam_achievements_exclude_dlc_gated_achievements: SteamAchievementsExcludeDlcGatedAchievements
+    steam_achievements_exclude_multiplayer_achievements: SteamAchievementsExcludeMultiplayerAchievements
     steam_achievements_percentage_min: SteamAchievementsPercentageMin
     steam_achievements_percentage_max: SteamAchievementsPercentageMax
     steam_achievements_include_play_game: SteamAchievementsIncludePlayGame
@@ -303,9 +317,19 @@ class SteamAchievementsGame(Game):
                 continue
             
             global_pcts = steam_library.get_global_achievement_percentages(game["appid"])
+            descriptions = steam_library.get_achievement_descriptions(game["appid"])
             
             filtered = []
             for achievement in achievements:
+                if self._is_achievement_excluded(game["name"], achievement):
+                    continue
+
+                if self.exclude_dlc_gated_achievements and steam_library.achievement_requires_unowned_dlc(steam_id, game["appid"], descriptions.get(achievement, "")):
+                    continue
+
+                if self.exclude_multiplayer_achievements and _is_multiplayer_achievement(achievement, descriptions.get(achievement, "")):
+                    continue
+
                 pct = float(global_pcts.get(achievement, 50.0))  # Default to 50% if unknown
                 
                 if tier == "quick" and pct >= time_threshold:
@@ -355,9 +379,19 @@ class SteamAchievementsGame(Game):
                 continue
 
             global_pcts = steam_library.get_global_achievement_percentages(game["appid"])
+            descriptions = steam_library.get_achievement_descriptions(game["appid"])
 
             filtered = []
             for achievement in achievements:
+                if self._is_achievement_excluded(game["name"], achievement):
+                    continue
+
+                if self.exclude_dlc_gated_achievements and steam_library.achievement_requires_unowned_dlc(steam_id, game["appid"], descriptions.get(achievement, "")):
+                    continue
+
+                if self.exclude_multiplayer_achievements and _is_multiplayer_achievement(achievement, descriptions.get(achievement, "")):
+                    continue
+
                 pct = float(global_pcts.get(achievement, 50.0))
 
                 if tier == "quick" and pct >= time_threshold:
@@ -386,6 +420,24 @@ class SteamAchievementsGame(Game):
     @property
     def excluded_games(self) -> Set[str]:
         return self.archipelago_options.steam_achievements_excluded_games.value
+
+    @property
+    def excluded_achievements(self) -> Set[str]:
+        return self.archipelago_options.steam_achievements_excluded_achievements.value
+
+    @property
+    def exclude_multiplayer_achievements(self) -> bool:
+        return self.archipelago_options.steam_achievements_exclude_multiplayer_achievements.value
+
+    @property
+    def exclude_dlc_gated_achievements(self) -> bool:
+        return self.archipelago_options.steam_achievements_exclude_dlc_gated_achievements.value
+
+    def _is_achievement_excluded(self, game_name: str, achievement_name: str) -> bool:
+        excluded = self.excluded_achievements
+        if not excluded:
+            return False
+        return achievement_name in excluded or f"{game_name}: {achievement_name}" in excluded
 
     def percentages(self) -> range:
         min_pct = self.archipelago_options.steam_achievements_percentage_min.value
@@ -470,6 +522,39 @@ class SteamAchievementsExcludedGames(OptionSet):
     List of game names (must be an exact match) or Steam App IDs to exclude from the Steam library.
     """
     display_name = "Steam Achievements Excluded Games"
+
+class SteamAchievementsExcludedAchievements(OptionSet):
+    """
+    List of specific achievements to never pick, e.g. ones gated behind DLC you don't own.
+
+    If steam_achievements_exclude_dlc_gated_achievements is enabled, achievements whose Steam
+    description text names a DLC you don't own are already skipped automatically. This option is
+    a manual fallback for achievements that slip past that check (e.g. the description doesn't
+    name the DLC). Add entries as "Game Name: Achievement Name" (exact match) to exclude an
+    achievement from one specific game, or just "Achievement Name" to exclude it regardless of game.
+    """
+    display_name = "Steam Achievements Excluded Achievements"
+
+class SteamAchievementsExcludeDlcGatedAchievements(DefaultOnToggle):
+    """
+    Skip achievements whose Steam description text names a DLC you don't own.
+
+    This is a best-effort check: it cross-references the achievement's public schema description
+    against the base game's Store-API DLC list and your owned apps, not a dedicated Steam field,
+    so it can miss achievements that don't name their required DLC. Use
+    steam_achievements_excluded_achievements to cover anything it misses.
+    """
+    display_name = "Steam Achievements Exclude DLC-Gated Achievements"
+
+class SteamAchievementsExcludeMultiplayerAchievements(Toggle):
+    """
+    Skip achievements whose name or description mentions multiplayer/online/co-op modes.
+
+    This is a keyword match against the achievement's public Steam schema text, not a dedicated
+    Steam field, so it can occasionally miss oddly-worded achievements or over-match; use
+    steam_achievements_excluded_achievements to correct either case.
+    """
+    display_name = "Steam Achievements Exclude Multiplayer Achievements"
 
 class SteamAchievementsPercentageMin(Range):
     """
@@ -563,6 +648,70 @@ class SteamAchievementsDifficultyThreshold(Range):
 class SteamLibraryHolder:
     def __init__(self):
         self._schema_cache: Dict[int, List[Dict]] = {}
+
+    @functools.lru_cache(maxsize=None)
+    def get_dlc_names(self, app_id: int) -> Dict[int, str]:
+        """Returns {dlc_appid: dlc_name} for a base game's DLC, via the public Steam Store API."""
+        try:
+            resp = requests.get(
+                "https://store.steampowered.com/api/appdetails",
+                params={"appids": app_id, "filters": "basic,dlc"},
+                timeout=10,
+            )
+            if resp.status_code != 200:
+                return {}
+            payload = resp.json().get(str(app_id), {})
+            if not payload.get("success"):
+                return {}
+            dlc_ids = payload.get("data", {}).get("dlc", [])
+        except Exception:
+            return {}
+
+        return {dlc_id: self._get_dlc_name(dlc_id) for dlc_id in dlc_ids}
+
+    @functools.lru_cache(maxsize=None)
+    def _get_dlc_name(self, dlc_appid: int) -> str:
+        try:
+            resp = requests.get(
+                "https://store.steampowered.com/api/appdetails",
+                params={"appids": dlc_appid, "filters": "basic"},
+                timeout=10,
+            )
+            if resp.status_code != 200:
+                return ""
+            payload = resp.json().get(str(dlc_appid), {})
+            if not payload.get("success"):
+                return ""
+            return payload.get("data", {}).get("name", "")
+        except Exception:
+            return ""
+
+    def get_owned_appids(self, steam_id) -> Set[int]:
+        return {g["appid"] for g in self.games(steam_id) if g.get("appid")}
+
+    @functools.lru_cache(maxsize=None)
+    def get_achievement_descriptions(self, app_id: int) -> Dict[str, str]:
+        """Maps achievement display name to its schema description text."""
+        available_stats = self._get_schema(app_id)
+        return {(a.get("displayName") or a["name"]): a.get("description", "") for a in available_stats}
+
+    def achievement_requires_unowned_dlc(self, steam_id, app_id: int, description: str) -> bool:
+        """
+        Best-effort check: an achievement's schema description sometimes names the DLC it
+        requires (this is the same public data SteamDB displays, not a dedicated API field).
+        Flags the achievement only if that named DLC is confirmed absent from the owned apps.
+        """
+        if not description:
+            return False
+        dlc_names = self.get_dlc_names(app_id)
+        if not dlc_names:
+            return False
+        owned = self.get_owned_appids(steam_id)
+        desc_lower = description.lower()
+        for dlc_id, dlc_name in dlc_names.items():
+            if dlc_name and dlc_name.lower() in desc_lower and dlc_id not in owned:
+                return True
+        return False
 
     def _get_schema(self, app_id: int) -> List[Dict]:
         """Fetch and cache the achievement schema for a game."""
