@@ -16,7 +16,6 @@ class BeyondTheLongNightArchipelagoOptions:
     beyond_the_long_night_include_npc_objectives: BeyondTheLongNightIncludeNPCObjectives
     beyond_the_long_night_include_challenge_objectives: BeyondTheLongNightIncludeChallengeObjectives
     beyond_the_long_night_include_upgrade_objectives: BeyondTheLongNightIncludeUpgradeObjectives
-    beyond_the_long_night_include_hat_objectives: BeyondTheLongNightIncludeHatObjectives
 
 
 class BeyondTheLongNightGame(Game):
@@ -34,31 +33,19 @@ class BeyondTheLongNightGame(Game):
     def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
         return [
             GameObjectiveTemplate(
-                label="Play with increased Storm speed (enable any fast-storm modifier)",
+                label="Only play in Encore mode (New Game+)",
                 data={},
                 is_time_consuming=False,
                 is_difficult=True,
             ),
             GameObjectiveTemplate(
-                label="Never heal at Campfires",
-                data={},
-                is_time_consuming=False,
-                is_difficult=True,
-            ),
-            GameObjectiveTemplate(
-                label="Do not purchase map revealing upgrades",
+                label="Do not purchase anything from the Annoying Child's shops",
                 data={},
                 is_time_consuming=False,
                 is_difficult=False,
             ),
             GameObjectiveTemplate(
-                label="Rescue villagers before entering any Storm layer",
-                data={},
-                is_time_consuming=False,
-                is_difficult=False,
-            ),
-            GameObjectiveTemplate(
-                label="No companion pets",
+                label="Never pick up a Buddy",
                 data={},
                 is_time_consuming=False,
                 is_difficult=True,
@@ -75,6 +62,12 @@ class BeyondTheLongNightGame(Game):
                 is_time_consuming=False,
                 is_difficult=False,
             ),
+            GameObjectiveTemplate(
+                label="You must lose at least one health from the storm during the run",
+                data={},
+                is_time_consuming=False,
+                is_difficult=False,
+            ),
         ]
 
     def game_objective_templates(self) -> List[GameObjectiveTemplate]:
@@ -87,44 +80,61 @@ class BeyondTheLongNightGame(Game):
             objectives += self.challenge_objectives()
         if self.include_upgrade_objectives:
             objectives += self.upgrade_objectives()
-        if self.include_hat_objectives:
-            objectives += self.hat_objectives()
 
         return objectives
 
     def base_objectives(self) -> List[GameObjectiveTemplate]:
         return [
             GameObjectiveTemplate(
-                label="Win a run (Reach the surface)",
-                data={},
-                is_time_consuming=True,
+                label="Win a run (defeat the Guardian of the Overworld to escape) wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=10,
             ),
             GameObjectiveTemplate(
-                label="Reach Layer 3 of the Storm",
-                data={},
-                is_time_consuming=True,
-                is_difficult=False,
-                weight=5,
-            ),
-            GameObjectiveTemplate(
-                label="Defeat a miniboss",
-                data={},
+                label="Reach the Forbidden Temple wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
                 is_time_consuming=False,
                 is_difficult=False,
-                weight=3,
+                weight=6,
             ),
             GameObjectiveTemplate(
-                label="Collect 5 different artifacts in one run",
-                data={},
-                is_time_consuming=True,
+                label="Reach Hope's Peak wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=5,
             ),
             GameObjectiveTemplate(
-                label="Carry 3 active powers simultaneously",
-                data={},
+                label="Reach the Sanctuary wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
+                is_difficult=True,
+                weight=5,
+            ),
+            GameObjectiveTemplate(
+                label="Collect at least one Upgrade of each of the 5 types (Bullet, Passive, Buddy, Superpower, Superpower Upgrade) in one run wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=5,
+            ),
+            GameObjectiveTemplate(
+                label="Have 3 different Superpower Upgrades active at once in a single run wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
                 is_time_consuming=False,
                 is_difficult=False,
                 weight=2,
@@ -134,194 +144,211 @@ class BeyondTheLongNightGame(Game):
     def npc_objectives(self) -> List[GameObjectiveTemplate]:
         return [
             GameObjectiveTemplate(
-                label="Rescue 3 villagers",
-                data={},
-                is_time_consuming=True,
+                label="Talk to 3 different NPCs in a single run wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=5,
             ),
             GameObjectiveTemplate(
-                label="Complete a villager quest chain",
-                data={},
-                is_time_consuming=True,
+                label="Find and talk to NPC wearing the HAT",
+                data={
+                    "NPC": (self.npcs, 1),
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
                 is_difficult=False,
-                weight=5,
+                weight=4,
             ),
             GameObjectiveTemplate(
-                label="Unlock the Airship upgrade",
-                data={},
-                is_time_consuming=True,
+                label="Purchase an item from one of the Annoying Child's shops in a single run wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
                 is_difficult=False,
-                weight=5,
+                weight=3,
             ),
         ]
 
     def upgrade_objectives(self) -> List[GameObjectiveTemplate]:
         return [
             GameObjectiveTemplate(
-                label="Unlock 3 permanent meta upgrades",
-                data={},
-                is_time_consuming=True,
-                is_difficult=False,
-                weight=5,
-            ),
-            GameObjectiveTemplate(
-                label="Fully upgrade a single power",
-                data={},
-                is_time_consuming=True,
+                label="Level up the same Superpower Upgrade card to level 3 or higher in a single run wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
                 is_difficult=False,
                 weight=3,
             ),
             GameObjectiveTemplate(
-                label="Unlock the Storm Scanner",
-                data={},
+                label="Collect 5 Upgrades from the same category (Bullet, Passive, Buddy, Superpower, or Superpower Upgrade) in a single run wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
                 is_time_consuming=False,
                 is_difficult=False,
-                weight=2,
+                weight=4,
             ),
         ]
 
     def challenge_objectives(self) -> List[GameObjectiveTemplate]:
         return [
             GameObjectiveTemplate(
-                label="Win a run without taking damage from Storm hazards",
-                data={},
-                is_time_consuming=True,
+                label="Win a run without taking any damage from the Storm wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=10,
             ),
             GameObjectiveTemplate(
-                label="Win a run without using Campfire healing",
-                data={},
-                is_time_consuming=True,
+                label="Win a run without collecting any Upgrades wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=8,
             ),
             GameObjectiveTemplate(
-                label="Win a run while the Storm speed modifier is active",
-                data={},
-                is_time_consuming=True,
+                label="Win a run without ever using your Superpower wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=8,
             ),
             GameObjectiveTemplate(
-                label="Reach Layer 3 in under 15 minutes",
-                data={},
+                label="Escape the Long Night in under 25 minutes wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
                 is_time_consuming=False,
                 is_difficult=True,
                 weight=6,
             ),
             GameObjectiveTemplate(
-                label="Use the bird somewhere in Sanctuary",
-                data={},
+                label="Use the bird somewhere in Sanctuary wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
                 is_time_consuming=False,
                 is_difficult=False,
                 weight=4,
             ),
             GameObjectiveTemplate(
-                label="Give a toot in Tetchy & Dopey's starting room",
-                data={},
+                label="Give a toot in Tetchy & Dopey's starting room wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
                 is_time_consuming=False,
                 is_difficult=False,
                 weight=3,
             ),
             GameObjectiveTemplate(
-                label="Expose Tetchy & Dopey to the storm",
-                data={},
+                label="Expose Tetchy & Dopey to the storm wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
                 is_time_consuming=False,
                 is_difficult=True,
                 weight=5,
             ),
             GameObjectiveTemplate(
-                label="Grab Sara's leftmost item",
-                data={},
+                label="Grab Sara's leftmost item wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
                 is_time_consuming=False,
-                is_difficult=False,
+                is_difficult=True,
                 weight=3,
             ),
             GameObjectiveTemplate(
-                label="Do a toot in an oddly shaped stone room encased in the storm",
-                data={},
+                label="Do a toot in an oddly shaped stone room encased in the storm wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
                 is_time_consuming=False,
-                is_difficult=False,
+                is_difficult=True,
                 weight=4,
             ),
             GameObjectiveTemplate(
-                label="Defeat at least two Birds",
-                data={},
+                label="Defeat at least two Birds wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
                 is_time_consuming=False,
                 is_difficult=True,
                 weight=5,
             ),
             GameObjectiveTemplate(
-                label="Visit every room on the map",
-                data={},
-                is_time_consuming=True,
+                label="Visit every room in the Forbidden Temple in a single run wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=5,
+            ),
+            GameObjectiveTemplate(
+                label="Visit every room in Hope's Peak in a single run wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=5,
+            ),
+            GameObjectiveTemplate(
+                label="Visit every room in every area (Forbidden Temple, Hope's Peak, and Sanctuary) in a single run wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=7,
             ),
             GameObjectiveTemplate(
-                label="Visit the Annoying Child in the Strange Dimension",
-                data={},
-                is_time_consuming=True,
-                is_difficult=False,
-                weight=5,
-            ),
-            GameObjectiveTemplate(
-                label="Lose at least one health from the storm during the run",
-                data={},
-                is_time_consuming=False,
-                is_difficult=False,
-                weight=2,
-            ),
-        ]
-
-    def hat_objectives(self) -> List[GameObjectiveTemplate]:
-        return [
-            GameObjectiveTemplate(
-                label="Win a run while wearing the HAT",
+                label="Win a run firing your main bullets weapon 100 times or fewer wearing the HAT",
                 data={
                     "HAT": (self.hats, 1),
                 },
-                is_time_consuming=True,
-                is_difficult=False,
+                is_time_consuming=False,
+                is_difficult=True,
                 weight=6,
             ),
             GameObjectiveTemplate(
-                label="Rescue 3 villagers while wearing the HAT",
+                label="Win a run in under 25 minutes without taking any damage wearing the HAT",
                 data={
                     "HAT": (self.hats, 1),
                 },
-                is_time_consuming=True,
-                is_difficult=False,
-                weight=5,
-            ),
-            GameObjectiveTemplate(
-                label="Reach Storm Layer 3 while continuously wearing the HAT",
-                data={
-                    "HAT": (self.hats, 1),
-                },
-                is_time_consuming=True,
-                is_difficult=False,
-                weight=5,
-            ),
-            GameObjectiveTemplate(
-                label="Collect 5 different artifacts while wearing the HAT",
-                data={
-                    "HAT": (self.hats, 1),
-                },
-                is_time_consuming=True,
-                is_difficult=False,
-                weight=4,
-            ),
-            GameObjectiveTemplate(
-                label="Win a run without changing from the starting HAT",
-                data={
-                    "HAT": (self.hats, 1),
-                },
-                is_time_consuming=True,
+                is_time_consuming=False,
                 is_difficult=True,
                 weight=8,
+            ),
+            GameObjectiveTemplate(
+                label="Engrave a cow statue in a single run wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=3,
+            ),
+            GameObjectiveTemplate(
+                label="Visit the Annoying Child in the Strange Dimension wearing the HAT",
+                data={
+                    "HAT": (self.hats, 1),
+                },
+                is_time_consuming=False,
+                is_difficult=True,
+                weight=5,
             ),
         ]
 
@@ -337,10 +364,6 @@ class BeyondTheLongNightGame(Game):
     def include_upgrade_objectives(self) -> bool:
         return self.archipelago_options.beyond_the_long_night_include_upgrade_objectives.value
 
-    @property
-    def include_hat_objectives(self) -> bool:
-        return self.archipelago_options.beyond_the_long_night_include_hat_objectives.value
-
     @staticmethod
     def hats() -> List[str]:
         return [
@@ -350,10 +373,21 @@ class BeyondTheLongNightGame(Game):
             "Iron Hat",
         ]
 
+    @staticmethod
+    def npcs() -> List[str]:
+        return [
+            "Eebi",
+            "the Annoying Child",
+            "the Pilgrim",
+            "Umpa",
+            "Archie",
+            "Tetchy and Dopey",
+        ]
+
 
 # Archipelago Options
 class BeyondTheLongNightIncludeNPCObjectives(DefaultOnToggle):
-    """Indicates whether to include objectives involving rescuing NPC villagers and their quests."""
+    """Indicates whether to include objectives involving talking to NPCs and visiting shops."""
     display_name = "Beyond the Long Night: Include NPC Objectives"
 
 class BeyondTheLongNightIncludeChallengeObjectives(Toggle):
@@ -361,9 +395,5 @@ class BeyondTheLongNightIncludeChallengeObjectives(Toggle):
     display_name = "Beyond the Long Night: Include Challenge Objectives"
 
 class BeyondTheLongNightIncludeUpgradeObjectives(DefaultOnToggle):
-    """Indicates whether to include objectives related to unlocking or upgrading powers/meta progression."""
+    """Indicates whether to include objectives related to collecting and leveling up Upgrades within a run."""
     display_name = "Beyond the Long Night: Include Upgrade Objectives"
-
-class BeyondTheLongNightIncludeHatObjectives(DefaultOnToggle):
-    """Indicates whether to include objectives that require wearing specific hats."""
-    display_name = "Beyond the Long Night: Include Hat Objectives"
