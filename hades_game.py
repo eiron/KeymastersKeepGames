@@ -15,13 +15,7 @@ from ..enums import KeymastersKeepGamePlatforms
 @dataclass
 class HadesArchipelagoOptions:
     hades_include_escape_attempts: HadesIncludeEscapeAttempts
-    hades_include_weapon_mastery: HadesIncludeWeaponMastery
-    hades_include_relationship_building: HadesIncludeRelationshipBuilding
-    hades_include_story_progression: HadesIncludeStoryProgression
-    hades_include_mirror_upgrades: HadesIncludeMirrorUpgrades
-    hades_include_prophecies: HadesIncludeProphecies
-    hades_include_contractor_upgrades: HadesIncludeContractorUpgrades
-    hades_include_collection_goals: HadesIncludeCollectionGoals
+    hades_include_run_challenges: HadesIncludeRunChallenges
     hades_difficulty_level: HadesDifficultyLevel
 
 
@@ -90,11 +84,11 @@ class HadesGame(Game):
             GameObjectiveTemplate(label="Finish the run in less than 25 minutes (according to the in game timer)", data={}, is_time_consuming=False, is_difficult=True),
             GameObjectiveTemplate(label="Start the run with the Cosmic Egg", data={}, is_time_consuming=False, is_difficult=False),
             GameObjectiveTemplate(label="Complete without taking any Legendary or Duo boons", data={}, is_time_consuming=False, is_difficult=True),
-            GameObjectiveTemplate(label="Never reroll boons at the fountain", data={}, is_time_consuming=False, is_difficult=False),
+            GameObjectiveTemplate(label="Never use Fated Persuasion to reroll a Boon", data={}, is_time_consuming=False, is_difficult=False),
             GameObjectiveTemplate(label="Complete with boons from at least GOD_COUNT different gods", data={"GOD_COUNT": (self.god_counts, 1)}, is_time_consuming=False, is_difficult=False),
             GameObjectiveTemplate(label="Don't use Call or Greater Call during boss fights", data={}, is_time_consuming=False, is_difficult=True),
             GameObjectiveTemplate(label="Complete with only Common and Rare boons (no Epic or Heroic)", data={}, is_time_consuming=False, is_difficult=True),
-            GameObjectiveTemplate(label="Sell at least 3 boons to the Broker", data={}, is_time_consuming=False, is_difficult=True),
+            GameObjectiveTemplate(label="Purge at least 3 boons at Pools of Purging", data={}, is_time_consuming=False, is_difficult=True),
             GameObjectiveTemplate(label="Complete without entering any side chambers (only main path)", data={}, is_time_consuming=False, is_difficult=True),
             GameObjectiveTemplate(label="Have at least one boon at level 5 or higher", data={}, is_time_consuming=False, is_difficult=False),
             GameObjectiveTemplate(label="Complete without using any Daedalus Hammers", data={}, is_time_consuming=False, is_difficult=True),
@@ -136,13 +130,6 @@ class HadesGame(Game):
                     weight=2,
                 ),
                 GameObjectiveTemplate(
-                    label="Complete RUN_COUNT successful escapes",
-                    data={"RUN_COUNT": (self.escape_counts, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
                     label="Complete an escape with HEAT heat or higher",
                     data={"HEAT": (self.heat_levels, 1)},
                     is_time_consuming=False,
@@ -151,192 +138,62 @@ class HadesGame(Game):
                 ),
             ])
 
-        # Weapon Mastery
-        if self.include_weapon_mastery:
+        # Repeatable run challenges
+        if self.include_run_challenges:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Unlock the ASPECT aspect for WEAPON",
-                    data={
-                        "ASPECT": (self.weapon_aspects, 1),
-                        "WEAPON": (self.weapons, 1)
-                    },
-                    is_time_consuming=False,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Fully upgrade WEAPON with Titan Blood",
-                    data={"WEAPON": (self.weapons, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=1,
-                ),
-                GameObjectiveTemplate(
-                    label="Complete COUNT runs using WEAPON",
-                    data={
-                        "COUNT": (self.weapon_run_counts, 1),
-                        "WEAPON": (self.weapons, 1)
-                    },
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Achieve a personal best time with WEAPON",
-                    data={"WEAPON": (self.weapons, 1)},
-                    is_time_consuming=False,
-                    is_difficult=False,
-                    weight=2,
-                ),
-            ])
-
-        # Relationship Building
-        if self.include_relationship_building:
-            game_objective_templates.extend([
-                GameObjectiveTemplate(
-                    label="Max out your relationship with CHARACTER",
-                    data={"CHARACTER": (self.characters, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Give GIFT_COUNT GIFT_TYPE to CHARACTER",
-                    data={
-                        "GIFT_COUNT": (self.gift_counts, 1),
-                        "GIFT_TYPE": (self.gifts, 1),
-                        "CHARACTER": (self.characters, 1)
-                    },
-                    is_time_consuming=False,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Unlock KEEPSAKE from CHARACTER",
-                    data={
-                        "KEEPSAKE": (self.keepsakes, 1),
-                        "CHARACTER": (self.characters, 1)
-                    },
-                    is_time_consuming=False,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Reach max rank with KEEPSAKE",
-                    data={"KEEPSAKE": (self.keepsakes, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=1,
-                ),
-            ])
-
-        # Story Progression
-        if self.include_story_progression:
-            game_objective_templates.extend([
-                GameObjectiveTemplate(
-                    label="Complete STORYLINE storyline",
-                    data={"STORYLINE": (self.storylines, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Unlock CODEX_COUNT codex entries",
-                    data={"CODEX_COUNT": (self.codex_counts, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Complete the main story ending",
+                    label="Purchase every item offered at Charon's shop in the Temple of Styx in a single visit",
                     data={},
                     is_time_consuming=True,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Purchase every item offered at Charon's shop in a single visit",
+                    data={},
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
                 ),
-            ])
-
-        # Mirror Upgrades
-        if self.include_mirror_upgrades:
-            game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Fully upgrade MIRROR_TALENT in the Mirror of Night",
-                    data={"MIRROR_TALENT": (self.mirror_talents, 1)},
-                    is_time_consuming=True,
+                    label="Purchase every item offered at a Well of Charon in a single visit",
+                    data={},
+                    is_time_consuming=False,
                     is_difficult=False,
-                    weight=2,
+                    weight=1,
                 ),
                 GameObjectiveTemplate(
-                    label="Unlock all alternate Mirror of Night talents",
+                    label="Reach the Temple of Styx with at least BOON_COUNT boons",
+                    data={"BOON_COUNT": (self.midrun_boon_counts, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Have boons from at least GOD_COUNT different Olympians in a single run",
+                    data={"GOD_COUNT": (self.god_counts, 1)},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Visit Fountain Chambers in Tartarus, Asphodel, and Elysium in a single run",
                     data={},
                     is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
                 ),
                 GameObjectiveTemplate(
-                    label="Spend DARKNESS_AMOUNT Darkness on Mirror upgrades",
-                    data={"DARKNESS_AMOUNT": (self.darkness_amounts, 1)},
+                    label="Visit Sisyphus's, Eurydice's, and Patroclus's chambers in a single run",
+                    data={},
                     is_time_consuming=True,
-                    is_difficult=False,
-                    weight=2,
-                ),
-            ])
-
-        # Prophecies
-        if self.include_prophecies:
-            game_objective_templates.extend([
-                GameObjectiveTemplate(
-                    label="Complete PROPHECY_COUNT prophecies from the Fated List",
-                    data={"PROPHECY_COUNT": (self.prophecy_counts, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Complete all prophecies in the PROPHECY_CATEGORY category",
-                    data={"PROPHECY_CATEGORY": (self.prophecy_categories, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
+                    is_difficult=True,
                     weight=1,
                 ),
-            ])
-
-        # Contractor Upgrades
-        if self.include_contractor_upgrades:
-            game_objective_templates.extend([
                 GameObjectiveTemplate(
-                    label="Purchase UPGRADE_COUNT upgrades from the House Contractor",
-                    data={"UPGRADE_COUNT": (self.contractor_upgrade_counts, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Fully renovate the HOUSE_AREA area",
-                    data={"HOUSE_AREA": (self.house_areas, 1)},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=1,
-                ),
-            ])
-
-        # Collection Goals
-        if self.include_collection_goals:
-            game_objective_templates.extend([
-                GameObjectiveTemplate(
-                    label="Collect RESOURCE_COUNT RESOURCE_TYPE",
-                    data={
-                        "RESOURCE_COUNT": (self.resource_counts, 1),
-                        "RESOURCE_TYPE": (self.resources, 1)
-                    },
+                    label="Purge a Boon at a Pool of Purging",
+                    data={},
                     is_time_consuming=False,
-                    is_difficult=False,
-                    weight=2,
-                ),
-                GameObjectiveTemplate(
-                    label="Purchase all items from MERCHANT",
-                    data={"MERCHANT": (self.merchants, 1)},
-                    is_time_consuming=True,
                     is_difficult=False,
                     weight=1,
                 ),
@@ -350,32 +207,8 @@ class HadesGame(Game):
         return self.archipelago_options.hades_include_escape_attempts.value
 
     @property
-    def include_weapon_mastery(self) -> bool:
-        return self.archipelago_options.hades_include_weapon_mastery.value
-
-    @property
-    def include_relationship_building(self) -> bool:
-        return self.archipelago_options.hades_include_relationship_building.value
-
-    @property
-    def include_story_progression(self) -> bool:
-        return self.archipelago_options.hades_include_story_progression.value
-
-    @property
-    def include_mirror_upgrades(self) -> bool:
-        return self.archipelago_options.hades_include_mirror_upgrades.value
-
-    @property
-    def include_prophecies(self) -> bool:
-        return self.archipelago_options.hades_include_prophecies.value
-
-    @property
-    def include_contractor_upgrades(self) -> bool:
-        return self.archipelago_options.hades_include_contractor_upgrades.value
-
-    @property
-    def include_collection_goals(self) -> bool:
-        return self.archipelago_options.hades_include_collection_goals.value
+    def include_run_challenges(self) -> bool:
+        return self.archipelago_options.hades_include_run_challenges.value
 
     @property
     def difficulty_level(self) -> str:
@@ -392,9 +225,18 @@ class HadesGame(Game):
     @staticmethod
     def weapon_aspects() -> List[str]:
         return [
-            "Zagreus", "Nemesis", "Poseidon", "Arthur", "Guan Yu", "Beowulf",
-            "Hestia", "Eris", "Zeus", "Chiron", "Hera", "Rama", "Demeter",
-            "Talos", "Gilgamesh", "Lucifer", "Hades", "Eris"
+            "Aspect of Zagreus (Stygian Blade)", "Aspect of Nemesis (Stygian Blade)",
+            "Aspect of Poseidon (Stygian Blade)",
+            "Aspect of Zagreus (Heart-Seeking Bow)", "Aspect of Chiron (Heart-Seeking Bow)",
+            "Aspect of Hera (Heart-Seeking Bow)",
+            "Aspect of Zagreus (Shield of Chaos)", "Aspect of Chaos (Shield of Chaos)",
+            "Aspect of Zeus (Shield of Chaos)",
+            "Aspect of Zagreus (Eternal Spear)", "Aspect of Achilles (Eternal Spear)",
+            "Aspect of Hades (Eternal Spear)",
+            "Aspect of Zagreus (Twin Fists)", "Aspect of Talos (Twin Fists)",
+            "Aspect of Demeter (Twin Fists)",
+            "Aspect of Zagreus (Adamant Rail)", "Aspect of Eris (Adamant Rail)",
+            "Aspect of Hestia (Adamant Rail)",
         ]
 
     @staticmethod
@@ -409,74 +251,20 @@ class HadesGame(Game):
         return ["Tartarus", "Asphodel", "Elysium", "Temple of Styx", "Greece"]
 
     @staticmethod
-    def characters() -> List[str]:
-        return [
-            "Achilles", "Nyx", "Cerberus", "Orpheus", "Eurydice", "Sisyphus",
-            "Patroclus", "Thanatos", "Megaera", "Dusa", "Skelly", "Hypnos",
-            "Charon", "Chaos", "Zeus", "Poseidon", "Athena", "Aphrodite",
-            "Artemis", "Ares", "Dionysus", "Hermes", "Demeter", "Persephone"
-        ]
-
-    @staticmethod
     def keepsakes() -> List[str]:
         return [
-            "Old Spiked Collar", "Black Shawl", "Chthonic Coin Purse", "Distant Memory",
-            "Evergreen Acorn", "Pierced Butterfly", "Bone Hourglass", "Overflowing Cup",
-            "Lucky Tooth", "Thunder Signet", "Conch Shell", "Owl Pendant", "Eternal Rose",
-            "Blood-Filled Vial", "Skull Earring", "Overflowing Cup", "Lambent Plume",
-            "Frostbitten Horn", "Pom Blossom", "Cosmic Egg"
-        ]
-
-    @staticmethod
-    def gifts() -> List[str]:
-        return ["Nectar", "Ambrosia"]
-
-    @staticmethod
-    def storylines() -> List[str]:
-        return [
-            "Zagreus's Escape", "Persephone's Return", "Orpheus and Eurydice",
-            "Achilles and Patroclus", "Sisyphus's Freedom", "Thanatos Relationship",
-            "Megaera Relationship", "Dusa Relationship", "Family Reunion"
-        ]
-
-    @staticmethod
-    def mirror_talents() -> List[str]:
-        return [
-            "Shadow Presence", "Chthonic Vitality", "Death Defiance", "Greater Reflex",
-            "Boiling Blood", "Infernal Soul", "Deep Pockets", "Thick Skin",
-            "Privileged Status", "Family Trade", "God's Pride", "Fated Authority",
-            "Fiery Presence", "Abyssal Blood", "Stubborn Defiance", "Ruthless Reflex",
-            "Stygian Soul", "Golden Touch", "Hard Labor", "Olympian Favor"
-        ]
-
-    @staticmethod
-    def prophecy_categories() -> List[str]:
-        return [
-            "Chthonic Colleagues", "Olympian Gods", "The Exiled", "Sworn Enemies",
-            "Heart-Seekers", "Distant Relatives", "Minor Prophesies"
+            "Old Spiked Collar", "Myrmidon Bracer", "Black Shawl", "Pierced Butterfly",
+            "Bone Hourglass", "Chthonic Coin Purse", "Skull Earring", "Distant Memory",
+            "Harpy Feather Duster", "Lucky Tooth", "Shattered Shackle", "Evergreen Acorn",
+            "Broken Spearpoint",
+            "Thunder Signet", "Conch Shell", "Owl Pendant", "Eternal Rose",
+            "Adamant Arrowhead", "Blood-Filled Vial", "Overflowing Cup", "Lambent Plume",
+            "Frostbitten Horn", "Cosmic Egg", "Pom Blossom", "Sigil of the Dead"
         ]
 
     @staticmethod
     def god_counts() -> range:
         return range(5, 9)
-
-    @staticmethod
-    def house_areas() -> List[str]:
-        return [
-            "Zagreus's Room", "Lounge", "Main Hall", "Nyx's Alcove", "Achilles' Arena",
-            "Orpheus's Court", "Administrative Chamber", "West Hall", "East Hall"
-        ]
-
-    @staticmethod
-    def resources() -> List[str]:
-        return [
-            "Darkness", "Chthonic Key", "Gemstone", "Diamond", "Titan Blood",
-            "Ambrosia", "Nectar", "Coin"
-        ]
-
-    @staticmethod
-    def merchants() -> List[str]:
-        return ["Charon", "Well of Charon", "House Contractor", "Wretched Broker"]
 
     @staticmethod
     def boon_types() -> List[str]:
@@ -486,10 +274,6 @@ class HadesGame(Game):
         ]
 
     # Ranges
-    @staticmethod
-    def escape_counts() -> range:
-        return range(1, 10, 2)
-
     @staticmethod
     def heat_levels() -> range:
         return range(1, 20, 2)
@@ -503,32 +287,8 @@ class HadesGame(Game):
         return range(0, 5)
 
     @staticmethod
-    def weapon_run_counts() -> range:
-        return range(3, 15, 3)
-
-    @staticmethod
-    def gift_counts() -> range:
-        return range(1, 10, 2)
-
-    @staticmethod
-    def codex_counts() -> range:
-        return range(10, 50, 10)
-
-    @staticmethod
-    def darkness_amounts() -> range:
-        return range(1000, 10000, 1000)
-
-    @staticmethod
-    def prophecy_counts() -> range:
-        return range(3, 15, 3)
-
-    @staticmethod
-    def contractor_upgrade_counts() -> range:
-        return range(5, 25, 5)
-
-    @staticmethod
-    def resource_counts() -> range:
-        return range(10, 100, 10)
+    def midrun_boon_counts() -> range:
+        return range(8, 17, 4)
 
 
 # Archipelago Options
@@ -536,33 +296,9 @@ class HadesIncludeEscapeAttempts(DefaultOnToggle):
     """Include escape attempt objectives (runs, bosses, heat)."""
     display_name = "Hades Include Escape Attempts"
 
-class HadesIncludeWeaponMastery(DefaultOnToggle):
-    """Include weapon mastery objectives (aspects, upgrades, runs)."""
-    display_name = "Hades Include Weapon Mastery"
-
-class HadesIncludeRelationshipBuilding(DefaultOnToggle):
-    """Include relationship objectives (characters, gifts, keepsakes)."""
-    display_name = "Hades Include Relationship Building"
-
-class HadesIncludeStoryProgression(DefaultOnToggle):
-    """Include story progression objectives (storylines, codex, endings)."""
-    display_name = "Hades Include Story Progression"
-
-class HadesIncludeMirrorUpgrades(DefaultOnToggle):
-    """Include Mirror of Night upgrade objectives."""
-    display_name = "Hades Include Mirror Upgrades"
-
-class HadesIncludeProphecies(DefaultOnToggle):
-    """Include Fated List prophecy objectives."""
-    display_name = "Hades Include Prophecies"
-
-class HadesIncludeContractorUpgrades(DefaultOnToggle):
-    """Include House Contractor upgrade objectives."""
-    display_name = "Hades Include Contractor Upgrades"
-
-class HadesIncludeCollectionGoals(DefaultOnToggle):
-    """Include resource collection and merchant objectives."""
-    display_name = "Hades Include Collection Goals"
+class HadesIncludeRunChallenges(DefaultOnToggle):
+    """Include repeatable in-run challenges."""
+    display_name = "Hades Include Run Challenges"
 
 class HadesDifficultyLevel(TextChoice):
     """Sets the difficulty level for objectives and constraints."""
