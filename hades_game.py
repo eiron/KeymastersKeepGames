@@ -38,7 +38,7 @@ class HadesGame(Game):
     def optional_game_constraint_templates(self) -> List[GameObjectiveTemplate]:
         constraints = []
         
-        if self.difficulty_level in ["Hard", "Extreme"]:
+        if self.difficulty_level in ["hard", "extreme"]:
             constraints.extend([
                 GameObjectiveTemplate(
                     label="Complete this objective using only ASPECT weapon aspect",
@@ -54,7 +54,7 @@ class HadesGame(Game):
                 ),
             ])
         
-        if self.difficulty_level == "Extreme":
+        if self.difficulty_level == "extreme":
             constraints.extend([
                 GameObjectiveTemplate(
                     label="Complete this objective with at least HEAT heat",
@@ -89,7 +89,6 @@ class HadesGame(Game):
             GameObjectiveTemplate(label="Don't use Call or Greater Call during boss fights", data={}, is_time_consuming=False, is_difficult=True),
             GameObjectiveTemplate(label="Complete with only Common and Rare boons (no Epic or Heroic)", data={}, is_time_consuming=False, is_difficult=True),
             GameObjectiveTemplate(label="Purge at least 3 boons at Pools of Purging", data={}, is_time_consuming=False, is_difficult=True),
-            GameObjectiveTemplate(label="Complete without entering any side chambers (only main path)", data={}, is_time_consuming=False, is_difficult=True),
             GameObjectiveTemplate(label="Have at least one boon at level 5 or higher", data={}, is_time_consuming=False, is_difficult=False),
             GameObjectiveTemplate(label="Complete without using any Daedalus Hammers", data={}, is_time_consuming=False, is_difficult=True),
             GameObjectiveTemplate(label="Don't take damage in any mini-boss rooms", data={}, is_time_consuming=False, is_difficult=True),
@@ -97,7 +96,6 @@ class HadesGame(Game):
             GameObjectiveTemplate(label="Never enter a Erebus gate", data={}, is_time_consuming=False, is_difficult=False),
             GameObjectiveTemplate(label="Finish with at least 500 gold", data={}, is_time_consuming=False, is_difficult=False),
             GameObjectiveTemplate(label="Take damage from traps at least 5 times", data={}, is_time_consuming=False, is_difficult=True),
-            GameObjectiveTemplate(label="Use the same Keepsake for the entire run", data={"KEEPSAKE": (self.keepsakes, 1)}, is_time_consuming=False, is_difficult=True),
         ])
         
         return constraints
@@ -116,11 +114,11 @@ class HadesGame(Game):
                     weight=3,
                 ),
                 GameObjectiveTemplate(
-                    label="Defeat BOSS without taking damage",
-                    data={"BOSS": (self.bosses, 1)},
+                    label="Complete a successful escape using ASPECT",
+                    data={"ASPECT": (self.weapon_aspects, 1)},
                     is_time_consuming=False,
-                    is_difficult=True,
-                    weight=1,
+                    is_difficult=False,
+                    weight=3,
                 ),
                 GameObjectiveTemplate(
                     label="Reach LOCATION in a single run",
@@ -137,6 +135,17 @@ class HadesGame(Game):
                     weight=1,
                 ),
             ])
+
+            if self.difficulty_level in ["hard", "extreme"]:
+                game_objective_templates.append(
+                    GameObjectiveTemplate(
+                        label="Defeat BOSS without taking damage",
+                        data={"BOSS": (self.bosses, 1)},
+                        is_time_consuming=False,
+                        is_difficult=True,
+                        weight=1,
+                    )
+                )
 
         # Repeatable run challenges
         if self.include_run_challenges:
@@ -177,20 +186,6 @@ class HadesGame(Game):
                     weight=1,
                 ),
                 GameObjectiveTemplate(
-                    label="Visit Fountain Chambers in Tartarus, Asphodel, and Elysium in a single run",
-                    data={},
-                    is_time_consuming=True,
-                    is_difficult=False,
-                    weight=1,
-                ),
-                GameObjectiveTemplate(
-                    label="Visit Sisyphus's, Eurydice's, and Patroclus's chambers in a single run",
-                    data={},
-                    is_time_consuming=True,
-                    is_difficult=True,
-                    weight=1,
-                ),
-                GameObjectiveTemplate(
                     label="Purge a Boon at a Pool of Purging",
                     data={},
                     is_time_consuming=False,
@@ -212,7 +207,8 @@ class HadesGame(Game):
 
     @property
     def difficulty_level(self) -> str:
-        return self.archipelago_options.hades_difficulty_level.value
+        option = self.archipelago_options.hades_difficulty_level
+        return str(option.current_key).lower()
 
     # Data lists
     @staticmethod
@@ -237,30 +233,21 @@ class HadesGame(Game):
             "Aspect of Demeter (Twin Fists)",
             "Aspect of Zagreus (Adamant Rail)", "Aspect of Eris (Adamant Rail)",
             "Aspect of Hestia (Adamant Rail)",
+            "Aspect of Arthur (Stygian Blade)", "Aspect of Rama (Heart-Seeking Bow)",
+            "Aspect of Beowulf (Shield of Chaos)", "Aspect of Guan Yu (Eternal Spear)",
+            "Aspect of Gilgamesh (Twin Fists)", "Aspect of Lucifer (Adamant Rail)",
         ]
 
     @staticmethod
     def bosses() -> List[str]:
         return [
             "Megaera", "Alecto", "Tisiphone", "Lernaean Bone Hydra", 
-            "Theseus", "Asterius", "Hades"
+            "Theseus and Asterius (together)"
         ]
 
     @staticmethod
     def locations() -> List[str]:
         return ["Tartarus", "Asphodel", "Elysium", "Temple of Styx", "Greece"]
-
-    @staticmethod
-    def keepsakes() -> List[str]:
-        return [
-            "Old Spiked Collar", "Myrmidon Bracer", "Black Shawl", "Pierced Butterfly",
-            "Bone Hourglass", "Chthonic Coin Purse", "Skull Earring", "Distant Memory",
-            "Harpy Feather Duster", "Lucky Tooth", "Shattered Shackle", "Evergreen Acorn",
-            "Broken Spearpoint",
-            "Thunder Signet", "Conch Shell", "Owl Pendant", "Eternal Rose",
-            "Adamant Arrowhead", "Blood-Filled Vial", "Overflowing Cup", "Lambent Plume",
-            "Frostbitten Horn", "Cosmic Egg", "Pom Blossom", "Sigil of the Dead"
-        ]
 
     @staticmethod
     def god_counts() -> range:
@@ -276,7 +263,7 @@ class HadesGame(Game):
     # Ranges
     @staticmethod
     def heat_levels() -> range:
-        return range(1, 20, 2)
+        return range(2, 17, 2)
 
     @staticmethod
     def high_heat_levels() -> range:
