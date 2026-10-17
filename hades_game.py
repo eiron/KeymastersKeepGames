@@ -151,6 +151,41 @@ class HadesGame(Game):
         if self.include_run_challenges:
             game_objective_templates.extend([
                 GameObjectiveTemplate(
+                    label="Complete a successful escape without entering any Chaos Gates",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete a successful escape without entering NPC chambers (Sisyphus, Eurydice, Patroclus)",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete a successful escape while skipping Charon's shops whenever another exit is available (forced rooms, Wells, and the Styx hub are allowed)",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete a successful escape without entering Chaos or NPC chambers (Sisyphus, Eurydice, Patroclus); skip Charon's shops whenever another exit is available (fountains, forced rooms, Wells, and the Styx hub are allowed)",
+                    data={},
+                    is_time_consuming=False,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Complete a successful escape with PACT enabled (other Pact conditions are optional)",
+                    data={"PACT": (self.pact_conditions, 1)},
+                    is_time_consuming=False,
+                    is_difficult=True,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
                     label="Purchase every item offered at Charon's shop in the Temple of Styx in a single visit",
                     data={},
                     is_time_consuming=True,
@@ -259,6 +294,21 @@ class HadesGame(Game):
             "Zeus", "Poseidon", "Athena", "Aphrodite", "Artemis", "Ares",
             "Dionysus", "Hermes", "Demeter", "Chaos"
         ]
+
+    def pact_conditions(self) -> List[str]:
+        conditions = [
+            "Extreme Measures at rank 1",
+            "Extreme Measures at rank 2",
+            "Tight Deadline at rank 1 (9 minutes per region)",
+        ]
+        if self.difficulty_level in ["hard", "extreme"]:
+            conditions.extend([
+                "Extreme Measures at rank 3",
+                "Tight Deadline at rank 2 (7 minutes per region)",
+            ])
+        if self.difficulty_level == "extreme":
+            conditions.append("Tight Deadline at rank 3 (5 minutes per region)")
+        return conditions
 
     # Ranges
     @staticmethod
